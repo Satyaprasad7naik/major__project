@@ -1,0 +1,1451 @@
+{
+  "scan_id": "scan-20260726T052048",
+  "timestamp": "2026-07-26T05:20:48.509595",
+  "stats": {
+    "total_missions": 8,
+    "critical_count": 0,
+    "high_count": 0,
+    "overall_risk": 0,
+    "overall_severity": "LOW"
+  },
+  "detections": [
+    {
+      "mission_id": "Mission-1",
+      "mission_name": "Unusual Login Patterns",
+      "domain": "security",
+      "severity": "LOW",
+      "risk_score": 0,
+      "risk_factors": {},
+      "sql": "SELECT u.full_name \nFROM users u \nJOIN login_events le1 ON u.user_id = le1.user_id \nJOIN login_events le2 ON u.user_id = le2.user_id \nJOIN transactions t ON u.user_id = t.user_id \nWHERE UPPER(le1.device_type) != UPPER(le2.device_type) \nAND UPPER(le1.user_agent) != UPPER(le2.user_agent) \nAND le1.created_at BETWEEN le2.created_at AND date('now', '-30 minutes') \nAND UPPER(t.instrument) LIKE '%STOCK%' \nAND UPPER(u.risk_level) IN ('LOW', 'MEDIUM') \nGROUP BY u.full_name \nHAVING COUNT(DISTINCT le1.device_type) >= 3",
+      "data_count": 0,
+      "results": [],
+      "visualization_config": null,
+      "insight": "No data found to analyze.",
+      "recommendation": "Try broadening your search criteria or checking if the data for this period is available.",
+      "original_query": "Identify users with login events from multiple devices (>= 3) with different user agents within a 30-minute window, who have executed transactions in low-risk instruments (e.g., stocks) within the same period, and have a risk level of 'LOW' or 'MEDIUM'.",
+      "depth": 0,
+      "parent_mission_id": null,
+      "rationale": "",
+      "timestamp": "LIVE AUDIT",
+      "logs": [
+        {
+          "ts": 1785043220.709,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [classify_intent]"
+        },
+        {
+          "ts": 1785043220.71,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Starting Intent Classification and Preprocessing in parallel for domain: security"
+        },
+        {
+          "ts": 1785043220.715,
+          "level": "INFO",
+          "node": "INTENT",
+          "msg": "Classifying intent for domain: security | Query: Identify users with login events from multiple devices (>= 3) with different user agents within a 30-minute window, who have executed transactions in low-risk instruments (e.g., stocks) within the same period, and have a risk level of 'LOW' or 'MEDIUM'."
+        },
+        {
+          "ts": 1785043220.718,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM [openai] using model [meta/llama-3.1-8b-instruct] generating response..."
+        },
+        {
+          "ts": 1785043220.743,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM [openai] using model [meta/llama-3.1-8b-instruct] generating response..."
+        },
+        {
+          "ts": 1785043222.41,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM response received from [meta/llama-3.1-8b-instruct]. Snippet: {\n  \"intent\": \"SELECT\",\n  \"confidence\": 0.9,\n  \"co..."
+        },
+        {
+          "ts": 1785043222.41,
+          "level": "INFO",
+          "node": "INTENT",
+          "msg": "Classification Result: SELECT (conf: 0.9) | Needs Clarification: False"
+        },
+        {
+          "ts": 1785043222.77,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM response received from [meta/llama-3.1-8b-instruct]. Snippet: {\n  \"resolved_entities\": {\n    \"login_events.devic..."
+        },
+        {
+          "ts": 1785043222.771,
+          "level": "INFO",
+          "node": "entity_extractor.py",
+          "msg": "Final Extracted/Resolved Entities: {'login_events.device_type': 'MOBILE, DESKTOP, TABLET', 'transactions.instrument': 'AAPL, AED/USD, BTC/USD, ETH/USD, EUR/USD, GBP/USD, GOLD, OIL, TSLA, USD/JPY', 'users.risk_level': 'MEDIUM'}"
+        },
+        {
+          "ts": 1785043222.771,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Intent classified: SELECT (conf: 0.9) | Needs Clarification: False"
+        },
+        {
+          "ts": 1785043222.774,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [generate_sql]"
+        },
+        {
+          "ts": 1785043222.775,
+          "level": "INFO",
+          "node": "SQL_GEN",
+          "msg": "Generating SQL for domain: security | Query: Identify users with login events from multiple devices (>= 3) with different user agents within a 30-minute window, who have executed transactions in low-risk instruments (e.g., stocks) within the same period, and have a risk level of 'LOW' or 'MEDIUM'."
+        },
+        {
+          "ts": 1785043222.781,
+          "level": "INFO",
+          "node": "SQL_GEN",
+          "msg": "Using custom SQL prompt for domain: security"
+        },
+        {
+          "ts": 1785043222.782,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM [openai] using model [meta/llama-3.1-8b-instruct] generating response..."
+        },
+        {
+          "ts": 1785043223.859,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM response received from [meta/llama-3.1-8b-instruct]. Snippet: SELECT u.full_name \nFROM users u \nJOIN login_event..."
+        },
+        {
+          "ts": 1785043223.86,
+          "level": "INFO",
+          "node": "SQL_GEN",
+          "msg": "SQL Generated and cleaned: SELECT u.full_name \nFROM users u \nJOIN login_event..."
+        },
+        {
+          "ts": 1785043223.86,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "SQL Generated: SELECT u.full_name \nFROM users u \nJOIN login_event..."
+        },
+        {
+          "ts": 1785043223.863,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [validate_sql]"
+        },
+        {
+          "ts": 1785043223.87,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [execute_query]"
+        },
+        {
+          "ts": 1785043223.87,
+          "level": "INFO",
+          "node": "DB_EXEC",
+          "msg": "Executing SQL: SELECT u.full_name \nFROM users u \nJOIN login_events le1 ON u.user_id = le1.user_id \nJOIN login_events le2 ON u.user_id = le2.user_id \nJOIN transactions t ON u.user_id = t.user_id \nWHERE UPPER(le1.device_type) != UPPER(le2.device_type) \nAND UPPER(le1.user_agent) != UPPER(le2.user_agent) \nAND le1.created_at BETWEEN le2.created_at AND date('now', '-30 minutes') \nAND UPPER(t.instrument) LIKE '%STOCK%' \nAND UPPER(u.risk_level) IN ('LOW', 'MEDIUM') \nGROUP BY u.full_name \nHAVING COUNT(DISTINCT le1.device_type) >= 3"
+        },
+        {
+          "ts": 1785043242.375,
+          "level": "INFO",
+          "node": "DB_EXEC",
+          "msg": "Execution complete. Returned 0 rows."
+        },
+        {
+          "ts": 1785043242.376,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Query execution successful. Rows: 0"
+        },
+        {
+          "ts": 1785043242.397,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [insight_recommendation]"
+        },
+        {
+          "ts": 1785043242.397,
+          "level": "INFO",
+          "node": "INSIGHT",
+          "msg": "Generating insights for 0 rows in domain: security"
+        },
+        {
+          "ts": 1785043242.398,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Insights generated successfully."
+        },
+        {
+          "ts": 1785043242.398,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [recommend_visualization]"
+        },
+        {
+          "ts": 1785043242.398,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "No results for visualization recommendation."
+        }
+      ]
+    },
+    {
+      "mission_id": "Mission-2",
+      "mission_name": "AML Monitoring",
+      "domain": "compliance",
+      "severity": "LOW",
+      "risk_score": 0,
+      "risk_factors": {},
+      "sql": null,
+      "data_count": 0,
+      "results": [],
+      "visualization_config": null,
+      "insight": null,
+      "recommendation": null,
+      "original_query": "Analyze the payment failure rate (status='failed') grouped by region (extracted from country) and instrument, and identify if specific regions experience significantly higher AML monitoring alerts within the last 60 days and have a low transaction volume (< $100,000 USD) in the last quarter.",
+      "depth": 0,
+      "parent_mission_id": null,
+      "rationale": "",
+      "timestamp": "LIVE AUDIT",
+      "logs": [
+        {
+          "ts": 1785043220.711,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [classify_intent]"
+        },
+        {
+          "ts": 1785043220.711,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Starting Intent Classification and Preprocessing in parallel for domain: compliance"
+        },
+        {
+          "ts": 1785043220.72,
+          "level": "INFO",
+          "node": "INTENT",
+          "msg": "Classifying intent for domain: compliance | Query: Analyze the payment failure rate (status='failed') grouped by region (extracted from country) and instrument, and identify if specific regions experience significantly higher AML monitoring alerts within the last 60 days and have a low transaction volume (< $100,000 USD) in the last quarter."
+        },
+        {
+          "ts": 1785043220.721,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM [openai] using model [meta/llama-3.1-8b-instruct] generating response..."
+        },
+        {
+          "ts": 1785043220.748,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM [openai] using model [meta/llama-3.1-8b-instruct] generating response..."
+        },
+        {
+          "ts": 1785043221.761,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM response received from [meta/llama-3.1-8b-instruct]. Snippet: {\n  \"intent\": \"SELECT\",\n  \"confidence\": 0.9,\n  \"co..."
+        },
+        {
+          "ts": 1785043221.761,
+          "level": "INFO",
+          "node": "INTENT",
+          "msg": "Classification Result: SELECT (conf: 0.9) | Needs Clarification: False"
+        },
+        {
+          "ts": 1785043242.386,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM response received from [meta/llama-3.1-8b-instruct]. Snippet: ```json\n{\n  \"resolved_entities\": {\n    \"transactio..."
+        },
+        {
+          "ts": 1785043242.386,
+          "level": "WARNING",
+          "node": "entity_extractor.py",
+          "msg": "EntityExtractor: LLM returned non-JSON response: {\n  \"resolved_entities\": {\n    \"transactions.status\": \"FAILED\",\n    \"transactions.instrument\": \"AAPL"
+        },
+        {
+          "ts": 1785043242.4,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Intent classified: SELECT (conf: 0.9) | Needs Clarification: False"
+        },
+        {
+          "ts": 1785043242.442,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [generate_sql]"
+        },
+        {
+          "ts": 1785043242.443,
+          "level": "INFO",
+          "node": "SQL_GEN",
+          "msg": "Generating SQL for domain: compliance | Query: Analyze the payment failure rate (status='failed') grouped by region (extracted from country) and instrument, and identify if specific regions experience significantly higher AML monitoring alerts within the last 60 days and have a low transaction volume (< $100,000 USD) in the last quarter."
+        },
+        {
+          "ts": 1785043242.449,
+          "level": "INFO",
+          "node": "SQL_GEN",
+          "msg": "Using custom SQL prompt for domain: compliance"
+        },
+        {
+          "ts": 1785043242.449,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM [openai] using model [meta/llama-3.1-8b-instruct] generating response..."
+        },
+        {
+          "ts": 1785043243.153,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM response received from [meta/llama-3.1-8b-instruct]. Snippet: Error: I don't have a table for AML monitoring ale..."
+        },
+        {
+          "ts": 1785043243.153,
+          "level": "WARNING",
+          "node": "SQL_GEN",
+          "msg": "SQL Generation guidance response for query: Analyze the payment failure rate (status='failed') grouped by region (extracted from country) and instrument, and identify if specific regions experience significantly higher AML monitoring alerts within the last 60 days and have a low transaction volume (< $100,000 USD) in the last quarter. | Msg: Error: I don't have a table for AML monitoring ale..."
+        },
+        {
+          "ts": 1785043243.154,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "SQL Generator returned guidance instead of SQL: Error: I don't have a table for AML monitoring ale..."
+        }
+      ]
+    },
+    {
+      "mission_id": "Mission-3",
+      "mission_name": "High-Risk Exposure",
+      "domain": "risk",
+      "severity": "LOW",
+      "risk_score": 0,
+      "risk_factors": {},
+      "sql": "SELECT u.full_name \nFROM users u \nJOIN transactions t ON u.user_id = t.user_id \nWHERE UPPER(u.risk_level) IN ('MEDIUM', 'HIGH') \nAND UPPER(t.instrument) LIKE '%CRYPTO%' \nOR UPPER(t.instrument) LIKE '%FOREX%' \nAND t.created_at >= date('now', '-30 days') \nAND u.user_id IN (SELECT user_id \n                  FROM (SELECT user_id, instrument, amount_usd, \n                               LAG(amount_usd) OVER (PARTITION BY user_id ORDER BY created_at) AS prev_amount_usd \n                               FROM transactions \n                               WHERE created_at >= date('now', '-90 days')) \n                  GROUP BY user_id, instrument \n                  HAVING SUM(CASE WHEN amount_usd > prev_amount_usd THEN 1 ELSE 0 END) / COUNT(*) > 0.2 \n                  AND COUNT(DISTINCT instrument) >= 2 \n                  AND SUM(CASE WHEN amount_usd > prev_amount_usd THEN amount_usd ELSE 0 END) / SUM(amount_usd) < 0.9);",
+      "data_count": 0,
+      "results": [],
+      "visualization_config": null,
+      "insight": "No data found to analyze.",
+      "recommendation": "Try broadening your search criteria or checking if the data for this period is available.",
+      "original_query": "Identify users with a risk level of 'MEDIUM' or 'HIGH' who have executed transactions in high-risk instruments (e.g., crypto, forex) within the last 30 days, and have a portfolio imbalance (i.e., a standard deviation of transaction volume by instrument for each user where multiple instruments (>= 2) represent >10% of their total transaction volume_usd in the last quarter), and have shown a significant decrease (> 20%) in transaction volume within the last 30 days.",
+      "depth": 0,
+      "parent_mission_id": null,
+      "rationale": "",
+      "timestamp": "LIVE AUDIT",
+      "logs": [
+        {
+          "ts": 1785043220.712,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [classify_intent]"
+        },
+        {
+          "ts": 1785043220.712,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Starting Intent Classification and Preprocessing in parallel for domain: risk"
+        },
+        {
+          "ts": 1785043220.723,
+          "level": "INFO",
+          "node": "INTENT",
+          "msg": "Classifying intent for domain: risk | Query: Identify users with a risk level of 'MEDIUM' or 'HIGH' who have executed transactions in high-risk instruments (e.g., crypto, forex) within the last 30 days, and have a portfolio imbalance (i.e., a standard deviation of transaction volume by instrument for each user where multiple instruments (>= 2) represent >10% of their total transaction volume_usd in the last quarter), and have shown a significant decrease (> 20%) in transaction volume within the last 30 days."
+        },
+        {
+          "ts": 1785043220.725,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM [openai] using model [meta/llama-3.1-8b-instruct] generating response..."
+        },
+        {
+          "ts": 1785043220.752,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM [openai] using model [meta/llama-3.1-8b-instruct] generating response..."
+        },
+        {
+          "ts": 1785043223.235,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM response received from [meta/llama-3.1-8b-instruct]. Snippet: ```json\n{\n  \"intent\": \"SELECT\",\n  \"confidence\": 0...."
+        },
+        {
+          "ts": 1785043223.235,
+          "level": "ERROR",
+          "node": "INTENT",
+          "msg": "Intent classification error: Extra data: line 10 column 1 (char 134)"
+        },
+        {
+          "ts": 1785043223.83,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM response received from [meta/llama-3.1-8b-instruct]. Snippet: {\n  \"resolved_entities\": {\n    \"users.risk_level\":..."
+        },
+        {
+          "ts": 1785043223.831,
+          "level": "INFO",
+          "node": "entity_extractor.py",
+          "msg": "Final Extracted/Resolved Entities: {'users.risk_level': 'HIGH', 'transactions.instrument': 'EUR/USD', 'transactions.txn_type': 'WITHDRAWAL', 'users.account_status': 'ACTIVE', 'transactions.status': 'FAILED', 'transactions.flag_reason': 'Automated screening', 'transactions.payment_method': 'BANK_TRANSFER', 'users.is_pep': '0', 'login_events.device_type': 'DESKTOP', 'login_events.status': 'FAILED', 'login_events.failure_reason': 'ACCOUNT_LOCKED'}"
+        },
+        {
+          "ts": 1785043223.832,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Intent classified: SELECT (conf: 0.9) | Needs Clarification: False"
+        },
+        {
+          "ts": 1785043223.835,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [generate_sql]"
+        },
+        {
+          "ts": 1785043223.835,
+          "level": "INFO",
+          "node": "SQL_GEN",
+          "msg": "Generating SQL for domain: risk | Query: Identify users with a risk level of 'MEDIUM' or 'HIGH' who have executed transactions in high-risk instruments (e.g., crypto, forex) within the last 30 days, and have a portfolio imbalance (i.e., a standard deviation of transaction volume by instrument for each user where multiple instruments (>= 2) represent >10% of their total transaction volume_usd in the last quarter), and have shown a significant decrease (> 20%) in transaction volume within the last 30 days."
+        },
+        {
+          "ts": 1785043223.845,
+          "level": "INFO",
+          "node": "SQL_GEN",
+          "msg": "Using custom SQL prompt for domain: risk"
+        },
+        {
+          "ts": 1785043223.846,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM [openai] using model [meta/llama-3.1-8b-instruct] generating response..."
+        },
+        {
+          "ts": 1785043242.404,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM response received from [meta/llama-3.1-8b-instruct]. Snippet: SELECT u.full_name \nFROM users u \nJOIN transaction..."
+        },
+        {
+          "ts": 1785043242.405,
+          "level": "INFO",
+          "node": "SQL_GEN",
+          "msg": "SQL Generated and cleaned: SELECT u.full_name \nFROM users u \nJOIN transaction..."
+        },
+        {
+          "ts": 1785043242.405,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "SQL Generated: SELECT u.full_name \nFROM users u \nJOIN transaction..."
+        },
+        {
+          "ts": 1785043242.467,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [validate_sql]"
+        },
+        {
+          "ts": 1785043242.638,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [execute_query]"
+        },
+        {
+          "ts": 1785043242.638,
+          "level": "INFO",
+          "node": "DB_EXEC",
+          "msg": "Executing SQL: SELECT u.full_name \nFROM users u \nJOIN transactions t ON u.user_id = t.user_id \nWHERE UPPER(u.risk_level) IN ('MEDIUM', 'HIGH') \nAND UPPER(t.instrument) LIKE '%CRYPTO%' \nOR UPPER(t.instrument) LIKE '%FOREX%' \nAND t.created_at >= date('now', '-30 days') \nAND u.user_id IN (SELECT user_id \n                  FROM (SELECT user_id, instrument, amount_usd, \n                               LAG(amount_usd) OVER (PARTITION BY user_id ORDER BY created_at) AS prev_amount_usd \n                               FROM transactions \n                               WHERE created_at >= date('now', '-90 days')) \n                  GROUP BY user_id, instrument \n                  HAVING SUM(CASE WHEN amount_usd > prev_amount_usd THEN 1 ELSE 0 END) / COUNT(*) > 0.2 \n                  AND COUNT(DISTINCT instrument) >= 2 \n                  AND SUM(CASE WHEN amount_usd > prev_amount_usd THEN amount_usd ELSE 0 END) / SUM(amount_usd) < 0.9);"
+        },
+        {
+          "ts": 1785043242.737,
+          "level": "INFO",
+          "node": "DB_EXEC",
+          "msg": "Execution complete. Returned 0 rows."
+        },
+        {
+          "ts": 1785043242.737,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Query execution successful. Rows: 0"
+        },
+        {
+          "ts": 1785043242.742,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [insight_recommendation]"
+        },
+        {
+          "ts": 1785043242.743,
+          "level": "INFO",
+          "node": "INSIGHT",
+          "msg": "Generating insights for 0 rows in domain: risk"
+        },
+        {
+          "ts": 1785043242.743,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Insights generated successfully."
+        },
+        {
+          "ts": 1785043242.743,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [recommend_visualization]"
+        },
+        {
+          "ts": 1785043242.743,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "No results for visualization recommendation."
+        }
+      ]
+    },
+    {
+      "mission_id": "Mission-4",
+      "mission_name": "Payment Failures",
+      "domain": "operations",
+      "severity": "LOW",
+      "risk_score": 0,
+      "risk_factors": {},
+      "sql": "SELECT \n  t.instrument, \n  COUNT(*) as failed_count, \n  SUM(t.amount_usd) as total_usd, \n  COUNT(*) * 1.0 / (SELECT COUNT(*) FROM transactions WHERE txn_type = 'payment' AND status = 'failed' AND created_at >= date('now', '-60 days')) as failure_rate\nFROM \n  transactions t\nWHERE \n  t.status = 'failed' AND \n  t.txn_type = 'payment' AND \n  t.created_at >= date('now', '-90 days') AND \n  t.created_at <= date('now', 'start of day')\nGROUP BY \n  t.instrument\nHAVING \n  SUM(t.amount_usd) > 200000 AND \n  COUNT(*) * 1.0 / (SELECT COUNT(*) FROM transactions WHERE txn_type = 'payment' AND status = 'failed' AND created_at >= date('now', '-60 days')) > 0.1",
+      "data_count": 0,
+      "results": [],
+      "visualization_config": null,
+      "insight": "No data found to analyze.",
+      "recommendation": "Try broadening your search criteria or checking if the data for this period is available.",
+      "original_query": "Analyze the payment failure rate (status='failed') grouped by instrument and identify if specific instruments experience significantly higher payment failure rates within the last 60 days and have a high transaction volume (> $200,000 USD) in the last quarter.",
+      "depth": 0,
+      "parent_mission_id": null,
+      "rationale": "",
+      "timestamp": "LIVE AUDIT",
+      "logs": [
+        {
+          "ts": 1785043220.712,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [classify_intent]"
+        },
+        {
+          "ts": 1785043220.713,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Starting Intent Classification and Preprocessing in parallel for domain: operations"
+        },
+        {
+          "ts": 1785043220.726,
+          "level": "INFO",
+          "node": "INTENT",
+          "msg": "Classifying intent for domain: operations | Query: Analyze the payment failure rate (status='failed') grouped by instrument and identify if specific instruments experience significantly higher payment failure rates within the last 60 days and have a high transaction volume (> $200,000 USD) in the last quarter."
+        },
+        {
+          "ts": 1785043220.728,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM [openai] using model [meta/llama-3.1-8b-instruct] generating response..."
+        },
+        {
+          "ts": 1785043220.757,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM [openai] using model [meta/llama-3.1-8b-instruct] generating response..."
+        },
+        {
+          "ts": 1785043222.034,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM response received from [meta/llama-3.1-8b-instruct]. Snippet: {\n  \"intent\": \"SELECT\",\n  \"confidence\": 0.9,\n  \"co..."
+        },
+        {
+          "ts": 1785043222.035,
+          "level": "INFO",
+          "node": "INTENT",
+          "msg": "Classification Result: SELECT (conf: 0.9) | Needs Clarification: False"
+        },
+        {
+          "ts": 1785043222.651,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM response received from [meta/llama-3.1-8b-instruct]. Snippet: {\n  \"resolved_entities\": {\n    \"transactions.instr..."
+        },
+        {
+          "ts": 1785043222.652,
+          "level": "INFO",
+          "node": "entity_extractor.py",
+          "msg": "Final Extracted/Resolved Entities: {'transactions.instrument': 'AAPL', 'transactions.status': 'FAILED', 'transactions.amount_usd': '200000'}"
+        },
+        {
+          "ts": 1785043222.653,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Intent classified: SELECT (conf: 0.9) | Needs Clarification: False"
+        },
+        {
+          "ts": 1785043222.656,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [generate_sql]"
+        },
+        {
+          "ts": 1785043222.656,
+          "level": "INFO",
+          "node": "SQL_GEN",
+          "msg": "Generating SQL for domain: operations | Query: Analyze the payment failure rate (status='failed') grouped by instrument and identify if specific instruments experience significantly higher payment failure rates within the last 60 days and have a high transaction volume (> $200,000 USD) in the last quarter."
+        },
+        {
+          "ts": 1785043222.662,
+          "level": "INFO",
+          "node": "SQL_GEN",
+          "msg": "Using custom SQL prompt for domain: operations"
+        },
+        {
+          "ts": 1785043222.663,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM [openai] using model [meta/llama-3.1-8b-instruct] generating response..."
+        },
+        {
+          "ts": 1785043242.384,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM response received from [meta/llama-3.1-8b-instruct]. Snippet: SELECT \n  t.instrument, \n  COUNT(*) as failed_coun..."
+        },
+        {
+          "ts": 1785043242.384,
+          "level": "INFO",
+          "node": "SQL_GEN",
+          "msg": "SQL Generated and cleaned: SELECT \n  t.instrument, \n  COUNT(*) as failed_coun..."
+        },
+        {
+          "ts": 1785043242.385,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "SQL Generated: SELECT \n  t.instrument, \n  COUNT(*) as failed_coun..."
+        },
+        {
+          "ts": 1785043242.419,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [validate_sql]"
+        },
+        {
+          "ts": 1785043242.483,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [execute_query]"
+        },
+        {
+          "ts": 1785043242.484,
+          "level": "INFO",
+          "node": "DB_EXEC",
+          "msg": "Executing SQL: SELECT \n  t.instrument, \n  COUNT(*) as failed_count, \n  SUM(t.amount_usd) as total_usd, \n  COUNT(*) * 1.0 / (SELECT COUNT(*) FROM transactions WHERE txn_type = 'payment' AND status = 'failed' AND created_at >= date('now', '-60 days')) as failure_rate\nFROM \n  transactions t\nWHERE \n  t.status = 'failed' AND \n  t.txn_type = 'payment' AND \n  t.created_at >= date('now', '-90 days') AND \n  t.created_at <= date('now', 'start of day')\nGROUP BY \n  t.instrument\nHAVING \n  SUM(t.amount_usd) > 200000 AND \n  COUNT(*) * 1.0 / (SELECT COUNT(*) FROM transactions WHERE txn_type = 'payment' AND status = 'failed' AND created_at >= date('now', '-60 days')) > 0.1"
+        },
+        {
+          "ts": 1785043242.486,
+          "level": "INFO",
+          "node": "DB_EXEC",
+          "msg": "Execution complete. Returned 0 rows."
+        },
+        {
+          "ts": 1785043242.487,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Query execution successful. Rows: 0"
+        },
+        {
+          "ts": 1785043242.629,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [insight_recommendation]"
+        },
+        {
+          "ts": 1785043242.63,
+          "level": "INFO",
+          "node": "INSIGHT",
+          "msg": "Generating insights for 0 rows in domain: operations"
+        },
+        {
+          "ts": 1785043242.63,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Insights generated successfully."
+        },
+        {
+          "ts": 1785043242.631,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [recommend_visualization]"
+        },
+        {
+          "ts": 1785043242.631,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "No results for visualization recommendation."
+        }
+      ]
+    },
+    {
+      "mission_id": "Mission-5",
+      "mission_name": "PEP Monitoring",
+      "domain": "compliance",
+      "severity": "LOW",
+      "risk_score": 0,
+      "risk_factors": {},
+      "sql": "SELECT DISTINCT u.full_name, u.risk_level, a.severity, t.txn_id, t.instrument, t.amount_usd \nFROM users u \nJOIN alerts a ON u.user_id = a.user_id \nJOIN transactions t ON u.user_id = t.user_id \nWHERE u.risk_level IN ('MEDIUM', 'HIGH') \nAND a.severity = 'PepMonitoring' \nAND a.created_at >= date('now', '-30 days') \nAND t.instrument IN ('crypto', 'forex') \nAND t.created_at >= date('now', '-90 days')",
+      "data_count": 0,
+      "results": [],
+      "visualization_config": null,
+      "insight": "No data found to analyze.",
+      "recommendation": "Try broadening your search criteria or checking if the data for this period is available.",
+      "original_query": "Find users with a risk level of 'MEDIUM' or 'HIGH' who have received PEP monitoring alerts within the last 30 days and have executed transactions in high-risk instruments (e.g., crypto, forex) within the same period, and have a portfolio imbalance (i.e., a standard deviation of transaction volume by instrument for each user where multiple instruments (>= 2) represent >10% of their total transaction volume_usd in the last quarter).",
+      "depth": 0,
+      "parent_mission_id": null,
+      "rationale": "",
+      "timestamp": "LIVE AUDIT",
+      "logs": [
+        {
+          "ts": 1785043220.713,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [classify_intent]"
+        },
+        {
+          "ts": 1785043220.713,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Starting Intent Classification and Preprocessing in parallel for domain: compliance"
+        },
+        {
+          "ts": 1785043220.73,
+          "level": "INFO",
+          "node": "INTENT",
+          "msg": "Classifying intent for domain: compliance | Query: Find users with a risk level of 'MEDIUM' or 'HIGH' who have received PEP monitoring alerts within the last 30 days and have executed transactions in high-risk instruments (e.g., crypto, forex) within the same period, and have a portfolio imbalance (i.e., a standard deviation of transaction volume by instrument for each user where multiple instruments (>= 2) represent >10% of their total transaction volume_usd in the last quarter)."
+        },
+        {
+          "ts": 1785043220.731,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM [openai] using model [meta/llama-3.1-8b-instruct] generating response..."
+        },
+        {
+          "ts": 1785043220.763,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM [openai] using model [meta/llama-3.1-8b-instruct] generating response..."
+        },
+        {
+          "ts": 1785043222.051,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM response received from [meta/llama-3.1-8b-instruct]. Snippet: {\n  \"intent\": \"SELECT\",\n  \"confidence\": 0.95,\n  \"c..."
+        },
+        {
+          "ts": 1785043222.052,
+          "level": "INFO",
+          "node": "INTENT",
+          "msg": "Classification Result: SELECT (conf: 0.95) | Needs Clarification: False"
+        },
+        {
+          "ts": 1785043222.886,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM response received from [meta/llama-3.1-8b-instruct]. Snippet: {\n  \"resolved_entities\": {\n    \"users.risk_level\":..."
+        },
+        {
+          "ts": 1785043222.887,
+          "level": "INFO",
+          "node": "entity_extractor.py",
+          "msg": "Final Extracted/Resolved Entities: {'users.risk_level': 'HIGH', 'users.is_pep': '1', 'transactions.instrument': 'USD/JPY', 'users.account_status': 'ACTIVE'}"
+        },
+        {
+          "ts": 1785043222.888,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Intent classified: SELECT (conf: 0.95) | Needs Clarification: False"
+        },
+        {
+          "ts": 1785043222.891,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [generate_sql]"
+        },
+        {
+          "ts": 1785043222.891,
+          "level": "INFO",
+          "node": "SQL_GEN",
+          "msg": "Generating SQL for domain: compliance | Query: Find users with a risk level of 'MEDIUM' or 'HIGH' who have received PEP monitoring alerts within the last 30 days and have executed transactions in high-risk instruments (e.g., crypto, forex) within the same period, and have a portfolio imbalance (i.e., a standard deviation of transaction volume by instrument for each user where multiple instruments (>= 2) represent >10% of their total transaction volume_usd in the last quarter)."
+        },
+        {
+          "ts": 1785043222.901,
+          "level": "INFO",
+          "node": "SQL_GEN",
+          "msg": "Using custom SQL prompt for domain: compliance"
+        },
+        {
+          "ts": 1785043222.901,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM [openai] using model [meta/llama-3.1-8b-instruct] generating response..."
+        },
+        {
+          "ts": 1785043242.388,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM response received from [meta/llama-3.1-8b-instruct]. Snippet: SELECT DISTINCT u.full_name, u.risk_level, a.sever..."
+        },
+        {
+          "ts": 1785043242.388,
+          "level": "INFO",
+          "node": "SQL_GEN",
+          "msg": "SQL Generated and cleaned: SELECT DISTINCT u.full_name, u.risk_level, a.sever..."
+        },
+        {
+          "ts": 1785043242.388,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "SQL Generated: SELECT DISTINCT u.full_name, u.risk_level, a.sever..."
+        },
+        {
+          "ts": 1785043242.409,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [validate_sql]"
+        },
+        {
+          "ts": 1785043242.624,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [execute_query]"
+        },
+        {
+          "ts": 1785043242.624,
+          "level": "INFO",
+          "node": "DB_EXEC",
+          "msg": "Executing SQL: SELECT DISTINCT u.full_name, u.risk_level, a.severity, t.txn_id, t.instrument, t.amount_usd \nFROM users u \nJOIN alerts a ON u.user_id = a.user_id \nJOIN transactions t ON u.user_id = t.user_id \nWHERE u.risk_level IN ('MEDIUM', 'HIGH') \nAND a.severity = 'PepMonitoring' \nAND a.created_at >= date('now', '-30 days') \nAND t.instrument IN ('crypto', 'forex') \nAND t.created_at >= date('now', '-90 days')"
+        },
+        {
+          "ts": 1785043242.625,
+          "level": "INFO",
+          "node": "DB_EXEC",
+          "msg": "Execution complete. Returned 0 rows."
+        },
+        {
+          "ts": 1785043242.625,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Query execution successful. Rows: 0"
+        },
+        {
+          "ts": 1785043242.635,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [insight_recommendation]"
+        },
+        {
+          "ts": 1785043242.635,
+          "level": "INFO",
+          "node": "INSIGHT",
+          "msg": "Generating insights for 0 rows in domain: compliance"
+        },
+        {
+          "ts": 1785043242.635,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Insights generated successfully."
+        },
+        {
+          "ts": 1785043242.636,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [recommend_visualization]"
+        },
+        {
+          "ts": 1785043242.636,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "No results for visualization recommendation."
+        }
+      ]
+    },
+    {
+      "mission_id": "Mission-6",
+      "mission_name": "System Health",
+      "domain": "operations",
+      "severity": "LOW",
+      "risk_score": 0,
+      "risk_factors": {},
+      "sql": "SELECT u.full_name, COUNT(DISTINCT le.device_fingerprint) AS device_count, COUNT(DISTINCT le.user_agent) AS agent_count, t.instrument, t.status \nFROM users u \nJOIN transactions t ON u.user_id = t.user_id \nJOIN login_events le ON u.user_id = le.user_id \nWHERE UPPER(le.status) LIKE '%FAILED%' \nAND u.risk_level IN ('LOW', 'MEDIUM') \nAND UPPER(t.instrument) LIKE '%STOCK%' \nAND le.created_at >= date('now', '-30 minutes') \nGROUP BY u.full_name, t.instrument, t.status \nHAVING COUNT(DISTINCT le.device_fingerprint) >= 2 AND COUNT(DISTINCT le.user_agent) >= 2",
+      "data_count": 0,
+      "results": [],
+      "visualization_config": null,
+      "insight": "No data found to analyze.",
+      "recommendation": "Try broadening your search criteria or checking if the data for this period is available.",
+      "original_query": "Analyze the system health of the platform by identifying users with login events from multiple devices (>= 2) with different user agents within a 30-minute window, who have executed transactions in low-risk instruments (e.g., stocks) within the same period, and have a risk level of 'LOW' or 'MEDIUM'.",
+      "depth": 0,
+      "parent_mission_id": null,
+      "rationale": "",
+      "timestamp": "LIVE AUDIT",
+      "logs": [
+        {
+          "ts": 1785043220.713,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [classify_intent]"
+        },
+        {
+          "ts": 1785043220.714,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Starting Intent Classification and Preprocessing in parallel for domain: operations"
+        },
+        {
+          "ts": 1785043220.733,
+          "level": "INFO",
+          "node": "INTENT",
+          "msg": "Classifying intent for domain: operations | Query: Analyze the system health of the platform by identifying users with login events from multiple devices (>= 2) with different user agents within a 30-minute window, who have executed transactions in low-risk instruments (e.g., stocks) within the same period, and have a risk level of 'LOW' or 'MEDIUM'."
+        },
+        {
+          "ts": 1785043220.735,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM [openai] using model [meta/llama-3.1-8b-instruct] generating response..."
+        },
+        {
+          "ts": 1785043220.769,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM [openai] using model [meta/llama-3.1-8b-instruct] generating response..."
+        },
+        {
+          "ts": 1785043222.533,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM response received from [meta/llama-3.1-8b-instruct]. Snippet: {\n  \"resolved_entities\": {\n    \"login_events.devic..."
+        },
+        {
+          "ts": 1785043222.533,
+          "level": "INFO",
+          "node": "entity_extractor.py",
+          "msg": "Final Extracted/Resolved Entities: {'login_events.device_type': 'TABLET', 'transactions.instrument': 'TSLA', 'users.risk_level': 'MEDIUM'}"
+        },
+        {
+          "ts": 1785043223.36,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM response received from [meta/llama-3.1-8b-instruct]. Snippet: ```json\n{\n  \"intent\": \"SELECT\",\n  \"confidence\": 0...."
+        },
+        {
+          "ts": 1785043223.36,
+          "level": "ERROR",
+          "node": "INTENT",
+          "msg": "Intent classification error: Extra data: line 10 column 1 (char 136)"
+        },
+        {
+          "ts": 1785043223.361,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Intent classified: SELECT (conf: 0.9) | Needs Clarification: False"
+        },
+        {
+          "ts": 1785043223.363,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [generate_sql]"
+        },
+        {
+          "ts": 1785043223.363,
+          "level": "INFO",
+          "node": "SQL_GEN",
+          "msg": "Generating SQL for domain: operations | Query: Analyze the system health of the platform by identifying users with login events from multiple devices (>= 2) with different user agents within a 30-minute window, who have executed transactions in low-risk instruments (e.g., stocks) within the same period, and have a risk level of 'LOW' or 'MEDIUM'."
+        },
+        {
+          "ts": 1785043223.37,
+          "level": "INFO",
+          "node": "SQL_GEN",
+          "msg": "Using custom SQL prompt for domain: operations"
+        },
+        {
+          "ts": 1785043223.37,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM [openai] using model [meta/llama-3.1-8b-instruct] generating response..."
+        },
+        {
+          "ts": 1785043242.389,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM response received from [meta/llama-3.1-8b-instruct]. Snippet: SELECT u.full_name, COUNT(DISTINCT le.device_finge..."
+        },
+        {
+          "ts": 1785043242.39,
+          "level": "INFO",
+          "node": "SQL_GEN",
+          "msg": "SQL Generated and cleaned: SELECT u.full_name, COUNT(DISTINCT le.device_finge..."
+        },
+        {
+          "ts": 1785043242.39,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "SQL Generated: SELECT u.full_name, COUNT(DISTINCT le.device_finge..."
+        },
+        {
+          "ts": 1785043242.414,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [validate_sql]"
+        },
+        {
+          "ts": 1785043242.492,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [execute_query]"
+        },
+        {
+          "ts": 1785043242.492,
+          "level": "INFO",
+          "node": "DB_EXEC",
+          "msg": "Executing SQL: SELECT u.full_name, COUNT(DISTINCT le.device_fingerprint) AS device_count, COUNT(DISTINCT le.user_agent) AS agent_count, t.instrument, t.status \nFROM users u \nJOIN transactions t ON u.user_id = t.user_id \nJOIN login_events le ON u.user_id = le.user_id \nWHERE UPPER(le.status) LIKE '%FAILED%' \nAND u.risk_level IN ('LOW', 'MEDIUM') \nAND UPPER(t.instrument) LIKE '%STOCK%' \nAND le.created_at >= date('now', '-30 minutes') \nGROUP BY u.full_name, t.instrument, t.status \nHAVING COUNT(DISTINCT le.device_fingerprint) >= 2 AND COUNT(DISTINCT le.user_agent) >= 2"
+        },
+        {
+          "ts": 1785043242.623,
+          "level": "INFO",
+          "node": "DB_EXEC",
+          "msg": "Execution complete. Returned 0 rows."
+        },
+        {
+          "ts": 1785043242.623,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Query execution successful. Rows: 0"
+        },
+        {
+          "ts": 1785043242.633,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [insight_recommendation]"
+        },
+        {
+          "ts": 1785043242.634,
+          "level": "INFO",
+          "node": "INSIGHT",
+          "msg": "Generating insights for 0 rows in domain: operations"
+        },
+        {
+          "ts": 1785043242.634,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Insights generated successfully."
+        },
+        {
+          "ts": 1785043242.634,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [recommend_visualization]"
+        },
+        {
+          "ts": 1785043242.635,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "No results for visualization recommendation."
+        }
+      ]
+    },
+    {
+      "mission_id": "Mission-7",
+      "mission_name": "Portfolio Imbalance",
+      "domain": "risk",
+      "severity": "LOW",
+      "risk_score": 0,
+      "risk_factors": {},
+      "sql": "SELECT u.full_name \nFROM users u \nJOIN transactions t ON u.user_id = t.user_id \nWHERE UPPER(u.risk_level) IN ('MEDIUM', 'HIGH') \nAND u.user_id IN (SELECT user_id \n                  FROM (SELECT user_id, instrument, amount_usd, \n                               LAG(amount_usd) OVER (PARTITION BY user_id, instrument ORDER BY created_at) AS prev_amount_usd \n                               FROM transactions \n                               WHERE created_at >= date('now', '-90 days')) \n                  GROUP BY user_id, instrument \n                  HAVING SUM(CASE WHEN amount_usd > prev_amount_usd THEN amount_usd ELSE 0 END) / SUM(amount_usd) > 0.15 \n                  AND COUNT(DISTINCT instrument) >= 2 \n                  AND SUM(CASE WHEN amount_usd > prev_amount_usd THEN amount_usd ELSE 0 END) / SUM(amount_usd) > 0.1 \n                  AND user_id IN (SELECT user_id \n                                  FROM (SELECT user_id, instrument, amount_usd, \n                                               LAG(amount_usd) OVER (PARTITION BY user_id, instrument ORDER BY created_at) AS prev_amount_usd \n                                               FROM transactions \n                                               WHERE created_at >= date('now', '-90 days')) \n                                  GROUP BY user_id, instrument \n                                  HAVING SUM(CASE WHEN amount_usd > prev_amount_usd THEN amount_usd ELSE 0 END) / SUM(amount_usd) > 0.1 \n                                  AND COUNT(DISTINCT instrument) >= 2))",
+      "data_count": 0,
+      "results": [],
+      "visualization_config": null,
+      "insight": "No data found to analyze.",
+      "recommendation": "Try broadening your search criteria or checking if the data for this period is available.",
+      "original_query": "Find users with a risk level of 'MEDIUM' or 'HIGH' who have a portfolio imbalance (i.e., a standard deviation of transaction volume by instrument for each user where multiple instruments (>= 2) represent >10% of their total transaction volume_usd in the last quarter) and have shown a significant increase (> 15%) in transaction volume within the last 60 days.",
+      "depth": 0,
+      "parent_mission_id": null,
+      "rationale": "",
+      "timestamp": "LIVE AUDIT",
+      "logs": [
+        {
+          "ts": 1785043220.714,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [classify_intent]"
+        },
+        {
+          "ts": 1785043220.714,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Starting Intent Classification and Preprocessing in parallel for domain: risk"
+        },
+        {
+          "ts": 1785043220.736,
+          "level": "INFO",
+          "node": "INTENT",
+          "msg": "Classifying intent for domain: risk | Query: Find users with a risk level of 'MEDIUM' or 'HIGH' who have a portfolio imbalance (i.e., a standard deviation of transaction volume by instrument for each user where multiple instruments (>= 2) represent >10% of their total transaction volume_usd in the last quarter) and have shown a significant increase (> 15%) in transaction volume within the last 60 days."
+        },
+        {
+          "ts": 1785043220.737,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM [openai] using model [meta/llama-3.1-8b-instruct] generating response..."
+        },
+        {
+          "ts": 1785043220.774,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM [openai] using model [meta/llama-3.1-8b-instruct] generating response..."
+        },
+        {
+          "ts": 1785043223.349,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM response received from [meta/llama-3.1-8b-instruct]. Snippet: ```json\n{\n  \"intent\": \"SELECT\",\n  \"confidence\": 0...."
+        },
+        {
+          "ts": 1785043223.349,
+          "level": "ERROR",
+          "node": "INTENT",
+          "msg": "Intent classification error: Extra data: line 10 column 1 (char 134)"
+        },
+        {
+          "ts": 1785043223.476,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM response received from [meta/llama-3.1-8b-instruct]. Snippet: {\n  \"resolved_entities\": {\n    \"users.risk_level\":..."
+        },
+        {
+          "ts": 1785043223.477,
+          "level": "INFO",
+          "node": "entity_extractor.py",
+          "msg": "Final Extracted/Resolved Entities: {'users.risk_level': 'MEDIUM', 'transactions.instrument': 'AAPL, AED/USD, BTC/USD, ETH/USD, EUR/USD, GBP/USD, GOLD, OIL, TSLA, USD/JPY', 'transactions.status': 'COMPLETED, FAILED, FLAGGED, PENDING', 'transactions.flag_reason': 'Automated screening, Unusual pattern, Risk threshold exceeded, Large amount', 'transactions.payment_method': 'CRYPTO, EWALLET, BANK_TRANSFER, CARD', 'login_events.device_type': 'MOBILE, DESKTOP, TABLET', 'login_events.status': 'BLOCKED, FAILED, SUCCESS', 'login_events.failure_reason': 'MFA_FAILED, ACCOUNT_LOCKED, WRONG_PASSWORD, GEO_BLOCKED, IP_BLOCKED, SUSPICIOUS_ACTIVITY'}"
+        },
+        {
+          "ts": 1785043223.477,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Intent classified: SELECT (conf: 0.9) | Needs Clarification: False"
+        },
+        {
+          "ts": 1785043223.479,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [generate_sql]"
+        },
+        {
+          "ts": 1785043223.48,
+          "level": "INFO",
+          "node": "SQL_GEN",
+          "msg": "Generating SQL for domain: risk | Query: Find users with a risk level of 'MEDIUM' or 'HIGH' who have a portfolio imbalance (i.e., a standard deviation of transaction volume by instrument for each user where multiple instruments (>= 2) represent >10% of their total transaction volume_usd in the last quarter) and have shown a significant increase (> 15%) in transaction volume within the last 60 days."
+        },
+        {
+          "ts": 1785043223.487,
+          "level": "INFO",
+          "node": "SQL_GEN",
+          "msg": "Using custom SQL prompt for domain: risk"
+        },
+        {
+          "ts": 1785043223.487,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM [openai] using model [meta/llama-3.1-8b-instruct] generating response..."
+        },
+        {
+          "ts": 1785043242.391,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM response received from [meta/llama-3.1-8b-instruct]. Snippet: SELECT u.full_name \nFROM users u \nJOIN transaction..."
+        },
+        {
+          "ts": 1785043242.391,
+          "level": "INFO",
+          "node": "SQL_GEN",
+          "msg": "SQL Generated and cleaned: SELECT u.full_name \nFROM users u \nJOIN transaction..."
+        },
+        {
+          "ts": 1785043242.392,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "SQL Generated: SELECT u.full_name \nFROM users u \nJOIN transaction..."
+        },
+        {
+          "ts": 1785043242.426,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [validate_sql]"
+        },
+        {
+          "ts": 1785043242.487,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [execute_query]"
+        },
+        {
+          "ts": 1785043242.488,
+          "level": "INFO",
+          "node": "DB_EXEC",
+          "msg": "Executing SQL: SELECT u.full_name \nFROM users u \nJOIN transactions t ON u.user_id = t.user_id \nWHERE UPPER(u.risk_level) IN ('MEDIUM', 'HIGH') \nAND u.user_id IN (SELECT user_id \n                  FROM (SELECT user_id, instrument, amount_usd, \n                               LAG(amount_usd) OVER (PARTITION BY user_id, instrument ORDER BY created_at) AS prev_amount_usd \n                               FROM transactions \n                               WHERE created_at >= date('now', '-90 days')) \n                  GROUP BY user_id, instrument \n                  HAVING SUM(CASE WHEN amount_usd > prev_amount_usd THEN amount_usd ELSE 0 END) / SUM(amount_usd) > 0.15 \n                  AND COUNT(DISTINCT instrument) >= 2 \n                  AND SUM(CASE WHEN amount_usd > prev_amount_usd THEN amount_usd ELSE 0 END) / SUM(amount_usd) > 0.1 \n                  AND user_id IN (SELECT user_id \n                                  FROM (SELECT user_id, instrument, amount_usd, \n                                               LAG(amount_usd) OVER (PARTITION BY user_id, instrument ORDER BY created_at) AS prev_amount_usd \n                                               FROM transactions \n                                               WHERE created_at >= date('now', '-90 days')) \n                                  GROUP BY user_id, instrument \n                                  HAVING SUM(CASE WHEN amount_usd > prev_amount_usd THEN amount_usd ELSE 0 END) / SUM(amount_usd) > 0.1 \n                                  AND COUNT(DISTINCT instrument) >= 2))"
+        },
+        {
+          "ts": 1785043242.491,
+          "level": "INFO",
+          "node": "DB_EXEC",
+          "msg": "Execution complete. Returned 0 rows."
+        },
+        {
+          "ts": 1785043242.491,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Query execution successful. Rows: 0"
+        },
+        {
+          "ts": 1785043242.632,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [insight_recommendation]"
+        },
+        {
+          "ts": 1785043242.632,
+          "level": "INFO",
+          "node": "INSIGHT",
+          "msg": "Generating insights for 0 rows in domain: risk"
+        },
+        {
+          "ts": 1785043242.632,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Insights generated successfully."
+        },
+        {
+          "ts": 1785043242.633,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [recommend_visualization]"
+        },
+        {
+          "ts": 1785043242.633,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "No results for visualization recommendation."
+        }
+      ]
+    },
+    {
+      "mission_id": "Mission-8",
+      "mission_name": "KYC Gaps",
+      "domain": "compliance",
+      "severity": "LOW",
+      "risk_score": 0,
+      "risk_factors": {},
+      "sql": "SELECT DISTINCT u.full_name, t.txn_id, t.amount_usd, t.instrument \nFROM users u \nJOIN transactions t ON u.user_id = t.user_id \nJOIN transactions t2 ON u.user_id = t2.user_id \nWHERE u.kyc_status = 0 OR u.kyc_expiry_date >= date('now', '-90 days') \nAND u.risk_level IN ('MEDIUM', 'HIGH') \nAND UPPER(t.instrument) LIKE '%STOCK%' \nAND t.created_at >= date('now', '-90 days') \nAND t2.created_at >= date('now', '-90 days') \nAND t2.amount_usd < (SELECT AVG(amount_usd) FROM transactions WHERE user_id = u.user_id AND created_at >= date('now', '-90 days')) * 0.6",
+      "data_count": 0,
+      "results": [],
+      "visualization_config": null,
+      "insight": "No data found to analyze.",
+      "recommendation": "Try broadening your search criteria or checking if the data for this period is available.",
+      "original_query": "Find users with unverified or expiring KYC (within 90 days of kyc_expiry_date) and a risk level of 'MEDIUM' or 'HIGH' who have executed transactions in low-risk instruments (e.g., stocks) within the last 90 days, and have shown a significant decrease (> 40%) in transaction volume within the last 90 days.",
+      "depth": 0,
+      "parent_mission_id": null,
+      "rationale": "",
+      "timestamp": "LIVE AUDIT",
+      "logs": [
+        {
+          "ts": 1785043220.714,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [classify_intent]"
+        },
+        {
+          "ts": 1785043220.714,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Starting Intent Classification and Preprocessing in parallel for domain: compliance"
+        },
+        {
+          "ts": 1785043220.739,
+          "level": "INFO",
+          "node": "INTENT",
+          "msg": "Classifying intent for domain: compliance | Query: Find users with unverified or expiring KYC (within 90 days of kyc_expiry_date) and a risk level of 'MEDIUM' or 'HIGH' who have executed transactions in low-risk instruments (e.g., stocks) within the last 90 days, and have shown a significant decrease (> 40%) in transaction volume within the last 90 days."
+        },
+        {
+          "ts": 1785043220.74,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM [openai] using model [meta/llama-3.1-8b-instruct] generating response..."
+        },
+        {
+          "ts": 1785043220.778,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM [openai] using model [meta/llama-3.1-8b-instruct] generating response..."
+        },
+        {
+          "ts": 1785043222.407,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM response received from [meta/llama-3.1-8b-instruct]. Snippet: {\n  \"intent\": \"SELECT\",\n  \"confidence\": 0.9,\n  \"co..."
+        },
+        {
+          "ts": 1785043222.407,
+          "level": "INFO",
+          "node": "INTENT",
+          "msg": "Classification Result: SELECT (conf: 0.9) | Needs Clarification: False"
+        },
+        {
+          "ts": 1785043242.393,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM response received from [meta/llama-3.1-8b-instruct]. Snippet: ```json\n{\n  \"resolved_entities\": {\n    \"users.kyc_..."
+        },
+        {
+          "ts": 1785043242.393,
+          "level": "WARNING",
+          "node": "entity_extractor.py",
+          "msg": "EntityExtractor: LLM returned non-JSON response: {\n  \"resolved_entities\": {\n    \"users.kyc_status\": \"PENDING, EXPIRED\",\n    \"users.risk_level\": \"MEDI"
+        },
+        {
+          "ts": 1785043242.4,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Intent classified: SELECT (conf: 0.9) | Needs Clarification: False"
+        },
+        {
+          "ts": 1785043242.452,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [generate_sql]"
+        },
+        {
+          "ts": 1785043242.453,
+          "level": "INFO",
+          "node": "SQL_GEN",
+          "msg": "Generating SQL for domain: compliance | Query: Find users with unverified or expiring KYC (within 90 days of kyc_expiry_date) and a risk level of 'MEDIUM' or 'HIGH' who have executed transactions in low-risk instruments (e.g., stocks) within the last 90 days, and have shown a significant decrease (> 40%) in transaction volume within the last 90 days."
+        },
+        {
+          "ts": 1785043242.46,
+          "level": "INFO",
+          "node": "SQL_GEN",
+          "msg": "Using custom SQL prompt for domain: compliance"
+        },
+        {
+          "ts": 1785043242.461,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM [openai] using model [meta/llama-3.1-8b-instruct] generating response..."
+        },
+        {
+          "ts": 1785043244.05,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM response received from [meta/llama-3.1-8b-instruct]. Snippet: SELECT DISTINCT u.full_name, t.txn_id, t.amount_us..."
+        },
+        {
+          "ts": 1785043244.051,
+          "level": "INFO",
+          "node": "SQL_GEN",
+          "msg": "SQL Generated and cleaned: SELECT DISTINCT u.full_name, t.txn_id, t.amount_us..."
+        },
+        {
+          "ts": 1785043244.051,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "SQL Generated: SELECT DISTINCT u.full_name, t.txn_id, t.amount_us..."
+        },
+        {
+          "ts": 1785043244.053,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [validate_sql]"
+        },
+        {
+          "ts": 1785043244.06,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [execute_query]"
+        },
+        {
+          "ts": 1785043244.06,
+          "level": "INFO",
+          "node": "DB_EXEC",
+          "msg": "Executing SQL: SELECT DISTINCT u.full_name, t.txn_id, t.amount_usd, t.instrument \nFROM users u \nJOIN transactions t ON u.user_id = t.user_id \nJOIN transactions t2 ON u.user_id = t2.user_id \nWHERE u.kyc_status = 0 OR u.kyc_expiry_date >= date('now', '-90 days') \nAND u.risk_level IN ('MEDIUM', 'HIGH') \nAND UPPER(t.instrument) LIKE '%STOCK%' \nAND t.created_at >= date('now', '-90 days') \nAND t2.created_at >= date('now', '-90 days') \nAND t2.amount_usd < (SELECT AVG(amount_usd) FROM transactions WHERE user_id = u.user_id AND created_at >= date('now', '-90 days')) * 0.6"
+        },
+        {
+          "ts": 1785043245.31,
+          "level": "INFO",
+          "node": "DB_EXEC",
+          "msg": "Execution complete. Returned 0 rows."
+        },
+        {
+          "ts": 1785043245.31,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Query execution successful. Rows: 0"
+        },
+        {
+          "ts": 1785043245.312,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [insight_recommendation]"
+        },
+        {
+          "ts": 1785043245.312,
+          "level": "INFO",
+          "node": "INSIGHT",
+          "msg": "Generating insights for 0 rows in domain: compliance"
+        },
+        {
+          "ts": 1785043245.312,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Insights generated successfully."
+        },
+        {
+          "ts": 1785043245.313,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [recommend_visualization]"
+        },
+        {
+          "ts": 1785043245.313,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "No results for visualization recommendation."
+        }
+      ]
+    }
+  ],
+  "clusters": [],
+  "narrative": {
+    "executive_summary": "Our real-time threat brief indicates a low-risk posture across all domains, with no high-severity detections or threat clusters. However, we must remain vigilant, as the absence of data does not necessarily imply a secure environment. It is essential to address potential vulnerabilities and monitor system health to prevent potential issues from escalating.",
+    "threat_vectors": [
+      {
+        "name": "Lack of Data for AML Monitoring",
+        "severity": "LOW",
+        "description": "Insufficient data is available for Anti-Money Laundering (AML) monitoring, which may indicate a potential vulnerability in our compliance framework."
+      },
+      {
+        "name": "System Health Indicators",
+        "severity": "LOW",
+        "description": "System health indicators are currently at 0, suggesting that our operations are functioning within normal parameters, but ongoing monitoring is necessary to prevent potential issues."
+      },
+      {
+        "name": "PEP Monitoring Inactivity",
+        "severity": "LOW",
+        "description": "There is currently no data available for Politically Exposed Person (PEP) monitoring, which may indicate a potential vulnerability in our compliance framework."
+      }
+    ],
+    "immediate_actions": [
+      "Initiate AML monitoring to ensure compliance with regulatory requirements.",
+      "Schedule a system health check to verify the integrity of our operations.",
+      "Develop a plan to implement PEP monitoring to address potential vulnerabilities in our compliance framework."
+    ],
+    "monitoring_recommendations": [
+      "Continuously monitor system health indicators to prevent potential issues.",
+      "Regularly review AML and PEP monitoring data to ensure compliance with regulatory requirements.",
+      "Implement cross-domain correlation to identify potential threat clusters and address them proactively."
+    ],
+    "overall_risk": 0,
+    "overall_severity": "LOW",
+    "title": "Intelligence Brief - LIVE"
+  }
+}

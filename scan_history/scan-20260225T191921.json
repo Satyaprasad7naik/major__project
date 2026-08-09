@@ -1,0 +1,232 @@
+{
+  "scan_id": "scan-20260225T191921",
+  "timestamp": "2026-02-25T19:19:21.788531",
+  "stats": {
+    "total_missions": 1,
+    "critical_count": 0,
+    "high_count": 0,
+    "overall_risk": 0,
+    "overall_severity": "LOW"
+  },
+  "detections": [
+    {
+      "mission_id": "fall-001",
+      "mission_name": "Basic Security Audit",
+      "domain": "security",
+      "severity": "LOW",
+      "risk_score": 0,
+      "risk_factors": {},
+      "sql": "SELECT u.user_id, u.username FROM users u WHERE UPPER(u.risk_level) LIKE '%HIGH%' AND UPPER(u.account_status) = 'ACTIVE';",
+      "data_count": 0,
+      "results": [],
+      "visualization_config": null,
+      "insight": "No data found to analyze.",
+      "recommendation": "Try broadening your search criteria or checking if the data for this period is available.",
+      "original_query": "Show users with risk_level HIGH and account_status ACTIVE",
+      "depth": 0,
+      "parent_mission_id": null,
+      "rationale": "",
+      "timestamp": "LIVE AUDIT",
+      "logs": [
+        {
+          "ts": 1772047149.956,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [classify_intent]"
+        },
+        {
+          "ts": 1772047149.956,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Starting Intent Classification and Preprocessing in parallel for domain: security"
+        },
+        {
+          "ts": 1772047149.957,
+          "level": "INFO",
+          "node": "INTENT",
+          "msg": "Classifying intent for domain: security | Query: Show users with risk_level HIGH and account_status ACTIVE"
+        },
+        {
+          "ts": 1772047149.958,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM [ollama] using model [llama3.2:3b] generating response..."
+        },
+        {
+          "ts": 1772047153.081,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM response received from [llama3.2:3b]. Snippet: {\"intent\": \"SELECT\", \"confidence\": 0.9, \"complexit..."
+        },
+        {
+          "ts": 1772047153.082,
+          "level": "INFO",
+          "node": "INTENT",
+          "msg": "Classification Result: SELECT (conf: 0.9) | Needs Clarification: False"
+        },
+        {
+          "ts": 1772047153.082,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM [ollama] using model [llama3.2:3b] generating response..."
+        },
+        {
+          "ts": 1772047153.462,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM response received from [llama3.2:3b]. Snippet: [\"users\", \"transactions\"]..."
+        },
+        {
+          "ts": 1772047153.464,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM [ollama] using model [llama3.2:3b] generating response..."
+        },
+        {
+          "ts": 1772047156.192,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM response received from [llama3.2:3b]. Snippet: {\n  \"resolved_entities\": {\n    \"users.risk_level\":..."
+        },
+        {
+          "ts": 1772047156.193,
+          "level": "INFO",
+          "node": "entity_extractor.py",
+          "msg": "Final Extracted/Resolved Entities: {'users.risk_level': 'HIGH', 'users.account_status': 'ACTIVE'}"
+        },
+        {
+          "ts": 1772047156.196,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Intent classified: SELECT (conf: 0.9) | Needs Clarification: False"
+        },
+        {
+          "ts": 1772047156.197,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [generate_sql]"
+        },
+        {
+          "ts": 1772047156.198,
+          "level": "INFO",
+          "node": "SQL_GEN",
+          "msg": "Generating SQL for domain: security | Query: Show users with risk_level HIGH and account_status ACTIVE"
+        },
+        {
+          "ts": 1772047156.202,
+          "level": "INFO",
+          "node": "SQL_GEN",
+          "msg": "Using custom SQL prompt for domain: security"
+        },
+        {
+          "ts": 1772047156.203,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM [ollama] using model [llama3.2:3b] generating response..."
+        },
+        {
+          "ts": 1772047157.517,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM response received from [llama3.2:3b]. Snippet: SELECT u.user_id, u.username FROM users u WHERE UP..."
+        },
+        {
+          "ts": 1772047157.517,
+          "level": "INFO",
+          "node": "SQL_GEN",
+          "msg": "SQL Generated and cleaned: SELECT u.user_id, u.username FROM users u WHERE UP..."
+        },
+        {
+          "ts": 1772047157.518,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "SQL Generated: SELECT u.user_id, u.username FROM users u WHERE UP..."
+        },
+        {
+          "ts": 1772047157.519,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [validate_sql]"
+        },
+        {
+          "ts": 1772047157.522,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [execute_query]"
+        },
+        {
+          "ts": 1772047157.522,
+          "level": "INFO",
+          "node": "DB_EXEC",
+          "msg": "Executing SQL: SELECT u.user_id, u.username FROM users u WHERE UPPER(u.risk_level) LIKE '%HIGH%' AND UPPER(u.account_status) = 'ACTIVE';"
+        },
+        {
+          "ts": 1772047157.523,
+          "level": "ERROR",
+          "node": "DB_EXEC",
+          "msg": "DATABASE EXECUTION ERROR: (sqlite3.OperationalError) no such column: u.username\n[SQL: SELECT u.user_id, u.username FROM users u WHERE UPPER(u.risk_level) LIKE '%HIGH%' AND UPPER(u.account_status) = 'ACTIVE';]\n(Background on this error at: https://sqlalche.me/e/20/e3q8) | Query: SELECT u.user_id, u.username FROM users u WHERE UPPER(u.risk_level) LIKE '%HIGH%' AND UPPER(u.account_status) = 'ACTIVE';"
+        },
+        {
+          "ts": 1772047157.523,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Query execution successful. Rows: 0"
+        },
+        {
+          "ts": 1772047157.525,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [insight_recommendation]"
+        },
+        {
+          "ts": 1772047157.525,
+          "level": "INFO",
+          "node": "INSIGHT",
+          "msg": "Generating insights for 0 rows in domain: security"
+        },
+        {
+          "ts": 1772047157.526,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Insights generated successfully."
+        },
+        {
+          "ts": 1772047157.526,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [recommend_visualization]"
+        },
+        {
+          "ts": 1772047157.526,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "No results for visualization recommendation."
+        }
+      ]
+    }
+  ],
+  "clusters": [],
+  "narrative": {
+    "executive_summary": "Our platform has been identified with a low-risk security audit detection, indicating potential compliance and operational vulnerabilities. However, no critical threats have been detected across all domains. Further analysis is required to determine the full scope of the issue.",
+    "threat_vectors": [
+      {
+        "name": "Low-Severity Security Audit",
+        "severity": "LOW",
+        "description": "A basic security audit revealed no data found to analyze, indicating a lack of actionable insights. This finding warrants immediate attention to ensure compliance and operational standards are met."
+      }
+    ],
+    "immediate_actions": [
+      "Initiate an emergency security audit within the next 24 hours to identify and address potential vulnerabilities.",
+      "Schedule a compliance review with key stakeholders to ensure adherence to regulatory requirements.",
+      "Conduct routine operations checks to prevent any potential disruptions or data breaches."
+    ],
+    "monitoring_recommendations": [
+      "Continuously monitor system logs for suspicious activity and implement real-time threat detection tools to enhance security measures.",
+      "Regularly review and update system configurations to ensure alignment with industry standards and best practices.",
+      "Implement a risk management framework to identify, assess, and mitigate potential threats proactively."
+    ],
+    "overall_risk": 0,
+    "overall_severity": "LOW",
+    "title": "Intelligence Brief - LIVE"
+  }
+}

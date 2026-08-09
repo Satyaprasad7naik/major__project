@@ -1,0 +1,1892 @@
+{
+  "scan_id": "scan-20260303T093124",
+  "timestamp": "2026-03-03T09:31:24.725224",
+  "stats": {
+    "total_missions": 8,
+    "critical_count": 0,
+    "high_count": 0,
+    "overall_risk": 8,
+    "overall_severity": "LOW"
+  },
+  "detections": [
+    {
+      "mission_id": "Audit-005",
+      "mission_name": "Regulatory Non-Compliance",
+      "domain": "compliance",
+      "severity": "LOW",
+      "risk_score": 0,
+      "risk_factors": {},
+      "sql": null,
+      "data_count": 0,
+      "results": [],
+      "visualization_config": null,
+      "insight": null,
+      "recommendation": null,
+      "original_query": "What are the top 10 regulatory non-compliant transactions in the last quarter?",
+      "depth": 0,
+      "parent_mission_id": null,
+      "rationale": "",
+      "timestamp": "LIVE AUDIT",
+      "logs": [
+        {
+          "ts": 1772529867.453,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [classify_intent]"
+        },
+        {
+          "ts": 1772529867.454,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Starting Intent Classification and Preprocessing in parallel for domain: compliance"
+        },
+        {
+          "ts": 1772529903.609,
+          "level": "INFO",
+          "node": "INTENT",
+          "msg": "Classifying intent for domain: compliance | Query: What are the top 10 regulatory non-compliant transactions in the last quarter?"
+        },
+        {
+          "ts": 1772529903.61,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM [ollama] using model [llama3.2:3b] generating response..."
+        },
+        {
+          "ts": 1772529920.383,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM response received from [llama3.2:3b]. Snippet: Given the user query \"What are the top 10 regulato..."
+        },
+        {
+          "ts": 1772529920.384,
+          "level": "ERROR",
+          "node": "INTENT",
+          "msg": "Intent classification error: Expecting value: line 1 column 1 (char 0)"
+        },
+        {
+          "ts": 1772530001.747,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM [ollama] using model [llama3.2:3b] generating response..."
+        },
+        {
+          "ts": 1772530002.908,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM response received from [llama3.2:3b]. Snippet: [\"users\", \"transactions\"]..."
+        },
+        {
+          "ts": 1772530002.91,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM [ollama] using model [llama3.2:3b] generating response..."
+        },
+        {
+          "ts": 1772530026.197,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM response received from [llama3.2:3b]. Snippet: {\n  \"resolved_entities\": {\n    \"transactions.statu..."
+        },
+        {
+          "ts": 1772530026.199,
+          "level": "INFO",
+          "node": "entity_extractor.py",
+          "msg": "Final Extracted/Resolved Entities: {'transactions.status': 'FAILED', 'transactions.date': '2024-04-18', 'transactions.amount': '1000', 'transactions.currency': 'USD', 'transactions.transaction_type': 'REGULATORY_NON_COMPLIANT', 'transactions.transaction_id': '12345', 'transactions.user_id': '67890', 'transactions.user_name': 'John Doe', 'transactions.user_email': 'johndoe@example.com', 'transactions.user_device': 'Desktop', 'transactions.user_location': 'DE'}"
+        },
+        {
+          "ts": 1772530076.082,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Intent classified: SELECT (conf: 0.9) | Needs Clarification: False"
+        },
+        {
+          "ts": 1772530078.047,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [generate_sql]"
+        },
+        {
+          "ts": 1772530078.047,
+          "level": "INFO",
+          "node": "SQL_GEN",
+          "msg": "Generating SQL for domain: compliance | Query: What are the top 10 regulatory non-compliant transactions in the last quarter?"
+        },
+        {
+          "ts": 1772530078.05,
+          "level": "INFO",
+          "node": "SQL_GEN",
+          "msg": "Using custom SQL prompt for domain: compliance"
+        },
+        {
+          "ts": 1772530078.05,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM [ollama] using model [llama3.2:3b] generating response..."
+        },
+        {
+          "ts": 1772530083.527,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM response received from [llama3.2:3b]. Snippet: Error: I don't have a table for regulatory text. H..."
+        },
+        {
+          "ts": 1772530083.527,
+          "level": "WARNING",
+          "node": "SQL_GEN",
+          "msg": "SQL Generation guidance response for query: What are the top 10 regulatory non-compliant transactions in the last quarter? | Msg: Error: I don't have a table for regulatory text. H..."
+        },
+        {
+          "ts": 1772530083.528,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "SQL Generator returned guidance instead of SQL: Error: I don't have a table for regulatory text. H..."
+        }
+      ]
+    },
+    {
+      "mission_id": "Audit-002",
+      "mission_name": "Inconsistent KYC Data",
+      "domain": "compliance",
+      "severity": "LOW",
+      "risk_score": 6,
+      "risk_factors": {
+        "affected_entities": {
+          "value": 1,
+          "score": 10,
+          "detail": "1 unique entities"
+        },
+        "dollar_exposure": {
+          "value": 0,
+          "score": 0,
+          "detail": "$0 exposure"
+        },
+        "velocity": {
+          "value": 1,
+          "score": 5,
+          "detail": "1 events"
+        },
+        "pep_involvement": {
+          "value": 0,
+          "score": 0,
+          "detail": "0 PEP accounts"
+        },
+        "kyc_gaps": {
+          "value": 0,
+          "score": 0,
+          "detail": "0 KYC gaps"
+        },
+        "severity_escalation": {
+          "value": "MEDIUM",
+          "score": 25,
+          "detail": "Base: MEDIUM"
+        }
+      },
+      "sql": "SELECT COUNT(*) FROM users WHERE kyc_status = 'confirmed' AND is_pep = 0;",
+      "data_count": 1,
+      "results": [
+        {
+          "COUNT(*)": 0
+        }
+      ],
+      "visualization_config": {
+        "chart_type": "table",
+        "title": "KYC Status and PEP Evaluation",
+        "x_axis_key": "COUNT(*)",
+        "y_axis_key": "COUNT(*)",
+        "label": "Count",
+        "description": "A table is used to display the count of users with a confirmed KYC status but an incomplete PEP evaluation, as the data is a simple count of a single category."
+      },
+      "insight": "The query results indicate that there are currently no users with a confirmed KYC status but an incomplete PEP evaluation. This suggests that our current KYC and PEP processes are functioning effectively, with no outstanding cases requiring attention. However, it is essential to maintain vigilance and continue to monitor this metric to ensure that our compliance posture remains robust. A high failure rate in this area could indicate operational risk and a lapse in our ability to identify and mitigate potential threats.",
+      "recommendation": [
+        "Schedule a review of the KYC and PEP processes with the relevant stakeholders to ensure that all necessary checks are in place and that our compliance team is adequately resourced to handle any potential cases.",
+        "Consider implementing a quarterly review of the KYC and PEP status to identify any trends or patterns that may indicate areas for improvement or potential operational risks."
+      ],
+      "original_query": "How many users have a confirmed KYC status but an incomplete PEP evaluation?",
+      "depth": 0,
+      "parent_mission_id": null,
+      "rationale": "",
+      "timestamp": "LIVE AUDIT",
+      "logs": [
+        {
+          "ts": 1772529867.451,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [classify_intent]"
+        },
+        {
+          "ts": 1772529867.451,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Starting Intent Classification and Preprocessing in parallel for domain: compliance"
+        },
+        {
+          "ts": 1772529874.414,
+          "level": "INFO",
+          "node": "INTENT",
+          "msg": "Classifying intent for domain: compliance | Query: How many users have a confirmed KYC status but an incomplete PEP evaluation?"
+        },
+        {
+          "ts": 1772529874.441,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM [ollama] using model [llama3.2:3b] generating response..."
+        },
+        {
+          "ts": 1772529881.396,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM response received from [llama3.2:3b]. Snippet: Given the user query \"How many users have a confir..."
+        },
+        {
+          "ts": 1772529881.397,
+          "level": "ERROR",
+          "node": "INTENT",
+          "msg": "Intent classification error: Expecting value: line 1 column 1 (char 0)"
+        },
+        {
+          "ts": 1772529947.634,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM [ollama] using model [llama3.2:3b] generating response..."
+        },
+        {
+          "ts": 1772529949.39,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM response received from [llama3.2:3b]. Snippet: [\"users\", \"transactions\"]..."
+        },
+        {
+          "ts": 1772529949.392,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM [ollama] using model [llama3.2:3b] generating response..."
+        },
+        {
+          "ts": 1772529965.273,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM response received from [llama3.2:3b]. Snippet: {\n  \"resolved_entities\": {\n    \"users.kyc_status\":..."
+        },
+        {
+          "ts": 1772529965.274,
+          "level": "INFO",
+          "node": "entity_extractor.py",
+          "msg": "Final Extracted/Resolved Entities: {'users.kyc_status': 'CONFIRMED', 'users.pep_evaluation': 'INCOMPLETE'}"
+        },
+        {
+          "ts": 1772530076.081,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Intent classified: SELECT (conf: 0.9) | Needs Clarification: False"
+        },
+        {
+          "ts": 1772530076.093,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [generate_sql]"
+        },
+        {
+          "ts": 1772530076.094,
+          "level": "INFO",
+          "node": "SQL_GEN",
+          "msg": "Generating SQL for domain: compliance | Query: How many users have a confirmed KYC status but an incomplete PEP evaluation?"
+        },
+        {
+          "ts": 1772530076.1,
+          "level": "INFO",
+          "node": "SQL_GEN",
+          "msg": "Using custom SQL prompt for domain: compliance"
+        },
+        {
+          "ts": 1772530076.101,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM [ollama] using model [llama3.2:3b] generating response..."
+        },
+        {
+          "ts": 1772530078.044,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM response received from [llama3.2:3b]. Snippet: SELECT COUNT(*) FROM users WHERE kyc_status = 'con..."
+        },
+        {
+          "ts": 1772530078.045,
+          "level": "INFO",
+          "node": "SQL_GEN",
+          "msg": "SQL Generated and cleaned: SELECT COUNT(*) FROM users WHERE kyc_status = 'con..."
+        },
+        {
+          "ts": 1772530078.045,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "SQL Generated: SELECT COUNT(*) FROM users WHERE kyc_status = 'con..."
+        },
+        {
+          "ts": 1772530125.634,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [validate_sql]"
+        },
+        {
+          "ts": 1772530125.665,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [execute_query]"
+        },
+        {
+          "ts": 1772530125.666,
+          "level": "INFO",
+          "node": "DB_EXEC",
+          "msg": "Executing SQL: SELECT COUNT(*) FROM users WHERE kyc_status = 'confirmed' AND is_pep = 0;"
+        },
+        {
+          "ts": 1772530125.669,
+          "level": "INFO",
+          "node": "DB_EXEC",
+          "msg": "Execution complete. Returned 1 rows."
+        },
+        {
+          "ts": 1772530125.67,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Query execution successful. Rows: 1"
+        },
+        {
+          "ts": 1772530125.888,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [insight_recommendation]"
+        },
+        {
+          "ts": 1772530125.888,
+          "level": "INFO",
+          "node": "INSIGHT",
+          "msg": "Generating insights for 1 rows in domain: compliance"
+        },
+        {
+          "ts": 1772530125.889,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM [ollama] using model [llama3.2:3b] generating response..."
+        },
+        {
+          "ts": 1772530143.075,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM response received from [llama3.2:3b]. Snippet: {\n  \"insight\": \"The query results indicate that th..."
+        },
+        {
+          "ts": 1772530143.075,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Insights generated successfully."
+        },
+        {
+          "ts": 1772530143.076,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [recommend_visualization]"
+        },
+        {
+          "ts": 1772530143.076,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM [ollama] using model [llama3.2:3b] generating response..."
+        },
+        {
+          "ts": 1772530147.274,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM response received from [llama3.2:3b]. Snippet: {\"chart_type\": \"table\", \"title\": \"KYC Status and P..."
+        },
+        {
+          "ts": 1772530147.274,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Visualization recommended: table"
+        }
+      ]
+    },
+    {
+      "mission_id": "Audit-001",
+      "mission_name": "Suspicious Account Activity",
+      "domain": "security",
+      "severity": "LOW",
+      "risk_score": 0,
+      "risk_factors": {},
+      "sql": "SELECT AVG(t.amount) FROM transactions t JOIN users u ON t.user_id = u.user_id WHERE t.status = 'ACTIVE' AND u.risk_level = 'HIGH' AND t.created_at >= (CURRENT_DATE - INTERVAL 30 DAY)",
+      "data_count": 0,
+      "results": [],
+      "visualization_config": null,
+      "insight": "No data found to analyze.",
+      "recommendation": "Try broadening your search criteria or checking if the data for this period is available.",
+      "original_query": "What is the average transaction amount for users with a risk level of HIGH and account status ACTIVE in the last 30 days?",
+      "depth": 0,
+      "parent_mission_id": null,
+      "rationale": "",
+      "timestamp": "LIVE AUDIT",
+      "logs": [
+        {
+          "ts": 1772529867.45,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [classify_intent]"
+        },
+        {
+          "ts": 1772529867.45,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Starting Intent Classification and Preprocessing in parallel for domain: security"
+        },
+        {
+          "ts": 1772529867.458,
+          "level": "INFO",
+          "node": "INTENT",
+          "msg": "Classifying intent for domain: security | Query: What is the average transaction amount for users with a risk level of HIGH and account status ACTIVE in the last 30 days?"
+        },
+        {
+          "ts": 1772529867.46,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM [ollama] using model [llama3.2:3b] generating response..."
+        },
+        {
+          "ts": 1772529874.413,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM response received from [llama3.2:3b]. Snippet: {\n  \"intent\": \"SELECT\",\n  \"confidence\": 0.9,\n  \"co..."
+        },
+        {
+          "ts": 1772529874.414,
+          "level": "INFO",
+          "node": "INTENT",
+          "msg": "Classification Result: SELECT (conf: 0.9) | Needs Clarification: False"
+        },
+        {
+          "ts": 1772529935.116,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM [ollama] using model [llama3.2:3b] generating response..."
+        },
+        {
+          "ts": 1772529935.772,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM response received from [llama3.2:3b]. Snippet: [\"users\", \"transactions\"]..."
+        },
+        {
+          "ts": 1772529935.774,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM [ollama] using model [llama3.2:3b] generating response..."
+        },
+        {
+          "ts": 1772529947.633,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM response received from [llama3.2:3b]. Snippet: {\n  \"resolved_entities\": {\n    \"users.risk_level\":..."
+        },
+        {
+          "ts": 1772529947.634,
+          "level": "INFO",
+          "node": "entity_extractor.py",
+          "msg": "Final Extracted/Resolved Entities: {'users.risk_level': 'HIGH', 'users.account_status': 'ACTIVE', 'transactions.amount': 'average'}"
+        },
+        {
+          "ts": 1772530076.08,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Intent classified: SELECT (conf: 0.9) | Needs Clarification: False"
+        },
+        {
+          "ts": 1772530083.534,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [generate_sql]"
+        },
+        {
+          "ts": 1772530083.535,
+          "level": "INFO",
+          "node": "SQL_GEN",
+          "msg": "Generating SQL for domain: security | Query: What is the average transaction amount for users with a risk level of HIGH and account status ACTIVE in the last 30 days?"
+        },
+        {
+          "ts": 1772530083.564,
+          "level": "INFO",
+          "node": "SQL_GEN",
+          "msg": "Using custom SQL prompt for domain: security"
+        },
+        {
+          "ts": 1772530083.565,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM [ollama] using model [llama3.2:3b] generating response..."
+        },
+        {
+          "ts": 1772530092.79,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM response received from [llama3.2:3b]. Snippet: SELECT AVG(t.amount) FROM transactions t JOIN user..."
+        },
+        {
+          "ts": 1772530092.79,
+          "level": "INFO",
+          "node": "SQL_GEN",
+          "msg": "SQL Generated and cleaned: SELECT AVG(t.amount) FROM transactions t JOIN user..."
+        },
+        {
+          "ts": 1772530092.791,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "SQL Generated: SELECT AVG(t.amount) FROM transactions t JOIN user..."
+        },
+        {
+          "ts": 1772530125.64,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [validate_sql]"
+        },
+        {
+          "ts": 1772530125.673,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [execute_query]"
+        },
+        {
+          "ts": 1772530125.674,
+          "level": "INFO",
+          "node": "DB_EXEC",
+          "msg": "Executing SQL: SELECT AVG(t.amount) FROM transactions t JOIN users u ON t.user_id = u.user_id WHERE t.status = 'ACTIVE' AND u.risk_level = 'HIGH' AND t.created_at >= (CURRENT_DATE - INTERVAL 30 DAY)"
+        },
+        {
+          "ts": 1772530125.675,
+          "level": "ERROR",
+          "node": "DB_EXEC",
+          "msg": "DATABASE EXECUTION ERROR: (sqlite3.OperationalError) near \"30\": syntax error\n[SQL: SELECT AVG(t.amount) FROM transactions t JOIN users u ON t.user_id = u.user_id WHERE t.status = 'ACTIVE' AND u.risk_level = 'HIGH' AND t.created_at >= (CURRENT_DATE - INTERVAL 30 DAY)]\n(Background on this error at: https://sqlalche.me/e/20/e3q8) | Query: SELECT AVG(t.amount) FROM transactions t JOIN users u ON t.user_id = u.user_id WHERE t.status = 'ACTIVE' AND u.risk_level = 'HIGH' AND t.created_at >= (CURRENT_DATE - INTERVAL 30 DAY)"
+        },
+        {
+          "ts": 1772530125.675,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Query execution successful. Rows: 0"
+        },
+        {
+          "ts": 1772530147.276,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [insight_recommendation]"
+        },
+        {
+          "ts": 1772530147.277,
+          "level": "INFO",
+          "node": "INSIGHT",
+          "msg": "Generating insights for 0 rows in domain: security"
+        },
+        {
+          "ts": 1772530147.277,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Insights generated successfully."
+        },
+        {
+          "ts": 1772530147.278,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [recommend_visualization]"
+        },
+        {
+          "ts": 1772530147.278,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "No results for visualization recommendation."
+        }
+      ]
+    },
+    {
+      "mission_id": "Audit-004",
+      "mission_name": "Unusual Login Patterns",
+      "domain": "security",
+      "severity": "LOW",
+      "risk_score": 0,
+      "risk_factors": {},
+      "sql": "SELECT COUNT(*) FROM login_events WHERE UPPER(device_type) != UPPER(users.device_type)",
+      "data_count": 0,
+      "results": [],
+      "visualization_config": null,
+      "insight": "No data found to analyze.",
+      "recommendation": "Try broadening your search criteria or checking if the data for this period is available.",
+      "original_query": "How many login events have a device type that doesn't match the user's account device?",
+      "depth": 0,
+      "parent_mission_id": null,
+      "rationale": "",
+      "timestamp": "LIVE AUDIT",
+      "logs": [
+        {
+          "ts": 1772529867.453,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [classify_intent]"
+        },
+        {
+          "ts": 1772529867.453,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Starting Intent Classification and Preprocessing in parallel for domain: security"
+        },
+        {
+          "ts": 1772529886.85,
+          "level": "INFO",
+          "node": "INTENT",
+          "msg": "Classifying intent for domain: security | Query: How many login events have a device type that doesn't match the user's account device?"
+        },
+        {
+          "ts": 1772529886.851,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM [ollama] using model [llama3.2:3b] generating response..."
+        },
+        {
+          "ts": 1772529903.607,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM response received from [llama3.2:3b]. Snippet: Given the user query \"How many login events have a..."
+        },
+        {
+          "ts": 1772529903.608,
+          "level": "ERROR",
+          "node": "INTENT",
+          "msg": "Intent classification error: Expecting value: line 1 column 1 (char 0)"
+        },
+        {
+          "ts": 1772529987.925,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM [ollama] using model [llama3.2:3b] generating response..."
+        },
+        {
+          "ts": 1772529989.156,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM response received from [llama3.2:3b]. Snippet: [\"login_events\", \"users\"]..."
+        },
+        {
+          "ts": 1772529989.159,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM [ollama] using model [llama3.2:3b] generating response..."
+        },
+        {
+          "ts": 1772530001.746,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM response received from [llama3.2:3b]. Snippet: {\n  \"resolved_entities\": {\n    \"login_events.devic..."
+        },
+        {
+          "ts": 1772530001.747,
+          "level": "INFO",
+          "node": "entity_extractor.py",
+          "msg": "Final Extracted/Resolved Entities: {'login_events.device_type': 'Tablet'}"
+        },
+        {
+          "ts": 1772530076.082,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Intent classified: SELECT (conf: 0.9) | Needs Clarification: False"
+        },
+        {
+          "ts": 1772530092.792,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [generate_sql]"
+        },
+        {
+          "ts": 1772530092.792,
+          "level": "INFO",
+          "node": "SQL_GEN",
+          "msg": "Generating SQL for domain: security | Query: How many login events have a device type that doesn't match the user's account device?"
+        },
+        {
+          "ts": 1772530092.799,
+          "level": "INFO",
+          "node": "SQL_GEN",
+          "msg": "Using custom SQL prompt for domain: security"
+        },
+        {
+          "ts": 1772530092.8,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM [ollama] using model [llama3.2:3b] generating response..."
+        },
+        {
+          "ts": 1772530096.139,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM response received from [llama3.2:3b]. Snippet: SELECT COUNT(*) FROM login_events WHERE UPPER(devi..."
+        },
+        {
+          "ts": 1772530096.14,
+          "level": "INFO",
+          "node": "SQL_GEN",
+          "msg": "SQL Generated and cleaned: SELECT COUNT(*) FROM login_events WHERE UPPER(devi..."
+        },
+        {
+          "ts": 1772530096.14,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "SQL Generated: SELECT COUNT(*) FROM login_events WHERE UPPER(devi..."
+        },
+        {
+          "ts": 1772530125.643,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [validate_sql]"
+        },
+        {
+          "ts": 1772530125.676,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [execute_query]"
+        },
+        {
+          "ts": 1772530125.677,
+          "level": "INFO",
+          "node": "DB_EXEC",
+          "msg": "Executing SQL: SELECT COUNT(*) FROM login_events WHERE UPPER(device_type) != UPPER(users.device_type)"
+        },
+        {
+          "ts": 1772530125.678,
+          "level": "ERROR",
+          "node": "DB_EXEC",
+          "msg": "DATABASE EXECUTION ERROR: (sqlite3.OperationalError) no such column: users.device_type\n[SQL: SELECT COUNT(*) FROM login_events WHERE UPPER(device_type) != UPPER(users.device_type)]\n(Background on this error at: https://sqlalche.me/e/20/e3q8) | Query: SELECT COUNT(*) FROM login_events WHERE UPPER(device_type) != UPPER(users.device_type)"
+        },
+        {
+          "ts": 1772530125.678,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Query execution successful. Rows: 0"
+        },
+        {
+          "ts": 1772530147.278,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [insight_recommendation]"
+        },
+        {
+          "ts": 1772530147.278,
+          "level": "INFO",
+          "node": "INSIGHT",
+          "msg": "Generating insights for 0 rows in domain: security"
+        },
+        {
+          "ts": 1772530147.279,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Insights generated successfully."
+        },
+        {
+          "ts": 1772530147.279,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [recommend_visualization]"
+        },
+        {
+          "ts": 1772530147.279,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "No results for visualization recommendation."
+        }
+      ]
+    },
+    {
+      "mission_id": "Audit-003",
+      "mission_name": "Payment Failure Rate",
+      "domain": "operations",
+      "severity": "LOW",
+      "risk_score": 6,
+      "risk_factors": {
+        "affected_entities": {
+          "value": 1,
+          "score": 10,
+          "detail": "1 unique entities"
+        },
+        "dollar_exposure": {
+          "value": 0,
+          "score": 0,
+          "detail": "$0 exposure"
+        },
+        "velocity": {
+          "value": 1,
+          "score": 5,
+          "detail": "1 events"
+        },
+        "pep_involvement": {
+          "value": 0,
+          "score": 0,
+          "detail": "0 PEP accounts"
+        },
+        "kyc_gaps": {
+          "value": 0,
+          "score": 0,
+          "detail": "0 KYC gaps"
+        },
+        "severity_escalation": {
+          "value": "MEDIUM",
+          "score": 25,
+          "detail": "Base: MEDIUM"
+        }
+      },
+      "sql": "SELECT AVG(CASE WHEN t.status = 'FAILED' THEN 1 ELSE 0 END) / COUNT(DISTINCT t.txn_id) FROM transactions t JOIN users u ON t.user_id = u.user_id WHERE t.status = 'FAILED' AND t.payment_method = 'SUCCESS'",
+      "data_count": 1,
+      "results": [
+        {
+          "AVG(CASE WHEN t.status = 'FAILED' THEN 1 ELSE 0 END) / COUNT(DISTINCT t.txn_id)": null
+        }
+      ],
+      "visualization_config": {
+        "chart_type": "table",
+        "title": "Average Daily Payment Failure Rate by Users with Successful Payment History",
+        "x_axis_key": "AVG(CASE WHEN t.status = 'FAILED' THEN 1 ELSE 0 END) / COUNT(DISTINCT t.txn_id)",
+        "y_axis_key": "AVG(CASE WHEN t.status = 'FAILED' THEN 1 ELSE 0 END) / COUNT(DISTINCT t.txn_id)",
+        "label": "Average Daily Payment Failure Rate",
+        "description": "The average daily payment failure rate for users with a history of successful payments is not meaningful as it is a single value, not a distribution of values."
+      },
+      "insight": "The average daily payment failure rate for users with a history of successful payments is currently unknown, as the query result indicates a null value. This lack of transparency suggests that the company may not have a comprehensive understanding of its payment processing performance, particularly for users who have a proven track record of successful transactions. This could indicate operational inefficiencies or inadequate risk management strategies, potentially leading to increased operational risk and financial losses. Further analysis is required to determine the root cause of this issue and implement corrective measures.",
+      "recommendation": [
+        "Conduct a thorough review of the payment processing system and identify potential bottlenecks or areas for improvement. This may involve collaborating with the IT and operations teams to optimize system performance and implement additional risk management strategies.",
+        "Establish a key performance indicator (KPI) to track the average daily payment failure rate for users with a history of successful payments, and set a target for improvement. This will enable the company to monitor progress and make data-driven decisions to address any operational inefficiencies."
+      ],
+      "original_query": "What is the average daily payment failure rate for users with a history of successful payments?",
+      "depth": 0,
+      "parent_mission_id": null,
+      "rationale": "",
+      "timestamp": "LIVE AUDIT",
+      "logs": [
+        {
+          "ts": 1772529867.452,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [classify_intent]"
+        },
+        {
+          "ts": 1772529867.452,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Starting Intent Classification and Preprocessing in parallel for domain: operations"
+        },
+        {
+          "ts": 1772529881.397,
+          "level": "INFO",
+          "node": "INTENT",
+          "msg": "Classifying intent for domain: operations | Query: What is the average daily payment failure rate for users with a history of successful payments?"
+        },
+        {
+          "ts": 1772529881.419,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM [ollama] using model [llama3.2:3b] generating response..."
+        },
+        {
+          "ts": 1772529886.85,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM response received from [llama3.2:3b]. Snippet: {\"intent\": \"SELECT\", \"confidence\": 0.9, \"complexit..."
+        },
+        {
+          "ts": 1772529886.85,
+          "level": "INFO",
+          "node": "INTENT",
+          "msg": "Classification Result: SELECT (conf: 0.9) | Needs Clarification: False"
+        },
+        {
+          "ts": 1772529965.276,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM [ollama] using model [llama3.2:3b] generating response..."
+        },
+        {
+          "ts": 1772529966.477,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM response received from [llama3.2:3b]. Snippet: [\"users\", \"transactions\"]..."
+        },
+        {
+          "ts": 1772529966.478,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM [ollama] using model [llama3.2:3b] generating response..."
+        },
+        {
+          "ts": 1772529987.924,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM response received from [llama3.2:3b]. Snippet: {\n  \"resolved_entities\": {\n    \"login_events.count..."
+        },
+        {
+          "ts": 1772529987.925,
+          "level": "INFO",
+          "node": "entity_extractor.py",
+          "msg": "Final Extracted/Resolved Entities: {'login_events.country': 'DE', 'login_events.device_type': 'Desktop', 'login_events.failure_reason': 'MFA failed', 'login_events.status': 'SUCCESS', 'login_events.user_agent': 'Mozilla/5.0 (Windows 11) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36 Edg/120.0.0.0'}"
+        },
+        {
+          "ts": 1772530076.081,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Intent classified: SELECT (conf: 0.9) | Needs Clarification: False"
+        },
+        {
+          "ts": 1772530096.141,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [generate_sql]"
+        },
+        {
+          "ts": 1772530096.141,
+          "level": "INFO",
+          "node": "SQL_GEN",
+          "msg": "Generating SQL for domain: operations | Query: What is the average daily payment failure rate for users with a history of successful payments?"
+        },
+        {
+          "ts": 1772530096.146,
+          "level": "INFO",
+          "node": "SQL_GEN",
+          "msg": "Using custom SQL prompt for domain: operations"
+        },
+        {
+          "ts": 1772530096.147,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM [ollama] using model [llama3.2:3b] generating response..."
+        },
+        {
+          "ts": 1772530105.185,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM response received from [llama3.2:3b]. Snippet: SELECT AVG(CASE WHEN t.status = 'FAILED' THEN 1 EL..."
+        },
+        {
+          "ts": 1772530105.186,
+          "level": "INFO",
+          "node": "SQL_GEN",
+          "msg": "SQL Generated and cleaned: SELECT AVG(CASE WHEN t.status = 'FAILED' THEN 1 EL..."
+        },
+        {
+          "ts": 1772530105.187,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "SQL Generated: SELECT AVG(CASE WHEN t.status = 'FAILED' THEN 1 EL..."
+        },
+        {
+          "ts": 1772530125.647,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [validate_sql]"
+        },
+        {
+          "ts": 1772530125.683,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [execute_query]"
+        },
+        {
+          "ts": 1772530125.683,
+          "level": "INFO",
+          "node": "DB_EXEC",
+          "msg": "Executing SQL: SELECT AVG(CASE WHEN t.status = 'FAILED' THEN 1 ELSE 0 END) / COUNT(DISTINCT t.txn_id) FROM transactions t JOIN users u ON t.user_id = u.user_id WHERE t.status = 'FAILED' AND t.payment_method = 'SUCCESS'"
+        },
+        {
+          "ts": 1772530125.887,
+          "level": "INFO",
+          "node": "DB_EXEC",
+          "msg": "Execution complete. Returned 1 rows."
+        },
+        {
+          "ts": 1772530125.888,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Query execution successful. Rows: 1"
+        },
+        {
+          "ts": 1772530147.282,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [insight_recommendation]"
+        },
+        {
+          "ts": 1772530147.282,
+          "level": "INFO",
+          "node": "INSIGHT",
+          "msg": "Generating insights for 1 rows in domain: operations"
+        },
+        {
+          "ts": 1772530147.283,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM [ollama] using model [llama3.2:3b] generating response..."
+        },
+        {
+          "ts": 1772530167.205,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM response received from [llama3.2:3b]. Snippet: {\n  \"insight\": \"The average daily payment failure ..."
+        },
+        {
+          "ts": 1772530167.206,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Insights generated successfully."
+        },
+        {
+          "ts": 1772530167.206,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [recommend_visualization]"
+        },
+        {
+          "ts": 1772530167.206,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM [ollama] using model [llama3.2:3b] generating response..."
+        },
+        {
+          "ts": 1772530181.313,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM response received from [llama3.2:3b]. Snippet: {\"chart_type\": \"table\", \"title\": \"Average Daily Pa..."
+        },
+        {
+          "ts": 1772530181.313,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Visualization recommended: table"
+        }
+      ]
+    },
+    {
+      "mission_id": "Audit-007",
+      "mission_name": "System Health Red Flags",
+      "domain": "operations",
+      "severity": "LOW",
+      "risk_score": 6,
+      "risk_factors": {
+        "affected_entities": {
+          "value": 1,
+          "score": 10,
+          "detail": "1 unique entities"
+        },
+        "dollar_exposure": {
+          "value": 0,
+          "score": 0,
+          "detail": "$0 exposure"
+        },
+        "velocity": {
+          "value": 1,
+          "score": 5,
+          "detail": "1 events"
+        },
+        "pep_involvement": {
+          "value": 0,
+          "score": 0,
+          "detail": "0 PEP accounts"
+        },
+        "kyc_gaps": {
+          "value": 0,
+          "score": 0,
+          "detail": "0 KYC gaps"
+        },
+        "severity_escalation": {
+          "value": "MEDIUM",
+          "score": 25,
+          "detail": "Base: MEDIUM"
+        }
+      },
+      "sql": "SELECT COUNT(le.event_id) FROM login_events le JOIN transactions t ON le.user_id = t.user_id WHERE UPPER(le.failure_reason) = 'INVALID CREDENTIALS' AND t.status = 'SUCCESSFUL';",
+      "data_count": 1,
+      "results": [
+        {
+          "COUNT(le.event_id)": 0
+        }
+      ],
+      "visualization_config": {
+        "chart_type": "bar",
+        "title": "Login Events with Invalid Credentials Processed Successfully",
+        "x_axis_key": "COUNT(le.event_id)",
+        "y_axis_key": "COUNT(le.event_id)",
+        "label": "Count",
+        "description": "Visualizing the number of login events with a failure reason of 'invalid credentials' that were processed successfully."
+      },
+      "insight": "The low count of login events with a failure reason of 'invalid credentials' but processed successfully suggests that our authentication mechanisms are robust and effective in preventing unauthorized access. This is a positive indicator of our security posture, indicating that our users are unlikely to be compromised by weak passwords or authentication failures. However, it's essential to note that this metric alone does not guarantee complete security, and we should continue to monitor and improve our security measures to stay ahead of emerging threats.",
+      "recommendation": [
+        "Conduct a thorough review of our password policies and consider implementing a password rotation schedule to further enhance security.",
+        "Investigate the success rate of our multi-factor authentication (MFA) implementation to ensure it is effective in preventing unauthorized access and consider expanding its use to additional user groups."
+      ],
+      "original_query": "How many login events have a failure reason of 'invalid credentials' but were processed successfully?",
+      "depth": 0,
+      "parent_mission_id": null,
+      "rationale": "",
+      "timestamp": "LIVE AUDIT",
+      "logs": [
+        {
+          "ts": 1772529867.455,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [classify_intent]"
+        },
+        {
+          "ts": 1772529867.455,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Starting Intent Classification and Preprocessing in parallel for domain: operations"
+        },
+        {
+          "ts": 1772529926.795,
+          "level": "INFO",
+          "node": "INTENT",
+          "msg": "Classifying intent for domain: operations | Query: How many login events have a failure reason of 'invalid credentials' but were processed successfully?"
+        },
+        {
+          "ts": 1772529926.797,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM [ollama] using model [llama3.2:3b] generating response..."
+        },
+        {
+          "ts": 1772529928.633,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM response received from [llama3.2:3b]. Snippet: {\"intent\": \"SELECT\", \"confidence\": 1.0, \"complexit..."
+        },
+        {
+          "ts": 1772529928.634,
+          "level": "INFO",
+          "node": "INTENT",
+          "msg": "Classification Result: SELECT (conf: 1.0) | Needs Clarification: False"
+        },
+        {
+          "ts": 1772530043.747,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM [ollama] using model [llama3.2:3b] generating response..."
+        },
+        {
+          "ts": 1772530045.29,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM response received from [llama3.2:3b]. Snippet: [\"login_events\", \"transactions\"]..."
+        },
+        {
+          "ts": 1772530045.33,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM [ollama] using model [llama3.2:3b] generating response..."
+        },
+        {
+          "ts": 1772530059.566,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM response received from [llama3.2:3b]. Snippet: {\n  \"resolved_entities\": {\n    \"login_events.failu..."
+        },
+        {
+          "ts": 1772530059.568,
+          "level": "INFO",
+          "node": "entity_extractor.py",
+          "msg": "Final Extracted/Resolved Entities: {'login_events.failure_reason': 'MFA failed'}"
+        },
+        {
+          "ts": 1772530076.083,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Intent classified: SELECT (conf: 1.0) | Needs Clarification: False"
+        },
+        {
+          "ts": 1772530105.192,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [generate_sql]"
+        },
+        {
+          "ts": 1772530105.192,
+          "level": "INFO",
+          "node": "SQL_GEN",
+          "msg": "Generating SQL for domain: operations | Query: How many login events have a failure reason of 'invalid credentials' but were processed successfully?"
+        },
+        {
+          "ts": 1772530105.198,
+          "level": "INFO",
+          "node": "SQL_GEN",
+          "msg": "Using custom SQL prompt for domain: operations"
+        },
+        {
+          "ts": 1772530105.199,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM [ollama] using model [llama3.2:3b] generating response..."
+        },
+        {
+          "ts": 1772530110.84,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM response received from [llama3.2:3b]. Snippet: SELECT COUNT(le.event_id) FROM login_events le JOI..."
+        },
+        {
+          "ts": 1772530110.841,
+          "level": "INFO",
+          "node": "SQL_GEN",
+          "msg": "SQL Generated and cleaned: SELECT COUNT(le.event_id) FROM login_events le JOI..."
+        },
+        {
+          "ts": 1772530110.841,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "SQL Generated: SELECT COUNT(le.event_id) FROM login_events le JOI..."
+        },
+        {
+          "ts": 1772530125.656,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [validate_sql]"
+        },
+        {
+          "ts": 1772530181.314,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [execute_query]"
+        },
+        {
+          "ts": 1772530181.314,
+          "level": "INFO",
+          "node": "DB_EXEC",
+          "msg": "Executing SQL: SELECT COUNT(le.event_id) FROM login_events le JOIN transactions t ON le.user_id = t.user_id WHERE UPPER(le.failure_reason) = 'INVALID CREDENTIALS' AND t.status = 'SUCCESSFUL';"
+        },
+        {
+          "ts": 1772530181.324,
+          "level": "INFO",
+          "node": "DB_EXEC",
+          "msg": "Execution complete. Returned 1 rows."
+        },
+        {
+          "ts": 1772530181.324,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Query execution successful. Rows: 1"
+        },
+        {
+          "ts": 1772530181.469,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [insight_recommendation]"
+        },
+        {
+          "ts": 1772530181.469,
+          "level": "INFO",
+          "node": "INSIGHT",
+          "msg": "Generating insights for 1 rows in domain: operations"
+        },
+        {
+          "ts": 1772530181.469,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM [ollama] using model [llama3.2:3b] generating response..."
+        },
+        {
+          "ts": 1772530197.292,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM response received from [llama3.2:3b]. Snippet: {\n  \"insight\": \"The low count of login events with..."
+        },
+        {
+          "ts": 1772530197.293,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Insights generated successfully."
+        },
+        {
+          "ts": 1772530197.293,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [recommend_visualization]"
+        },
+        {
+          "ts": 1772530197.294,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM [ollama] using model [llama3.2:3b] generating response..."
+        },
+        {
+          "ts": 1772530205.237,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM response received from [llama3.2:3b]. Snippet: {\"chart_type\": \"bar\", \"title\": \"Login Events with ..."
+        },
+        {
+          "ts": 1772530205.24,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Visualization recommended: bar"
+        }
+      ]
+    },
+    {
+      "mission_id": "Audit-008",
+      "mission_name": "PEP Gap in Transaction History",
+      "domain": "compliance",
+      "severity": "LOW",
+      "risk_score": 15,
+      "risk_factors": {
+        "affected_entities": {
+          "value": 1,
+          "score": 10,
+          "detail": "1 unique entities"
+        },
+        "dollar_exposure": {
+          "value": 0,
+          "score": 0,
+          "detail": "$0 exposure"
+        },
+        "velocity": {
+          "value": 1,
+          "score": 5,
+          "detail": "1 events"
+        },
+        "pep_involvement": {
+          "value": 0,
+          "score": 0,
+          "detail": "0 PEP accounts"
+        },
+        "kyc_gaps": {
+          "value": 0,
+          "score": 0,
+          "detail": "0 KYC gaps"
+        },
+        "severity_escalation": {
+          "value": "CRITICAL",
+          "score": 80,
+          "detail": "Base: CRITICAL"
+        }
+      },
+      "sql": "SELECT COUNT(t.txn_id) FROM transactions t JOIN users u ON t.user_id = u.user_id WHERE u.kyc_status = 1 AND t.txn_id IS NULL",
+      "data_count": 1,
+      "results": [
+        {
+          "COUNT(t.txn_id)": 0
+        }
+      ],
+      "visualization_config": {
+        "chart_type": "table",
+        "title": "Transactions with Confirmed PEP Evaluation but No Record of Transactions",
+        "x_axis_key": "COUNT(t.txn_id)",
+        "y_axis_key": "COUNT(t.txn_id)",
+        "label": "Count",
+        "description": "The data is a simple count of transactions with a specific condition, making a table the most appropriate visualization."
+      },
+      "insight": "The query results indicate that there are no transactions associated with users who have a confirmed PEP (Politically Exposed Person) evaluation, suggesting a potential gap in our transaction monitoring and risk assessment processes. This could lead to operational risk if such individuals are not properly flagged and monitored, potentially allowing them to engage in illicit activities. Furthermore, the absence of any transactions with PEP users may also indicate a lack of effective customer due diligence, which is critical in preventing money laundering and terrorist financing.",
+      "recommendation": [
+        "Implement a review of our transaction monitoring and risk assessment processes to identify any gaps or weaknesses that may be contributing to this issue.",
+        "Conduct a thorough review of our customer due diligence procedures to ensure that all high-risk customers are properly flagged and monitored, and that our risk assessment models are up-to-date and accurate."
+      ],
+      "original_query": "How many transactions have a user with a confirmed PEP evaluation but no record of transactions?",
+      "depth": 0,
+      "parent_mission_id": null,
+      "rationale": "",
+      "timestamp": "LIVE AUDIT",
+      "logs": [
+        {
+          "ts": 1772529867.456,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [classify_intent]"
+        },
+        {
+          "ts": 1772529867.456,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Starting Intent Classification and Preprocessing in parallel for domain: compliance"
+        },
+        {
+          "ts": 1772529928.634,
+          "level": "INFO",
+          "node": "INTENT",
+          "msg": "Classifying intent for domain: compliance | Query: How many transactions have a user with a confirmed PEP evaluation but no record of transactions?"
+        },
+        {
+          "ts": 1772529928.635,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM [ollama] using model [llama3.2:3b] generating response..."
+        },
+        {
+          "ts": 1772529935.113,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM response received from [llama3.2:3b]. Snippet: Given the user query \"How many transactions have a..."
+        },
+        {
+          "ts": 1772529935.114,
+          "level": "ERROR",
+          "node": "INTENT",
+          "msg": "Intent classification error: Expecting value: line 1 column 1 (char 0)"
+        },
+        {
+          "ts": 1772530059.568,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM [ollama] using model [llama3.2:3b] generating response..."
+        },
+        {
+          "ts": 1772530060.863,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM response received from [llama3.2:3b]. Snippet: [\"users\", \"transactions\"]..."
+        },
+        {
+          "ts": 1772530060.882,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM [ollama] using model [llama3.2:3b] generating response..."
+        },
+        {
+          "ts": 1772530076.061,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM response received from [llama3.2:3b]. Snippet: {\n  \"resolved_entities\": {\n    \"transactions.user_..."
+        },
+        {
+          "ts": 1772530076.062,
+          "level": "INFO",
+          "node": "entity_extractor.py",
+          "msg": "Final Extracted/Resolved Entities: {'transactions.user_id': 'PEP', 'transactions.transaction_id': 'NULL'}"
+        },
+        {
+          "ts": 1772530076.083,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Intent classified: SELECT (conf: 0.9) | Needs Clarification: False"
+        },
+        {
+          "ts": 1772530117.6,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [generate_sql]"
+        },
+        {
+          "ts": 1772530117.6,
+          "level": "INFO",
+          "node": "SQL_GEN",
+          "msg": "Generating SQL for domain: compliance | Query: How many transactions have a user with a confirmed PEP evaluation but no record of transactions?"
+        },
+        {
+          "ts": 1772530117.607,
+          "level": "INFO",
+          "node": "SQL_GEN",
+          "msg": "Using custom SQL prompt for domain: compliance"
+        },
+        {
+          "ts": 1772530117.608,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM [ollama] using model [llama3.2:3b] generating response..."
+        },
+        {
+          "ts": 1772530125.629,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM response received from [llama3.2:3b]. Snippet: SELECT COUNT(t.txn_id) FROM transactions t JOIN us..."
+        },
+        {
+          "ts": 1772530125.63,
+          "level": "INFO",
+          "node": "SQL_GEN",
+          "msg": "SQL Generated and cleaned: SELECT COUNT(t.txn_id) FROM transactions t JOIN us..."
+        },
+        {
+          "ts": 1772530125.631,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "SQL Generated: SELECT COUNT(t.txn_id) FROM transactions t JOIN us..."
+        },
+        {
+          "ts": 1772530125.66,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [validate_sql]"
+        },
+        {
+          "ts": 1772530181.325,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [execute_query]"
+        },
+        {
+          "ts": 1772530181.325,
+          "level": "INFO",
+          "node": "DB_EXEC",
+          "msg": "Executing SQL: SELECT COUNT(t.txn_id) FROM transactions t JOIN users u ON t.user_id = u.user_id WHERE u.kyc_status = 1 AND t.txn_id IS NULL"
+        },
+        {
+          "ts": 1772530181.327,
+          "level": "INFO",
+          "node": "DB_EXEC",
+          "msg": "Execution complete. Returned 1 rows."
+        },
+        {
+          "ts": 1772530181.327,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Query execution successful. Rows: 1"
+        },
+        {
+          "ts": 1772530205.241,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [insight_recommendation]"
+        },
+        {
+          "ts": 1772530205.241,
+          "level": "INFO",
+          "node": "INSIGHT",
+          "msg": "Generating insights for 1 rows in domain: compliance"
+        },
+        {
+          "ts": 1772530205.241,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM [ollama] using model [llama3.2:3b] generating response..."
+        },
+        {
+          "ts": 1772530222.297,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM response received from [llama3.2:3b]. Snippet: {\n  \"insight\": \"The query results indicate that th..."
+        },
+        {
+          "ts": 1772530222.298,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Insights generated successfully."
+        },
+        {
+          "ts": 1772530222.299,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [recommend_visualization]"
+        },
+        {
+          "ts": 1772530222.299,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM [ollama] using model [llama3.2:3b] generating response..."
+        },
+        {
+          "ts": 1772530226.206,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM response received from [llama3.2:3b]. Snippet: {\"chart_type\": \"table\", \"title\": \"Transactions wit..."
+        },
+        {
+          "ts": 1772530226.206,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Visualization recommended: table"
+        }
+      ]
+    },
+    {
+      "mission_id": "Audit-006",
+      "mission_name": "High-Risk Exposure",
+      "domain": "risk",
+      "severity": "LOW",
+      "risk_score": 6,
+      "risk_factors": {
+        "affected_entities": {
+          "value": 1,
+          "score": 10,
+          "detail": "1 unique entities"
+        },
+        "dollar_exposure": {
+          "value": 0,
+          "score": 0,
+          "detail": "$0 exposure"
+        },
+        "velocity": {
+          "value": 1,
+          "score": 5,
+          "detail": "1 events"
+        },
+        "pep_involvement": {
+          "value": 0,
+          "score": 0,
+          "detail": "0 PEP accounts"
+        },
+        "kyc_gaps": {
+          "value": 0,
+          "score": 0,
+          "detail": "0 KYC gaps"
+        },
+        "severity_escalation": {
+          "value": "MEDIUM",
+          "score": 25,
+          "detail": "Base: MEDIUM"
+        }
+      },
+      "sql": "SELECT AVG(amount) FROM transactions WHERE user_id IN (SELECT user_id FROM users WHERE risk_level = 'HIGH')",
+      "data_count": 1,
+      "results": [
+        {
+          "AVG(amount)": 9376.541199207137
+        }
+      ],
+      "visualization_config": {
+        "chart_type": "table",
+        "title": "Average Monthly Transaction Amount by Risk Level",
+        "x_axis_key": "AVG(amount)",
+        "y_axis_key": "AVG(amount)",
+        "label": "Average Monthly Transaction Amount",
+        "description": "The average monthly transaction amount for users with a risk level of HIGH."
+      },
+      "insight": "The average monthly transaction amount for users with a risk level of HIGH is $9,376.54, indicating a significant increase in potentially high-risk transactions. This suggests that our current risk assessment and mitigation strategies may not be effective in preventing high-risk transactions, potentially exposing the company to operational and financial risks. Further analysis is required to identify the root causes of this trend and implement targeted measures to reduce risk.",
+      "recommendation": [
+        "Implement a more granular risk assessment framework to better identify and prioritize high-risk transactions, focusing on transaction patterns and behavior anomalies.",
+        "Establish a cross-functional task force to review and enhance our risk mitigation strategies, including the development of more effective controls and monitoring processes to prevent high-risk transactions."
+      ],
+      "original_query": "What is the average monthly transaction amount for users with a risk level of HIGH?",
+      "depth": 0,
+      "parent_mission_id": null,
+      "rationale": "",
+      "timestamp": "LIVE AUDIT",
+      "logs": [
+        {
+          "ts": 1772529867.454,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [classify_intent]"
+        },
+        {
+          "ts": 1772529867.454,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Starting Intent Classification and Preprocessing in parallel for domain: risk"
+        },
+        {
+          "ts": 1772529920.384,
+          "level": "INFO",
+          "node": "INTENT",
+          "msg": "Classifying intent for domain: risk | Query: What is the average monthly transaction amount for users with a risk level of HIGH?"
+        },
+        {
+          "ts": 1772529920.386,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM [ollama] using model [llama3.2:3b] generating response..."
+        },
+        {
+          "ts": 1772529926.793,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM response received from [llama3.2:3b]. Snippet: Given the user query \"What is the average monthly ..."
+        },
+        {
+          "ts": 1772529926.794,
+          "level": "ERROR",
+          "node": "INTENT",
+          "msg": "Intent classification error: Expecting value: line 1 column 1 (char 0)"
+        },
+        {
+          "ts": 1772530026.199,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM [ollama] using model [llama3.2:3b] generating response..."
+        },
+        {
+          "ts": 1772530027.512,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM response received from [llama3.2:3b]. Snippet: [\"users\", \"transactions\"]..."
+        },
+        {
+          "ts": 1772530027.52,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM [ollama] using model [llama3.2:3b] generating response..."
+        },
+        {
+          "ts": 1772530043.746,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM response received from [llama3.2:3b]. Snippet: {\n  \"resolved_entities\": {\n    \"transaction_amount..."
+        },
+        {
+          "ts": 1772530043.747,
+          "level": "INFO",
+          "node": "entity_extractor.py",
+          "msg": "Final Extracted/Resolved Entities: {'transaction_amount': 'Average monthly transaction amount'}"
+        },
+        {
+          "ts": 1772530076.082,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Intent classified: SELECT (conf: 0.9) | Needs Clarification: False"
+        },
+        {
+          "ts": 1772530110.842,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [generate_sql]"
+        },
+        {
+          "ts": 1772530110.842,
+          "level": "INFO",
+          "node": "SQL_GEN",
+          "msg": "Generating SQL for domain: risk | Query: What is the average monthly transaction amount for users with a risk level of HIGH?"
+        },
+        {
+          "ts": 1772530110.866,
+          "level": "INFO",
+          "node": "SQL_GEN",
+          "msg": "Using custom SQL prompt for domain: risk"
+        },
+        {
+          "ts": 1772530110.867,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM [ollama] using model [llama3.2:3b] generating response..."
+        },
+        {
+          "ts": 1772530117.599,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM response received from [llama3.2:3b]. Snippet: SELECT AVG(amount) FROM transactions WHERE user_id..."
+        },
+        {
+          "ts": 1772530117.599,
+          "level": "INFO",
+          "node": "SQL_GEN",
+          "msg": "SQL Generated and cleaned: SELECT AVG(amount) FROM transactions WHERE user_id..."
+        },
+        {
+          "ts": 1772530117.6,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "SQL Generated: SELECT AVG(amount) FROM transactions WHERE user_id..."
+        },
+        {
+          "ts": 1772530125.661,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [validate_sql]"
+        },
+        {
+          "ts": 1772530181.328,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [execute_query]"
+        },
+        {
+          "ts": 1772530181.328,
+          "level": "INFO",
+          "node": "DB_EXEC",
+          "msg": "Executing SQL: SELECT AVG(amount) FROM transactions WHERE user_id IN (SELECT user_id FROM users WHERE risk_level = 'HIGH')"
+        },
+        {
+          "ts": 1772530181.463,
+          "level": "INFO",
+          "node": "DB_EXEC",
+          "msg": "Execution complete. Returned 1 rows."
+        },
+        {
+          "ts": 1772530181.463,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Query execution successful. Rows: 1"
+        },
+        {
+          "ts": 1772530226.207,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [insight_recommendation]"
+        },
+        {
+          "ts": 1772530226.207,
+          "level": "INFO",
+          "node": "INSIGHT",
+          "msg": "Generating insights for 1 rows in domain: risk"
+        },
+        {
+          "ts": 1772530226.207,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM [ollama] using model [llama3.2:3b] generating response..."
+        },
+        {
+          "ts": 1772530240.319,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM response received from [llama3.2:3b]. Snippet: {\n  \"insight\": \"The average monthly transaction am..."
+        },
+        {
+          "ts": 1772530240.319,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Insights generated successfully."
+        },
+        {
+          "ts": 1772530240.32,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [recommend_visualization]"
+        },
+        {
+          "ts": 1772530240.32,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM [ollama] using model [llama3.2:3b] generating response..."
+        },
+        {
+          "ts": 1772530243.543,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM response received from [llama3.2:3b]. Snippet: {\"chart_type\": \"table\", \"title\": \"Average Monthly ..."
+        },
+        {
+          "ts": 1772530243.543,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Visualization recommended: table"
+        }
+      ]
+    }
+  ],
+  "clusters": [],
+  "narrative": {
+    "executive_summary": "Our platform's security and compliance posture is currently threatened by several critical vectors. The top threat vectors include a high-risk exposure to financial crimes, a significant gap in our transaction monitoring and risk assessment processes, and a lack of transparency in our payment processing performance. These vulnerabilities pose a moderate to high risk to our organization's reputation and financial stability.",
+    "threat_vectors": [
+      {
+        "name": "PEP Gap in Transaction History",
+        "severity": "CRITICAL",
+        "description": "A potential gap in our transaction monitoring and risk assessment processes could lead to operational risk if individuals with confirmed PEP evaluations are not properly identified and flagged."
+      },
+      {
+        "name": "High-Risk Exposure",
+        "severity": "CRITICAL",
+        "description": "A significant increase in potentially high-risk transactions indicates that our current risk assessment and mitigation strategies may not be effective in preventing high-risk transactions."
+      },
+      {
+        "name": "Payment Processing Performance",
+        "severity": "MEDIUM",
+        "description": "The lack of transparency in our payment processing performance suggests that our company may not have a comprehensive understanding of its payment processing performance, particularly for users with a history of successful payments."
+      }
+    ],
+    "immediate_actions": [
+      "Activate a task force to review and enhance our transaction monitoring and risk assessment processes to identify and flag PEP evaluations in a timely manner.",
+      "Conduct an immediate audit of our payment processing performance to identify areas for improvement and provide recommendations for enhancing data transparency.",
+      "Implement a temporary hold on high-risk transactions until our risk assessment and mitigation strategies are updated and effective."
+    ],
+    "monitoring_recommendations": [
+      "Schedule a quarterly review of our transaction monitoring and risk assessment processes to ensure they remain effective and up-to-date.",
+      "Conduct a monthly review of our payment processing performance to identify trends and areas for improvement.",
+      "Monitor our risk score and adjust our mitigation strategies as needed to prevent high-risk transactions."
+    ],
+    "overall_risk": 8,
+    "overall_severity": "LOW",
+    "title": "Intelligence Brief - LIVE"
+  }
+}

@@ -1,0 +1,1910 @@
+{
+  "scan_id": "scan-20260722T144508",
+  "timestamp": "2026-07-22T14:45:08.296659",
+  "stats": {
+    "total_missions": 8,
+    "critical_count": 0,
+    "high_count": 0,
+    "overall_risk": 35,
+    "overall_severity": "LOW"
+  },
+  "detections": [
+    {
+      "mission_id": "comp_mission_002",
+      "mission_name": "Structuring/Smurfing Detection Near Reporting Thresholds",
+      "domain": "compliance",
+      "severity": "LOW",
+      "risk_score": 0,
+      "risk_factors": {},
+      "sql": "WITH filtered_txns AS (\n    SELECT txn_id, user_id, created_at, amount_usd\n    FROM transactions\n    WHERE amount_usd BETWEEN 9000 AND 10000\n)\nSELECT DISTINCT u.user_id, u.username\nFROM users u\nJOIN filtered_txns ft ON u.user_id = ft.user_id\nWHERE (\n    SELECT COUNT(*)\n    FROM filtered_txns ft2\n    WHERE ft2.user_id = ft.user_id\n      AND ft2.created_at BETWEEN date(ft.created_at, '-6 days') AND ft.created_at\n) >= 3;",
+      "data_count": 0,
+      "results": [],
+      "visualization_config": null,
+      "insight": "No data found to analyze.",
+      "recommendation": "Try broadening your search criteria or checking if the data for this period is available.",
+      "original_query": "Detect users who have conducted 3 or more transactions of amount_usd between $9,000 and $10,000 (just below common $10k reporting thresholds) within a 7-day rolling window, across any currency, indicating potential structuring to avoid AML reporting.",
+      "depth": 0,
+      "parent_mission_id": null,
+      "rationale": "",
+      "timestamp": "LIVE AUDIT",
+      "logs": [
+        {
+          "ts": 1784731151.569,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [classify_intent]"
+        },
+        {
+          "ts": 1784731151.569,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Starting Intent Classification and Preprocessing in parallel for domain: compliance"
+        },
+        {
+          "ts": 1784731151.586,
+          "level": "INFO",
+          "node": "INTENT",
+          "msg": "Classifying intent for domain: compliance | Query: Detect users who have conducted 3 or more transactions of amount_usd between $9,000 and $10,000 (just below common $10k reporting thresholds) within a 7-day rolling window, across any currency, indicating potential structuring to avoid AML reporting."
+        },
+        {
+          "ts": 1784731151.588,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM [openai] using model [nvidia/nemotron-3-ultra-550b-a55b] generating response..."
+        },
+        {
+          "ts": 1784731151.622,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM [openai] using model [nvidia/nemotron-3-ultra-550b-a55b] generating response..."
+        },
+        {
+          "ts": 1784731151.627,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM [openai] using model [nvidia/nemotron-3-ultra-550b-a55b] generating response..."
+        },
+        {
+          "ts": 1784731154.573,
+          "level": "WARNING",
+          "node": "llm.py",
+          "msg": "LLM rate limit / resource exhaustion encountered, retrying in 2s (attempt 1)"
+        },
+        {
+          "ts": 1784731158.378,
+          "level": "WARNING",
+          "node": "llm.py",
+          "msg": "LLM rate limit / resource exhaustion encountered, retrying in 4s (attempt 2)"
+        },
+        {
+          "ts": 1784731170.303,
+          "level": "WARNING",
+          "node": "llm.py",
+          "msg": "LLM rate limit / resource exhaustion encountered, retrying in 8s (attempt 3)"
+        },
+        {
+          "ts": 1784731189.263,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM response received from [nvidia/nemotron-3-ultra-550b-a55b]. Snippet: {\n  \"intent\": \"SELECT\",\n  \"confidence\": 0.95,\n  \"c..."
+        },
+        {
+          "ts": 1784731189.264,
+          "level": "INFO",
+          "node": "INTENT",
+          "msg": "Classification Result: SELECT (conf: 0.95) | Needs Clarification: False"
+        },
+        {
+          "ts": 1784731207.33,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM response received from [nvidia/nemotron-3-ultra-550b-a55b]. Snippet: [\"transactions\"]..."
+        },
+        {
+          "ts": 1784731236.68,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM response received from [nvidia/nemotron-3-ultra-550b-a55b]. Snippet: {\n  \"resolved_entities\": {},\n  \"metadata\": {\n    \"..."
+        },
+        {
+          "ts": 1784731236.681,
+          "level": "INFO",
+          "node": "entity_extractor.py",
+          "msg": "Final Extracted/Resolved Entities: {}"
+        },
+        {
+          "ts": 1784731236.681,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Intent classified: SELECT (conf: 0.95) | Needs Clarification: False"
+        },
+        {
+          "ts": 1784731236.685,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [generate_sql]"
+        },
+        {
+          "ts": 1784731236.685,
+          "level": "INFO",
+          "node": "SQL_GEN",
+          "msg": "Generating SQL for domain: compliance | Query: Detect users who have conducted 3 or more transactions of amount_usd between $9,000 and $10,000 (just below common $10k reporting thresholds) within a 7-day rolling window, across any currency, indicating potential structuring to avoid AML reporting."
+        },
+        {
+          "ts": 1784731236.692,
+          "level": "INFO",
+          "node": "SQL_GEN",
+          "msg": "Using custom SQL prompt for domain: compliance"
+        },
+        {
+          "ts": 1784731236.693,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM [openai] using model [nvidia/nemotron-3-ultra-550b-a55b] generating response..."
+        },
+        {
+          "ts": 1784731260.821,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM response received from [nvidia/nemotron-3-ultra-550b-a55b]. Snippet: WITH filtered_txns AS (\n    SELECT txn_id, user_id..."
+        },
+        {
+          "ts": 1784731260.821,
+          "level": "INFO",
+          "node": "SQL_GEN",
+          "msg": "SQL Generated and cleaned: WITH filtered_txns AS (\n    SELECT txn_id, user_id..."
+        },
+        {
+          "ts": 1784731260.821,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "SQL Generated: WITH filtered_txns AS (\n    SELECT txn_id, user_id..."
+        },
+        {
+          "ts": 1784731260.823,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [validate_sql]"
+        },
+        {
+          "ts": 1784731260.842,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [execute_query]"
+        },
+        {
+          "ts": 1784731260.843,
+          "level": "INFO",
+          "node": "DB_EXEC",
+          "msg": "Executing SQL: WITH filtered_txns AS (\n    SELECT txn_id, user_id, created_at, amount_usd\n    FROM transactions\n    WHERE amount_usd BETWEEN 9000 AND 10000\n)\nSELECT DISTINCT u.user_id, u.username\nFROM users u\nJOIN filtered_txns ft ON u.user_id = ft.user_id\nWHERE (\n    SELECT COUNT(*)\n    FROM filtered_txns ft2\n    WHERE ft2.user_id = ft.user_id\n      AND ft2.created_at BETWEEN date(ft.created_at, '-6 days') AND ft.created_at\n) >= 3;"
+        },
+        {
+          "ts": 1784731260.847,
+          "level": "ERROR",
+          "node": "DB_EXEC",
+          "msg": "DATABASE EXECUTION ERROR: (sqlite3.OperationalError) no such column: u.username\n[SQL: WITH filtered_txns AS (\n    SELECT txn_id, user_id, created_at, amount_usd\n    FROM transactions\n    WHERE amount_usd BETWEEN 9000 AND 10000\n)\nSELECT DISTINCT u.user_id, u.username\nFROM users u\nJOIN filtered_txns ft ON u.user_id = ft.user_id\nWHERE (\n    SELECT COUNT(*)\n    FROM filtered_txns ft2\n    WHERE ft2.user_id = ft.user_id\n      AND ft2.created_at BETWEEN date(ft.created_at, '-6 days') AND ft.created_at\n) >= 3;]\n(Background on this error at: https://sqlalche.me/e/20/e3q8) | Query: WITH filtered_txns AS (\n    SELECT txn_id, user_id, created_at, amount_usd\n    FROM transactions\n    WHERE amount_usd BETWEEN 9000 AND 10000\n)\nSELECT DISTINCT u.user_id, u.username\nFROM users u\nJOIN filtered_txns ft ON u.user_id = ft.user_id\nWHERE (\n    SELECT COUNT(*)\n    FROM filtered_txns ft2\n    WHERE ft2.user_id = ft.user_id\n      AND ft2.created_at BETWEEN date(ft.created_at, '-6 days') AND ft.created_at\n) >= 3;"
+        },
+        {
+          "ts": 1784731260.847,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Query execution successful. Rows: 0"
+        },
+        {
+          "ts": 1784731260.85,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [insight_recommendation]"
+        },
+        {
+          "ts": 1784731260.851,
+          "level": "INFO",
+          "node": "INSIGHT",
+          "msg": "Generating insights for 0 rows in domain: compliance"
+        },
+        {
+          "ts": 1784731260.851,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Insights generated successfully."
+        },
+        {
+          "ts": 1784731260.851,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [recommend_visualization]"
+        },
+        {
+          "ts": 1784731260.852,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "No results for visualization recommendation."
+        }
+      ]
+    },
+    {
+      "mission_id": "risk_mission_001",
+      "mission_name": "Risk Score Calibration Drift",
+      "domain": "risk",
+      "severity": "LOW",
+      "risk_score": 0,
+      "risk_factors": {},
+      "sql": null,
+      "data_count": 0,
+      "results": [],
+      "visualization_config": null,
+      "insight": null,
+      "recommendation": null,
+      "original_query": "Identify users currently classified as risk_level 'LOW' or 'MEDIUM' whose transaction behavior in the last 30 days exhibits high-risk typologies: cross-border velocity >5 countries, transaction velocity >100 txns/day, or >50% of volume in high-risk instruments (e.g., crypto, forex). These users may require immediate risk re-rating.",
+      "depth": 0,
+      "parent_mission_id": null,
+      "rationale": "",
+      "timestamp": "LIVE AUDIT",
+      "logs": [
+        {
+          "ts": 1784731151.57,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [classify_intent]"
+        },
+        {
+          "ts": 1784731151.57,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Starting Intent Classification and Preprocessing in parallel for domain: risk"
+        },
+        {
+          "ts": 1784731151.595,
+          "level": "INFO",
+          "node": "INTENT",
+          "msg": "Classifying intent for domain: risk | Query: Identify users currently classified as risk_level 'LOW' or 'MEDIUM' whose transaction behavior in the last 30 days exhibits high-risk typologies: cross-border velocity >5 countries, transaction velocity >100 txns/day, or >50% of volume in high-risk instruments (e.g., crypto, forex). These users may require immediate risk re-rating."
+        },
+        {
+          "ts": 1784731151.596,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM [openai] using model [nvidia/nemotron-3-ultra-550b-a55b] generating response..."
+        },
+        {
+          "ts": 1784731151.645,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM [openai] using model [nvidia/nemotron-3-ultra-550b-a55b] generating response..."
+        },
+        {
+          "ts": 1784731151.649,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM [openai] using model [nvidia/nemotron-3-ultra-550b-a55b] generating response..."
+        },
+        {
+          "ts": 1784731157.975,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM response received from [nvidia/nemotron-3-ultra-550b-a55b]. Snippet: [\"users\", \"transactions\"]..."
+        },
+        {
+          "ts": 1784731182.367,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM response received from [nvidia/nemotron-3-ultra-550b-a55b]. Snippet: {\n  \"intent\": \"SELECT\",\n  \"confidence\": 0.85,\n  \"c..."
+        },
+        {
+          "ts": 1784731182.367,
+          "level": "INFO",
+          "node": "INTENT",
+          "msg": "Classification Result: SELECT (conf: 0.85) | Needs Clarification: True"
+        },
+        {
+          "ts": 1784731220.999,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM response received from [nvidia/nemotron-3-ultra-550b-a55b]. Snippet: {\n  \"resolved_entities\": {},\n  \"metadata\": {\n    \"..."
+        },
+        {
+          "ts": 1784731220.999,
+          "level": "INFO",
+          "node": "entity_extractor.py",
+          "msg": "Final Extracted/Resolved Entities: {}"
+        },
+        {
+          "ts": 1784731221.0,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Intent classified: SELECT (conf: 0.85) | Needs Clarification: True"
+        },
+        {
+          "ts": 1784731221.002,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM [openai] using model [nvidia/nemotron-3-ultra-550b-a55b] generating response..."
+        },
+        {
+          "ts": 1784731263.777,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM response received from [nvidia/nemotron-3-ultra-550b-a55b]. Snippet: I see you're looking to identify users who may nee..."
+        }
+      ]
+    },
+    {
+      "mission_id": "ops_mission_001",
+      "mission_name": "Payment Failure Correlation with Risk Controls",
+      "domain": "operations",
+      "severity": "MEDIUM",
+      "risk_score": 35,
+      "risk_factors": {
+        "affected_entities": {
+          "value": 15,
+          "score": 100,
+          "detail": "15 unique entities"
+        },
+        "dollar_exposure": {
+          "value": 0,
+          "score": 0,
+          "detail": "$0 exposure"
+        },
+        "velocity": {
+          "value": 15,
+          "score": 75,
+          "detail": "15 events"
+        },
+        "pep_involvement": {
+          "value": 0,
+          "score": 0,
+          "detail": "0 PEP accounts"
+        },
+        "kyc_gaps": {
+          "value": 0,
+          "score": 0,
+          "detail": "0 KYC gaps"
+        },
+        "severity_escalation": {
+          "value": "MEDIUM",
+          "score": 25,
+          "detail": "Base: MEDIUM"
+        }
+      },
+      "sql": "WITH txn_stats AS (\n    SELECT\n        u.risk_level,\n        t.payment_method,\n        COUNT(*) AS total_txns,\n        SUM(CASE WHEN UPPER(t.status) LIKE '%FAILED%' THEN 1 ELSE 0 END) AS failed_txns\n    FROM transactions t\n    JOIN users u ON t.user_id = u.user_id\n    WHERE u.account_status = 'ACTIVE'\n    GROUP BY u.risk_level, t.payment_method\n)\nSELECT\n    risk_level,\n    payment_method,\n    total_txns,\n    failed_txns,\n    ROUND(100.0 * failed_txns / total_txns, 2) AS failure_rate_pct\nFROM txn_stats\nWHERE total_txns > 0\nORDER BY\n    CASE WHEN UPPER(risk_level) LIKE '%HIGH%' THEN 0 ELSE 1 END,\n    payment_method;",
+      "data_count": 15,
+      "results": [
+        {
+          "risk_level": "HIGH",
+          "payment_method": null,
+          "total_txns": 3893,
+          "failed_txns": 156,
+          "failure_rate_pct": 4.01
+        },
+        {
+          "risk_level": "HIGH",
+          "payment_method": "BANK_TRANSFER",
+          "total_txns": 494,
+          "failed_txns": 25,
+          "failure_rate_pct": 5.06
+        },
+        {
+          "risk_level": "HIGH",
+          "payment_method": "CARD",
+          "total_txns": 507,
+          "failed_txns": 17,
+          "failure_rate_pct": 3.35
+        },
+        {
+          "risk_level": "HIGH",
+          "payment_method": "CRYPTO",
+          "total_txns": 524,
+          "failed_txns": 21,
+          "failure_rate_pct": 4.01
+        },
+        {
+          "risk_level": "HIGH",
+          "payment_method": "EWALLET",
+          "total_txns": 542,
+          "failed_txns": 18,
+          "failure_rate_pct": 3.32
+        },
+        {
+          "risk_level": "LOW",
+          "payment_method": null,
+          "total_txns": 18373,
+          "failed_txns": 674,
+          "failure_rate_pct": 3.67
+        },
+        {
+          "risk_level": "MEDIUM",
+          "payment_method": null,
+          "total_txns": 9211,
+          "failed_txns": 384,
+          "failure_rate_pct": 4.17
+        },
+        {
+          "risk_level": "LOW",
+          "payment_method": "BANK_TRANSFER",
+          "total_txns": 2481,
+          "failed_txns": 80,
+          "failure_rate_pct": 3.22
+        },
+        {
+          "risk_level": "MEDIUM",
+          "payment_method": "BANK_TRANSFER",
+          "total_txns": 1257,
+          "failed_txns": 51,
+          "failure_rate_pct": 4.06
+        },
+        {
+          "risk_level": "LOW",
+          "payment_method": "CARD",
+          "total_txns": 2457,
+          "failed_txns": 96,
+          "failure_rate_pct": 3.91
+        },
+        {
+          "risk_level": "MEDIUM",
+          "payment_method": "CARD",
+          "total_txns": 1278,
+          "failed_txns": 53,
+          "failure_rate_pct": 4.15
+        },
+        {
+          "risk_level": "LOW",
+          "payment_method": "CRYPTO",
+          "total_txns": 2444,
+          "failed_txns": 99,
+          "failure_rate_pct": 4.05
+        },
+        {
+          "risk_level": "MEDIUM",
+          "payment_method": "CRYPTO",
+          "total_txns": 1225,
+          "failed_txns": 61,
+          "failure_rate_pct": 4.98
+        },
+        {
+          "risk_level": "LOW",
+          "payment_method": "EWALLET",
+          "total_txns": 2466,
+          "failed_txns": 80,
+          "failure_rate_pct": 3.24
+        },
+        {
+          "risk_level": "MEDIUM",
+          "payment_method": "EWALLET",
+          "total_txns": 1228,
+          "failed_txns": 46,
+          "failure_rate_pct": 3.75
+        }
+      ],
+      "visualization_config": {
+        "chart_type": "bar",
+        "title": "Payment Failure Rate by Payment Method and User Risk Level",
+        "x_axis_key": "payment_method",
+        "y_axis_key": "failure_rate_pct",
+        "label": "Failure Rate (%)",
+        "description": "Grouped bar chart comparing failure rates across payment methods for each risk level, highlighting if HIGH risk users have significantly higher failure rates on specific methods (e.g., card vs. bank transfer), which may indicate overly aggressive fraud controls or integration issues."
+      },
+      "insight": "The data reveals a critical, method-specific friction point: HIGH risk users suffer a 57% higher failure rate on BANK_TRANSFER (5.06%) compared to LOW risk users (3.22%), while their CARD failure rate (3.35%) is actually the lowest across all risk tiers. This disproves a systemic 'overly aggressive fraud control' hypothesis across the board. Instead, it isolates the issue to the bank transfer rail\u2014likely driven by aggressive velocity/verification checks, insufficient funds (NSF) prevalence in this cohort, or integration instability with the ACH/SEPA provider. The Card channel is performing optimally for High Risk users, suggesting current card fraud rules are well-calibrated.",
+      "recommendation": "1. Immediately audit BANK_TRANSFER failure reason codes (e.g., R01/R09 ACH codes, 'account_closed', 'verification_failed') for the HIGH risk segment to distinguish hard declines (fraud rules) from soft failures (NSF, data entry). 2. Pilot a 'step-up verification' flow (instant account verification via Plaid/Yodlee or micro-deposits) exclusively for HIGH risk users initiating bank transfers, reducing reliance on post-submission fraud blocks that inflate failure rates and degrade UX.",
+      "original_query": "Analyze the payment failure rate (status='failed') grouped by payment_method and user risk_level. Identify if HIGH risk users experience significantly higher failure rates on specific payment methods (e.g., card vs. bank_transfer), suggesting overly aggressive fraud controls or systemic integration issues.",
+      "depth": 0,
+      "parent_mission_id": null,
+      "rationale": "",
+      "timestamp": "LIVE AUDIT",
+      "logs": [
+        {
+          "ts": 1784731151.569,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [classify_intent]"
+        },
+        {
+          "ts": 1784731151.57,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Starting Intent Classification and Preprocessing in parallel for domain: operations"
+        },
+        {
+          "ts": 1784731151.589,
+          "level": "INFO",
+          "node": "INTENT",
+          "msg": "Classifying intent for domain: operations | Query: Analyze the payment failure rate (status='failed') grouped by payment_method and user risk_level. Identify if HIGH risk users experience significantly higher failure rates on specific payment methods (e.g., card vs. bank_transfer), suggesting overly aggressive fraud controls or systemic integration issues."
+        },
+        {
+          "ts": 1784731151.59,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM [openai] using model [nvidia/nemotron-3-ultra-550b-a55b] generating response..."
+        },
+        {
+          "ts": 1784731151.629,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM [openai] using model [nvidia/nemotron-3-ultra-550b-a55b] generating response..."
+        },
+        {
+          "ts": 1784731151.634,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM [openai] using model [nvidia/nemotron-3-ultra-550b-a55b] generating response..."
+        },
+        {
+          "ts": 1784731154.343,
+          "level": "WARNING",
+          "node": "llm.py",
+          "msg": "LLM rate limit / resource exhaustion encountered, retrying in 2s (attempt 1)"
+        },
+        {
+          "ts": 1784731155.435,
+          "level": "WARNING",
+          "node": "llm.py",
+          "msg": "LLM rate limit / resource exhaustion encountered, retrying in 2s (attempt 1)"
+        },
+        {
+          "ts": 1784731158.06,
+          "level": "WARNING",
+          "node": "llm.py",
+          "msg": "LLM rate limit / resource exhaustion encountered, retrying in 4s (attempt 2)"
+        },
+        {
+          "ts": 1784731159.092,
+          "level": "WARNING",
+          "node": "llm.py",
+          "msg": "LLM rate limit / resource exhaustion encountered, retrying in 4s (attempt 2)"
+        },
+        {
+          "ts": 1784731166.582,
+          "level": "WARNING",
+          "node": "llm.py",
+          "msg": "LLM rate limit / resource exhaustion encountered, retrying in 8s (attempt 3)"
+        },
+        {
+          "ts": 1784731169.414,
+          "level": "WARNING",
+          "node": "llm.py",
+          "msg": "LLM rate limit / resource exhaustion encountered, retrying in 8s (attempt 3)"
+        },
+        {
+          "ts": 1784731183.6,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM response received from [nvidia/nemotron-3-ultra-550b-a55b]. Snippet: {\n  \"intent\": \"SELECT\",\n  \"confidence\": 0.95,\n  \"c..."
+        },
+        {
+          "ts": 1784731183.6,
+          "level": "INFO",
+          "node": "INTENT",
+          "msg": "Classification Result: SELECT (conf: 0.95) | Needs Clarification: False"
+        },
+        {
+          "ts": 1784731185.529,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM response received from [nvidia/nemotron-3-ultra-550b-a55b]. Snippet: [\"users\", \"transactions\"]..."
+        },
+        {
+          "ts": 1784731203.606,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM response received from [nvidia/nemotron-3-ultra-550b-a55b]. Snippet: {\n  \"resolved_entities\": {\n    \"transactions.statu..."
+        },
+        {
+          "ts": 1784731203.607,
+          "level": "INFO",
+          "node": "entity_extractor.py",
+          "msg": "Final Extracted/Resolved Entities: {'transactions.status': 'FAILED', 'users.risk_level': 'HIGH'}"
+        },
+        {
+          "ts": 1784731203.607,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Intent classified: SELECT (conf: 0.95) | Needs Clarification: False"
+        },
+        {
+          "ts": 1784731203.611,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [generate_sql]"
+        },
+        {
+          "ts": 1784731203.611,
+          "level": "INFO",
+          "node": "SQL_GEN",
+          "msg": "Generating SQL for domain: operations | Query: Analyze the payment failure rate (status='failed') grouped by payment_method and user risk_level. Identify if HIGH risk users experience significantly higher failure rates on specific payment methods (e.g., card vs. bank_transfer), suggesting overly aggressive fraud controls or systemic integration issues."
+        },
+        {
+          "ts": 1784731203.62,
+          "level": "INFO",
+          "node": "SQL_GEN",
+          "msg": "Using custom SQL prompt for domain: operations"
+        },
+        {
+          "ts": 1784731203.621,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM [openai] using model [nvidia/nemotron-3-ultra-550b-a55b] generating response..."
+        },
+        {
+          "ts": 1784731219.24,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM response received from [nvidia/nemotron-3-ultra-550b-a55b]. Snippet: WITH txn_stats AS (\n    SELECT\n        u.risk_leve..."
+        },
+        {
+          "ts": 1784731219.24,
+          "level": "INFO",
+          "node": "SQL_GEN",
+          "msg": "SQL Generated and cleaned: WITH txn_stats AS (\n    SELECT\n        u.risk_leve..."
+        },
+        {
+          "ts": 1784731219.24,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "SQL Generated: WITH txn_stats AS (\n    SELECT\n        u.risk_leve..."
+        },
+        {
+          "ts": 1784731219.244,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [validate_sql]"
+        },
+        {
+          "ts": 1784731219.255,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [execute_query]"
+        },
+        {
+          "ts": 1784731219.256,
+          "level": "INFO",
+          "node": "DB_EXEC",
+          "msg": "Executing SQL: WITH txn_stats AS (\n    SELECT\n        u.risk_level,\n        t.payment_method,\n        COUNT(*) AS total_txns,\n        SUM(CASE WHEN UPPER(t.status) LIKE '%FAILED%' THEN 1 ELSE 0 END) AS failed_txns\n    FROM transactions t\n    JOIN users u ON t.user_id = u.user_id\n    WHERE u.account_status = 'ACTIVE'\n    GROUP BY u.risk_level, t.payment_method\n)\nSELECT\n    risk_level,\n    payment_method,\n    total_txns,\n    failed_txns,\n    ROUND(100.0 * failed_txns / total_txns, 2) AS failure_rate_pct\nFROM txn_stats\nWHERE total_txns > 0\nORDER BY\n    CASE WHEN UPPER(risk_level) LIKE '%HIGH%' THEN 0 ELSE 1 END,\n    payment_method;"
+        },
+        {
+          "ts": 1784731220.357,
+          "level": "INFO",
+          "node": "DB_EXEC",
+          "msg": "Execution complete. Returned 15 rows."
+        },
+        {
+          "ts": 1784731220.357,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Query execution successful. Rows: 15"
+        },
+        {
+          "ts": 1784731220.36,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [insight_recommendation]"
+        },
+        {
+          "ts": 1784731220.361,
+          "level": "INFO",
+          "node": "INSIGHT",
+          "msg": "Generating insights for 15 rows in domain: operations"
+        },
+        {
+          "ts": 1784731220.361,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM [openai] using model [nvidia/nemotron-3-ultra-550b-a55b] generating response..."
+        },
+        {
+          "ts": 1784731220.366,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [recommend_visualization]"
+        },
+        {
+          "ts": 1784731220.367,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM [openai] using model [nvidia/nemotron-3-ultra-550b-a55b] generating response..."
+        },
+        {
+          "ts": 1784731255.143,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM response received from [nvidia/nemotron-3-ultra-550b-a55b]. Snippet: {\n  \"insight\": \"The data reveals a critical, metho..."
+        },
+        {
+          "ts": 1784731255.143,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Insights generated successfully."
+        },
+        {
+          "ts": 1784731270.178,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM response received from [nvidia/nemotron-3-ultra-550b-a55b]. Snippet: {\n  \"chart_type\": \"bar\",\n  \"title\": \"Payment Failu..."
+        },
+        {
+          "ts": 1784731270.18,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Visualization recommended: bar"
+        }
+      ]
+    },
+    {
+      "mission_id": "sec_mission_001",
+      "mission_name": "Impossible Travel & Geo-Velocity Anomaly",
+      "domain": "security",
+      "severity": "LOW",
+      "risk_score": 0,
+      "risk_factors": {},
+      "sql": "WITH successful_logins AS (\n    SELECT \n        le.user_id,\n        le.country,\n        le.created_at,\n        le.event_id\n    FROM login_events le\n    WHERE UPPER(le.status) LIKE '%SUCCESS%'\n)\nSELECT DISTINCT \n    u.user_id,\n    u.username,\n    sl1.country AS country_1,\n    sl1.created_at AS login_time_1,\n    sl2.country AS country_2,\n    sl2.created_at AS login_time_2,\n    ROUND((julianday(sl2.created_at) - julianday(sl1.created_at)) * 24, 2) AS hours_between_logins\nFROM successful_logins sl1\nJOIN successful_logins sl2 \n    ON sl1.user_id = sl2.user_id\n    AND sl1.event_id < sl2.event_id\n    AND UPPER(sl1.country) != UPPER(sl2.country)\n    AND sl1.created_at < sl2.created_at\n    AND (julianday(sl2.created_at) - julianday(sl1.created_at)) * 24 < 4\nJOIN users u ON u.user_id = sl1.user_id\nORDER BY u.user_id, sl1.created_at;",
+      "data_count": 0,
+      "results": [],
+      "visualization_config": null,
+      "insight": "No data found to analyze.",
+      "recommendation": "Try broadening your search criteria or checking if the data for this period is available.",
+      "original_query": "Identify users who have successful login events from two different countries within a time window that makes physical travel impossible (e.g., less than 4 hours), indicating potential account takeover or credential sharing.",
+      "depth": 0,
+      "parent_mission_id": null,
+      "rationale": "",
+      "timestamp": "LIVE AUDIT",
+      "logs": [
+        {
+          "ts": 1784731151.568,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [classify_intent]"
+        },
+        {
+          "ts": 1784731151.569,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Starting Intent Classification and Preprocessing in parallel for domain: security"
+        },
+        {
+          "ts": 1784731151.574,
+          "level": "INFO",
+          "node": "INTENT",
+          "msg": "Classifying intent for domain: security | Query: Identify users who have successful login events from two different countries within a time window that makes physical travel impossible (e.g., less than 4 hours), indicating potential account takeover or credential sharing."
+        },
+        {
+          "ts": 1784731151.58,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM [openai] using model [nvidia/nemotron-3-ultra-550b-a55b] generating response..."
+        },
+        {
+          "ts": 1784731151.602,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM [openai] using model [nvidia/nemotron-3-ultra-550b-a55b] generating response..."
+        },
+        {
+          "ts": 1784731151.605,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM [openai] using model [nvidia/nemotron-3-ultra-550b-a55b] generating response..."
+        },
+        {
+          "ts": 1784731155.578,
+          "level": "WARNING",
+          "node": "llm.py",
+          "msg": "LLM rate limit / resource exhaustion encountered, retrying in 2s (attempt 1)"
+        },
+        {
+          "ts": 1784731155.893,
+          "level": "WARNING",
+          "node": "llm.py",
+          "msg": "LLM rate limit / resource exhaustion encountered, retrying in 2s (attempt 1)"
+        },
+        {
+          "ts": 1784731159.086,
+          "level": "WARNING",
+          "node": "llm.py",
+          "msg": "LLM rate limit / resource exhaustion encountered, retrying in 4s (attempt 2)"
+        },
+        {
+          "ts": 1784731159.717,
+          "level": "WARNING",
+          "node": "llm.py",
+          "msg": "LLM rate limit / resource exhaustion encountered, retrying in 4s (attempt 2)"
+        },
+        {
+          "ts": 1784731169.423,
+          "level": "WARNING",
+          "node": "llm.py",
+          "msg": "LLM rate limit / resource exhaustion encountered, retrying in 8s (attempt 3)"
+        },
+        {
+          "ts": 1784731171.198,
+          "level": "WARNING",
+          "node": "llm.py",
+          "msg": "LLM rate limit / resource exhaustion encountered, retrying in 8s (attempt 3)"
+        },
+        {
+          "ts": 1784731185.996,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM response received from [nvidia/nemotron-3-ultra-550b-a55b]. Snippet: [\"login_events\"]..."
+        },
+        {
+          "ts": 1784731195.623,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM response received from [nvidia/nemotron-3-ultra-550b-a55b]. Snippet: {\n  \"intent\": \"SELECT\",\n  \"confidence\": 0.95,\n  \"c..."
+        },
+        {
+          "ts": 1784731195.624,
+          "level": "INFO",
+          "node": "INTENT",
+          "msg": "Classification Result: SELECT (conf: 0.95) | Needs Clarification: False"
+        },
+        {
+          "ts": 1784731259.738,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM response received from [nvidia/nemotron-3-ultra-550b-a55b]. Snippet: {\n  \"resolved_entities\": {\n    \"login_events.statu..."
+        },
+        {
+          "ts": 1784731259.738,
+          "level": "INFO",
+          "node": "entity_extractor.py",
+          "msg": "Final Extracted/Resolved Entities: {'login_events.status': 'SUCCESS'}"
+        },
+        {
+          "ts": 1784731259.74,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Intent classified: SELECT (conf: 0.95) | Needs Clarification: False"
+        },
+        {
+          "ts": 1784731259.745,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [generate_sql]"
+        },
+        {
+          "ts": 1784731259.746,
+          "level": "INFO",
+          "node": "SQL_GEN",
+          "msg": "Generating SQL for domain: security | Query: Identify users who have successful login events from two different countries within a time window that makes physical travel impossible (e.g., less than 4 hours), indicating potential account takeover or credential sharing."
+        },
+        {
+          "ts": 1784731259.759,
+          "level": "INFO",
+          "node": "SQL_GEN",
+          "msg": "Using custom SQL prompt for domain: security"
+        },
+        {
+          "ts": 1784731259.76,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM [openai] using model [nvidia/nemotron-3-ultra-550b-a55b] generating response..."
+        },
+        {
+          "ts": 1784731297.993,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM response received from [nvidia/nemotron-3-ultra-550b-a55b]. Snippet: WITH successful_logins AS (\n    SELECT \n        le..."
+        },
+        {
+          "ts": 1784731297.993,
+          "level": "INFO",
+          "node": "SQL_GEN",
+          "msg": "SQL Generated and cleaned: WITH successful_logins AS (\n    SELECT \n        le..."
+        },
+        {
+          "ts": 1784731297.993,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "SQL Generated: WITH successful_logins AS (\n    SELECT \n        le..."
+        },
+        {
+          "ts": 1784731297.997,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [validate_sql]"
+        },
+        {
+          "ts": 1784731298.009,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [execute_query]"
+        },
+        {
+          "ts": 1784731298.01,
+          "level": "INFO",
+          "node": "DB_EXEC",
+          "msg": "Executing SQL: WITH successful_logins AS (\n    SELECT \n        le.user_id,\n        le.country,\n        le.created_at,\n        le.event_id\n    FROM login_events le\n    WHERE UPPER(le.status) LIKE '%SUCCESS%'\n)\nSELECT DISTINCT \n    u.user_id,\n    u.username,\n    sl1.country AS country_1,\n    sl1.created_at AS login_time_1,\n    sl2.country AS country_2,\n    sl2.created_at AS login_time_2,\n    ROUND((julianday(sl2.created_at) - julianday(sl1.created_at)) * 24, 2) AS hours_between_logins\nFROM successful_logins sl1\nJOIN successful_logins sl2 \n    ON sl1.user_id = sl2.user_id\n    AND sl1.event_id < sl2.event_id\n    AND UPPER(sl1.country) != UPPER(sl2.country)\n    AND sl1.created_at < sl2.created_at\n    AND (julianday(sl2.created_at) - julianday(sl1.created_at)) * 24 < 4\nJOIN users u ON u.user_id = sl1.user_id\nORDER BY u.user_id, sl1.created_at;"
+        },
+        {
+          "ts": 1784731298.012,
+          "level": "ERROR",
+          "node": "DB_EXEC",
+          "msg": "DATABASE EXECUTION ERROR: (sqlite3.OperationalError) no such column: u.username\n[SQL: WITH successful_logins AS (\n    SELECT \n        le.user_id,\n        le.country,\n        le.created_at,\n        le.event_id\n    FROM login_events le\n    WHERE UPPER(le.status) LIKE '%SUCCESS%'\n)\nSELECT DISTINCT \n    u.user_id,\n    u.username,\n    sl1.country AS country_1,\n    sl1.created_at AS login_time_1,\n    sl2.country AS country_2,\n    sl2.created_at AS login_time_2,\n    ROUND((julianday(sl2.created_at) - julianday(sl1.created_at)) * 24, 2) AS hours_between_logins\nFROM successful_logins sl1\nJOIN successful_logins sl2 \n    ON sl1.user_id = sl2.user_id\n    AND sl1.event_id < sl2.event_id\n    AND UPPER(sl1.country) != UPPER(sl2.country)\n    AND sl1.created_at < sl2.created_at\n    AND (julianday(sl2.created_at) - julianday(sl1.created_at)) * 24 < 4\nJOIN users u ON u.user_id = sl1.user_id\nORDER BY u.user_id, sl1.created_at;]\n(Background on this error at: https://sqlalche.me/e/20/e3q8) | Query: WITH successful_logins AS (\n    SELECT \n        le.user_id,\n        le.country,\n        le.created_at,\n        le.event_id\n    FROM login_events le\n    WHERE UPPER(le.status) LIKE '%SUCCESS%'\n)\nSELECT DISTINCT \n    u.user_id,\n    u.username,\n    sl1.country AS country_1,\n    sl1.created_at AS login_time_1,\n    sl2.country AS country_2,\n    sl2.created_at AS login_time_2,\n    ROUND((julianday(sl2.created_at) - julianday(sl1.created_at)) * 24, 2) AS hours_between_logins\nFROM successful_logins sl1\nJOIN successful_logins sl2 \n    ON sl1.user_id = sl2.user_id\n    AND sl1.event_id < sl2.event_id\n    AND UPPER(sl1.country) != UPPER(sl2.country)\n    AND sl1.created_at < sl2.created_at\n    AND (julianday(sl2.created_at) - julianday(sl1.created_at)) * 24 < 4\nJOIN users u ON u.user_id = sl1.user_id\nORDER BY u.user_id, sl1.created_at;"
+        },
+        {
+          "ts": 1784731298.014,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Query execution successful. Rows: 0"
+        },
+        {
+          "ts": 1784731298.017,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [insight_recommendation]"
+        },
+        {
+          "ts": 1784731298.017,
+          "level": "INFO",
+          "node": "INSIGHT",
+          "msg": "Generating insights for 0 rows in domain: security"
+        },
+        {
+          "ts": 1784731298.017,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Insights generated successfully."
+        },
+        {
+          "ts": 1784731298.018,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [recommend_visualization]"
+        },
+        {
+          "ts": 1784731298.018,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "No results for visualization recommendation."
+        }
+      ]
+    },
+    {
+      "mission_id": "comp_mission_001",
+      "mission_name": "PEP Transaction Monitoring Gap",
+      "domain": "compliance",
+      "severity": "LOW",
+      "risk_score": 0,
+      "risk_factors": {},
+      "sql": "SELECT u.username, u.user_id, t.txn_id, t.amount_usd, t.flag_reason, t.created_at\nFROM users u\nJOIN transactions t ON u.user_id = t.user_id\nWHERE u.is_pep = 1\n  AND t.amount_usd > 50000\n  AND t.created_at >= date('now', '-90 days')\n  AND (t.flag_reason IS NULL OR (UPPER(t.flag_reason) NOT LIKE '%EDD%' AND UPPER(t.flag_reason) NOT LIKE '%ENHANCED DUE DILIGENCE%'));",
+      "data_count": 0,
+      "results": [],
+      "visualization_config": null,
+      "insight": "No data found to analyze.",
+      "recommendation": "Try broadening your search criteria or checking if the data for this period is available.",
+      "original_query": "List all Politically Exposed Persons (is_pep=true) who have executed transactions exceeding $50,000 USD in the last 90 days but have no corresponding 'flag_reason' indicating enhanced due diligence (EDD) review, signaling a compliance monitoring gap.",
+      "depth": 0,
+      "parent_mission_id": null,
+      "rationale": "",
+      "timestamp": "LIVE AUDIT",
+      "logs": [
+        {
+          "ts": 1784731151.569,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [classify_intent]"
+        },
+        {
+          "ts": 1784731151.569,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Starting Intent Classification and Preprocessing in parallel for domain: compliance"
+        },
+        {
+          "ts": 1784731151.584,
+          "level": "INFO",
+          "node": "INTENT",
+          "msg": "Classifying intent for domain: compliance | Query: List all Politically Exposed Persons (is_pep=true) who have executed transactions exceeding $50,000 USD in the last 90 days but have no corresponding 'flag_reason' indicating enhanced due diligence (EDD) review, signaling a compliance monitoring gap."
+        },
+        {
+          "ts": 1784731151.585,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM [openai] using model [nvidia/nemotron-3-ultra-550b-a55b] generating response..."
+        },
+        {
+          "ts": 1784731151.615,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM [openai] using model [nvidia/nemotron-3-ultra-550b-a55b] generating response..."
+        },
+        {
+          "ts": 1784731151.619,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM [openai] using model [nvidia/nemotron-3-ultra-550b-a55b] generating response..."
+        },
+        {
+          "ts": 1784731154.377,
+          "level": "WARNING",
+          "node": "llm.py",
+          "msg": "LLM rate limit / resource exhaustion encountered, retrying in 2s (attempt 1)"
+        },
+        {
+          "ts": 1784731157.018,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM response received from [nvidia/nemotron-3-ultra-550b-a55b]. Snippet: [\"users\", \"transactions\"]..."
+        },
+        {
+          "ts": 1784731158.38,
+          "level": "WARNING",
+          "node": "llm.py",
+          "msg": "LLM rate limit / resource exhaustion encountered, retrying in 4s (attempt 2)"
+        },
+        {
+          "ts": 1784731166.97,
+          "level": "WARNING",
+          "node": "llm.py",
+          "msg": "LLM rate limit / resource exhaustion encountered, retrying in 8s (attempt 3)"
+        },
+        {
+          "ts": 1784731182.646,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM response received from [nvidia/nemotron-3-ultra-550b-a55b]. Snippet: {\n  \"intent\": \"SELECT\",\n  \"confidence\": 0.95,\n  \"c..."
+        },
+        {
+          "ts": 1784731182.646,
+          "level": "INFO",
+          "node": "INTENT",
+          "msg": "Classification Result: SELECT (conf: 0.95) | Needs Clarification: False"
+        },
+        {
+          "ts": 1784731269.787,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM response received from [nvidia/nemotron-3-ultra-550b-a55b]. Snippet: {\n  \"resolved_entities\": {\n    \"login_events.creat..."
+        },
+        {
+          "ts": 1784731269.787,
+          "level": "INFO",
+          "node": "entity_extractor.py",
+          "msg": "Final Extracted/Resolved Entities: {'login_events.created_at': '2025-11-25 16:39:05', 'login_events.failure_reason': 'Suspicious activity'}"
+        },
+        {
+          "ts": 1784731269.788,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Intent classified: SELECT (conf: 0.95) | Needs Clarification: False"
+        },
+        {
+          "ts": 1784731269.791,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [generate_sql]"
+        },
+        {
+          "ts": 1784731269.792,
+          "level": "INFO",
+          "node": "SQL_GEN",
+          "msg": "Generating SQL for domain: compliance | Query: List all Politically Exposed Persons (is_pep=true) who have executed transactions exceeding $50,000 USD in the last 90 days but have no corresponding 'flag_reason' indicating enhanced due diligence (EDD) review, signaling a compliance monitoring gap."
+        },
+        {
+          "ts": 1784731269.806,
+          "level": "INFO",
+          "node": "SQL_GEN",
+          "msg": "Using custom SQL prompt for domain: compliance"
+        },
+        {
+          "ts": 1784731269.807,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM [openai] using model [nvidia/nemotron-3-ultra-550b-a55b] generating response..."
+        },
+        {
+          "ts": 1784731310.727,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM response received from [nvidia/nemotron-3-ultra-550b-a55b]. Snippet: SELECT u.username, u.user_id, t.txn_id, t.amount_u..."
+        },
+        {
+          "ts": 1784731310.727,
+          "level": "INFO",
+          "node": "SQL_GEN",
+          "msg": "SQL Generated and cleaned: SELECT u.username, u.user_id, t.txn_id, t.amount_u..."
+        },
+        {
+          "ts": 1784731310.728,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "SQL Generated: SELECT u.username, u.user_id, t.txn_id, t.amount_u..."
+        },
+        {
+          "ts": 1784731310.73,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [validate_sql]"
+        },
+        {
+          "ts": 1784731310.735,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [execute_query]"
+        },
+        {
+          "ts": 1784731310.735,
+          "level": "INFO",
+          "node": "DB_EXEC",
+          "msg": "Executing SQL: SELECT u.username, u.user_id, t.txn_id, t.amount_usd, t.flag_reason, t.created_at\nFROM users u\nJOIN transactions t ON u.user_id = t.user_id\nWHERE u.is_pep = 1\n  AND t.amount_usd > 50000\n  AND t.created_at >= date('now', '-90 days')\n  AND (t.flag_reason IS NULL OR (UPPER(t.flag_reason) NOT LIKE '%EDD%' AND UPPER(t.flag_reason) NOT LIKE '%ENHANCED DUE DILIGENCE%'));"
+        },
+        {
+          "ts": 1784731310.736,
+          "level": "ERROR",
+          "node": "DB_EXEC",
+          "msg": "DATABASE EXECUTION ERROR: (sqlite3.OperationalError) no such column: u.username\n[SQL: SELECT u.username, u.user_id, t.txn_id, t.amount_usd, t.flag_reason, t.created_at\nFROM users u\nJOIN transactions t ON u.user_id = t.user_id\nWHERE u.is_pep = 1\n  AND t.amount_usd > 50000\n  AND t.created_at >= date('now', '-90 days')\n  AND (t.flag_reason IS NULL OR (UPPER(t.flag_reason) NOT LIKE '%EDD%' AND UPPER(t.flag_reason) NOT LIKE '%ENHANCED DUE DILIGENCE%'));]\n(Background on this error at: https://sqlalche.me/e/20/e3q8) | Query: SELECT u.username, u.user_id, t.txn_id, t.amount_usd, t.flag_reason, t.created_at\nFROM users u\nJOIN transactions t ON u.user_id = t.user_id\nWHERE u.is_pep = 1\n  AND t.amount_usd > 50000\n  AND t.created_at >= date('now', '-90 days')\n  AND (t.flag_reason IS NULL OR (UPPER(t.flag_reason) NOT LIKE '%EDD%' AND UPPER(t.flag_reason) NOT LIKE '%ENHANCED DUE DILIGENCE%'));"
+        },
+        {
+          "ts": 1784731310.737,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Query execution successful. Rows: 0"
+        },
+        {
+          "ts": 1784731310.74,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [insight_recommendation]"
+        },
+        {
+          "ts": 1784731310.741,
+          "level": "INFO",
+          "node": "INSIGHT",
+          "msg": "Generating insights for 0 rows in domain: compliance"
+        },
+        {
+          "ts": 1784731310.741,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Insights generated successfully."
+        },
+        {
+          "ts": 1784731310.742,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [recommend_visualization]"
+        },
+        {
+          "ts": 1784731310.742,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "No results for visualization recommendation."
+        }
+      ]
+    },
+    {
+      "mission_id": "risk_mission_002",
+      "mission_name": "Single Instrument Concentration Risk",
+      "domain": "risk",
+      "severity": "LOW",
+      "risk_score": 0,
+      "risk_factors": {},
+      "sql": "WITH user_instrument_volume AS (\n    SELECT\n        t.user_id,\n        UPPER(t.instrument) AS instrument,\n        SUM(t.amount_usd) AS vol_usd\n    FROM transactions t\n    WHERE t.created_at >= date('now', '-3 months')\n    GROUP BY t.user_id, UPPER(t.instrument)\n),\nuser_total_volume AS (\n    SELECT\n        user_id,\n        SUM(vol_usd) AS total_vol_usd\n    FROM user_instrument_volume\n    GROUP BY user_id\n),\nuser_shares AS (\n    SELECT\n        uiv.user_id,\n        uiv.instrument,\n        uiv.vol_usd,\n        utv.total_vol_usd,\n        (uiv.vol_usd * 1.0 / utv.total_vol_usd) AS share\n    FROM user_instrument_volume uiv\n    JOIN user_total_volume utv ON uiv.user_id = utv.user_id\n),\nuser_hhi AS (\n    SELECT\n        user_id,\n        SUM(share * share) AS hhi,\n        MAX(share) AS max_share\n    FROM user_shares\n    GROUP BY user_id\n)\nSELECT\n    u.user_id,\n    u.username,\n    uh.hhi,\n    uh.max_share,\n    CASE WHEN uh.max_share > 0.8 THEN 'CONCENTRATION_RISK' ELSE 'OK' END AS risk_flag\nFROM user_hhi uh\nJOIN users u ON uh.user_id = u.user_id\nORDER BY uh.max_share DESC;",
+      "data_count": 0,
+      "results": [],
+      "visualization_config": null,
+      "insight": "No data found to analyze.",
+      "recommendation": "Try broadening your search criteria or checking if the data for this period is available.",
+      "original_query": "Calculate the Herfindahl-Hirschman Index (HHI) of transaction volume by instrument for each user. Flag users where a single instrument (e.g., a specific stock, crypto, or forex pair) represents >80% of their total transaction volume_usd in the last quarter, indicating dangerous concentration risk and potential market manipulation exposure.",
+      "depth": 0,
+      "parent_mission_id": null,
+      "rationale": "",
+      "timestamp": "LIVE AUDIT",
+      "logs": [
+        {
+          "ts": 1784731151.57,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [classify_intent]"
+        },
+        {
+          "ts": 1784731151.572,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Starting Intent Classification and Preprocessing in parallel for domain: risk"
+        },
+        {
+          "ts": 1784731151.597,
+          "level": "INFO",
+          "node": "INTENT",
+          "msg": "Classifying intent for domain: risk | Query: Calculate the Herfindahl-Hirschman Index (HHI) of transaction volume by instrument for each user. Flag users where a single instrument (e.g., a specific stock, crypto, or forex pair) represents >80% of their total transaction volume_usd in the last quarter, indicating dangerous concentration risk and potential market manipulation exposure."
+        },
+        {
+          "ts": 1784731151.599,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM [openai] using model [nvidia/nemotron-3-ultra-550b-a55b] generating response..."
+        },
+        {
+          "ts": 1784731151.651,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM [openai] using model [nvidia/nemotron-3-ultra-550b-a55b] generating response..."
+        },
+        {
+          "ts": 1784731151.654,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM [openai] using model [nvidia/nemotron-3-ultra-550b-a55b] generating response..."
+        },
+        {
+          "ts": 1784731154.34,
+          "level": "WARNING",
+          "node": "llm.py",
+          "msg": "LLM rate limit / resource exhaustion encountered, retrying in 2s (attempt 1)"
+        },
+        {
+          "ts": 1784731154.345,
+          "level": "WARNING",
+          "node": "llm.py",
+          "msg": "LLM rate limit / resource exhaustion encountered, retrying in 2s (attempt 1)"
+        },
+        {
+          "ts": 1784731155.852,
+          "level": "WARNING",
+          "node": "llm.py",
+          "msg": "LLM rate limit / resource exhaustion encountered, retrying in 2s (attempt 1)"
+        },
+        {
+          "ts": 1784731157.907,
+          "level": "WARNING",
+          "node": "llm.py",
+          "msg": "LLM rate limit / resource exhaustion encountered, retrying in 4s (attempt 2)"
+        },
+        {
+          "ts": 1784731157.974,
+          "level": "WARNING",
+          "node": "llm.py",
+          "msg": "LLM rate limit / resource exhaustion encountered, retrying in 4s (attempt 2)"
+        },
+        {
+          "ts": 1784731159.594,
+          "level": "WARNING",
+          "node": "llm.py",
+          "msg": "LLM rate limit / resource exhaustion encountered, retrying in 4s (attempt 2)"
+        },
+        {
+          "ts": 1784731166.033,
+          "level": "WARNING",
+          "node": "llm.py",
+          "msg": "LLM rate limit / resource exhaustion encountered, retrying in 8s (attempt 3)"
+        },
+        {
+          "ts": 1784731167.626,
+          "level": "WARNING",
+          "node": "llm.py",
+          "msg": "LLM rate limit / resource exhaustion encountered, retrying in 8s (attempt 3)"
+        },
+        {
+          "ts": 1784731169.655,
+          "level": "WARNING",
+          "node": "llm.py",
+          "msg": "LLM rate limit / resource exhaustion encountered, retrying in 8s (attempt 3)"
+        },
+        {
+          "ts": 1784731177.535,
+          "level": "WARNING",
+          "node": "llm.py",
+          "msg": "LLM rate limit / resource exhaustion encountered, retrying in 16s (attempt 4)"
+        },
+        {
+          "ts": 1784731188.397,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM response received from [nvidia/nemotron-3-ultra-550b-a55b]. Snippet: [\"users\", \"transactions\"]..."
+        },
+        {
+          "ts": 1784731211.846,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM response received from [nvidia/nemotron-3-ultra-550b-a55b]. Snippet: {\n  \"intent\": \"SELECT\",\n  \"confidence\": 0.95,\n  \"c..."
+        },
+        {
+          "ts": 1784731211.847,
+          "level": "INFO",
+          "node": "INTENT",
+          "msg": "Classification Result: SELECT (conf: 0.95) | Needs Clarification: False"
+        },
+        {
+          "ts": 1784731288.598,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM response received from [nvidia/nemotron-3-ultra-550b-a55b]. Snippet: {\n  \"resolved_entities\": {},\n  \"metadata\": {\n    \"..."
+        },
+        {
+          "ts": 1784731288.598,
+          "level": "INFO",
+          "node": "entity_extractor.py",
+          "msg": "Final Extracted/Resolved Entities: {}"
+        },
+        {
+          "ts": 1784731288.599,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Intent classified: SELECT (conf: 0.95) | Needs Clarification: False"
+        },
+        {
+          "ts": 1784731288.602,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [generate_sql]"
+        },
+        {
+          "ts": 1784731288.602,
+          "level": "INFO",
+          "node": "SQL_GEN",
+          "msg": "Generating SQL for domain: risk | Query: Calculate the Herfindahl-Hirschman Index (HHI) of transaction volume by instrument for each user. Flag users where a single instrument (e.g., a specific stock, crypto, or forex pair) represents >80% of their total transaction volume_usd in the last quarter, indicating dangerous concentration risk and potential market manipulation exposure."
+        },
+        {
+          "ts": 1784731288.609,
+          "level": "INFO",
+          "node": "SQL_GEN",
+          "msg": "Using custom SQL prompt for domain: risk"
+        },
+        {
+          "ts": 1784731288.609,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM [openai] using model [nvidia/nemotron-3-ultra-550b-a55b] generating response..."
+        },
+        {
+          "ts": 1784731320.902,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM response received from [nvidia/nemotron-3-ultra-550b-a55b]. Snippet: WITH user_instrument_volume AS (\n    SELECT\n      ..."
+        },
+        {
+          "ts": 1784731320.903,
+          "level": "INFO",
+          "node": "SQL_GEN",
+          "msg": "SQL Generated and cleaned: WITH user_instrument_volume AS (\n    SELECT\n      ..."
+        },
+        {
+          "ts": 1784731320.903,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "SQL Generated: WITH user_instrument_volume AS (\n    SELECT\n      ..."
+        },
+        {
+          "ts": 1784731320.906,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [validate_sql]"
+        },
+        {
+          "ts": 1784731320.918,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [execute_query]"
+        },
+        {
+          "ts": 1784731320.918,
+          "level": "INFO",
+          "node": "DB_EXEC",
+          "msg": "Executing SQL: WITH user_instrument_volume AS (\n    SELECT\n        t.user_id,\n        UPPER(t.instrument) AS instrument,\n        SUM(t.amount_usd) AS vol_usd\n    FROM transactions t\n    WHERE t.created_at >= date('now', '-3 months')\n    GROUP BY t.user_id, UPPER(t.instrument)\n),\nuser_total_volume AS (\n    SELECT\n        user_id,\n        SUM(vol_usd) AS total_vol_usd\n    FROM user_instrument_volume\n    GROUP BY user_id\n),\nuser_shares AS (\n    SELECT\n        uiv.user_id,\n        uiv.instrument,\n        uiv.vol_usd,\n        utv.total_vol_usd,\n        (uiv.vol_usd * 1.0 / utv.total_vol_usd) AS share\n    FROM user_instrument_volume uiv\n    JOIN user_total_volume utv ON uiv.user_id = utv.user_id\n),\nuser_hhi AS (\n    SELECT\n        user_id,\n        SUM(share * share) AS hhi,\n        MAX(share) AS max_share\n    FROM user_shares\n    GROUP BY user_id\n)\nSELECT\n    u.user_id,\n    u.username,\n    uh.hhi,\n    uh.max_share,\n    CASE WHEN uh.max_share > 0.8 THEN 'CONCENTRATION_RISK' ELSE 'OK' END AS risk_flag\nFROM user_hhi uh\nJOIN users u ON uh.user_id = u.user_id\nORDER BY uh.max_share DESC;"
+        },
+        {
+          "ts": 1784731320.919,
+          "level": "ERROR",
+          "node": "DB_EXEC",
+          "msg": "DATABASE EXECUTION ERROR: (sqlite3.OperationalError) no such column: u.username\n[SQL: WITH user_instrument_volume AS (\n    SELECT\n        t.user_id,\n        UPPER(t.instrument) AS instrument,\n        SUM(t.amount_usd) AS vol_usd\n    FROM transactions t\n    WHERE t.created_at >= date('now', '-3 months')\n    GROUP BY t.user_id, UPPER(t.instrument)\n),\nuser_total_volume AS (\n    SELECT\n        user_id,\n        SUM(vol_usd) AS total_vol_usd\n    FROM user_instrument_volume\n    GROUP BY user_id\n),\nuser_shares AS (\n    SELECT\n        uiv.user_id,\n        uiv.instrument,\n        uiv.vol_usd,\n        utv.total_vol_usd,\n        (uiv.vol_usd * 1.0 / utv.total_vol_usd) AS share\n    FROM user_instrument_volume uiv\n    JOIN user_total_volume utv ON uiv.user_id = utv.user_id\n),\nuser_hhi AS (\n    SELECT\n        user_id,\n        SUM(share * share) AS hhi,\n        MAX(share) AS max_share\n    FROM user_shares\n    GROUP BY user_id\n)\nSELECT\n    u.user_id,\n    u.username,\n    uh.hhi,\n    uh.max_share,\n    CASE WHEN uh.max_share > 0.8 THEN 'CONCENTRATION_RISK' ELSE 'OK' END AS risk_flag\nFROM user_hhi uh\nJOIN users u ON uh.user_id = u.user_id\nORDER BY uh.max_share DESC;]\n(Background on this error at: https://sqlalche.me/e/20/e3q8) | Query: WITH user_instrument_volume AS (\n    SELECT\n        t.user_id,\n        UPPER(t.instrument) AS instrument,\n        SUM(t.amount_usd) AS vol_usd\n    FROM transactions t\n    WHERE t.created_at >= date('now', '-3 months')\n    GROUP BY t.user_id, UPPER(t.instrument)\n),\nuser_total_volume AS (\n    SELECT\n        user_id,\n        SUM(vol_usd) AS total_vol_usd\n    FROM user_instrument_volume\n    GROUP BY user_id\n),\nuser_shares AS (\n    SELECT\n        uiv.user_id,\n        uiv.instrument,\n        uiv.vol_usd,\n        utv.total_vol_usd,\n        (uiv.vol_usd * 1.0 / utv.total_vol_usd) AS share\n    FROM user_instrument_volume uiv\n    JOIN user_total_volume utv ON uiv.user_id = utv.user_id\n),\nuser_hhi AS (\n    SELECT\n        user_id,\n        SUM(share * share) AS hhi,\n        MAX(share) AS max_share\n    FROM user_shares\n    GROUP BY user_id\n)\nSELECT\n    u.user_id,\n    u.username,\n    uh.hhi,\n    uh.max_share,\n    CASE WHEN uh.max_share > 0.8 THEN 'CONCENTRATION_RISK' ELSE 'OK' END AS risk_flag\nFROM user_hhi uh\nJOIN users u ON uh.user_id = u.user_id\nORDER BY uh.max_share DESC;"
+        },
+        {
+          "ts": 1784731320.92,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Query execution successful. Rows: 0"
+        },
+        {
+          "ts": 1784731320.922,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [insight_recommendation]"
+        },
+        {
+          "ts": 1784731320.922,
+          "level": "INFO",
+          "node": "INSIGHT",
+          "msg": "Generating insights for 0 rows in domain: risk"
+        },
+        {
+          "ts": 1784731320.923,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Insights generated successfully."
+        },
+        {
+          "ts": 1784731320.923,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [recommend_visualization]"
+        },
+        {
+          "ts": 1784731320.923,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "No results for visualization recommendation."
+        }
+      ]
+    },
+    {
+      "mission_id": "ops_mission_002",
+      "mission_name": "High Volume / Low Activity Bot Signature",
+      "domain": "operations",
+      "severity": "LOW",
+      "risk_score": 0,
+      "risk_factors": {},
+      "sql": "WITH params AS (\n    SELECT date('2026-07-22', '-30 days') AS start_date\n),\ntxns AS (\n    SELECT t.user_id,\n           t.created_at,\n           strftime('%s', t.created_at) AS ts\n    FROM transactions t, params\n    WHERE date(t.created_at) >= params.start_date\n),\nlogins AS (\n    SELECT le.user_id, COUNT(*) AS login_count\n    FROM login_events le, params\n    WHERE date(le.created_at) >= params.start_date\n    GROUP BY le.user_id\n),\ntxn_counts AS (\n    SELECT user_id, COUNT(*) AS txn_count\n    FROM txns\n    GROUP BY user_id\n),\ntxn_intervals AS (\n    SELECT user_id,\n           ts - LAG(ts) OVER (PARTITION BY user_id ORDER BY ts) AS diff_sec\n    FROM txns\n),\nregularity AS (\n    SELECT user_id,\n           COUNT(*) AS interval_count,\n           SUM(CASE WHEN diff_sec % 3600 = 0 AND diff_sec > 0 THEN 1 ELSE 0 END) AS hourly_intervals\n    FROM txn_intervals\n    WHERE diff_sec IS NOT NULL\n    GROUP BY user_id\n)\nSELECT u.user_id,\n       u.username,\n       tc.txn_count,\n       COALESCE(l.login_count, 0) AS login_count,\n       r.hourly_intervals,\n       r.interval_count,\n       (r.hourly_intervals * 1.0 / r.interval_count) AS hourly_ratio\nFROM users u\nJOIN txn_counts tc ON u.user_id = tc.user_id\nLEFT JOIN logins l ON u.user_id = l.user_id\nJOIN regularity r ON u.user_id = r.user_id\nWHERE tc.txn_count > 50\n  AND COALESCE(l.login_count, 0) < 2\n  AND r.interval_count > 10\n  AND (r.hourly_intervals * 1.0 / r.interval_count) > 0.8\nORDER BY tc.txn_count DESC;",
+      "data_count": 0,
+      "results": [],
+      "visualization_config": null,
+      "insight": "No data found to analyze.",
+      "recommendation": "Try broadening your search criteria or checking if the data for this period is available.",
+      "original_query": "Find users with high transaction counts (>50 txns in 30 days) but extremely low login frequency (<2 logins in same period), and where transaction timestamps show non-human regularity (e.g., exact hourly intervals), indicating potential API abuse, bot activity, or compromised automated trading keys.",
+      "depth": 0,
+      "parent_mission_id": null,
+      "rationale": "",
+      "timestamp": "LIVE AUDIT",
+      "logs": [
+        {
+          "ts": 1784731151.57,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [classify_intent]"
+        },
+        {
+          "ts": 1784731151.57,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Starting Intent Classification and Preprocessing in parallel for domain: operations"
+        },
+        {
+          "ts": 1784731151.591,
+          "level": "INFO",
+          "node": "INTENT",
+          "msg": "Classifying intent for domain: operations | Query: Find users with high transaction counts (>50 txns in 30 days) but extremely low login frequency (<2 logins in same period), and where transaction timestamps show non-human regularity (e.g., exact hourly intervals), indicating potential API abuse, bot activity, or compromised automated trading keys."
+        },
+        {
+          "ts": 1784731151.593,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM [openai] using model [nvidia/nemotron-3-ultra-550b-a55b] generating response..."
+        },
+        {
+          "ts": 1784731151.638,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM [openai] using model [nvidia/nemotron-3-ultra-550b-a55b] generating response..."
+        },
+        {
+          "ts": 1784731151.643,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM [openai] using model [nvidia/nemotron-3-ultra-550b-a55b] generating response..."
+        },
+        {
+          "ts": 1784731155.814,
+          "level": "WARNING",
+          "node": "llm.py",
+          "msg": "LLM rate limit / resource exhaustion encountered, retrying in 2s (attempt 1)"
+        },
+        {
+          "ts": 1784731159.387,
+          "level": "WARNING",
+          "node": "llm.py",
+          "msg": "LLM rate limit / resource exhaustion encountered, retrying in 4s (attempt 2)"
+        },
+        {
+          "ts": 1784731162.557,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM response received from [nvidia/nemotron-3-ultra-550b-a55b]. Snippet: [\"users\", \"transactions\", \"login_events\"]..."
+        },
+        {
+          "ts": 1784731170.787,
+          "level": "WARNING",
+          "node": "llm.py",
+          "msg": "LLM rate limit / resource exhaustion encountered, retrying in 8s (attempt 3)"
+        },
+        {
+          "ts": 1784731192.288,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM response received from [nvidia/nemotron-3-ultra-550b-a55b]. Snippet: {\n  \"intent\": \"SELECT\",\n  \"confidence\": 0.95,\n  \"c..."
+        },
+        {
+          "ts": 1784731192.289,
+          "level": "INFO",
+          "node": "INTENT",
+          "msg": "Classification Result: SELECT (conf: 0.95) | Needs Clarification: False"
+        },
+        {
+          "ts": 1784731286.182,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM response received from [nvidia/nemotron-3-ultra-550b-a55b]. Snippet: {\n  \"resolved_entities\": {\n    \"login_events.statu..."
+        },
+        {
+          "ts": 1784731286.182,
+          "level": "INFO",
+          "node": "entity_extractor.py",
+          "msg": "Final Extracted/Resolved Entities: {'login_events.status': 'SUCCESS', 'login_events.failure_reason': 'Suspicious activity'}"
+        },
+        {
+          "ts": 1784731286.185,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Intent classified: SELECT (conf: 0.95) | Needs Clarification: False"
+        },
+        {
+          "ts": 1784731286.188,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [generate_sql]"
+        },
+        {
+          "ts": 1784731286.188,
+          "level": "INFO",
+          "node": "SQL_GEN",
+          "msg": "Generating SQL for domain: operations | Query: Find users with high transaction counts (>50 txns in 30 days) but extremely low login frequency (<2 logins in same period), and where transaction timestamps show non-human regularity (e.g., exact hourly intervals), indicating potential API abuse, bot activity, or compromised automated trading keys."
+        },
+        {
+          "ts": 1784731286.199,
+          "level": "INFO",
+          "node": "SQL_GEN",
+          "msg": "Using custom SQL prompt for domain: operations"
+        },
+        {
+          "ts": 1784731286.199,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM [openai] using model [nvidia/nemotron-3-ultra-550b-a55b] generating response..."
+        },
+        {
+          "ts": 1784731303.384,
+          "level": "WARNING",
+          "node": "llm.py",
+          "msg": "LLM rate limit / resource exhaustion encountered, retrying in 2s (attempt 1)"
+        },
+        {
+          "ts": 1784731355.195,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM response received from [nvidia/nemotron-3-ultra-550b-a55b]. Snippet: WITH params AS (\n    SELECT date('2026-07-22', '-3..."
+        },
+        {
+          "ts": 1784731355.196,
+          "level": "INFO",
+          "node": "SQL_GEN",
+          "msg": "SQL Generated and cleaned: WITH params AS (\n    SELECT date('2026-07-22', '-3..."
+        },
+        {
+          "ts": 1784731355.196,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "SQL Generated: WITH params AS (\n    SELECT date('2026-07-22', '-3..."
+        },
+        {
+          "ts": 1784731355.198,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [validate_sql]"
+        },
+        {
+          "ts": 1784731355.214,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [execute_query]"
+        },
+        {
+          "ts": 1784731355.215,
+          "level": "INFO",
+          "node": "DB_EXEC",
+          "msg": "Executing SQL: WITH params AS (\n    SELECT date('2026-07-22', '-30 days') AS start_date\n),\ntxns AS (\n    SELECT t.user_id,\n           t.created_at,\n           strftime('%s', t.created_at) AS ts\n    FROM transactions t, params\n    WHERE date(t.created_at) >= params.start_date\n),\nlogins AS (\n    SELECT le.user_id, COUNT(*) AS login_count\n    FROM login_events le, params\n    WHERE date(le.created_at) >= params.start_date\n    GROUP BY le.user_id\n),\ntxn_counts AS (\n    SELECT user_id, COUNT(*) AS txn_count\n    FROM txns\n    GROUP BY user_id\n),\ntxn_intervals AS (\n    SELECT user_id,\n           ts - LAG(ts) OVER (PARTITION BY user_id ORDER BY ts) AS diff_sec\n    FROM txns\n),\nregularity AS (\n    SELECT user_id,\n           COUNT(*) AS interval_count,\n           SUM(CASE WHEN diff_sec % 3600 = 0 AND diff_sec > 0 THEN 1 ELSE 0 END) AS hourly_intervals\n    FROM txn_intervals\n    WHERE diff_sec IS NOT NULL\n    GROUP BY user_id\n)\nSELECT u.user_id,\n       u.username,\n       tc.txn_count,\n       COALESCE(l.login_count, 0) AS login_count,\n       r.hourly_intervals,\n       r.interval_count,\n       (r.hourly_intervals * 1.0 / r.interval_count) AS hourly_ratio\nFROM users u\nJOIN txn_counts tc ON u.user_id = tc.user_id\nLEFT JOIN logins l ON u.user_id = l.user_id\nJOIN regularity r ON u.user_id = r.user_id\nWHERE tc.txn_count > 50\n  AND COALESCE(l.login_count, 0) < 2\n  AND r.interval_count > 10\n  AND (r.hourly_intervals * 1.0 / r.interval_count) > 0.8\nORDER BY tc.txn_count DESC;"
+        },
+        {
+          "ts": 1784731355.217,
+          "level": "ERROR",
+          "node": "DB_EXEC",
+          "msg": "DATABASE EXECUTION ERROR: (sqlite3.OperationalError) no such column: u.username\n[SQL: WITH params AS (\n    SELECT date('2026-07-22', '-30 days') AS start_date\n),\ntxns AS (\n    SELECT t.user_id,\n           t.created_at,\n           strftime('%s', t.created_at) AS ts\n    FROM transactions t, params\n    WHERE date(t.created_at) >= params.start_date\n),\nlogins AS (\n    SELECT le.user_id, COUNT(*) AS login_count\n    FROM login_events le, params\n    WHERE date(le.created_at) >= params.start_date\n    GROUP BY le.user_id\n),\ntxn_counts AS (\n    SELECT user_id, COUNT(*) AS txn_count\n    FROM txns\n    GROUP BY user_id\n),\ntxn_intervals AS (\n    SELECT user_id,\n           ts - LAG(ts) OVER (PARTITION BY user_id ORDER BY ts) AS diff_sec\n    FROM txns\n),\nregularity AS (\n    SELECT user_id,\n           COUNT(*) AS interval_count,\n           SUM(CASE WHEN diff_sec % 3600 = 0 AND diff_sec > 0 THEN 1 ELSE 0 END) AS hourly_intervals\n    FROM txn_intervals\n    WHERE diff_sec IS NOT NULL\n    GROUP BY user_id\n)\nSELECT u.user_id,\n       u.username,\n       tc.txn_count,\n       COALESCE(l.login_count, 0) AS login_count,\n       r.hourly_intervals,\n       r.interval_count,\n       (r.hourly_intervals * 1.0 / r.interval_count) AS hourly_ratio\nFROM users u\nJOIN txn_counts tc ON u.user_id = tc.user_id\nLEFT JOIN logins l ON u.user_id = l.user_id\nJOIN regularity r ON u.user_id = r.user_id\nWHERE tc.txn_count > 50\n  AND COALESCE(l.login_count, 0) < 2\n  AND r.interval_count > 10\n  AND (r.hourly_intervals * 1.0 / r.interval_count) > 0.8\nORDER BY tc.txn_count DESC;]\n(Background on this error at: https://sqlalche.me/e/20/e3q8) | Query: WITH params AS (\n    SELECT date('2026-07-22', '-30 days') AS start_date\n),\ntxns AS (\n    SELECT t.user_id,\n           t.created_at,\n           strftime('%s', t.created_at) AS ts\n    FROM transactions t, params\n    WHERE date(t.created_at) >= params.start_date\n),\nlogins AS (\n    SELECT le.user_id, COUNT(*) AS login_count\n    FROM login_events le, params\n    WHERE date(le.created_at) >= params.start_date\n    GROUP BY le.user_id\n),\ntxn_counts AS (\n    SELECT user_id, COUNT(*) AS txn_count\n    FROM txns\n    GROUP BY user_id\n),\ntxn_intervals AS (\n    SELECT user_id,\n           ts - LAG(ts) OVER (PARTITION BY user_id ORDER BY ts) AS diff_sec\n    FROM txns\n),\nregularity AS (\n    SELECT user_id,\n           COUNT(*) AS interval_count,\n           SUM(CASE WHEN diff_sec % 3600 = 0 AND diff_sec > 0 THEN 1 ELSE 0 END) AS hourly_intervals\n    FROM txn_intervals\n    WHERE diff_sec IS NOT NULL\n    GROUP BY user_id\n)\nSELECT u.user_id,\n       u.username,\n       tc.txn_count,\n       COALESCE(l.login_count, 0) AS login_count,\n       r.hourly_intervals,\n       r.interval_count,\n       (r.hourly_intervals * 1.0 / r.interval_count) AS hourly_ratio\nFROM users u\nJOIN txn_counts tc ON u.user_id = tc.user_id\nLEFT JOIN logins l ON u.user_id = l.user_id\nJOIN regularity r ON u.user_id = r.user_id\nWHERE tc.txn_count > 50\n  AND COALESCE(l.login_count, 0) < 2\n  AND r.interval_count > 10\n  AND (r.hourly_intervals * 1.0 / r.interval_count) > 0.8\nORDER BY tc.txn_count DESC;"
+        },
+        {
+          "ts": 1784731355.217,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Query execution successful. Rows: 0"
+        },
+        {
+          "ts": 1784731355.219,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [insight_recommendation]"
+        },
+        {
+          "ts": 1784731355.22,
+          "level": "INFO",
+          "node": "INSIGHT",
+          "msg": "Generating insights for 0 rows in domain: operations"
+        },
+        {
+          "ts": 1784731355.22,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Insights generated successfully."
+        },
+        {
+          "ts": 1784731355.22,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [recommend_visualization]"
+        },
+        {
+          "ts": 1784731355.22,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "No results for visualization recommendation."
+        }
+      ]
+    },
+    {
+      "mission_id": "sec_mission_002",
+      "mission_name": "Credential Stuffing Pattern Detection",
+      "domain": "security",
+      "severity": "LOW",
+      "risk_score": 0,
+      "risk_factors": {},
+      "sql": "WITH failed_events AS (\n    SELECT\n        user_id,\n        created_at,\n        device_type,\n        country\n    FROM login_events\n    WHERE UPPER(status) LIKE '%FAILED%'\n),\nhourly_stats AS (\n    SELECT\n        user_id,\n        strftime('%Y-%m-%d %H:00', created_at) AS hour_bucket,\n        COUNT(*) AS fail_count,\n        COUNT(DISTINCT device_type) AS distinct_devices,\n        COUNT(DISTINCT country) AS distinct_countries,\n        MAX(created_at) AS last_failed_at\n    FROM failed_events\n    GROUP BY user_id, hour_bucket\n    HAVING fail_count > 5\n       AND (distinct_devices > 1 OR distinct_countries > 1)\n),\nsuccessful_logins AS (\n    SELECT\n        user_id,\n        created_at\n    FROM login_events\n    WHERE UPPER(status) LIKE '%SUCCESS%'\n)\nSELECT\n    hs.user_id,\n    u.username,\n    hs.hour_bucket,\n    hs.fail_count,\n    hs.distinct_devices,\n    hs.distinct_countries,\n    hs.last_failed_at,\n    sl.created_at AS success_at\nFROM hourly_stats hs\nJOIN users u ON hs.user_id = u.user_id\nJOIN successful_logins sl ON hs.user_id = sl.user_id\n    AND sl.created_at > hs.last_failed_at\n    AND sl.created_at <= datetime(hs.last_failed_at, '+1 hour')\nORDER BY hs.last_failed_at DESC;",
+      "data_count": 0,
+      "results": [],
+      "visualization_config": null,
+      "insight": "No data found to analyze.",
+      "recommendation": "Try broadening your search criteria or checking if the data for this period is available.",
+      "original_query": "Find users with a high volume of failed login attempts (status='failed') from multiple distinct device_types or countries within a 1-hour window, immediately followed by a successful login, suggesting automated credential stuffing attacks.",
+      "depth": 0,
+      "parent_mission_id": null,
+      "rationale": "",
+      "timestamp": "LIVE AUDIT",
+      "logs": [
+        {
+          "ts": 1784731151.569,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [classify_intent]"
+        },
+        {
+          "ts": 1784731151.569,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Starting Intent Classification and Preprocessing in parallel for domain: security"
+        },
+        {
+          "ts": 1784731151.581,
+          "level": "INFO",
+          "node": "INTENT",
+          "msg": "Classifying intent for domain: security | Query: Find users with a high volume of failed login attempts (status='failed') from multiple distinct device_types or countries within a 1-hour window, immediately followed by a successful login, suggesting automated credential stuffing attacks."
+        },
+        {
+          "ts": 1784731151.582,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM [openai] using model [nvidia/nemotron-3-ultra-550b-a55b] generating response..."
+        },
+        {
+          "ts": 1784731151.607,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM [openai] using model [nvidia/nemotron-3-ultra-550b-a55b] generating response..."
+        },
+        {
+          "ts": 1784731151.612,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM [openai] using model [nvidia/nemotron-3-ultra-550b-a55b] generating response..."
+        },
+        {
+          "ts": 1784731154.46,
+          "level": "WARNING",
+          "node": "llm.py",
+          "msg": "LLM rate limit / resource exhaustion encountered, retrying in 2s (attempt 1)"
+        },
+        {
+          "ts": 1784731155.026,
+          "level": "WARNING",
+          "node": "llm.py",
+          "msg": "LLM rate limit / resource exhaustion encountered, retrying in 2s (attempt 1)"
+        },
+        {
+          "ts": 1784731158.261,
+          "level": "WARNING",
+          "node": "llm.py",
+          "msg": "LLM rate limit / resource exhaustion encountered, retrying in 4s (attempt 2)"
+        },
+        {
+          "ts": 1784731158.786,
+          "level": "WARNING",
+          "node": "llm.py",
+          "msg": "LLM rate limit / resource exhaustion encountered, retrying in 4s (attempt 2)"
+        },
+        {
+          "ts": 1784731159.702,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM response received from [nvidia/nemotron-3-ultra-550b-a55b]. Snippet: [\"login_events\"]..."
+        },
+        {
+          "ts": 1784731169.703,
+          "level": "WARNING",
+          "node": "llm.py",
+          "msg": "LLM rate limit / resource exhaustion encountered, retrying in 8s (attempt 3)"
+        },
+        {
+          "ts": 1784731169.776,
+          "level": "WARNING",
+          "node": "llm.py",
+          "msg": "LLM rate limit / resource exhaustion encountered, retrying in 8s (attempt 3)"
+        },
+        {
+          "ts": 1784731188.249,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM response received from [nvidia/nemotron-3-ultra-550b-a55b]. Snippet: {\n  \"intent\": \"SELECT\",\n  \"confidence\": 0.95,\n  \"c..."
+        },
+        {
+          "ts": 1784731188.249,
+          "level": "INFO",
+          "node": "INTENT",
+          "msg": "Classification Result: SELECT (conf: 0.95) | Needs Clarification: False"
+        },
+        {
+          "ts": 1784731372.215,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM response received from [nvidia/nemotron-3-ultra-550b-a55b]. Snippet: {\n  \"resolved_entities\": {\n    \"login_events.statu..."
+        },
+        {
+          "ts": 1784731372.216,
+          "level": "INFO",
+          "node": "entity_extractor.py",
+          "msg": "Final Extracted/Resolved Entities: {'login_events.status': ['FAILED', 'SUCCESS'], 'login_events.device_fingerprint': 'device_fingerprint', 'login_events.user_agent': 'user_agent', 'login_events.created_at': 'created_at'}"
+        },
+        {
+          "ts": 1784731372.217,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Intent classified: SELECT (conf: 0.95) | Needs Clarification: False"
+        },
+        {
+          "ts": 1784731372.22,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [generate_sql]"
+        },
+        {
+          "ts": 1784731372.22,
+          "level": "INFO",
+          "node": "SQL_GEN",
+          "msg": "Generating SQL for domain: security | Query: Find users with a high volume of failed login attempts (status='failed') from multiple distinct device_types or countries within a 1-hour window, immediately followed by a successful login, suggesting automated credential stuffing attacks."
+        },
+        {
+          "ts": 1784731372.226,
+          "level": "INFO",
+          "node": "SQL_GEN",
+          "msg": "Using custom SQL prompt for domain: security"
+        },
+        {
+          "ts": 1784731372.226,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM [openai] using model [nvidia/nemotron-3-ultra-550b-a55b] generating response..."
+        },
+        {
+          "ts": 1784731392.469,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM response received from [nvidia/nemotron-3-ultra-550b-a55b]. Snippet: WITH failed_events AS (\n    SELECT\n        user_id..."
+        },
+        {
+          "ts": 1784731392.469,
+          "level": "INFO",
+          "node": "SQL_GEN",
+          "msg": "SQL Generated and cleaned: WITH failed_events AS (\n    SELECT\n        user_id..."
+        },
+        {
+          "ts": 1784731392.469,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "SQL Generated: WITH failed_events AS (\n    SELECT\n        user_id..."
+        },
+        {
+          "ts": 1784731392.472,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [validate_sql]"
+        },
+        {
+          "ts": 1784731392.488,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [execute_query]"
+        },
+        {
+          "ts": 1784731392.489,
+          "level": "INFO",
+          "node": "DB_EXEC",
+          "msg": "Executing SQL: WITH failed_events AS (\n    SELECT\n        user_id,\n        created_at,\n        device_type,\n        country\n    FROM login_events\n    WHERE UPPER(status) LIKE '%FAILED%'\n),\nhourly_stats AS (\n    SELECT\n        user_id,\n        strftime('%Y-%m-%d %H:00', created_at) AS hour_bucket,\n        COUNT(*) AS fail_count,\n        COUNT(DISTINCT device_type) AS distinct_devices,\n        COUNT(DISTINCT country) AS distinct_countries,\n        MAX(created_at) AS last_failed_at\n    FROM failed_events\n    GROUP BY user_id, hour_bucket\n    HAVING fail_count > 5\n       AND (distinct_devices > 1 OR distinct_countries > 1)\n),\nsuccessful_logins AS (\n    SELECT\n        user_id,\n        created_at\n    FROM login_events\n    WHERE UPPER(status) LIKE '%SUCCESS%'\n)\nSELECT\n    hs.user_id,\n    u.username,\n    hs.hour_bucket,\n    hs.fail_count,\n    hs.distinct_devices,\n    hs.distinct_countries,\n    hs.last_failed_at,\n    sl.created_at AS success_at\nFROM hourly_stats hs\nJOIN users u ON hs.user_id = u.user_id\nJOIN successful_logins sl ON hs.user_id = sl.user_id\n    AND sl.created_at > hs.last_failed_at\n    AND sl.created_at <= datetime(hs.last_failed_at, '+1 hour')\nORDER BY hs.last_failed_at DESC;"
+        },
+        {
+          "ts": 1784731392.491,
+          "level": "ERROR",
+          "node": "DB_EXEC",
+          "msg": "DATABASE EXECUTION ERROR: (sqlite3.OperationalError) no such column: u.username\n[SQL: WITH failed_events AS (\n    SELECT\n        user_id,\n        created_at,\n        device_type,\n        country\n    FROM login_events\n    WHERE UPPER(status) LIKE '%FAILED%'\n),\nhourly_stats AS (\n    SELECT\n        user_id,\n        strftime('%Y-%m-%d %H:00', created_at) AS hour_bucket,\n        COUNT(*) AS fail_count,\n        COUNT(DISTINCT device_type) AS distinct_devices,\n        COUNT(DISTINCT country) AS distinct_countries,\n        MAX(created_at) AS last_failed_at\n    FROM failed_events\n    GROUP BY user_id, hour_bucket\n    HAVING fail_count > 5\n       AND (distinct_devices > 1 OR distinct_countries > 1)\n),\nsuccessful_logins AS (\n    SELECT\n        user_id,\n        created_at\n    FROM login_events\n    WHERE UPPER(status) LIKE '%SUCCESS%'\n)\nSELECT\n    hs.user_id,\n    u.username,\n    hs.hour_bucket,\n    hs.fail_count,\n    hs.distinct_devices,\n    hs.distinct_countries,\n    hs.last_failed_at,\n    sl.created_at AS success_at\nFROM hourly_stats hs\nJOIN users u ON hs.user_id = u.user_id\nJOIN successful_logins sl ON hs.user_id = sl.user_id\n    AND sl.created_at > hs.last_failed_at\n    AND sl.created_at <= datetime(hs.last_failed_at, '+1 hour')\nORDER BY hs.last_failed_at DESC;]\n(Background on this error at: https://sqlalche.me/e/20/e3q8) | Query: WITH failed_events AS (\n    SELECT\n        user_id,\n        created_at,\n        device_type,\n        country\n    FROM login_events\n    WHERE UPPER(status) LIKE '%FAILED%'\n),\nhourly_stats AS (\n    SELECT\n        user_id,\n        strftime('%Y-%m-%d %H:00', created_at) AS hour_bucket,\n        COUNT(*) AS fail_count,\n        COUNT(DISTINCT device_type) AS distinct_devices,\n        COUNT(DISTINCT country) AS distinct_countries,\n        MAX(created_at) AS last_failed_at\n    FROM failed_events\n    GROUP BY user_id, hour_bucket\n    HAVING fail_count > 5\n       AND (distinct_devices > 1 OR distinct_countries > 1)\n),\nsuccessful_logins AS (\n    SELECT\n        user_id,\n        created_at\n    FROM login_events\n    WHERE UPPER(status) LIKE '%SUCCESS%'\n)\nSELECT\n    hs.user_id,\n    u.username,\n    hs.hour_bucket,\n    hs.fail_count,\n    hs.distinct_devices,\n    hs.distinct_countries,\n    hs.last_failed_at,\n    sl.created_at AS success_at\nFROM hourly_stats hs\nJOIN users u ON hs.user_id = u.user_id\nJOIN successful_logins sl ON hs.user_id = sl.user_id\n    AND sl.created_at > hs.last_failed_at\n    AND sl.created_at <= datetime(hs.last_failed_at, '+1 hour')\nORDER BY hs.last_failed_at DESC;"
+        },
+        {
+          "ts": 1784731392.491,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Query execution successful. Rows: 0"
+        },
+        {
+          "ts": 1784731392.494,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [insight_recommendation]"
+        },
+        {
+          "ts": 1784731392.494,
+          "level": "INFO",
+          "node": "INSIGHT",
+          "msg": "Generating insights for 0 rows in domain: security"
+        },
+        {
+          "ts": 1784731392.494,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Insights generated successfully."
+        },
+        {
+          "ts": 1784731392.495,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [recommend_visualization]"
+        },
+        {
+          "ts": 1784731392.495,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "No results for visualization recommendation."
+        }
+      ]
+    }
+  ],
+  "clusters": [],
+  "narrative": {
+    "executive_summary": "The platform's primary operational risk is a method-specific payment failure disparity affecting high-risk users on bank transfers, with a 57% higher failure rate (5.06% vs 3.22%) compared to low-risk users, while card failure rates remain low across tiers. Seven of eight detection missions returned no data, indicating significant telemetry gaps across security, compliance, and risk domains that leave the organization blind to structuring, impossible travel, PEP monitoring, concentration risk, bot signatures, and credential stuffing.",
+    "threat_vectors": [
+      {
+        "name": "Payment Failure Correlation with Risk Controls",
+        "severity": "MEDIUM",
+        "description": "High-risk users suffer a 57% higher failure rate on BANK_TRANSFER (5.06%) versus LOW risk users (3.22%), while their CARD failure rate (3.35%) is the lowest across all tiers, indicating risk controls may be misaligned with payment method routing."
+      },
+      {
+        "name": "Data Visibility Gaps Across Critical Domains",
+        "severity": "LOW",
+        "description": "Seven detection missions across security, compliance, risk, and operations returned zero data, creating blind spots for structuring/smurfing, impossible travel, PEP monitoring, concentration risk, bot signatures, and credential stuffing."
+      }
+    ],
+    "immediate_actions": [
+      "Investigate bank transfer failure root cause for high-risk users and adjust risk-based routing rules to reduce false declines.",
+      "Validate risk scoring model calibration for payment method-specific friction and implement method-aware risk thresholds.",
+      "Deploy enhanced telemetry pipelines for structuring/smurfing, impossible travel, PEP monitoring, and credential stuffing detection.",
+      "Implement automated alerts for payment failure rate disparities exceeding 20% across risk tiers and payment methods.",
+      "Conduct data pipeline audit to restore visibility for all seven blind missions and establish data completeness SLAs."
+    ],
+    "monitoring_recommendations": [
+      "Establish real-time dashboards for payment failure rates segmented by risk tier and payment method with automated anomaly detection.",
+      "Schedule weekly data completeness checks across all detection missions with automated alerts on zero-data returns.",
+      "Integrate risk score drift monitoring with model retraining triggers and quarterly calibration reviews."
+    ],
+    "overall_risk": 35,
+    "overall_severity": "MEDIUM",
+    "title": "Intelligence Brief - LIVE"
+  }
+}
