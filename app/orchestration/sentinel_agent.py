@@ -13,10 +13,15 @@ class SentinelBrainstormer:
         )
 
         self.schema_context = """
-        ACTUAL TABLES:
-        - users (user_id, email, full_name, country, phone, date_of_birth, kyc_status, kyc_verified_at, kyc_expiry_date, risk_level, risk_score, is_pep, account_status, created_at, updated_at)
-        - transactions (txn_id, user_id, txn_type, instrument, amount, currency, amount_usd, status, flag_reason, payment_method, external_ref, ip_address, created_at, processed_at)
-        - login_events (event_id, user_id, email_attempted, ip_address, country, city, device_type, device_fingerprint, user_agent, status, failure_reason, created_at)
+        ACTUAL TABLES (Retail Clothing Domain):
+        - products (sku, style_name, category, size, color, unit_cost, retail_price, supplier_id, created_at)
+        - inventory (sku, location, stock_count, reorder_point, last_restocked_at)
+        - suppliers (supplier_id, supplier_name, lead_time_days, on_time_rate, country)
+        - sales_events (event_id, sku, units_sold, sale_date, channel)
+        
+        JOIN KEY: products.sku = inventory.sku = sales_events.sku
+        SUPPLIER JOIN: products.supplier_id = suppliers.supplier_id
+        SKU format: CL-00001 to CL-00120
         """
 
     async def brainstorm_missions(self, count_per_domain=2):
@@ -26,8 +31,7 @@ class SentinelBrainstormer:
         if settings.ADAPTIVE_ENABLED and adaptive["scan_count"] > 0:
             domain_weights = adaptive["domain_weights"]
         else:
-            domain_weights = {"security": count_per_domain, "compliance": count_per_domain,
-                              "risk": count_per_domain, "operations": count_per_domain}
+            domain_weights = {"retail_clothing": count_per_domain * 4}
 
         total_count = sum(domain_weights.values())
 
@@ -39,10 +43,7 @@ class SentinelBrainstormer:
             {schema}
 
             MISSION ALLOCATION BY DOMAIN:
-            - security: {sec_count} missions (threats, fraud, unusual logins, account takeovers)
-            - compliance: {comp_count} missions (regulatory violations, KYC gaps, PEP monitoring, AML)
-            - operations: {ops_count} missions (payment failures, system health, user performance)
-            - risk: {risk_count} missions (high-risk exposure, portfolio imbalances)
+            - retail_clothing: {retail_count} missions (dead stock, sizing anomalies, supplier delays, reorder point breaches)
 
             SCAN INTELLIGENCE (from {scan_count} previous scans):
 
@@ -73,10 +74,7 @@ class SentinelBrainstormer:
         chain = prompt | self.llm
         response = await chain.ainvoke({
             "schema": self.schema_context,
-            "sec_count": domain_weights.get("security", 2),
-            "comp_count": domain_weights.get("compliance", 2),
-            "ops_count": domain_weights.get("operations", 2),
-            "risk_count": domain_weights.get("risk", 2),
+            "retail_count": domain_weights.get("retail_clothing", 8),
             "total_count": total_count,
             "scan_count": adaptive["scan_count"],
             "focus_areas": "\n".join(adaptive["focus_areas"]) or "No previous data. This is the first scan.",

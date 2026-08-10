@@ -46,15 +46,20 @@ def main():
     signal.signal(signal.SIGINT, on_stop)
 
     print("[GeneratorWorker] Starting event generator")
-    generator.start_all(
-        user_interval=user_interval,
-        login_interval=(login_min, login_max),
-        txn_interval=(txn_min, txn_max),
-        kyc_interval=(kyc_min, kyc_max),
-    )
     try:
+        generator.start_all(
+            user_interval=user_interval,
+            login_interval=(login_min, login_max),
+            txn_interval=(txn_min, txn_max),
+            kyc_interval=(kyc_min, kyc_max),
+        )
         while not _shutdown.is_set():
             _shutdown.wait(timeout=1)
+    except Exception as exc:
+        print(f"[GeneratorWorker] Fatal error: {exc}", file=sys.stderr)
+        import traceback
+        traceback.print_exc(file=sys.stderr)
+        sys.exit(1)
     finally:
         generator.stop_all()
     print("[GeneratorWorker] Stopped.")

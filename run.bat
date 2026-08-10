@@ -12,7 +12,10 @@ set SCRIPT_DIR=%~dp0
 cd /d "%SCRIPT_DIR%"
 
 echo [1/3] Checking Python environment...
-if exist "%SCRIPT_DIR%venv\Scripts\python.exe" (
+if exist "%SCRIPT_DIR%.venv\Scripts\python.exe" (
+    echo     [+] Virtual environment detected: .venv
+    set PYTHON_CMD="%SCRIPT_DIR%.venv\Scripts\python.exe"
+) else if exist "%SCRIPT_DIR%venv\Scripts\python.exe" (
     echo     [+] Virtual environment detected: venv
     set PYTHON_CMD="%SCRIPT_DIR%venv\Scripts\python.exe"
 ) else (

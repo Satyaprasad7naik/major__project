@@ -1,0 +1,120 @@
+{
+  "scan_id": "scan-20260810T172321",
+  "timestamp": "2026-08-10T17:23:21.695684",
+  "stats": {
+    "total_missions": 1,
+    "critical_count": 0,
+    "high_count": 0,
+    "overall_risk": 0,
+    "overall_severity": "LOW"
+  },
+  "detections": [
+    {
+      "mission_id": "fall-001",
+      "mission_name": "Basic Security Audit",
+      "domain": "security",
+      "severity": "LOW",
+      "risk_score": 0,
+      "risk_factors": {},
+      "sql": null,
+      "data_count": 0,
+      "results": [],
+      "visualization_config": null,
+      "insight": null,
+      "recommendation": null,
+      "original_query": "Show users with risk_level HIGH and account_status ACTIVE",
+      "depth": 0,
+      "parent_mission_id": null,
+      "rationale": "",
+      "timestamp": "LIVE AUDIT",
+      "logs": [
+        {
+          "ts": 1786382569.92,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [classify_intent]"
+        },
+        {
+          "ts": 1786382569.921,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Starting Intent Classification and Preprocessing in parallel for domain: security"
+        },
+        {
+          "ts": 1786382569.922,
+          "level": "INFO",
+          "node": "INTENT",
+          "msg": "Classifying intent for domain: security | Query: Show users with risk_level HIGH and account_status ACTIVE"
+        },
+        {
+          "ts": 1786382569.984,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM [gemini] using model [gemini-3-flash-preview] generating response..."
+        },
+        {
+          "ts": 1786382574.244,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM response received from [gemini-3-flash-preview]. Snippet: ```json\n{\n  \"intent\": \"SELECT\",\n  \"confidence\": 0...."
+        },
+        {
+          "ts": 1786382574.246,
+          "level": "INFO",
+          "node": "INTENT",
+          "msg": "Classification Result: SELECT (conf: 0.98) | Needs Clarification: True"
+        },
+        {
+          "ts": 1786382574.25,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM [gemini] using model [gemini-3-flash-preview] generating response..."
+        },
+        {
+          "ts": 1786382578.0,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM response received from [gemini-3-flash-preview]. Snippet: {\n  \"resolved_entities\": {\n    \"users.risk_level\":..."
+        },
+        {
+          "ts": 1786382578.002,
+          "level": "INFO",
+          "node": "entity_extractor.py",
+          "msg": "Final Extracted/Resolved Entities: {'users.risk_level': 'HIGH', 'users.account_status': 'ACTIVE'}"
+        },
+        {
+          "ts": 1786382578.017,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Intent classified: SELECT (conf: 0.98) | Needs Clarification: True"
+        },
+        {
+          "ts": 1786382578.024,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM [gemini] using model [gemini-3-flash-preview] generating response..."
+        },
+        {
+          "ts": 1786382593.572,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM response received from [gemini-3-flash-preview]. Snippet: I see you're looking for active users who are curr..."
+        }
+      ]
+    }
+  ],
+  "clusters": [],
+  "narrative": {
+    "title": "Intelligence Brief",
+    "overall_risk": 0,
+    "overall_severity": "LOW",
+    "executive_summary": "Scan completed. Review individual findings for details.",
+    "threat_vectors": [],
+    "immediate_actions": [
+      "Review detection cards for specific findings"
+    ],
+    "monitoring_recommendations": [
+      "Continue scheduled scans"
+    ]
+  }
+}

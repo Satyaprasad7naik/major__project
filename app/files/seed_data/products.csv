@@ -1,0 +1,121 @@
+sku,style_name,category,size,color,unit_cost,retail_price,supplier_id,created_at
+CL-00001,Oxford Shirt,Shirts,XS,Black,6.33,24.99,SUP-006,2025-03-12
+CL-00002,Oxford Shirt,Shirts,S,Black,6.65,24.99,SUP-006,2025-02-05
+CL-00003,Oxford Shirt,Shirts,M,Black,6.66,24.99,SUP-006,2025-06-23
+CL-00004,Oxford Shirt,Shirts,L,Black,6.23,24.99,SUP-006,2025-05-20
+CL-00005,Oxford Shirt,Shirts,XL,Black,6.2,24.99,SUP-006,2025-04-19
+CL-00006,Oxford Shirt,Shirts,XS,Olive,6.32,24.99,SUP-006,2025-01-24
+CL-00007,Oxford Shirt,Shirts,S,Olive,6.57,24.99,SUP-006,2025-05-10
+CL-00008,Oxford Shirt,Shirts,M,Olive,6.3,24.99,SUP-006,2025-05-24
+CL-00009,Oxford Shirt,Shirts,L,Olive,6.63,24.99,SUP-006,2025-06-16
+CL-00010,Oxford Shirt,Shirts,XL,Olive,6.32,24.99,SUP-006,2025-04-18
+CL-00011,Oxford Shirt,Shirts,XS,Navy,6.36,24.99,SUP-006,2025-05-31
+CL-00012,Oxford Shirt,Shirts,S,Navy,6.67,24.99,SUP-006,2025-01-02
+CL-00013,Oxford Shirt,Shirts,M,Navy,6.63,24.99,SUP-006,2025-02-10
+CL-00014,Oxford Shirt,Shirts,L,Navy,6.36,24.99,SUP-006,2025-03-29
+CL-00015,Oxford Shirt,Shirts,XL,Navy,6.8,24.99,SUP-006,2025-02-25
+CL-00016,Classic Polo,T-Shirts,XS,Black,4.14,17.99,SUP-003,2025-01-25
+CL-00017,Classic Polo,T-Shirts,S,Black,4.24,17.99,SUP-003,2025-03-30
+CL-00018,Classic Polo,T-Shirts,M,Black,4.3,17.99,SUP-003,2025-01-12
+CL-00019,Classic Polo,T-Shirts,L,Black,4.04,17.99,SUP-003,2025-05-18
+CL-00020,Classic Polo,T-Shirts,XL,Black,4.02,17.99,SUP-003,2025-04-07
+CL-00021,Classic Polo,T-Shirts,XS,Olive,4.34,17.99,SUP-003,2025-03-17
+CL-00022,Classic Polo,T-Shirts,S,Olive,4.36,17.99,SUP-003,2025-06-08
+CL-00023,Classic Polo,T-Shirts,M,Olive,4.23,17.99,SUP-003,2025-04-03
+CL-00024,Classic Polo,T-Shirts,L,Olive,4.02,17.99,SUP-003,2025-06-30
+CL-00025,Classic Polo,T-Shirts,XL,Olive,4.09,17.99,SUP-003,2025-06-19
+CL-00026,Classic Polo,T-Shirts,XS,White,4.4,17.99,SUP-003,2025-03-16
+CL-00027,Classic Polo,T-Shirts,S,White,4.35,17.99,SUP-003,2025-03-01
+CL-00028,Classic Polo,T-Shirts,M,White,4.11,17.99,SUP-003,2025-04-08
+CL-00029,Classic Polo,T-Shirts,L,White,4.34,17.99,SUP-003,2025-06-12
+CL-00030,Classic Polo,T-Shirts,XL,White,4.15,17.99,SUP-003,2025-02-11
+CL-00031,Slim Fit Jeans,Denim,XS,Navy,9.48,39.99,SUP-002,2025-06-12
+CL-00032,Slim Fit Jeans,Denim,S,Navy,9.55,39.99,SUP-002,2025-07-06
+CL-00033,Slim Fit Jeans,Denim,M,Navy,9.68,39.99,SUP-002,2025-04-29
+CL-00034,Slim Fit Jeans,Denim,L,Navy,9.98,39.99,SUP-002,2025-06-13
+CL-00035,Slim Fit Jeans,Denim,XL,Navy,9.98,39.99,SUP-002,2025-02-26
+CL-00036,Slim Fit Jeans,Denim,XS,Black,10.07,39.99,SUP-002,2025-07-16
+CL-00037,Slim Fit Jeans,Denim,S,Black,10.12,39.99,SUP-002,2025-02-28
+CL-00038,Slim Fit Jeans,Denim,M,Black,9.7,39.99,SUP-002,2025-03-22
+CL-00039,Slim Fit Jeans,Denim,L,Black,9.52,39.99,SUP-002,2025-01-17
+CL-00040,Slim Fit Jeans,Denim,XL,Black,10.17,39.99,SUP-002,2025-05-26
+CL-00041,Slim Fit Jeans,Denim,XS,Olive,9.52,39.99,SUP-002,2025-03-22
+CL-00042,Slim Fit Jeans,Denim,S,Olive,9.7,39.99,SUP-002,2025-05-08
+CL-00043,Slim Fit Jeans,Denim,M,Olive,9.76,39.99,SUP-002,2025-06-14
+CL-00044,Slim Fit Jeans,Denim,L,Olive,9.45,39.99,SUP-002,2025-03-09
+CL-00045,Slim Fit Jeans,Denim,XL,Olive,9.86,39.99,SUP-002,2025-07-10
+CL-00046,Crew Neck Tee,T-Shirts,XS,Olive,2.86,12.99,SUP-003,2025-04-13
+CL-00047,Crew Neck Tee,T-Shirts,S,Olive,2.9,12.99,SUP-003,2025-02-05
+CL-00048,Crew Neck Tee,T-Shirts,M,Olive,2.97,12.99,SUP-003,2025-01-24
+CL-00049,Crew Neck Tee,T-Shirts,L,Olive,2.8,12.99,SUP-003,2025-01-29
+CL-00050,Crew Neck Tee,T-Shirts,XL,Olive,2.98,12.99,SUP-003,2025-02-10
+CL-00051,Crew Neck Tee,T-Shirts,XS,Grey,2.93,12.99,SUP-003,2025-04-19
+CL-00052,Crew Neck Tee,T-Shirts,S,Grey,2.87,12.99,SUP-003,2025-04-09
+CL-00053,Crew Neck Tee,T-Shirts,M,Grey,2.91,12.99,SUP-003,2025-04-30
+CL-00054,Crew Neck Tee,T-Shirts,L,Grey,3.0,12.99,SUP-003,2025-05-22
+CL-00055,Crew Neck Tee,T-Shirts,XL,Grey,2.95,12.99,SUP-003,2025-01-03
+CL-00056,Crew Neck Tee,T-Shirts,XS,Navy,2.95,12.99,SUP-003,2025-01-30
+CL-00057,Crew Neck Tee,T-Shirts,S,Navy,2.97,12.99,SUP-003,2025-05-18
+CL-00058,Crew Neck Tee,T-Shirts,M,Navy,2.94,12.99,SUP-003,2025-07-16
+CL-00059,Crew Neck Tee,T-Shirts,L,Navy,2.84,12.99,SUP-003,2025-01-29
+CL-00060,Crew Neck Tee,T-Shirts,XL,Navy,2.89,12.99,SUP-003,2025-02-10
+CL-00061,Wool Blend Blazer,Outerwear,XS,Navy,22.82,89.99,SUP-006,2025-01-28
+CL-00062,Wool Blend Blazer,Outerwear,S,Navy,22.75,89.99,SUP-006,2025-03-18
+CL-00063,Wool Blend Blazer,Outerwear,M,Navy,22.24,89.99,SUP-006,2025-05-10
+CL-00064,Wool Blend Blazer,Outerwear,L,Navy,21.72,89.99,SUP-006,2025-02-09
+CL-00065,Wool Blend Blazer,Outerwear,XL,Navy,22.09,89.99,SUP-006,2025-02-11
+CL-00066,Wool Blend Blazer,Outerwear,XS,White,22.93,89.99,SUP-006,2025-07-19
+CL-00067,Wool Blend Blazer,Outerwear,S,White,22.22,89.99,SUP-006,2025-01-01
+CL-00068,Wool Blend Blazer,Outerwear,M,White,20.94,89.99,SUP-006,2025-05-06
+CL-00069,Wool Blend Blazer,Outerwear,L,White,22.83,89.99,SUP-006,2025-04-03
+CL-00070,Wool Blend Blazer,Outerwear,XL,White,21.43,89.99,SUP-006,2025-03-20
+CL-00071,Wool Blend Blazer,Outerwear,XS,Olive,22.83,89.99,SUP-006,2025-03-03
+CL-00072,Wool Blend Blazer,Outerwear,S,Olive,21.09,89.99,SUP-006,2025-01-21
+CL-00073,Wool Blend Blazer,Outerwear,M,Olive,22.7,89.99,SUP-006,2025-05-05
+CL-00074,Wool Blend Blazer,Outerwear,L,Olive,22.07,89.99,SUP-006,2025-07-14
+CL-00075,Wool Blend Blazer,Outerwear,XL,Olive,21.18,89.99,SUP-006,2025-02-02
+CL-00076,Summer Linen Dress,Dresses,XS,Olive,8.71,34.99,SUP-004,2025-05-16
+CL-00077,Summer Linen Dress,Dresses,S,Olive,8.79,34.99,SUP-004,2025-04-19
+CL-00078,Summer Linen Dress,Dresses,M,Olive,8.61,34.99,SUP-004,2025-05-19
+CL-00079,Summer Linen Dress,Dresses,L,Olive,8.15,34.99,SUP-004,2025-06-26
+CL-00080,Summer Linen Dress,Dresses,XL,Olive,8.32,34.99,SUP-004,2025-03-21
+CL-00081,Summer Linen Dress,Dresses,XS,White,8.53,34.99,SUP-004,2025-06-21
+CL-00082,Summer Linen Dress,Dresses,S,White,8.74,34.99,SUP-004,2025-04-23
+CL-00083,Summer Linen Dress,Dresses,M,White,8.08,34.99,SUP-004,2025-04-26
+CL-00084,Summer Linen Dress,Dresses,L,White,8.03,34.99,SUP-004,2025-02-27
+CL-00085,Summer Linen Dress,Dresses,XL,White,8.47,34.99,SUP-004,2025-01-06
+CL-00086,Summer Linen Dress,Dresses,XS,Grey,8.47,34.99,SUP-004,2025-02-28
+CL-00087,Summer Linen Dress,Dresses,S,Grey,8.04,34.99,SUP-004,2025-01-02
+CL-00088,Summer Linen Dress,Dresses,M,Grey,8.03,34.99,SUP-004,2025-06-11
+CL-00089,Summer Linen Dress,Dresses,L,Grey,8.74,34.99,SUP-004,2025-01-18
+CL-00090,Summer Linen Dress,Dresses,XL,Grey,8.04,34.99,SUP-004,2025-03-26
+CL-00091,Zip Hoodie,Outerwear,XS,Navy,6.84,29.99,SUP-002,2025-05-19
+CL-00092,Zip Hoodie,Outerwear,S,Navy,7.15,29.99,SUP-002,2025-05-27
+CL-00093,Zip Hoodie,Outerwear,M,Navy,7.3,29.99,SUP-002,2025-03-04
+CL-00094,Zip Hoodie,Outerwear,L,Navy,6.88,29.99,SUP-002,2025-04-15
+CL-00095,Zip Hoodie,Outerwear,XL,Navy,7.21,29.99,SUP-002,2025-01-25
+CL-00096,Zip Hoodie,Outerwear,XS,Grey,7.05,29.99,SUP-002,2025-04-01
+CL-00097,Zip Hoodie,Outerwear,S,Grey,7.36,29.99,SUP-002,2025-04-30
+CL-00098,Zip Hoodie,Outerwear,M,Grey,7.22,29.99,SUP-002,2025-01-14
+CL-00099,Zip Hoodie,Outerwear,L,Grey,6.81,29.99,SUP-002,2025-06-15
+CL-00100,Zip Hoodie,Outerwear,XL,Grey,7.26,29.99,SUP-002,2025-04-14
+CL-00101,Zip Hoodie,Outerwear,XS,Black,6.92,29.99,SUP-002,2025-01-28
+CL-00102,Zip Hoodie,Outerwear,S,Black,7.13,29.99,SUP-002,2025-02-18
+CL-00103,Zip Hoodie,Outerwear,M,Black,7.04,29.99,SUP-002,2025-02-05
+CL-00104,Zip Hoodie,Outerwear,L,Black,7.07,29.99,SUP-002,2025-03-13
+CL-00105,Zip Hoodie,Outerwear,XL,Black,7.06,29.99,SUP-002,2025-01-20
+CL-00106,Pleated Trousers,Trousers,XS,Black,7.13,27.99,SUP-005,2025-05-19
+CL-00107,Pleated Trousers,Trousers,S,Black,7.19,27.99,SUP-005,2025-01-24
+CL-00108,Pleated Trousers,Trousers,M,Black,6.67,27.99,SUP-005,2025-03-02
+CL-00109,Pleated Trousers,Trousers,L,Black,6.89,27.99,SUP-005,2025-05-05
+CL-00110,Pleated Trousers,Trousers,XL,Black,7.18,27.99,SUP-005,2025-04-13
+CL-00111,Pleated Trousers,Trousers,XS,Olive,6.82,27.99,SUP-005,2025-02-12
+CL-00112,Pleated Trousers,Trousers,S,Olive,6.74,27.99,SUP-005,2025-04-10
+CL-00113,Pleated Trousers,Trousers,M,Olive,7.1,27.99,SUP-005,2025-07-20
+CL-00114,Pleated Trousers,Trousers,L,Olive,6.85,27.99,SUP-005,2025-03-15
+CL-00115,Pleated Trousers,Trousers,XL,Olive,7.24,27.99,SUP-005,2025-07-07
+CL-00116,Pleated Trousers,Trousers,XS,Navy,7.01,27.99,SUP-005,2025-05-23
+CL-00117,Pleated Trousers,Trousers,S,Navy,6.66,27.99,SUP-005,2025-05-05
+CL-00118,Pleated Trousers,Trousers,M,Navy,6.71,27.99,SUP-005,2025-03-17
+CL-00119,Pleated Trousers,Trousers,L,Navy,6.95,27.99,SUP-005,2025-01-15
+CL-00120,Pleated Trousers,Trousers,XL,Navy,6.6,27.99,SUP-005,2025-05-19

@@ -1,0 +1,7 @@
+supplier_id,supplier_name,lead_time_days,on_time_rate,country
+SUP-001,Bangalore Textile Mills,12,0.94,India
+SUP-002,Guangzhou Apparel Co.,25,0.81,China
+SUP-003,Istanbul Weave House,18,0.88,Turkey
+SUP-004,Dhaka Garment Works,30,0.72,Bangladesh
+SUP-005,Ho Chi Minh Stitch Co.,20,0.9,Vietnam
+SUP-006,Tirupur Knitwear Ltd.,10,0.96,India

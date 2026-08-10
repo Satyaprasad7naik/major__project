@@ -1,0 +1,22 @@
+{
+  "_last_touched": 1786382601.6606207,
+  "history": [
+    {
+      "timestamp": "2026-08-10T17:23:21.660539",
+      "missions": [
+        {
+          "name": "Basic Security Audit",
+          "query": "Show users with risk_level HIGH and account_status ACTIVE",
+          "domain": "security",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        }
+      ],
+      "domain_scores": {
+        "security": 0
+      },
+      "critical_domains": []
+    }
+  ]
+}
