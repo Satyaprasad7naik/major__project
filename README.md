@@ -1,4 +1,4 @@
-# 🦅 InsightOS: Autonomous Retail Decision Engine & Custom AI Intelligence
+# Mixo: Autonomous Retail Decision Engine & Custom AI Intelligence
 
 [![Demo Verification](https://img.shields.io/badge/Demo-Verified_100%25-brightgreen.svg)]()
 [![Custom AI](https://img.shields.io/badge/AI_Engine-Custom_Trained_Models-blue.svg)]()
