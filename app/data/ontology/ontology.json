@@ -1,0 +1,314 @@
+{
+  "version": "1.0",
+  "description": "Simple ontology for query expansion across domains",
+  "domains": {
+    "retail_clothing": {
+      "categories": {
+        "Shirts": {
+          "parent": "Apparel",
+          "properties": {
+            "is_perishable": false,
+            "needs_cold_storage": false,
+            "seasonal": true,
+            "fabric_types": ["cotton", "polyester", "denim"]
+          }
+        },
+        "T-Shirts": {
+          "parent": "Apparel",
+          "properties": {
+            "is_perishable": false,
+            "needs_cold_storage": false,
+            "seasonal": true,
+            "fabric_types": ["cotton", "blend"]
+          }
+        },
+        "Denim": {
+          "parent": "Apparel",
+          "properties": {
+            "is_perishable": false,
+            "needs_cold_storage": false,
+            "seasonal": false,
+            "fabric_types": ["denim"]
+          }
+        },
+        "Dresses": {
+          "parent": "Apparel",
+          "properties": {
+            "is_perishable": false,
+            "needs_cold_storage": false,
+            "seasonal": true,
+            "fabric_types": ["chiffon", "cotton", "knit"]
+          }
+        },
+        "Trousers": {
+          "parent": "Apparel",
+          "properties": {
+            "is_perishable": false,
+            "needs_cold_storage": false,
+            "seasonal": false,
+            "fabric_types": ["denim", "cotton", "wool"]
+          }
+        },
+        "Outerwear": {
+          "parent": "Apparel",
+          "properties": {
+            "is_perishable": false,
+            "needs_cold_storage": false,
+            "seasonal": true,
+            "fabric_types": ["wool", "leather", "cotton"]
+          }
+        }
+      },
+      "properties": {
+        "is_perishable": {
+          "type": "boolean",
+          "description": "Item requires cold storage or special handling"
+        },
+        "needs_cold_storage": {
+          "type": "boolean",
+          "description": "Requires refrigerated storage or transport"
+        },
+        "seasonal": {
+          "type": "boolean",
+          "description": "Demand varies by season/time of year"
+        },
+        "fabric_types": {
+          "type": "array",
+          "description": "List of common fabric compositions"
+        }
+      },
+      "synonyms": {
+        "tops": ["Shirts", "T-Shirts", "Dresses", "Blouses"],
+        "bottoms": ["Trousers", "Jeans", "Denim", "Shorts"],
+        "apparel": ["Shirts", "T-Shirts", "Dresses", "Trousers", "Denim", "Outerwear"],
+        "warm clothes": ["Outerwear", "Sweaters", "Jackets"],
+        "summer wear": ["T-Shirts", "Shorts", "Dresses", "Skirts"],
+        "winter wear": ["Outerwear", "Sweaters", "Jackets", "Denim"],
+        "perishable items": ["Dairy", "Bakery", "Produce"],
+        "cold storage items": ["Dairy", "Produce"]
+      }
+    },
+
+    "grocery": {
+      "categories": {
+        "Dairy": {
+          "parent": "Perishables",
+          "properties": {
+            "is_perishable": true,
+            "needs_cold_storage": true,
+            "shelf_life_days": 21,
+            "types": ["milk", "cheese", "yogurt", "butter"]
+          }
+        },
+        "Bakery": {
+          "parent": "Perishables",
+          "properties": {
+            "is_perishable": true,
+            "needs_cold_storage": false,
+            "shelf_life_days": 7,
+            "types": ["bread", "rolls", "cakes", "pastries"]
+          }
+        },
+        "Produce": {
+          "parent": "Perishables",
+          "properties": {
+            "is_perishable": true,
+            "needs_cold_storage": true,
+            "shelf_life_days": 14,
+            "types": ["apples", "bananas", "carrots", "lettuce"]
+          }
+        },
+        "Meat": {
+          "parent": "Perishables",
+          "properties": {
+            "is_perishable": true,
+            "needs_cold_storage": true,
+            "shelf_life_days": 7,
+            "types": ["beef", "chicken", "pork", "fish"]
+          }
+        },
+        "Canned Goods": {
+          "parent": "Shelf Stable",
+          "properties": {
+            "is_perishable": false,
+            "needs_cold_storage": false,
+            "shelf_life_days": 365,
+            "types": ["beans", "soup", "tomatoes", "fruits"]
+          }
+        },
+        "Dry Goods": {
+          "parent": "Shelf Stable",
+          "properties": {
+            "is_perishable": false,
+            "needs_cold_storage": false,
+            "shelf_life_days": 180,
+            "types": ["rice", "pasta", "cereal", "spices"]
+          }
+        }
+      },
+      "properties": {
+        "is_perishable": {
+          "type": "boolean",
+          "description": "Item requires cold storage or special handling"
+        },
+        "needs_cold_storage": {
+          "type": "boolean",
+          "description": "Requires refrigerated storage or transport"
+        },
+        "shelf_life_days": {
+          "type": "integer",
+          "description": "Expected shelf life in days unopened"
+        },
+        "types": {
+          "type": "array",
+          "description": "List of product type categories"
+        }
+      },
+      "synonyms": {
+        "perishable items": ["Dairy", "Bakery", "Produce", "Meat"],
+        "cold storage items": ["Dairy", "Produce", "Meat"],
+        "shelf stable": ["Canned Goods", "Dry Goods"],
+        "groceries": ["Dairy", "Bakery", "Produce", "Meat", "Canned Goods", "Dry Goods"],
+        "dairy products": ["Milk", "Cheese", "Yogurt", "Butter"],
+        " fresh produce": ["Apples", "Bananas", "Carrots", "Lettuce"]
+      }
+    },
+
+    "banking_finance": {
+      "categories": {
+        "Personal Banking": {
+          "parent": "Financial Services",
+          "properties": {
+            "account_types": ["checking", "savings", "CD", "money market"],
+            "customer_tiers": ["basic", "premium", "gold", "platinum"]
+          }
+        },
+        "Business Banking": {
+          "parent": "Financial Services",
+          "properties": {
+            "account_types": ["checking", "savings", "merchant services", "credit lines"],
+            "business_types": ["small", "medium", "enterprise"]
+          }
+        },
+        "Investment Services": {
+          "parent": "Financial Services",
+          "properties": {
+            "product_types": ["stocks", "bonds", "mutual funds", "retirement"],
+            "risk_levels": ["conservative", "moderate", "aggressive"]
+          }
+        },
+        "Insurance": {
+          "parent": "Financial Services",
+          "properties": {
+            "product_types": ["life", "health", "property", "auto"],
+            "coverage_levels": ["basic", "comprehensive", "premium"]
+          }
+        },
+        "Loans": {
+          "parent": "Financial Services",
+          "properties": {
+            "loan_types": ["personal", "mortgage", "auto", "business"],
+            "interest_rate_types": ["fixed", "variable"]
+          }
+        }
+      },
+      "properties": {
+        "account_types": {
+          "type": "array",
+          "description": "Types of accounts offered"
+        },
+        "customer_tiers": {
+          "type": "array",
+          "description": "Customer segmentation levels"
+        },
+        "product_types": {
+          "type": "array",
+          "description": "Types of financial products"
+        },
+        "risk_levels": {
+          "type": "array",
+          "description": "Risk level classifications"
+        }
+      },
+      "synonyms": {
+        "financial services": ["Personal Banking", "Business Banking", "Investment Services", "Insurance", "Loans"],
+        "banking": ["Personal Banking", "Business Banking"],
+        "investments": ["Investment Services"],
+        "insurance coverage": ["Insurance"],
+        "loan products": ["Loans"],
+        "savings accounts": ["Personal Banking -> checking", "Personal Banking -> savings"]
+      }
+    },
+
+    "insurance": {
+      "categories": {
+        "Life Insurance": {
+          "parent": "Insurance Products",
+          "properties": {
+            "policy_types": ["term", "whole", "universal", "variable"],
+            "coverage_amounts": ["$50k", "$100k", "$500k", "$1M+"],
+            "premium_payment": ["monthly", "quarterly", "annual"]
+          }
+        },
+        "Health Insurance": {
+          "parent": "Insurance Products",
+          "properties": {
+            "policy_types": ["individual", "family", "group"],
+            "metal_levels": ["bronze", "silver", "gold", "platinum"],
+            "network_types": ["HMO", "PPO", "EPO", "POS"]
+          }
+        },
+        "Property Insurance": {
+          "parent": "Insurance Products",
+          "properties": {
+            "property_types": ["home", "renters", "condo", "commercial"],
+            "coverage_amounts": ["market value", "actual cash value"],
+            "deductible_options": ["$500", "$1k", "$2.5k", "$5k"]
+          }
+        },
+        "Auto Insurance": {
+          "parent": "Insurance Products",
+          "properties": {
+            "policy_types": ["liability", "collision", "comprehensive"],
+            "driver_types": ["primary", "secondary", "commercial"],
+            "vehicle_types": ["car", "truck", "SUV", "motorcycle"]
+          }
+        },
+        "Claims": {
+          "parent": "Insurance Operations",
+          "properties": {
+            "claim_types": ["first party", "third party"],
+            "statuses": ["open", "pending", "closed", "settled"],
+            "complexity_levels": ["simple", "moderate", "complex"]
+          }
+        }
+      },
+      "properties": {
+        "policy_types": {
+          "type": "array",
+          "description": "Types of insurance policies offered"
+        },
+        "metal_levels": {
+          "type": "array",
+          "description": "ACA metal level classifications"
+        },
+        "claim_statuses": {
+          "type": "array",
+          "description": "Possible claim status values"
+        },
+        "complexity_levels": {
+          "type": "array",
+          "description": "Claim complexity classifications"
+        }
+      },
+      "synonyms": {
+        "insurance products": ["Life Insurance", "Health Insurance", "Property Insurance", "Auto Insurance"],
+        "coverage": ["Life Insurance", "Health Insurance", "Property Insurance", "Auto Insurance"],
+        "insurance policies": ["Life Insurance", "Health Insurance", "Property Insurance", "Auto Insurance"],
+        "claims process": ["Claims"],
+        "first party claim": ["Claims -> first party"],
+        "third party claim": ["Claims -> third party"]
+      }
+    }
+  }
+}

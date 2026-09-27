@@ -24,7 +24,7 @@ class LLMService:
             self.client = openai.AsyncOpenAI(
                 api_key=settings.QUBRID_API_KEY,
                 base_url=settings.QUBRID_BASE_URL,
-                timeout=20.0
+                timeout=60.0
             )
             self.provider = "qubrid"
             self.model_name = getattr(settings, "QUBRID_MODEL_NAME", "meta-llama/Llama-3.3-70B-Instruct")
@@ -35,10 +35,10 @@ class LLMService:
             self.client = openai.AsyncOpenAI(
                 api_key=settings.OPENAI_API_KEY,
                 base_url=settings.OPENAI_BASE_URL,
-                timeout=20.0
+                timeout=15.0
             )
             self.provider = "openai"
-            self.model_name = getattr(settings, "OPENAI_MODEL_NAME", "gpt-4o-mini")
+            self.model_name = getattr(settings, "OPENAI_MODEL_NAME", "meta/llama-3.1-8b-instruct")
             logger.info(f"LLM Service initialized with OpenAI provider, model: {self.model_name}")
         elif getattr(settings, "GEMINI_API_KEY", None):
             if genai is None:
@@ -61,6 +61,7 @@ class LLMService:
             print("Warning: No LLM API key found in settings.")
             self.provider = None
             self.model = None
+            self.model_name = getattr(settings, "GEMINI_MODEL_NAME", "gemini-2.5-flash-lite")
 
     async def _call_openai_compatible(self, prompt: str, model_override: str = None) -> str:
         """Call OpenAI-compatible ChatCompletion (works for OpenAI, Ollama, Qubrid, etc.)."""
@@ -68,6 +69,7 @@ class LLMService:
             model=model_override or self.model_name,
             messages=[{"role": "user", "content": prompt}],
             temperature=0.0,
+            max_tokens=400,
             stream=False,
         )
         return response.choices[0].message.content
@@ -80,9 +82,9 @@ class LLMService:
         selected_model = model_name or self.model_name
         logger.info(f"LLM [{self.provider}] using model [{selected_model}] generating response...")
         
-        # Retry logic for rate-limit (429/503) – up to 5 attempts
+        # Retry logic for rate-limit (429/503) – up to 2 attempts
         attempts = 0
-        while attempts < 5:
+        while attempts < 2:
             try:
                 if self.provider in ("openai", "qubrid"):
                     res = await self._call_openai_compatible(prompt, model_override=selected_model)
@@ -124,3 +126,35 @@ class LLMService:
         return "Error: LLM service rate limit exceeded after multiple retries."
 
 llm_service = LLMService()
+
+
+def get_langchain_llm(temperature: float = 0.7, model_name: str = None):
+    selected_model = model_name or getattr(settings, "OPENAI_MODEL_NAME", "meta/llama-3.1-8b-instruct")
+    if getattr(settings, "OPENAI_API_KEY", None):
+        from langchain_openai import ChatOpenAI
+        kwargs = {
+            "model": selected_model,
+            "api_key": settings.OPENAI_API_KEY,
+            "temperature": temperature,
+        }
+        if settings.OPENAI_BASE_URL:
+            kwargs["base_url"] = settings.OPENAI_BASE_URL
+        return ChatOpenAI(**kwargs)
+    elif getattr(settings, "GEMINI_API_KEY", None):
+        from langchain_google_genai import ChatGoogleGenerativeAI
+        return ChatGoogleGenerativeAI(
+            model=settings.GEMINI_MODEL_NAME,
+            google_api_key=settings.GEMINI_API_KEY,
+            temperature=temperature,
+        )
+    else:
+        from langchain_openai import ChatOpenAI
+        kwargs = {
+            "model": selected_model,
+            "api_key": settings.OPENAI_API_KEY or "dummy",
+            "temperature": temperature,
+        }
+        if settings.OPENAI_BASE_URL:
+            kwargs["base_url"] = settings.OPENAI_BASE_URL
+        return ChatOpenAI(**kwargs)
+

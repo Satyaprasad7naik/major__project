@@ -1,0 +1,78 @@
+{
+  "_last_touched": 1787594859.1533387,
+  "history": [
+    {
+      "timestamp": "2026-08-24T18:07:39.153311",
+      "missions": [
+        {
+          "name": "Dead Stock Detection",
+          "query": "Identify products with stock count greater than 120 days old in the inventory table.",
+          "domain": "retail_clothing",
+          "risk_score": 47,
+          "severity": "MEDIUM",
+          "data_count": 39
+        },
+        {
+          "name": "Sizing Anomalies",
+          "query": "Find products where the size range is greater than 20% of the total stock count across all sizes.",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        },
+        {
+          "name": "Supplier Delay Analysis",
+          "query": "Identify suppliers with an average lead time greater than 30 days and less than 90% on-time rate over the past 6 months.",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        },
+        {
+          "name": "Reorder Point Breaches",
+          "query": "Find products where the stock count has fallen below the reorder point and the last restocked date is more than 60 days ago.",
+          "domain": "retail_clothing",
+          "risk_score": 31,
+          "severity": "MEDIUM",
+          "data_count": 10
+        },
+        {
+          "name": "Low-Margin Products",
+          "query": "Identify products with a retail price less than 150% of the unit cost and more than 10 units sold in the past month.",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        },
+        {
+          "name": "Channel-Specific Sales",
+          "query": "Find sales events where the channel is 'online' and the units sold are more than 50% of the total units sold for the product in the past quarter.",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        },
+        {
+          "name": "Supplier Concentration Risk",
+          "query": "Identify suppliers with more than 30% of the total products and an average lead time greater than 20 days.",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        },
+        {
+          "name": "Seasonal Demand Analysis",
+          "query": "Find products with a sales volume greater than 80% of the total sales for the product in the past year and a seasonality coefficient greater than 1.5.",
+          "domain": "retail_clothing",
+          "risk_score": 39,
+          "severity": "MEDIUM",
+          "data_count": 90
+        }
+      ],
+      "domain_scores": {
+        "retail_clothing": 15
+      },
+      "critical_domains": []
+    }
+  ]
+}

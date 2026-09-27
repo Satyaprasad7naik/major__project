@@ -1,0 +1,26 @@
+{
+  "domain": "insurance",
+  "description": "Configuration for Insurance Claims, Risk Alerts, Compliance Violations, Policy Audit Logs, and Security Monitoring",
+  "schema_context": "ACTUAL TABLES:\n- alerts (alert_id, rule_name, rule_id, user_id, txn_id, severity, status, details, assigned_to, resolved_at, resolution_notes, created_at)\n- alert_rules (rule_id, rule_name, rule_type, condition, severity, is_active, created_at)\n- login_events (event_id, user_id, email_attempted, ip_address, country, city, device_type, device_fingerprint, user_agent, status, failure_reason, created_at)\n- audit_logs (log_id, actor_id, action, resource_type, resource_id, query_text, ip_address, created_at)",
+  "prompts": {
+    "intent": "You are an AI assistant for Insurance & Risk Compliance.\nYour task is to classify the user's intent.\n\nACTUAL TABLES & COLUMNS:\n- alerts (alert_id, rule_name, rule_id, user_id, txn_id, severity, status, details, created_at)\n- alert_rules (rule_id, rule_name, rule_type, condition, severity, is_active)\n- login_events (event_id, user_id, email_attempted, ip_address, country, status, failure_reason, created_at)\n- audit_logs (log_id, actor_id, action, resource_type, resource_id, created_at)\n\nIf the user asks for incidents, high severity alerts, compliance violations, failed login attempts, or audit logs, classify it as SELECT and set needs_clarification to false.\n\nOutput JSON only.",
+    "sql": "You are a strict SQLite expert for Insurance & Compliance.\nACTUAL TABLES:\n- alerts (alert_id, rule_name, rule_id, user_id, txn_id, severity, status, details, assigned_to, resolved_at, resolution_notes, created_at)\n- alert_rules (rule_id, rule_name, rule_type, condition, severity, is_active, created_at)\n- login_events (event_id, user_id, email_attempted, ip_address, country, city, device_type, device_fingerprint, user_agent, status, failure_reason, created_at)\n- audit_logs (log_id, actor_id, action, resource_type, resource_id, query_text, ip_address, created_at)\n\nRULES:\n1. ONLY use tables: alerts, alert_rules, login_events, audit_logs.\n2. JOIN alerts and alert_rules on rule_id.\n3. Failed logins can be queried from login_events where status != 'SUCCESS'.\n4. Use UPPER() and LIKE with % for string comparisons.\n5. DATE FILTERING: SQLite only. Use date('now', '-30 days') or datetime() modifiers."
+  },
+  "few_shots": [
+    {
+      "question": "Show me all high severity incidents",
+      "sql": "SELECT a.alert_id, a.rule_name, a.severity, a.status, a.details, a.created_at FROM alerts a JOIN alert_rules ar ON a.rule_id = ar.rule_id WHERE UPPER(ar.severity) = 'HIGH';",
+      "explanation": "Returns all security and compliance alerts triggered by HIGH severity rules."
+    },
+    {
+      "question": "What are the compliance violations in the last 30 days?",
+      "sql": "SELECT alert_id, rule_name, severity, status, details, created_at FROM alerts WHERE created_at >= date('now', '-30 days') ORDER BY created_at DESC;",
+      "explanation": "Fetches recent compliance and risk alerts in the trailing 30 days."
+    },
+    {
+      "question": "Show all email IDs with failed login attempts",
+      "sql": "SELECT DISTINCT email_attempted, count(*) AS failure_count FROM login_events WHERE UPPER(status) = 'FAILED' GROUP BY email_attempted ORDER BY failure_count DESC;",
+      "explanation": "Aggregates failed authentication attempts by email address."
+    }
+  ]
+}

@@ -1,0 +1,1250 @@
+{
+  "scan_id": "scan-20260923T184615",
+  "timestamp": "2026-09-23T18:46:15.255207",
+  "stats": {
+    "total_missions": 10,
+    "critical_count": 0,
+    "high_count": 0,
+    "overall_risk": 39,
+    "overall_severity": "LOW"
+  },
+  "detections": [
+    {
+      "mission_id": "ms-1",
+      "mission_name": "Supplier Lead Time Variance",
+      "domain": "retail_clothing",
+      "severity": "LOW",
+      "risk_score": 0,
+      "risk_factors": {},
+      "sql": null,
+      "data_count": 0,
+      "results": [],
+      "visualization_config": null,
+      "insight": null,
+      "recommendation": null,
+      "original_query": "Which suppliers have a lead time variance greater than 20% compared to the average lead time across all suppliers?",
+      "depth": 0,
+      "parent_mission_id": null,
+      "rationale": "",
+      "timestamp": "LIVE AUDIT",
+      "logs": [
+        {
+          "ts": 1790189164.964,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [classify_intent]"
+        },
+        {
+          "ts": 1790189164.965,
+          "level": "INFO",
+          "node": "INTENT",
+          "msg": "[IntentModule] Using Custom ML Intent Classifier for query: 'Which suppliers have a lead time variance greater than 20% compared to the average lead time across all suppliers?'"
+        },
+        {
+          "ts": 1790189164.967,
+          "level": "INFO",
+          "node": "model.py",
+          "msg": "[IntentClassifier] ML prediction: general_query (conf: 0.251) -> workflow: SELECT"
+        },
+        {
+          "ts": 1790189164.967,
+          "level": "INFO",
+          "node": "intent_service.py",
+          "msg": "[IntentService] Custom model result: retail=general_query, workflow=SELECT, conf=0.251, complexity=Complex, clarify=True"
+        },
+        {
+          "ts": 1790189165.197,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Intent classified: SELECT (conf: 0.2507199756609332) | Needs Clarification: True"
+        }
+      ]
+    },
+    {
+      "mission_id": "ms-2",
+      "mission_name": "Product Size Distribution Across Suppliers",
+      "domain": "retail_clothing",
+      "severity": "LOW",
+      "risk_score": 0,
+      "risk_factors": {},
+      "sql": null,
+      "data_count": 0,
+      "results": [],
+      "visualization_config": null,
+      "insight": null,
+      "recommendation": null,
+      "original_query": "For each product style, calculate the distribution of sizes across different suppliers, and identify styles with an uneven distribution of sizes (e.g., one supplier dominates the market for a particular size)",
+      "depth": 0,
+      "parent_mission_id": null,
+      "rationale": "",
+      "timestamp": "LIVE AUDIT",
+      "logs": [
+        {
+          "ts": 1790189164.967,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [classify_intent]"
+        },
+        {
+          "ts": 1790189164.967,
+          "level": "INFO",
+          "node": "INTENT",
+          "msg": "[IntentModule] Using Custom ML Intent Classifier for query: 'For each product style, calculate the distribution of sizes across different suppliers, and identify styles with an uneven distribution of sizes (e.g., one supplier dominates the market for a particular size)'"
+        },
+        {
+          "ts": 1790189164.97,
+          "level": "INFO",
+          "node": "model.py",
+          "msg": "[IntentClassifier] ML prediction: sales_analysis (conf: 0.217) -> workflow: SELECT"
+        },
+        {
+          "ts": 1790189164.97,
+          "level": "INFO",
+          "node": "intent_service.py",
+          "msg": "[IntentService] Custom model result: retail=sales_analysis, workflow=SELECT, conf=0.217, complexity=Complex, clarify=True"
+        },
+        {
+          "ts": 1790189165.198,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Intent classified: SELECT (conf: 0.21735062289708904) | Needs Clarification: True"
+        }
+      ]
+    },
+    {
+      "mission_id": "ms-3",
+      "mission_name": "Reorder Point Optimization",
+      "domain": "retail_clothing",
+      "severity": "LOW",
+      "risk_score": 0,
+      "risk_factors": {},
+      "sql": null,
+      "data_count": 0,
+      "results": [],
+      "visualization_config": null,
+      "insight": null,
+      "recommendation": null,
+      "original_query": "Analyze the sales history and inventory levels for each product to identify optimal reorder points that minimize stockouts and overstocking",
+      "depth": 0,
+      "parent_mission_id": null,
+      "rationale": "",
+      "timestamp": "LIVE AUDIT",
+      "logs": [
+        {
+          "ts": 1790189164.971,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [classify_intent]"
+        },
+        {
+          "ts": 1790189164.971,
+          "level": "INFO",
+          "node": "INTENT",
+          "msg": "[IntentModule] Using Custom ML Intent Classifier for query: 'Analyze the sales history and inventory levels for each product to identify optimal reorder points that minimize stockouts and overstocking'"
+        },
+        {
+          "ts": 1790189164.977,
+          "level": "INFO",
+          "node": "model.py",
+          "msg": "[IntentClassifier] ML prediction: inventory_status (conf: 0.271) -> workflow: SELECT"
+        },
+        {
+          "ts": 1790189164.981,
+          "level": "INFO",
+          "node": "intent_service.py",
+          "msg": "[IntentService] Custom model result: retail=inventory_status, workflow=SELECT, conf=0.271, complexity=Complex, clarify=True"
+        },
+        {
+          "ts": 1790189165.198,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Intent classified: SELECT (conf: 0.27100398864117836) | Needs Clarification: True"
+        }
+      ]
+    },
+    {
+      "mission_id": "ms-4",
+      "mission_name": "Supplier On-Time Delivery Rate Trend",
+      "domain": "retail_clothing",
+      "severity": "LOW",
+      "risk_score": 0,
+      "risk_factors": {},
+      "sql": null,
+      "data_count": 0,
+      "results": [],
+      "visualization_config": null,
+      "insight": null,
+      "recommendation": null,
+      "original_query": "Plot the on-time delivery rate trend for each supplier over the past year to identify any significant changes or anomalies",
+      "depth": 0,
+      "parent_mission_id": null,
+      "rationale": "",
+      "timestamp": "LIVE AUDIT",
+      "logs": [
+        {
+          "ts": 1790189164.981,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [classify_intent]"
+        },
+        {
+          "ts": 1790189164.981,
+          "level": "INFO",
+          "node": "INTENT",
+          "msg": "[IntentModule] Using Custom ML Intent Classifier for query: 'Plot the on-time delivery rate trend for each supplier over the past year to identify any significant changes or anomalies'"
+        },
+        {
+          "ts": 1790189164.984,
+          "level": "INFO",
+          "node": "model.py",
+          "msg": "[IntentClassifier] ML prediction: general_query (conf: 0.270) -> workflow: SELECT"
+        },
+        {
+          "ts": 1790189164.984,
+          "level": "INFO",
+          "node": "intent_service.py",
+          "msg": "[IntentService] Custom model result: retail=general_query, workflow=SELECT, conf=0.270, complexity=Complex, clarify=True"
+        },
+        {
+          "ts": 1790189165.198,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Intent classified: SELECT (conf: 0.2699505693597381) | Needs Clarification: True"
+        }
+      ]
+    },
+    {
+      "mission_id": "ms-5",
+      "mission_name": "Product Seasonality Analysis",
+      "domain": "retail_clothing",
+      "severity": "LOW",
+      "risk_score": 0,
+      "risk_factors": {},
+      "sql": null,
+      "data_count": 0,
+      "results": [],
+      "visualization_config": null,
+      "insight": null,
+      "recommendation": null,
+      "original_query": "Analyze the sales history for each product to identify any seasonality patterns, and calculate the average sales volume for each product during peak and off-peak seasons",
+      "depth": 0,
+      "parent_mission_id": null,
+      "rationale": "",
+      "timestamp": "LIVE AUDIT",
+      "logs": [
+        {
+          "ts": 1790189164.984,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [classify_intent]"
+        },
+        {
+          "ts": 1790189164.985,
+          "level": "INFO",
+          "node": "INTENT",
+          "msg": "[IntentModule] Using Custom ML Intent Classifier for query: 'Analyze the sales history for each product to identify any seasonality patterns, and calculate the average sales volume for each product during peak and off-peak seasons'"
+        },
+        {
+          "ts": 1790189164.986,
+          "level": "INFO",
+          "node": "model.py",
+          "msg": "[IntentClassifier] ML prediction: sales_analysis (conf: 0.495) -> workflow: SELECT"
+        },
+        {
+          "ts": 1790189164.986,
+          "level": "INFO",
+          "node": "intent_service.py",
+          "msg": "[IntentService] Custom model result: retail=sales_analysis, workflow=SELECT, conf=0.495, complexity=Complex, clarify=True"
+        },
+        {
+          "ts": 1790189165.198,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Intent classified: SELECT (conf: 0.4954424701877673) | Needs Clarification: True"
+        }
+      ]
+    },
+    {
+      "mission_id": "ms-6",
+      "mission_name": "Inventory Turnover Ratio",
+      "domain": "retail_clothing",
+      "severity": "LOW",
+      "risk_score": 0,
+      "risk_factors": {},
+      "sql": null,
+      "data_count": 0,
+      "results": [],
+      "visualization_config": null,
+      "insight": null,
+      "recommendation": null,
+      "original_query": "Calculate the inventory turnover ratio for each product and supplier to identify slow-moving or dead stock, and analyze the ratio over time to identify any trends or anomalies",
+      "depth": 0,
+      "parent_mission_id": null,
+      "rationale": "",
+      "timestamp": "LIVE AUDIT",
+      "logs": [
+        {
+          "ts": 1790189164.987,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [classify_intent]"
+        },
+        {
+          "ts": 1790189164.987,
+          "level": "INFO",
+          "node": "INTENT",
+          "msg": "[IntentModule] Using Custom ML Intent Classifier for query: 'Calculate the inventory turnover ratio for each product and supplier to identify slow-moving or dead stock, and analyze the ratio over time to identify any trends or anomalies'"
+        },
+        {
+          "ts": 1790189164.991,
+          "level": "INFO",
+          "node": "model.py",
+          "msg": "[IntentClassifier] ML prediction: inventory_status (conf: 0.270) -> workflow: SELECT"
+        },
+        {
+          "ts": 1790189164.991,
+          "level": "INFO",
+          "node": "intent_service.py",
+          "msg": "[IntentService] Custom model result: retail=inventory_status, workflow=SELECT, conf=0.270, complexity=Complex, clarify=True"
+        },
+        {
+          "ts": 1790189165.199,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Intent classified: SELECT (conf: 0.2703627346034253) | Needs Clarification: True"
+        }
+      ]
+    },
+    {
+      "mission_id": "ms-7",
+      "mission_name": "Supplier Country-Based Lead Time Analysis",
+      "domain": "retail_clothing",
+      "severity": "LOW",
+      "risk_score": 0,
+      "risk_factors": {},
+      "sql": null,
+      "data_count": 0,
+      "results": [],
+      "visualization_config": null,
+      "insight": null,
+      "recommendation": null,
+      "original_query": "Analyze the lead time for each supplier by country to identify any regional differences or trends, and calculate the average lead time for each country",
+      "depth": 0,
+      "parent_mission_id": null,
+      "rationale": "",
+      "timestamp": "LIVE AUDIT",
+      "logs": [
+        {
+          "ts": 1790189164.992,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [classify_intent]"
+        },
+        {
+          "ts": 1790189164.992,
+          "level": "INFO",
+          "node": "INTENT",
+          "msg": "[IntentModule] Using Custom ML Intent Classifier for query: 'Analyze the lead time for each supplier by country to identify any regional differences or trends, and calculate the average lead time for each country'"
+        },
+        {
+          "ts": 1790189165.0,
+          "level": "INFO",
+          "node": "model.py",
+          "msg": "[IntentClassifier] ML prediction: off_topic (conf: 0.221) -> workflow: OFF_TOPIC"
+        },
+        {
+          "ts": 1790189165.001,
+          "level": "INFO",
+          "node": "intent_service.py",
+          "msg": "[IntentService] Custom model result: retail=off_topic, workflow=OFF_TOPIC, conf=0.221, complexity=Complex, clarify=True"
+        },
+        {
+          "ts": 1790189165.199,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Intent classified: OFF_TOPIC (conf: 0.22069224981633248) | Needs Clarification: True"
+        }
+      ]
+    },
+    {
+      "mission_id": "ms-8",
+      "mission_name": "Product Channel-Specific Demand Analysis",
+      "domain": "retail_clothing",
+      "severity": "LOW",
+      "risk_score": 0,
+      "risk_factors": {},
+      "sql": null,
+      "data_count": 0,
+      "results": [],
+      "visualization_config": null,
+      "insight": null,
+      "recommendation": null,
+      "original_query": "Analyze the sales history for each product by sales channel to identify any channel-specific demand patterns or anomalies, and calculate the average sales volume for each product by channel",
+      "depth": 0,
+      "parent_mission_id": null,
+      "rationale": "",
+      "timestamp": "LIVE AUDIT",
+      "logs": [
+        {
+          "ts": 1790189165.002,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [classify_intent]"
+        },
+        {
+          "ts": 1790189165.002,
+          "level": "INFO",
+          "node": "INTENT",
+          "msg": "[IntentModule] Using Custom ML Intent Classifier for query: 'Analyze the sales history for each product by sales channel to identify any channel-specific demand patterns or anomalies, and calculate the average sales volume for each product by channel'"
+        },
+        {
+          "ts": 1790189165.005,
+          "level": "INFO",
+          "node": "model.py",
+          "msg": "[IntentClassifier] ML prediction: sales_analysis (conf: 0.449) -> workflow: SELECT"
+        },
+        {
+          "ts": 1790189165.005,
+          "level": "INFO",
+          "node": "intent_service.py",
+          "msg": "[IntentService] Custom model result: retail=sales_analysis, workflow=SELECT, conf=0.449, complexity=Complex, clarify=True"
+        },
+        {
+          "ts": 1790189165.199,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Intent classified: SELECT (conf: 0.4489837418935003) | Needs Clarification: True"
+        }
+      ]
+    },
+    {
+      "mission_id": "ms-9",
+      "mission_name": "Supplier Rating Based on On-Time Delivery and Lead Time",
+      "domain": "retail_clothing",
+      "severity": "LOW",
+      "risk_score": 0,
+      "risk_factors": {},
+      "sql": null,
+      "data_count": 0,
+      "results": [],
+      "visualization_config": null,
+      "insight": null,
+      "recommendation": null,
+      "original_query": "Assign a rating to each supplier based on their on-time delivery rate and lead time, and calculate the average rating for each supplier over time",
+      "depth": 0,
+      "parent_mission_id": null,
+      "rationale": "",
+      "timestamp": "LIVE AUDIT",
+      "logs": [
+        {
+          "ts": 1790189165.006,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [classify_intent]"
+        },
+        {
+          "ts": 1790189165.006,
+          "level": "INFO",
+          "node": "INTENT",
+          "msg": "[IntentModule] Using Custom ML Intent Classifier for query: 'Assign a rating to each supplier based on their on-time delivery rate and lead time, and calculate the average rating for each supplier over time'"
+        },
+        {
+          "ts": 1790189165.009,
+          "level": "INFO",
+          "node": "model.py",
+          "msg": "[IntentClassifier] ML prediction: general_query (conf: 0.298) -> workflow: SELECT"
+        },
+        {
+          "ts": 1790189165.01,
+          "level": "INFO",
+          "node": "intent_service.py",
+          "msg": "[IntentService] Custom model result: retail=general_query, workflow=SELECT, conf=0.298, complexity=Complex, clarify=True"
+        },
+        {
+          "ts": 1790189165.199,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Intent classified: SELECT (conf: 0.2980200086352365) | Needs Clarification: True"
+        }
+      ]
+    },
+    {
+      "mission_id": "ms-10",
+      "mission_name": "Inventory Location-Based Stock Imbalance Analysis",
+      "domain": "retail_clothing",
+      "severity": "MEDIUM",
+      "risk_score": 39,
+      "risk_factors": {
+        "affected_entities": {
+          "value": 50,
+          "score": 100,
+          "detail": "50 unique entities"
+        },
+        "dollar_exposure": {
+          "value": 0,
+          "score": 0,
+          "detail": "$0 exposure"
+        },
+        "velocity": {
+          "value": 50,
+          "score": 100,
+          "detail": "50 events"
+        },
+        "pep_involvement": {
+          "value": 0,
+          "score": 0,
+          "detail": "0 PEP accounts"
+        },
+        "kyc_gaps": {
+          "value": 0,
+          "score": 0,
+          "detail": "0 KYC gaps"
+        },
+        "severity_escalation": {
+          "value": "MEDIUM",
+          "score": 25,
+          "detail": "Base: MEDIUM"
+        }
+      },
+      "sql": "SELECT p.sku, p.style_name, p.category, p.size, p.color, i.stock_count, i.reorder_point, i.location, s.supplier_name FROM products p JOIN inventory i ON p.sku = i.sku LEFT JOIN suppliers s ON p.supplier_id = s.supplier_id ORDER BY p.style_name ASC LIMIT 50;",
+      "data_count": 50,
+      "results": [
+        {
+          "sku": "CL-00016",
+          "style_name": "Classic Polo",
+          "category": "T-Shirts",
+          "size": "XS",
+          "color": "Black",
+          "stock_count": 28,
+          "reorder_point": 5,
+          "location": "Store-Koramangala",
+          "supplier_name": "Istanbul Weave House"
+        },
+        {
+          "sku": "CL-00017",
+          "style_name": "Classic Polo",
+          "category": "T-Shirts",
+          "size": "S",
+          "color": "Black",
+          "stock_count": 33,
+          "reorder_point": 5,
+          "location": "Store-Koramangala",
+          "supplier_name": "Istanbul Weave House"
+        },
+        {
+          "sku": "CL-00018",
+          "style_name": "Classic Polo",
+          "category": "T-Shirts",
+          "size": "M",
+          "color": "Black",
+          "stock_count": 5,
+          "reorder_point": 5,
+          "location": "Store-Koramangala",
+          "supplier_name": "Istanbul Weave House"
+        },
+        {
+          "sku": "CL-00019",
+          "style_name": "Classic Polo",
+          "category": "T-Shirts",
+          "size": "L",
+          "color": "Black",
+          "stock_count": 13,
+          "reorder_point": 5,
+          "location": "Store-Koramangala",
+          "supplier_name": "Istanbul Weave House"
+        },
+        {
+          "sku": "CL-00020",
+          "style_name": "Classic Polo",
+          "category": "T-Shirts",
+          "size": "XL",
+          "color": "Black",
+          "stock_count": 11,
+          "reorder_point": 5,
+          "location": "Store-Indiranagar",
+          "supplier_name": "Istanbul Weave House"
+        },
+        {
+          "sku": "CL-00021",
+          "style_name": "Classic Polo",
+          "category": "T-Shirts",
+          "size": "XS",
+          "color": "Olive",
+          "stock_count": 23,
+          "reorder_point": 5,
+          "location": "Store-Indiranagar",
+          "supplier_name": "Istanbul Weave House"
+        },
+        {
+          "sku": "CL-00022",
+          "style_name": "Classic Polo",
+          "category": "T-Shirts",
+          "size": "S",
+          "color": "Olive",
+          "stock_count": 18,
+          "reorder_point": 5,
+          "location": "Store-Koramangala",
+          "supplier_name": "Istanbul Weave House"
+        },
+        {
+          "sku": "CL-00023",
+          "style_name": "Classic Polo",
+          "category": "T-Shirts",
+          "size": "M",
+          "color": "Olive",
+          "stock_count": 36,
+          "reorder_point": 5,
+          "location": "Store-Koramangala",
+          "supplier_name": "Istanbul Weave House"
+        },
+        {
+          "sku": "CL-00024",
+          "style_name": "Classic Polo",
+          "category": "T-Shirts",
+          "size": "L",
+          "color": "Olive",
+          "stock_count": 10,
+          "reorder_point": 5,
+          "location": "Warehouse-Mumbai",
+          "supplier_name": "Istanbul Weave House"
+        },
+        {
+          "sku": "CL-00025",
+          "style_name": "Classic Polo",
+          "category": "T-Shirts",
+          "size": "XL",
+          "color": "Olive",
+          "stock_count": 7,
+          "reorder_point": 5,
+          "location": "Warehouse-Bengaluru",
+          "supplier_name": "Istanbul Weave House"
+        },
+        {
+          "sku": "CL-00026",
+          "style_name": "Classic Polo",
+          "category": "T-Shirts",
+          "size": "XS",
+          "color": "White",
+          "stock_count": 54,
+          "reorder_point": 8,
+          "location": "Store-Indiranagar",
+          "supplier_name": "Istanbul Weave House"
+        },
+        {
+          "sku": "CL-00027",
+          "style_name": "Classic Polo",
+          "category": "T-Shirts",
+          "size": "S",
+          "color": "White",
+          "stock_count": 15,
+          "reorder_point": 5,
+          "location": "Warehouse-Mumbai",
+          "supplier_name": "Istanbul Weave House"
+        },
+        {
+          "sku": "CL-00028",
+          "style_name": "Classic Polo",
+          "category": "T-Shirts",
+          "size": "M",
+          "color": "White",
+          "stock_count": 50,
+          "reorder_point": 7,
+          "location": "Warehouse-Mumbai",
+          "supplier_name": "Istanbul Weave House"
+        },
+        {
+          "sku": "CL-00029",
+          "style_name": "Classic Polo",
+          "category": "T-Shirts",
+          "size": "L",
+          "color": "White",
+          "stock_count": 5,
+          "reorder_point": 5,
+          "location": "Warehouse-Bengaluru",
+          "supplier_name": "Istanbul Weave House"
+        },
+        {
+          "sku": "CL-00030",
+          "style_name": "Classic Polo",
+          "category": "T-Shirts",
+          "size": "XL",
+          "color": "White",
+          "stock_count": 49,
+          "reorder_point": 7,
+          "location": "Store-Indiranagar",
+          "supplier_name": "Istanbul Weave House"
+        },
+        {
+          "sku": "CL-00046",
+          "style_name": "Crew Neck Tee",
+          "category": "T-Shirts",
+          "size": "XS",
+          "color": "Olive",
+          "stock_count": 30,
+          "reorder_point": 5,
+          "location": "Store-Koramangala",
+          "supplier_name": "Istanbul Weave House"
+        },
+        {
+          "sku": "CL-00047",
+          "style_name": "Crew Neck Tee",
+          "category": "T-Shirts",
+          "size": "S",
+          "color": "Olive",
+          "stock_count": 60,
+          "reorder_point": 9,
+          "location": "Warehouse-Bengaluru",
+          "supplier_name": "Istanbul Weave House"
+        },
+        {
+          "sku": "CL-00048",
+          "style_name": "Crew Neck Tee",
+          "category": "T-Shirts",
+          "size": "M",
+          "color": "Olive",
+          "stock_count": 27,
+          "reorder_point": 5,
+          "location": "Warehouse-Mumbai",
+          "supplier_name": "Istanbul Weave House"
+        },
+        {
+          "sku": "CL-00049",
+          "style_name": "Crew Neck Tee",
+          "category": "T-Shirts",
+          "size": "L",
+          "color": "Olive",
+          "stock_count": 26,
+          "reorder_point": 5,
+          "location": "Warehouse-Bengaluru",
+          "supplier_name": "Istanbul Weave House"
+        },
+        {
+          "sku": "CL-00050",
+          "style_name": "Crew Neck Tee",
+          "category": "T-Shirts",
+          "size": "XL",
+          "color": "Olive",
+          "stock_count": 21,
+          "reorder_point": 5,
+          "location": "Store-Indiranagar",
+          "supplier_name": "Istanbul Weave House"
+        },
+        {
+          "sku": "CL-00051",
+          "style_name": "Crew Neck Tee",
+          "category": "T-Shirts",
+          "size": "XS",
+          "color": "Grey",
+          "stock_count": 21,
+          "reorder_point": 5,
+          "location": "Warehouse-Bengaluru",
+          "supplier_name": "Istanbul Weave House"
+        },
+        {
+          "sku": "CL-00052",
+          "style_name": "Crew Neck Tee",
+          "category": "T-Shirts",
+          "size": "S",
+          "color": "Grey",
+          "stock_count": 43,
+          "reorder_point": 6,
+          "location": "Warehouse-Mumbai",
+          "supplier_name": "Istanbul Weave House"
+        },
+        {
+          "sku": "CL-00053",
+          "style_name": "Crew Neck Tee",
+          "category": "T-Shirts",
+          "size": "M",
+          "color": "Grey",
+          "stock_count": 51,
+          "reorder_point": 7,
+          "location": "Store-Koramangala",
+          "supplier_name": "Istanbul Weave House"
+        },
+        {
+          "sku": "CL-00054",
+          "style_name": "Crew Neck Tee",
+          "category": "T-Shirts",
+          "size": "L",
+          "color": "Grey",
+          "stock_count": 43,
+          "reorder_point": 6,
+          "location": "Warehouse-Bengaluru",
+          "supplier_name": "Istanbul Weave House"
+        },
+        {
+          "sku": "CL-00055",
+          "style_name": "Crew Neck Tee",
+          "category": "T-Shirts",
+          "size": "XL",
+          "color": "Grey",
+          "stock_count": 41,
+          "reorder_point": 6,
+          "location": "Store-Indiranagar",
+          "supplier_name": "Istanbul Weave House"
+        },
+        {
+          "sku": "CL-00056",
+          "style_name": "Crew Neck Tee",
+          "category": "T-Shirts",
+          "size": "XS",
+          "color": "Navy",
+          "stock_count": 7,
+          "reorder_point": 5,
+          "location": "Warehouse-Mumbai",
+          "supplier_name": "Istanbul Weave House"
+        },
+        {
+          "sku": "CL-00057",
+          "style_name": "Crew Neck Tee",
+          "category": "T-Shirts",
+          "size": "S",
+          "color": "Navy",
+          "stock_count": 38,
+          "reorder_point": 5,
+          "location": "Store-Indiranagar",
+          "supplier_name": "Istanbul Weave House"
+        },
+        {
+          "sku": "CL-00058",
+          "style_name": "Crew Neck Tee",
+          "category": "T-Shirts",
+          "size": "M",
+          "color": "Navy",
+          "stock_count": 32,
+          "reorder_point": 5,
+          "location": "Warehouse-Bengaluru",
+          "supplier_name": "Istanbul Weave House"
+        },
+        {
+          "sku": "CL-00059",
+          "style_name": "Crew Neck Tee",
+          "category": "T-Shirts",
+          "size": "L",
+          "color": "Navy",
+          "stock_count": 44,
+          "reorder_point": 6,
+          "location": "Store-Koramangala",
+          "supplier_name": "Istanbul Weave House"
+        },
+        {
+          "sku": "CL-00060",
+          "style_name": "Crew Neck Tee",
+          "category": "T-Shirts",
+          "size": "XL",
+          "color": "Navy",
+          "stock_count": 51,
+          "reorder_point": 7,
+          "location": "Store-Koramangala",
+          "supplier_name": "Istanbul Weave House"
+        },
+        {
+          "sku": "CL-00001",
+          "style_name": "Oxford Shirt",
+          "category": "Shirts",
+          "size": "XS",
+          "color": "Black",
+          "stock_count": 25,
+          "reorder_point": 5,
+          "location": "Warehouse-Bengaluru",
+          "supplier_name": "Tirupur Knitwear Ltd."
+        },
+        {
+          "sku": "CL-00002",
+          "style_name": "Oxford Shirt",
+          "category": "Shirts",
+          "size": "S",
+          "color": "Black",
+          "stock_count": 42,
+          "reorder_point": 6,
+          "location": "Warehouse-Mumbai",
+          "supplier_name": "Tirupur Knitwear Ltd."
+        },
+        {
+          "sku": "CL-00003",
+          "style_name": "Oxford Shirt",
+          "category": "Shirts",
+          "size": "M",
+          "color": "Black",
+          "stock_count": 217,
+          "reorder_point": 32,
+          "location": "Store-Indiranagar",
+          "supplier_name": "Tirupur Knitwear Ltd."
+        },
+        {
+          "sku": "CL-00004",
+          "style_name": "Oxford Shirt",
+          "category": "Shirts",
+          "size": "L",
+          "color": "Black",
+          "stock_count": 37,
+          "reorder_point": 5,
+          "location": "Warehouse-Bengaluru",
+          "supplier_name": "Tirupur Knitwear Ltd."
+        },
+        {
+          "sku": "CL-00005",
+          "style_name": "Oxford Shirt",
+          "category": "Shirts",
+          "size": "XL",
+          "color": "Black",
+          "stock_count": 9,
+          "reorder_point": 5,
+          "location": "Warehouse-Bengaluru",
+          "supplier_name": "Tirupur Knitwear Ltd."
+        },
+        {
+          "sku": "CL-00006",
+          "style_name": "Oxford Shirt",
+          "category": "Shirts",
+          "size": "XS",
+          "color": "Olive",
+          "stock_count": 30,
+          "reorder_point": 5,
+          "location": "Warehouse-Bengaluru",
+          "supplier_name": "Tirupur Knitwear Ltd."
+        },
+        {
+          "sku": "CL-00007",
+          "style_name": "Oxford Shirt",
+          "category": "Shirts",
+          "size": "S",
+          "color": "Olive",
+          "stock_count": 20,
+          "reorder_point": 5,
+          "location": "Warehouse-Bengaluru",
+          "supplier_name": "Tirupur Knitwear Ltd."
+        },
+        {
+          "sku": "CL-00008",
+          "style_name": "Oxford Shirt",
+          "category": "Shirts",
+          "size": "M",
+          "color": "Olive",
+          "stock_count": 216,
+          "reorder_point": 32,
+          "location": "Store-Koramangala",
+          "supplier_name": "Tirupur Knitwear Ltd."
+        },
+        {
+          "sku": "CL-00009",
+          "style_name": "Oxford Shirt",
+          "category": "Shirts",
+          "size": "L",
+          "color": "Olive",
+          "stock_count": 18,
+          "reorder_point": 5,
+          "location": "Store-Koramangala",
+          "supplier_name": "Tirupur Knitwear Ltd."
+        },
+        {
+          "sku": "CL-00010",
+          "style_name": "Oxford Shirt",
+          "category": "Shirts",
+          "size": "XL",
+          "color": "Olive",
+          "stock_count": 21,
+          "reorder_point": 5,
+          "location": "Warehouse-Mumbai",
+          "supplier_name": "Tirupur Knitwear Ltd."
+        },
+        {
+          "sku": "CL-00011",
+          "style_name": "Oxford Shirt",
+          "category": "Shirts",
+          "size": "XS",
+          "color": "Navy",
+          "stock_count": 47,
+          "reorder_point": 7,
+          "location": "Store-Koramangala",
+          "supplier_name": "Tirupur Knitwear Ltd."
+        },
+        {
+          "sku": "CL-00012",
+          "style_name": "Oxford Shirt",
+          "category": "Shirts",
+          "size": "S",
+          "color": "Navy",
+          "stock_count": 25,
+          "reorder_point": 5,
+          "location": "Warehouse-Bengaluru",
+          "supplier_name": "Tirupur Knitwear Ltd."
+        },
+        {
+          "sku": "CL-00013",
+          "style_name": "Oxford Shirt",
+          "category": "Shirts",
+          "size": "M",
+          "color": "Navy",
+          "stock_count": 162,
+          "reorder_point": 24,
+          "location": "Warehouse-Bengaluru",
+          "supplier_name": "Tirupur Knitwear Ltd."
+        },
+        {
+          "sku": "CL-00014",
+          "style_name": "Oxford Shirt",
+          "category": "Shirts",
+          "size": "L",
+          "color": "Navy",
+          "stock_count": 18,
+          "reorder_point": 5,
+          "location": "Store-Koramangala",
+          "supplier_name": "Tirupur Knitwear Ltd."
+        },
+        {
+          "sku": "CL-00015",
+          "style_name": "Oxford Shirt",
+          "category": "Shirts",
+          "size": "XL",
+          "color": "Navy",
+          "stock_count": 27,
+          "reorder_point": 5,
+          "location": "Warehouse-Bengaluru",
+          "supplier_name": "Tirupur Knitwear Ltd."
+        },
+        {
+          "sku": "CL-00106",
+          "style_name": "Pleated Trousers",
+          "category": "Trousers",
+          "size": "XS",
+          "color": "Black",
+          "stock_count": 8,
+          "reorder_point": 5,
+          "location": "Store-Koramangala",
+          "supplier_name": "Ho Chi Minh Stitch Co."
+        },
+        {
+          "sku": "CL-00107",
+          "style_name": "Pleated Trousers",
+          "category": "Trousers",
+          "size": "S",
+          "color": "Black",
+          "stock_count": 25,
+          "reorder_point": 5,
+          "location": "Store-Indiranagar",
+          "supplier_name": "Ho Chi Minh Stitch Co."
+        },
+        {
+          "sku": "CL-00108",
+          "style_name": "Pleated Trousers",
+          "category": "Trousers",
+          "size": "M",
+          "color": "Black",
+          "stock_count": 25,
+          "reorder_point": 5,
+          "location": "Store-Koramangala",
+          "supplier_name": "Ho Chi Minh Stitch Co."
+        },
+        {
+          "sku": "CL-00109",
+          "style_name": "Pleated Trousers",
+          "category": "Trousers",
+          "size": "L",
+          "color": "Black",
+          "stock_count": 22,
+          "reorder_point": 5,
+          "location": "Warehouse-Mumbai",
+          "supplier_name": "Ho Chi Minh Stitch Co."
+        },
+        {
+          "sku": "CL-00110",
+          "style_name": "Pleated Trousers",
+          "category": "Trousers",
+          "size": "XL",
+          "color": "Black",
+          "stock_count": 58,
+          "reorder_point": 8,
+          "location": "Warehouse-Bengaluru",
+          "supplier_name": "Ho Chi Minh Stitch Co."
+        }
+      ],
+      "visualization_config": {
+        "chart_type": "line",
+        "title": "stock_count by category",
+        "x_axis_key": "category",
+        "y_axis_key": "stock_count",
+        "label": "stock_count",
+        "description": "Auto-generated fallback chart"
+      },
+      "insight": "Inventory snapshot: 50 products tracked with a total of 1944 units. 2 items are at or below reorder point and need attention. Overall inventory health is moderate.",
+      "recommendation": "1. Review and reorder items below their reorder thresholds. 2. Investigate slow-moving inventory for potential clearance or promotion. 2. Ensure regular sync with Tally/ERP for accurate stock levels. 3. Monitor inventory turnover rates to optimize stocking levels.",
+      "original_query": "Analyze the stock levels for each product across different inventory locations to identify any imbalances or anomalies, and calculate the average stock imbalance for each product over time",
+      "depth": 0,
+      "parent_mission_id": null,
+      "rationale": "",
+      "timestamp": "LIVE AUDIT",
+      "logs": [
+        {
+          "ts": 1790189165.01,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [classify_intent]"
+        },
+        {
+          "ts": 1790189165.01,
+          "level": "INFO",
+          "node": "INTENT",
+          "msg": "[IntentModule] Using Custom ML Intent Classifier for query: 'Analyze the stock levels for each product across different inventory locations to identify any imbalances or anomalies, and calculate the average stock imbalance for each product over time'"
+        },
+        {
+          "ts": 1790189165.014,
+          "level": "INFO",
+          "node": "model.py",
+          "msg": "[IntentClassifier] ML prediction: inventory_status (conf: 0.596) -> workflow: SELECT"
+        },
+        {
+          "ts": 1790189165.014,
+          "level": "INFO",
+          "node": "intent_service.py",
+          "msg": "[IntentService] Custom model result: retail=inventory_status, workflow=SELECT, conf=0.596, complexity=Complex, clarify=False"
+        },
+        {
+          "ts": 1790189165.199,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Intent classified: SELECT (conf: 0.5963149875126655) | Needs Clarification: False"
+        },
+        {
+          "ts": 1790189165.212,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [generate_sql]"
+        },
+        {
+          "ts": 1790189165.212,
+          "level": "INFO",
+          "node": "SQL_GEN",
+          "msg": "Generating SQL for domain: retail_clothing | Query: Analyze the stock levels for each product across different inventory locations to identify any imbalances or anomalies, and calculate the average stock imbalance for each product over time"
+        },
+        {
+          "ts": 1790189165.215,
+          "level": "INFO",
+          "node": "model.py",
+          "msg": "[IntentClassifier] ML prediction: inventory_status (conf: 0.596) -> workflow: SELECT"
+        },
+        {
+          "ts": 1790189165.215,
+          "level": "INFO",
+          "node": "rule_engine.py",
+          "msg": "[SQLGenerator] Intent: inventory_status -> SQL: SELECT p.sku, p.style_name, p.category, p.size, p.color, i.stock_count, i.reorde..."
+        },
+        {
+          "ts": 1790189165.215,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "SQL Generated: SELECT p.sku, p.style_name, p.category, p.size, p...."
+        },
+        {
+          "ts": 1790189165.228,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [validate_sql]"
+        },
+        {
+          "ts": 1790189165.235,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [execute_query]"
+        },
+        {
+          "ts": 1790189165.236,
+          "level": "INFO",
+          "node": "DB_EXEC",
+          "msg": "Executing SQL: SELECT p.sku, p.style_name, p.category, p.size, p.color, i.stock_count, i.reorder_point, i.location, s.supplier_name FROM products p JOIN inventory i ON p.sku = i.sku LEFT JOIN suppliers s ON p.supplier_id = s.supplier_id ORDER BY p.style_name ASC LIMIT 50;"
+        },
+        {
+          "ts": 1790189165.239,
+          "level": "INFO",
+          "node": "DB_EXEC",
+          "msg": "Execution complete. Returned 50 rows."
+        },
+        {
+          "ts": 1790189165.239,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Query execution successful. Rows: 50"
+        },
+        {
+          "ts": 1790189165.241,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [analyze_stockout]"
+        },
+        {
+          "ts": 1790189165.265,
+          "level": "INFO",
+          "node": "stockout_analyzer.py",
+          "msg": "Stockout analysis for retail_clothing: 18 at-risk products found"
+        },
+        {
+          "ts": 1790189165.266,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Stockout analysis complete: 18 at-risk products"
+        },
+        {
+          "ts": 1790189165.269,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [insight_recommendation]"
+        },
+        {
+          "ts": 1790189165.27,
+          "level": "INFO",
+          "node": "INSIGHT",
+          "msg": "Generating insights for 50 rows in domain: retail_clothing"
+        },
+        {
+          "ts": 1790189165.273,
+          "level": "INFO",
+          "node": "model.py",
+          "msg": "[IntentClassifier] ML prediction: inventory_status (conf: 0.596) -> workflow: SELECT"
+        },
+        {
+          "ts": 1790189165.273,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Insights generated successfully."
+        },
+        {
+          "ts": 1790189165.274,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [recommend_visualization]"
+        },
+        {
+          "ts": 1790189165.274,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Visualization recommended: line"
+        }
+      ]
+    }
+  ],
+  "clusters": [],
+  "narrative": {
+    "executive_summary": "Our real-time threat detection system has identified a potential inventory management issue within the retail clothing domain, with a medium-severity threat vector detected. The system has tracked 50 products with a total of 1944 units, and 2 items are at or below reorder point, requiring immediate attention. This poses a moderate risk to inventory health and overall supply chain operations. Immediate action is required to mitigate this risk.",
+    "threat_vectors": [
+      {
+        "name": "Inventory Location-Based Stock Imbalance Analysis",
+        "severity": "MEDIUM",
+        "description": "Inventory snapshot: 50 products tracked with a total of 1944 units. 2 items are at or below reorder point and need attention. Overall inventory health is moderate."
+      }
+    ],
+    "immediate_actions": [
+      "Immediately review and adjust the inventory levels of the 2 items at or below reorder point to prevent stockouts and ensure timely delivery to customers.",
+      "Conduct a thorough inventory audit to identify and address any underlying issues contributing to the stock imbalance.",
+      "Implement a real-time inventory tracking system to monitor inventory levels and prevent similar imbalances in the future."
+    ],
+    "monitoring_recommendations": [
+      "Continuously monitor the inventory levels of the 2 items and adjust the reorder points as necessary to prevent stockouts.",
+      "Regularly review the inventory health metrics to identify any emerging trends or issues that may impact supply chain operations.",
+      "Implement a data-driven approach to inventory management to optimize inventory levels, reduce waste, and improve overall supply chain efficiency."
+    ],
+    "overall_risk": 39,
+    "overall_severity": "MEDIUM",
+    "title": "Intelligence Brief - LIVE"
+  }
+}

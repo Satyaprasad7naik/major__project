@@ -5,6 +5,7 @@ import Sidebar from './components/Sidebar';
 import ChatInterface from './components/ChatInterface';
 import SentinelDashboard from './components/SentinelDashboard';
 import ScanHistoryPanel from './components/ScanHistoryPanel';
+import AutoInsightsPanel from './components/AutoInsightsPanel';
 import type { HistoricalScan } from './components/SentinelDashboard';
 import './App.css';
 
@@ -47,7 +48,7 @@ function App() {
                 {/* Header */}
                 <header className="app-header">
                     <div className="logo-section">
-                        <div className="logo-icon">🛰️</div>
+                        <div className="logo-icon">🛡️</div>
                         <h1>DerivInsight</h1>
                         <span className="tagline">AI-Powered Intelligence Platform</span>
                     </div>
@@ -72,6 +73,9 @@ function App() {
 
                     {/* Main Content */}
                     <main className="main-content">
+                        {/* Auto Insights Panel Banner */}
+                        <AutoInsightsPanel domain={selectedDomain} />
+
                         {mode === 'chat' ? (
                             <ChatInterface domain={selectedDomain} />
                         ) : (

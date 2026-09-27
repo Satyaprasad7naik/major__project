@@ -16,7 +16,8 @@ from threading import Event as ThreadEvent
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))))
 
 from app.services.alert_events_generate import EventGenerator
-from app.services.alert_engine import ALERTS_DB_PATH
+from app.services.alert_engine import AlertEngineService, ALERTS_DB_PATH
+from app.core.logger import logger
 
 _shutdown = ThreadEvent()
 
@@ -56,9 +57,13 @@ def main():
         while not _shutdown.is_set():
             _shutdown.wait(timeout=1)
     except Exception as exc:
-        print(f"[GeneratorWorker] Fatal error: {exc}", file=sys.stderr)
-        import traceback
-        traceback.print_exc(file=sys.stderr)
+        logger.error(f"[GeneratorWorker] Fatal error: {exc}", exc_info=True)
+        # Persist FAILED state so the dashboard can surface the crash (mirrors engine_worker pattern)
+        try:
+            engine_svc = AlertEngineService()
+            engine_svc.mark_worker_failed(reason=f"[generator] {exc}")
+        except Exception as mark_exc:
+            logger.error(f"[GeneratorWorker] Could not persist FAILED state: {mark_exc}")
         sys.exit(1)
     finally:
         generator.stop_all()

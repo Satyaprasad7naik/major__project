@@ -1,0 +1,2044 @@
+{
+  "scan_id": "scan-20260925T130242",
+  "timestamp": "2026-09-25T13:02:42.337682",
+  "stats": {
+    "total_missions": 11,
+    "critical_count": 0,
+    "high_count": 0,
+    "overall_risk": 23,
+    "overall_severity": "LOW"
+  },
+  "detections": [
+    {
+      "mission_id": "retail_clothing_001",
+      "mission_name": "Size Distribution Inconsistency",
+      "domain": "retail_clothing",
+      "severity": "LOW",
+      "risk_score": 0,
+      "risk_factors": {},
+      "sql": "SELECT p.sku, p.style_name, p.category, p.size, p.color, i.stock_count, i.reorder_point, i.location, s.supplier_name FROM products p JOIN inventory i ON p.sku = i.sku LEFT JOIN suppliers s ON p.supplier_id = s.supplier_id ORDER BY p.style_name ASC LIMIT 50;",
+      "data_count": 0,
+      "results": [],
+      "visualization_config": null,
+      "insight": "No data found to analyze.",
+      "recommendation": "Try broadening your search criteria or checking if the data for this period is available.",
+      "original_query": "SELECT style_name, size, AVG(stock_count) AS average_stock_count FROM inventory GROUP BY style_name, size HAVING AVG(stock_count) < 10 OR AVG(stock_count) > 50",
+      "depth": 0,
+      "parent_mission_id": null,
+      "rationale": "",
+      "timestamp": "LIVE AUDIT",
+      "logs": [
+        {
+          "ts": 1790341313.125,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [classify_intent]"
+        },
+        {
+          "ts": 1790341313.126,
+          "level": "INFO",
+          "node": "INTENT",
+          "msg": "[IntentModule] Using Custom ML Intent Classifier for query: 'SELECT style_name, size, AVG(stock_count) AS average_stock_count FROM inventory GROUP BY style_name, size HAVING AVG(stock_count) < 10 OR AVG(stock_count) > 50'"
+        },
+        {
+          "ts": 1790341313.127,
+          "level": "INFO",
+          "node": "model.py",
+          "msg": "[IntentClassifier] ML prediction: inventory_status (conf: 0.900) -> workflow: SELECT"
+        },
+        {
+          "ts": 1790341313.128,
+          "level": "INFO",
+          "node": "intent_service.py",
+          "msg": "[IntentService] Custom model result: retail=inventory_status, workflow=SELECT, conf=0.900, complexity=Complex, clarify=False"
+        },
+        {
+          "ts": 1790341313.223,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Intent classified: SELECT (conf: 0.9) | Needs Clarification: False"
+        },
+        {
+          "ts": 1790341313.244,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [generate_sql]"
+        },
+        {
+          "ts": 1790341313.244,
+          "level": "INFO",
+          "node": "SQL_GEN",
+          "msg": "Generating SQL for domain: retail_clothing | Query: SELECT style_name, size, AVG(stock_count) AS average_stock_count FROM inventory GROUP BY style_name, size HAVING AVG(stock_count) < 10 OR AVG(stock_count) > 50"
+        },
+        {
+          "ts": 1790341313.245,
+          "level": "INFO",
+          "node": "model.py",
+          "msg": "[IntentClassifier] ML prediction: inventory_status (conf: 0.900) -> workflow: SELECT"
+        },
+        {
+          "ts": 1790341313.246,
+          "level": "INFO",
+          "node": "rule_engine.py",
+          "msg": "[SQLGenerator] Intent: inventory_status -> SQL: SELECT p.sku, p.style_name, p.category, p.size, p.color, i.stock_count, i.reorde..."
+        },
+        {
+          "ts": 1790341313.246,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "SQL Generated: SELECT p.sku, p.style_name, p.category, p.size, p...."
+        },
+        {
+          "ts": 1790341313.27,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [validate_sql]"
+        },
+        {
+          "ts": 1790341313.298,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [execute_query]"
+        },
+        {
+          "ts": 1790341313.298,
+          "level": "INFO",
+          "node": "DB_EXEC",
+          "msg": "Executing SQL: SELECT p.sku, p.style_name, p.category, p.size, p.color, i.stock_count, i.reorder_point, i.location, s.supplier_name FROM products p JOIN inventory i ON p.sku = i.sku LEFT JOIN suppliers s ON p.supplier_id = s.supplier_id ORDER BY p.style_name ASC LIMIT 50;"
+        },
+        {
+          "ts": 1790341313.298,
+          "level": "INFO",
+          "node": "DB_EXEC",
+          "msg": "Execution complete. Returned 0 rows."
+        },
+        {
+          "ts": 1790341313.298,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Query execution successful. Rows: 0"
+        },
+        {
+          "ts": 1790341313.306,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [analyze_stockout]"
+        },
+        {
+          "ts": 1790341313.307,
+          "level": "INFO",
+          "node": "stockout_analyzer.py",
+          "msg": "Stockout analysis for retail_clothing: 0 at-risk products found"
+        },
+        {
+          "ts": 1790341313.308,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Stockout analysis complete: 0 at-risk products"
+        },
+        {
+          "ts": 1790341313.323,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [insight_recommendation]"
+        },
+        {
+          "ts": 1790341313.323,
+          "level": "INFO",
+          "node": "INSIGHT",
+          "msg": "Generating insights for 0 rows in domain: retail_clothing"
+        },
+        {
+          "ts": 1790341313.324,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Insights generated successfully."
+        },
+        {
+          "ts": 1790341313.324,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [recommend_visualization]"
+        },
+        {
+          "ts": 1790341313.324,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "No results for visualization recommendation."
+        }
+      ]
+    },
+    {
+      "mission_id": "retail_clothing_002",
+      "mission_name": "Supplier Lead Time Variability",
+      "domain": "retail_clothing",
+      "severity": "LOW",
+      "risk_score": 24,
+      "risk_factors": {
+        "affected_entities": {
+          "value": 6,
+          "score": 60,
+          "detail": "6 unique entities"
+        },
+        "dollar_exposure": {
+          "value": 0,
+          "score": 0,
+          "detail": "$0 exposure"
+        },
+        "velocity": {
+          "value": 6,
+          "score": 30,
+          "detail": "6 events"
+        },
+        "pep_involvement": {
+          "value": 0,
+          "score": 0,
+          "detail": "0 PEP accounts"
+        },
+        "kyc_gaps": {
+          "value": 0,
+          "score": 0,
+          "detail": "0 KYC gaps"
+        },
+        "severity_escalation": {
+          "value": "HIGH",
+          "score": 50,
+          "detail": "Base: HIGH"
+        }
+      },
+      "sql": "SELECT supplier_id, supplier_name, lead_time_days, on_time_rate, country FROM suppliers ORDER BY lead_time_days ASC;",
+      "data_count": 6,
+      "results": [
+        {
+          "supplier_id": "Apex Audio Dist.",
+          "supplier_name": "Apex Audio Dist.",
+          "lead_time_days": 7,
+          "on_time_rate": 0.95,
+          "country": "Global"
+        },
+        {
+          "supplier_id": "Vanguard Goods",
+          "supplier_name": "Vanguard Goods",
+          "lead_time_days": 7,
+          "on_time_rate": 0.95,
+          "country": "Global"
+        },
+        {
+          "supplier_id": "ThreadCraft Apparel",
+          "supplier_name": "ThreadCraft Apparel",
+          "lead_time_days": 7,
+          "on_time_rate": 0.95,
+          "country": "Global"
+        },
+        {
+          "supplier_id": "Urban Cargo Co.",
+          "supplier_name": "Urban Cargo Co.",
+          "lead_time_days": 7,
+          "on_time_rate": 0.95,
+          "country": "Global"
+        },
+        {
+          "supplier_id": "Aroma Botanics",
+          "supplier_name": "Aroma Botanics",
+          "lead_time_days": 7,
+          "on_time_rate": 0.95,
+          "country": "Global"
+        },
+        {
+          "supplier_id": "SUP-001",
+          "supplier_name": "SUP-001",
+          "lead_time_days": 7,
+          "on_time_rate": 0.95,
+          "country": "Global"
+        }
+      ],
+      "visualization_config": {
+        "chart_type": "line",
+        "title": "lead_time_days by lead_time_days",
+        "x_axis_key": "lead_time_days",
+        "y_axis_key": "lead_time_days",
+        "label": "lead_time_days",
+        "description": "Auto-generated fallback chart"
+      },
+      "insight": "The retrieved data reveals that all suppliers have an average lead time of 7 days, which is significantly lower than the threshold of 30 days. This indicates that the current lead time performance is satisfactory, and there is no immediate need to address lead time-related issues.",
+      "recommendation": "Continue monitoring lead time performance and focus on maintaining the current level of efficiency. Consider exploring opportunities to further optimize lead times, potentially through process improvements or supplier negotiations, to maintain a competitive edge in the retail clothing industry.",
+      "original_query": "SELECT supplier_id, AVG(lead_time_days) AS average_lead_time FROM suppliers WHERE lead_time_days > 20 GROUP BY supplier_id HAVING AVG(lead_time_days) > 30",
+      "depth": 0,
+      "parent_mission_id": null,
+      "rationale": "",
+      "timestamp": "LIVE AUDIT",
+      "logs": [
+        {
+          "ts": 1790341313.128,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [classify_intent]"
+        },
+        {
+          "ts": 1790341313.129,
+          "level": "INFO",
+          "node": "INTENT",
+          "msg": "[IntentModule] Using Custom ML Intent Classifier for query: 'SELECT supplier_id, AVG(lead_time_days) AS average_lead_time FROM suppliers WHERE lead_time_days > 20 GROUP BY supplier_id HAVING AVG(lead_time_days) > 30'"
+        },
+        {
+          "ts": 1790341313.13,
+          "level": "INFO",
+          "node": "model.py",
+          "msg": "[IntentClassifier] ML prediction: general_query (conf: 0.900) -> workflow: SELECT"
+        },
+        {
+          "ts": 1790341313.13,
+          "level": "INFO",
+          "node": "intent_service.py",
+          "msg": "[IntentService] Custom model result: retail=general_query, workflow=SELECT, conf=0.900, complexity=Complex, clarify=False"
+        },
+        {
+          "ts": 1790341313.223,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Intent classified: SELECT (conf: 0.9) | Needs Clarification: False"
+        },
+        {
+          "ts": 1790341313.251,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [generate_sql]"
+        },
+        {
+          "ts": 1790341313.252,
+          "level": "INFO",
+          "node": "SQL_GEN",
+          "msg": "Generating SQL for domain: retail_clothing | Query: SELECT supplier_id, AVG(lead_time_days) AS average_lead_time FROM suppliers WHERE lead_time_days > 20 GROUP BY supplier_id HAVING AVG(lead_time_days) > 30"
+        },
+        {
+          "ts": 1790341313.252,
+          "level": "INFO",
+          "node": "model.py",
+          "msg": "[IntentClassifier] ML prediction: general_query (conf: 0.900) -> workflow: SELECT"
+        },
+        {
+          "ts": 1790341313.252,
+          "level": "INFO",
+          "node": "rule_engine.py",
+          "msg": "[SQLGenerator] Intent: general_query -> SQL: SELECT supplier_id, supplier_name, lead_time_days, on_time_rate, country FROM su..."
+        },
+        {
+          "ts": 1790341313.253,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "SQL Generated: SELECT supplier_id, supplier_name, lead_time_days,..."
+        },
+        {
+          "ts": 1790341313.277,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [validate_sql]"
+        },
+        {
+          "ts": 1790341313.299,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [execute_query]"
+        },
+        {
+          "ts": 1790341313.299,
+          "level": "INFO",
+          "node": "DB_EXEC",
+          "msg": "Executing SQL: SELECT supplier_id, supplier_name, lead_time_days, on_time_rate, country FROM suppliers ORDER BY lead_time_days ASC;"
+        },
+        {
+          "ts": 1790341313.3,
+          "level": "INFO",
+          "node": "DB_EXEC",
+          "msg": "Execution complete. Returned 6 rows."
+        },
+        {
+          "ts": 1790341313.3,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Query execution successful. Rows: 6"
+        },
+        {
+          "ts": 1790341313.31,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [analyze_stockout]"
+        },
+        {
+          "ts": 1790341313.326,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [insight_recommendation]"
+        },
+        {
+          "ts": 1790341313.326,
+          "level": "INFO",
+          "node": "INSIGHT",
+          "msg": "Generating insights for 6 rows in domain: retail_clothing"
+        },
+        {
+          "ts": 1790341313.326,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM [nvidia] using model [meta/llama-3.2-11b-vision-instruct] generating response..."
+        },
+        {
+          "ts": 1790341313.328,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [recommend_visualization]"
+        },
+        {
+          "ts": 1790341313.328,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Visualization recommended: line"
+        },
+        {
+          "ts": 1790341317.503,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM response received from [meta/llama-3.2-11b-vision-instruct]. Snippet: {\n  \"insight\": \"The retrieved data reveals that al..."
+        },
+        {
+          "ts": 1790341317.504,
+          "level": "INFO",
+          "node": "INSIGHT",
+          "msg": "Successfully generated data analysis insights using NVIDIA LLM."
+        },
+        {
+          "ts": 1790341317.504,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Insights generated successfully."
+        }
+      ]
+    },
+    {
+      "mission_id": "retail_clothing_003",
+      "mission_name": "Inventory Imbalance by Location",
+      "domain": "retail_clothing",
+      "severity": "LOW",
+      "risk_score": 0,
+      "risk_factors": {},
+      "sql": "SELECT p.sku, p.style_name, p.category, i.stock_count, i.reorder_point, (i.reorder_point - i.stock_count + i.reorder_point) AS suggested_reorder_qty, s.supplier_name, s.lead_time_days FROM products p JOIN inventory i ON p.sku = i.sku JOIN suppliers s ON p.supplier_id = s.supplier_id WHERE i.stock_count < i.reorder_point ORDER BY (i.reorder_point - i.stock_count) DESC LIMIT 20;",
+      "data_count": 0,
+      "results": [],
+      "visualization_config": null,
+      "insight": "No data found to analyze.",
+      "recommendation": "Try broadening your search criteria or checking if the data for this period is available.",
+      "original_query": "SELECT sku, location, stock_count, reorder_point FROM inventory WHERE stock_count < reorder_point AND sku NOT IN (SELECT sku FROM inventory WHERE stock_count > reorder_point)",
+      "depth": 0,
+      "parent_mission_id": null,
+      "rationale": "",
+      "timestamp": "LIVE AUDIT",
+      "logs": [
+        {
+          "ts": 1790341313.13,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [classify_intent]"
+        },
+        {
+          "ts": 1790341313.132,
+          "level": "INFO",
+          "node": "INTENT",
+          "msg": "[IntentModule] Using Custom ML Intent Classifier for query: 'SELECT sku, location, stock_count, reorder_point FROM inventory WHERE stock_count < reorder_point AND sku NOT IN (SELECT sku FROM inventory WHERE stock_count > reorder_point)'"
+        },
+        {
+          "ts": 1790341313.132,
+          "level": "INFO",
+          "node": "model.py",
+          "msg": "[IntentClassifier] ML prediction: reorder_recommendation (conf: 0.900) -> workflow: SELECT"
+        },
+        {
+          "ts": 1790341313.132,
+          "level": "INFO",
+          "node": "intent_service.py",
+          "msg": "[IntentService] Custom model result: retail=reorder_recommendation, workflow=SELECT, conf=0.900, complexity=Complex, clarify=False"
+        },
+        {
+          "ts": 1790341313.224,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Intent classified: SELECT (conf: 0.9) | Needs Clarification: False"
+        },
+        {
+          "ts": 1790341313.25,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [generate_sql]"
+        },
+        {
+          "ts": 1790341313.25,
+          "level": "INFO",
+          "node": "SQL_GEN",
+          "msg": "Generating SQL for domain: retail_clothing | Query: SELECT sku, location, stock_count, reorder_point FROM inventory WHERE stock_count < reorder_point AND sku NOT IN (SELECT sku FROM inventory WHERE stock_count > reorder_point)"
+        },
+        {
+          "ts": 1790341313.25,
+          "level": "INFO",
+          "node": "model.py",
+          "msg": "[IntentClassifier] ML prediction: reorder_recommendation (conf: 0.900) -> workflow: SELECT"
+        },
+        {
+          "ts": 1790341313.251,
+          "level": "INFO",
+          "node": "rule_engine.py",
+          "msg": "[SQLGenerator] Intent: reorder_recommendation -> SQL: SELECT p.sku, p.style_name, p.category, i.stock_count, i.reorder_point, (i.reord..."
+        },
+        {
+          "ts": 1790341313.251,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "SQL Generated: SELECT p.sku, p.style_name, p.category, i.stock_co..."
+        },
+        {
+          "ts": 1790341313.275,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [validate_sql]"
+        },
+        {
+          "ts": 1790341313.297,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [execute_query]"
+        },
+        {
+          "ts": 1790341313.297,
+          "level": "INFO",
+          "node": "DB_EXEC",
+          "msg": "Executing SQL: SELECT p.sku, p.style_name, p.category, i.stock_count, i.reorder_point, (i.reorder_point - i.stock_count + i.reorder_point) AS suggested_reorder_qty, s.supplier_name, s.lead_time_days FROM products p JOIN inventory i ON p.sku = i.sku JOIN suppliers s ON p.supplier_id = s.supplier_id WHERE i.stock_count < i.reorder_point ORDER BY (i.reorder_point - i.stock_count) DESC LIMIT 20;"
+        },
+        {
+          "ts": 1790341313.297,
+          "level": "INFO",
+          "node": "DB_EXEC",
+          "msg": "Execution complete. Returned 0 rows."
+        },
+        {
+          "ts": 1790341313.297,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Query execution successful. Rows: 0"
+        },
+        {
+          "ts": 1790341313.304,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [analyze_stockout]"
+        },
+        {
+          "ts": 1790341313.305,
+          "level": "INFO",
+          "node": "stockout_analyzer.py",
+          "msg": "Stockout analysis for retail_clothing: 0 at-risk products found"
+        },
+        {
+          "ts": 1790341313.305,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Stockout analysis complete: 0 at-risk products"
+        },
+        {
+          "ts": 1790341313.322,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [insight_recommendation]"
+        },
+        {
+          "ts": 1790341313.322,
+          "level": "INFO",
+          "node": "INSIGHT",
+          "msg": "Generating insights for 0 rows in domain: retail_clothing"
+        },
+        {
+          "ts": 1790341313.322,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Insights generated successfully."
+        },
+        {
+          "ts": 1790341313.323,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [recommend_visualization]"
+        },
+        {
+          "ts": 1790341313.323,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "No results for visualization recommendation."
+        }
+      ]
+    },
+    {
+      "mission_id": "retail_clothing_004",
+      "mission_name": "Product Line Sales Decline",
+      "domain": "retail_clothing",
+      "severity": "LOW",
+      "risk_score": 0,
+      "risk_factors": {},
+      "sql": "SELECT p.sku, p.style_name, p.category, SUM(se.units_sold) AS total_units_sold, COUNT(se.event_id) AS num_transactions, ROUND(SUM(se.units_sold) * p.retail_price, 2) AS estimated_revenue FROM sales_events se JOIN products p ON se.sku = p.sku GROUP BY p.sku, p.style_name, p.category ORDER BY total_units_sold DESC LIMIT 10;",
+      "data_count": 0,
+      "results": [],
+      "visualization_config": null,
+      "insight": "No data found to analyze.",
+      "recommendation": "Try broadening your search criteria or checking if the data for this period is available.",
+      "original_query": "SELECT style_name, SUM(units_sold) AS total_units_sold FROM sales_events WHERE sale_date < DATE_SUB(CURRENT_DATE, INTERVAL 1 YEAR) GROUP BY style_name HAVING SUM(units_sold) < 0.8 * (SELECT SUM(units_sold) FROM sales_events WHERE style_name = inventory.style_name)",
+      "depth": 0,
+      "parent_mission_id": null,
+      "rationale": "",
+      "timestamp": "LIVE AUDIT",
+      "logs": [
+        {
+          "ts": 1790341313.133,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [classify_intent]"
+        },
+        {
+          "ts": 1790341313.134,
+          "level": "INFO",
+          "node": "INTENT",
+          "msg": "[IntentModule] Using Custom ML Intent Classifier for query: 'SELECT style_name, SUM(units_sold) AS total_units_sold FROM sales_events WHERE sale_date < DATE_SUB(CURRENT_DATE, INTERVAL 1 YEAR) GROUP BY style_name HAVING SUM(units_sold) < 0.8 * (SELECT SUM(units_sold) FROM sales_events WHERE style_name = inventory.style_name)'"
+        },
+        {
+          "ts": 1790341313.135,
+          "level": "INFO",
+          "node": "model.py",
+          "msg": "[IntentClassifier] ML prediction: sales_analysis (conf: 0.900) -> workflow: SELECT"
+        },
+        {
+          "ts": 1790341313.135,
+          "level": "INFO",
+          "node": "intent_service.py",
+          "msg": "[IntentService] Custom model result: retail=sales_analysis, workflow=SELECT, conf=0.900, complexity=Complex, clarify=False"
+        },
+        {
+          "ts": 1790341313.224,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Intent classified: SELECT (conf: 0.9) | Needs Clarification: False"
+        },
+        {
+          "ts": 1790341313.246,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [generate_sql]"
+        },
+        {
+          "ts": 1790341313.246,
+          "level": "INFO",
+          "node": "SQL_GEN",
+          "msg": "Generating SQL for domain: retail_clothing | Query: SELECT style_name, SUM(units_sold) AS total_units_sold FROM sales_events WHERE sale_date < DATE_SUB(CURRENT_DATE, INTERVAL 1 YEAR) GROUP BY style_name HAVING SUM(units_sold) < 0.8 * (SELECT SUM(units_sold) FROM sales_events WHERE style_name = inventory.style_name)"
+        },
+        {
+          "ts": 1790341313.247,
+          "level": "INFO",
+          "node": "model.py",
+          "msg": "[IntentClassifier] ML prediction: sales_analysis (conf: 0.900) -> workflow: SELECT"
+        },
+        {
+          "ts": 1790341313.247,
+          "level": "INFO",
+          "node": "rule_engine.py",
+          "msg": "[SQLGenerator] Intent: sales_analysis -> SQL: SELECT p.sku, p.style_name, p.category, SUM(se.units_sold) AS total_units_sold, ..."
+        },
+        {
+          "ts": 1790341313.248,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "SQL Generated: SELECT p.sku, p.style_name, p.category, SUM(se.uni..."
+        },
+        {
+          "ts": 1790341313.278,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [validate_sql]"
+        },
+        {
+          "ts": 1790341313.294,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [execute_query]"
+        },
+        {
+          "ts": 1790341313.294,
+          "level": "INFO",
+          "node": "DB_EXEC",
+          "msg": "Executing SQL: SELECT p.sku, p.style_name, p.category, SUM(se.units_sold) AS total_units_sold, COUNT(se.event_id) AS num_transactions, ROUND(SUM(se.units_sold) * p.retail_price, 2) AS estimated_revenue FROM sales_events se JOIN products p ON se.sku = p.sku GROUP BY p.sku, p.style_name, p.category ORDER BY total_units_sold DESC LIMIT 10;"
+        },
+        {
+          "ts": 1790341313.295,
+          "level": "INFO",
+          "node": "DB_EXEC",
+          "msg": "Execution complete. Returned 0 rows."
+        },
+        {
+          "ts": 1790341313.295,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Query execution successful. Rows: 0"
+        },
+        {
+          "ts": 1790341313.301,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [analyze_stockout]"
+        },
+        {
+          "ts": 1790341313.302,
+          "level": "INFO",
+          "node": "stockout_analyzer.py",
+          "msg": "Stockout analysis for retail_clothing: 0 at-risk products found"
+        },
+        {
+          "ts": 1790341313.303,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Stockout analysis complete: 0 at-risk products"
+        },
+        {
+          "ts": 1790341313.319,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [insight_recommendation]"
+        },
+        {
+          "ts": 1790341313.319,
+          "level": "INFO",
+          "node": "INSIGHT",
+          "msg": "Generating insights for 0 rows in domain: retail_clothing"
+        },
+        {
+          "ts": 1790341313.32,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Insights generated successfully."
+        },
+        {
+          "ts": 1790341313.32,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [recommend_visualization]"
+        },
+        {
+          "ts": 1790341313.32,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "No results for visualization recommendation."
+        }
+      ]
+    },
+    {
+      "mission_id": "retail_clothing_005",
+      "mission_name": "Supplier On-Time Rate Fluctuation",
+      "domain": "retail_clothing",
+      "severity": "LOW",
+      "risk_score": 0,
+      "risk_factors": {},
+      "sql": "SELECT p.sku, p.style_name, p.category, p.size, p.color, i.stock_count, i.reorder_point, i.location, s.supplier_name FROM products p JOIN inventory i ON p.sku = i.sku LEFT JOIN suppliers s ON p.supplier_id = s.supplier_id ORDER BY p.style_name ASC LIMIT 50;",
+      "data_count": 0,
+      "results": [],
+      "visualization_config": null,
+      "insight": "No data found to analyze.",
+      "recommendation": "Try broadening your search criteria or checking if the data for this period is available.",
+      "original_query": "SELECT supplier_id, AVG(on_time_rate) AS average_on_time_rate FROM suppliers WHERE on_time_rate < 80 GROUP BY supplier_id HAVING AVG(on_time_rate) > 0.9 * (SELECT AVG(on_time_rate) FROM suppliers WHERE supplier_id = products.supplier_id)",
+      "depth": 0,
+      "parent_mission_id": null,
+      "rationale": "",
+      "timestamp": "LIVE AUDIT",
+      "logs": [
+        {
+          "ts": 1790341313.135,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [classify_intent]"
+        },
+        {
+          "ts": 1790341313.136,
+          "level": "INFO",
+          "node": "INTENT",
+          "msg": "[IntentModule] Using Custom ML Intent Classifier for query: 'SELECT supplier_id, AVG(on_time_rate) AS average_on_time_rate FROM suppliers WHERE on_time_rate < 80 GROUP BY supplier_id HAVING AVG(on_time_rate) > 0.9 * (SELECT AVG(on_time_rate) FROM suppliers WHERE supplier_id = products.supplier_id)'"
+        },
+        {
+          "ts": 1790341313.137,
+          "level": "INFO",
+          "node": "model.py",
+          "msg": "[IntentClassifier] ML prediction: inventory_status (conf: 0.900) -> workflow: SELECT"
+        },
+        {
+          "ts": 1790341313.138,
+          "level": "INFO",
+          "node": "intent_service.py",
+          "msg": "[IntentService] Custom model result: retail=inventory_status, workflow=SELECT, conf=0.900, complexity=Complex, clarify=False"
+        },
+        {
+          "ts": 1790341313.224,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Intent classified: SELECT (conf: 0.9) | Needs Clarification: False"
+        },
+        {
+          "ts": 1790341313.248,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [generate_sql]"
+        },
+        {
+          "ts": 1790341313.248,
+          "level": "INFO",
+          "node": "SQL_GEN",
+          "msg": "Generating SQL for domain: retail_clothing | Query: SELECT supplier_id, AVG(on_time_rate) AS average_on_time_rate FROM suppliers WHERE on_time_rate < 80 GROUP BY supplier_id HAVING AVG(on_time_rate) > 0.9 * (SELECT AVG(on_time_rate) FROM suppliers WHERE supplier_id = products.supplier_id)"
+        },
+        {
+          "ts": 1790341313.249,
+          "level": "INFO",
+          "node": "model.py",
+          "msg": "[IntentClassifier] ML prediction: inventory_status (conf: 0.900) -> workflow: SELECT"
+        },
+        {
+          "ts": 1790341313.249,
+          "level": "INFO",
+          "node": "rule_engine.py",
+          "msg": "[SQLGenerator] Intent: inventory_status -> SQL: SELECT p.sku, p.style_name, p.category, p.size, p.color, i.stock_count, i.reorde..."
+        },
+        {
+          "ts": 1790341313.249,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "SQL Generated: SELECT p.sku, p.style_name, p.category, p.size, p...."
+        },
+        {
+          "ts": 1790341313.273,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [validate_sql]"
+        },
+        {
+          "ts": 1790341313.295,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [execute_query]"
+        },
+        {
+          "ts": 1790341313.296,
+          "level": "INFO",
+          "node": "DB_EXEC",
+          "msg": "Executing SQL: SELECT p.sku, p.style_name, p.category, p.size, p.color, i.stock_count, i.reorder_point, i.location, s.supplier_name FROM products p JOIN inventory i ON p.sku = i.sku LEFT JOIN suppliers s ON p.supplier_id = s.supplier_id ORDER BY p.style_name ASC LIMIT 50;"
+        },
+        {
+          "ts": 1790341313.296,
+          "level": "INFO",
+          "node": "DB_EXEC",
+          "msg": "Execution complete. Returned 0 rows."
+        },
+        {
+          "ts": 1790341313.296,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Query execution successful. Rows: 0"
+        },
+        {
+          "ts": 1790341313.303,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [analyze_stockout]"
+        },
+        {
+          "ts": 1790341313.304,
+          "level": "INFO",
+          "node": "stockout_analyzer.py",
+          "msg": "Stockout analysis for retail_clothing: 0 at-risk products found"
+        },
+        {
+          "ts": 1790341313.304,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Stockout analysis complete: 0 at-risk products"
+        },
+        {
+          "ts": 1790341313.32,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [insight_recommendation]"
+        },
+        {
+          "ts": 1790341313.321,
+          "level": "INFO",
+          "node": "INSIGHT",
+          "msg": "Generating insights for 0 rows in domain: retail_clothing"
+        },
+        {
+          "ts": 1790341313.321,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Insights generated successfully."
+        },
+        {
+          "ts": 1790341313.321,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [recommend_visualization]"
+        },
+        {
+          "ts": 1790341313.321,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "No results for visualization recommendation."
+        }
+      ]
+    },
+    {
+      "mission_id": "retail_clothing_006",
+      "mission_name": "Channel Sales Growth",
+      "domain": "retail_clothing",
+      "severity": "LOW",
+      "risk_score": 0,
+      "risk_factors": {},
+      "sql": "SELECT se.channel, SUM(se.units_sold) AS total_units, COUNT(se.event_id) AS num_sales FROM sales_events se GROUP BY se.channel ORDER BY total_units DESC;",
+      "data_count": 0,
+      "results": [],
+      "visualization_config": null,
+      "insight": "No data found to analyze.",
+      "recommendation": "Try broadening your search criteria or checking if the data for this period is available.",
+      "original_query": "SELECT channel, SUM(units_sold) AS total_units_sold FROM sales_events WHERE sale_date > DATE_SUB(CURRENT_DATE, INTERVAL 1 QUARTER) GROUP BY channel HAVING SUM(units_sold) > 1.2 * (SELECT SUM(units_sold) FROM sales_events WHERE channel = sales_events.channel)",
+      "depth": 0,
+      "parent_mission_id": null,
+      "rationale": "",
+      "timestamp": "LIVE AUDIT",
+      "logs": [
+        {
+          "ts": 1790341313.138,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [classify_intent]"
+        },
+        {
+          "ts": 1790341313.139,
+          "level": "INFO",
+          "node": "INTENT",
+          "msg": "[IntentModule] Using Custom ML Intent Classifier for query: 'SELECT channel, SUM(units_sold) AS total_units_sold FROM sales_events WHERE sale_date > DATE_SUB(CURRENT_DATE, INTERVAL 1 QUARTER) GROUP BY channel HAVING SUM(units_sold) > 1.2 * (SELECT SUM(units_sold) FROM sales_events WHERE channel = sales_events.channel)'"
+        },
+        {
+          "ts": 1790341313.141,
+          "level": "INFO",
+          "node": "model.py",
+          "msg": "[IntentClassifier] ML prediction: sales_analysis (conf: 0.900) -> workflow: SELECT"
+        },
+        {
+          "ts": 1790341313.141,
+          "level": "INFO",
+          "node": "intent_service.py",
+          "msg": "[IntentService] Custom model result: retail=sales_analysis, workflow=SELECT, conf=0.900, complexity=Complex, clarify=False"
+        },
+        {
+          "ts": 1790341313.238,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Intent classified: SELECT (conf: 0.9) | Needs Clarification: False"
+        },
+        {
+          "ts": 1790341313.254,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [generate_sql]"
+        },
+        {
+          "ts": 1790341313.254,
+          "level": "INFO",
+          "node": "SQL_GEN",
+          "msg": "Generating SQL for domain: retail_clothing | Query: SELECT channel, SUM(units_sold) AS total_units_sold FROM sales_events WHERE sale_date > DATE_SUB(CURRENT_DATE, INTERVAL 1 QUARTER) GROUP BY channel HAVING SUM(units_sold) > 1.2 * (SELECT SUM(units_sold) FROM sales_events WHERE channel = sales_events.channel)"
+        },
+        {
+          "ts": 1790341313.255,
+          "level": "INFO",
+          "node": "model.py",
+          "msg": "[IntentClassifier] ML prediction: sales_analysis (conf: 0.900) -> workflow: SELECT"
+        },
+        {
+          "ts": 1790341313.255,
+          "level": "INFO",
+          "node": "rule_engine.py",
+          "msg": "[SQLGenerator] Intent: sales_analysis -> SQL: SELECT se.channel, SUM(se.units_sold) AS total_units, COUNT(se.event_id) AS num_..."
+        },
+        {
+          "ts": 1790341313.255,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "SQL Generated: SELECT se.channel, SUM(se.units_sold) AS total_uni..."
+        },
+        {
+          "ts": 1790341313.285,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [validate_sql]"
+        },
+        {
+          "ts": 1790341313.314,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [execute_query]"
+        },
+        {
+          "ts": 1790341313.314,
+          "level": "INFO",
+          "node": "DB_EXEC",
+          "msg": "Executing SQL: SELECT se.channel, SUM(se.units_sold) AS total_units, COUNT(se.event_id) AS num_sales FROM sales_events se GROUP BY se.channel ORDER BY total_units DESC;"
+        },
+        {
+          "ts": 1790341313.314,
+          "level": "INFO",
+          "node": "DB_EXEC",
+          "msg": "Execution complete. Returned 0 rows."
+        },
+        {
+          "ts": 1790341313.315,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Query execution successful. Rows: 0"
+        },
+        {
+          "ts": 1790341313.33,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [analyze_stockout]"
+        },
+        {
+          "ts": 1790341313.342,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [insight_recommendation]"
+        },
+        {
+          "ts": 1790341313.342,
+          "level": "INFO",
+          "node": "INSIGHT",
+          "msg": "Generating insights for 0 rows in domain: retail_clothing"
+        },
+        {
+          "ts": 1790341313.343,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Insights generated successfully."
+        },
+        {
+          "ts": 1790341313.343,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [recommend_visualization]"
+        },
+        {
+          "ts": 1790341313.343,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "No results for visualization recommendation."
+        }
+      ]
+    },
+    {
+      "mission_id": "retail_clothing_007",
+      "mission_name": "Dead Stock Identification",
+      "domain": "retail_clothing",
+      "severity": "LOW",
+      "risk_score": 0,
+      "risk_factors": {},
+      "sql": "SELECT p.sku, p.style_name, p.category, i.stock_count, i.reorder_point, (i.reorder_point - i.stock_count + i.reorder_point) AS suggested_reorder_qty, s.supplier_name, s.lead_time_days FROM products p JOIN inventory i ON p.sku = i.sku JOIN suppliers s ON p.supplier_id = s.supplier_id WHERE i.stock_count < i.reorder_point ORDER BY (i.reorder_point - i.stock_count) DESC LIMIT 20;",
+      "data_count": 0,
+      "results": [],
+      "visualization_config": null,
+      "insight": "No data found to analyze.",
+      "recommendation": "Try broadening your search criteria or checking if the data for this period is available.",
+      "original_query": "SELECT sku FROM inventory WHERE stock_count = 0 AND last_restocked_at < DATE_SUB(CURRENT_DATE, INTERVAL 6 MONTH)",
+      "depth": 0,
+      "parent_mission_id": null,
+      "rationale": "",
+      "timestamp": "LIVE AUDIT",
+      "logs": [
+        {
+          "ts": 1790341313.141,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [classify_intent]"
+        },
+        {
+          "ts": 1790341313.143,
+          "level": "INFO",
+          "node": "INTENT",
+          "msg": "[IntentModule] Using Custom ML Intent Classifier for query: 'SELECT sku FROM inventory WHERE stock_count = 0 AND last_restocked_at < DATE_SUB(CURRENT_DATE, INTERVAL 6 MONTH)'"
+        },
+        {
+          "ts": 1790341313.144,
+          "level": "INFO",
+          "node": "model.py",
+          "msg": "[IntentClassifier] ML prediction: reorder_recommendation (conf: 0.900) -> workflow: SELECT"
+        },
+        {
+          "ts": 1790341313.144,
+          "level": "INFO",
+          "node": "intent_service.py",
+          "msg": "[IntentService] Custom model result: retail=reorder_recommendation, workflow=SELECT, conf=0.900, complexity=Medium, clarify=False"
+        },
+        {
+          "ts": 1790341313.238,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Intent classified: SELECT (conf: 0.9) | Needs Clarification: False"
+        },
+        {
+          "ts": 1790341313.265,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [generate_sql]"
+        },
+        {
+          "ts": 1790341313.265,
+          "level": "INFO",
+          "node": "SQL_GEN",
+          "msg": "Generating SQL for domain: retail_clothing | Query: SELECT sku FROM inventory WHERE stock_count = 0 AND last_restocked_at < DATE_SUB(CURRENT_DATE, INTERVAL 6 MONTH)"
+        },
+        {
+          "ts": 1790341313.266,
+          "level": "INFO",
+          "node": "model.py",
+          "msg": "[IntentClassifier] ML prediction: reorder_recommendation (conf: 0.900) -> workflow: SELECT"
+        },
+        {
+          "ts": 1790341313.266,
+          "level": "INFO",
+          "node": "rule_engine.py",
+          "msg": "[SQLGenerator] Intent: reorder_recommendation -> SQL: SELECT p.sku, p.style_name, p.category, i.stock_count, i.reorder_point, (i.reord..."
+        },
+        {
+          "ts": 1790341313.266,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "SQL Generated: SELECT p.sku, p.style_name, p.category, i.stock_co..."
+        },
+        {
+          "ts": 1790341313.289,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [validate_sql]"
+        },
+        {
+          "ts": 1790341313.315,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [execute_query]"
+        },
+        {
+          "ts": 1790341313.315,
+          "level": "INFO",
+          "node": "DB_EXEC",
+          "msg": "Executing SQL: SELECT p.sku, p.style_name, p.category, i.stock_count, i.reorder_point, (i.reorder_point - i.stock_count + i.reorder_point) AS suggested_reorder_qty, s.supplier_name, s.lead_time_days FROM products p JOIN inventory i ON p.sku = i.sku JOIN suppliers s ON p.supplier_id = s.supplier_id WHERE i.stock_count < i.reorder_point ORDER BY (i.reorder_point - i.stock_count) DESC LIMIT 20;"
+        },
+        {
+          "ts": 1790341313.315,
+          "level": "INFO",
+          "node": "DB_EXEC",
+          "msg": "Execution complete. Returned 0 rows."
+        },
+        {
+          "ts": 1790341313.316,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Query execution successful. Rows: 0"
+        },
+        {
+          "ts": 1790341313.331,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [analyze_stockout]"
+        },
+        {
+          "ts": 1790341313.332,
+          "level": "INFO",
+          "node": "stockout_analyzer.py",
+          "msg": "Stockout analysis for retail_clothing: 0 at-risk products found"
+        },
+        {
+          "ts": 1790341313.332,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Stockout analysis complete: 0 at-risk products"
+        },
+        {
+          "ts": 1790341313.343,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [insight_recommendation]"
+        },
+        {
+          "ts": 1790341313.344,
+          "level": "INFO",
+          "node": "INSIGHT",
+          "msg": "Generating insights for 0 rows in domain: retail_clothing"
+        },
+        {
+          "ts": 1790341313.344,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Insights generated successfully."
+        },
+        {
+          "ts": 1790341313.344,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [recommend_visualization]"
+        },
+        {
+          "ts": 1790341313.344,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "No results for visualization recommendation."
+        }
+      ]
+    },
+    {
+      "mission_id": "retail_clothing_008",
+      "mission_name": "Supplier Delay Risk",
+      "domain": "retail_clothing",
+      "severity": "LOW",
+      "risk_score": 24,
+      "risk_factors": {
+        "affected_entities": {
+          "value": 6,
+          "score": 60,
+          "detail": "6 unique entities"
+        },
+        "dollar_exposure": {
+          "value": 0,
+          "score": 0,
+          "detail": "$0 exposure"
+        },
+        "velocity": {
+          "value": 6,
+          "score": 30,
+          "detail": "6 events"
+        },
+        "pep_involvement": {
+          "value": 0,
+          "score": 0,
+          "detail": "0 PEP accounts"
+        },
+        "kyc_gaps": {
+          "value": 0,
+          "score": 0,
+          "detail": "0 KYC gaps"
+        },
+        "severity_escalation": {
+          "value": "HIGH",
+          "score": 50,
+          "detail": "Base: HIGH"
+        }
+      },
+      "sql": "SELECT supplier_id, supplier_name, lead_time_days, on_time_rate, country FROM suppliers ORDER BY lead_time_days ASC;",
+      "data_count": 6,
+      "results": [
+        {
+          "supplier_id": "Apex Audio Dist.",
+          "supplier_name": "Apex Audio Dist.",
+          "lead_time_days": 7,
+          "on_time_rate": 0.95,
+          "country": "Global"
+        },
+        {
+          "supplier_id": "Vanguard Goods",
+          "supplier_name": "Vanguard Goods",
+          "lead_time_days": 7,
+          "on_time_rate": 0.95,
+          "country": "Global"
+        },
+        {
+          "supplier_id": "ThreadCraft Apparel",
+          "supplier_name": "ThreadCraft Apparel",
+          "lead_time_days": 7,
+          "on_time_rate": 0.95,
+          "country": "Global"
+        },
+        {
+          "supplier_id": "Urban Cargo Co.",
+          "supplier_name": "Urban Cargo Co.",
+          "lead_time_days": 7,
+          "on_time_rate": 0.95,
+          "country": "Global"
+        },
+        {
+          "supplier_id": "Aroma Botanics",
+          "supplier_name": "Aroma Botanics",
+          "lead_time_days": 7,
+          "on_time_rate": 0.95,
+          "country": "Global"
+        },
+        {
+          "supplier_id": "SUP-001",
+          "supplier_name": "SUP-001",
+          "lead_time_days": 7,
+          "on_time_rate": 0.95,
+          "country": "Global"
+        }
+      ],
+      "visualization_config": {
+        "chart_type": "line",
+        "title": "lead_time_days by lead_time_days",
+        "x_axis_key": "lead_time_days",
+        "y_axis_key": "lead_time_days",
+        "label": "lead_time_days",
+        "description": "Auto-generated fallback chart"
+      },
+      "insight": "The retrieved data reveals that all suppliers have an average lead time of 7 days, which is below the threshold of 20 days. However, the on-time rate of 95% is below the target of 80%. This suggests that while suppliers are generally meeting lead time expectations, there may be issues with timely delivery.",
+      "recommendation": "To improve on-time delivery rates, consider implementing a supplier performance monitoring system to track and address potential delays. Additionally, negotiate with suppliers to establish more stringent on-time delivery targets and penalties for non-compliance.",
+      "original_query": "SELECT supplier_id, AVG(lead_time_days) AS average_lead_time FROM suppliers WHERE lead_time_days > 20 AND on_time_rate < 80 GROUP BY supplier_id HAVING AVG(lead_time_days) > 30",
+      "depth": 0,
+      "parent_mission_id": null,
+      "rationale": "",
+      "timestamp": "LIVE AUDIT",
+      "logs": [
+        {
+          "ts": 1790341313.144,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [classify_intent]"
+        },
+        {
+          "ts": 1790341313.145,
+          "level": "INFO",
+          "node": "INTENT",
+          "msg": "[IntentModule] Using Custom ML Intent Classifier for query: 'SELECT supplier_id, AVG(lead_time_days) AS average_lead_time FROM suppliers WHERE lead_time_days > 20 AND on_time_rate < 80 GROUP BY supplier_id HAVING AVG(lead_time_days) > 30'"
+        },
+        {
+          "ts": 1790341313.146,
+          "level": "INFO",
+          "node": "model.py",
+          "msg": "[IntentClassifier] ML prediction: general_query (conf: 0.900) -> workflow: SELECT"
+        },
+        {
+          "ts": 1790341313.146,
+          "level": "INFO",
+          "node": "intent_service.py",
+          "msg": "[IntentService] Custom model result: retail=general_query, workflow=SELECT, conf=0.900, complexity=Complex, clarify=False"
+        },
+        {
+          "ts": 1790341313.239,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Intent classified: SELECT (conf: 0.9) | Needs Clarification: False"
+        },
+        {
+          "ts": 1790341313.259,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [generate_sql]"
+        },
+        {
+          "ts": 1790341313.259,
+          "level": "INFO",
+          "node": "SQL_GEN",
+          "msg": "Generating SQL for domain: retail_clothing | Query: SELECT supplier_id, AVG(lead_time_days) AS average_lead_time FROM suppliers WHERE lead_time_days > 20 AND on_time_rate < 80 GROUP BY supplier_id HAVING AVG(lead_time_days) > 30"
+        },
+        {
+          "ts": 1790341313.261,
+          "level": "INFO",
+          "node": "model.py",
+          "msg": "[IntentClassifier] ML prediction: general_query (conf: 0.900) -> workflow: SELECT"
+        },
+        {
+          "ts": 1790341313.261,
+          "level": "INFO",
+          "node": "rule_engine.py",
+          "msg": "[SQLGenerator] Intent: general_query -> SQL: SELECT supplier_id, supplier_name, lead_time_days, on_time_rate, country FROM su..."
+        },
+        {
+          "ts": 1790341313.261,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "SQL Generated: SELECT supplier_id, supplier_name, lead_time_days,..."
+        },
+        {
+          "ts": 1790341313.286,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [validate_sql]"
+        },
+        {
+          "ts": 1790341313.317,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [execute_query]"
+        },
+        {
+          "ts": 1790341313.317,
+          "level": "INFO",
+          "node": "DB_EXEC",
+          "msg": "Executing SQL: SELECT supplier_id, supplier_name, lead_time_days, on_time_rate, country FROM suppliers ORDER BY lead_time_days ASC;"
+        },
+        {
+          "ts": 1790341313.318,
+          "level": "INFO",
+          "node": "DB_EXEC",
+          "msg": "Execution complete. Returned 6 rows."
+        },
+        {
+          "ts": 1790341313.318,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Query execution successful. Rows: 6"
+        },
+        {
+          "ts": 1790341313.334,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [analyze_stockout]"
+        },
+        {
+          "ts": 1790341313.346,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [insight_recommendation]"
+        },
+        {
+          "ts": 1790341313.346,
+          "level": "INFO",
+          "node": "INSIGHT",
+          "msg": "Generating insights for 6 rows in domain: retail_clothing"
+        },
+        {
+          "ts": 1790341313.346,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM [nvidia] using model [meta/llama-3.2-11b-vision-instruct] generating response..."
+        },
+        {
+          "ts": 1790341313.347,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [recommend_visualization]"
+        },
+        {
+          "ts": 1790341313.347,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Visualization recommended: line"
+        },
+        {
+          "ts": 1790341316.733,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM response received from [meta/llama-3.2-11b-vision-instruct]. Snippet: {\n  \"insight\": \"The retrieved data reveals that al..."
+        },
+        {
+          "ts": 1790341316.733,
+          "level": "INFO",
+          "node": "INSIGHT",
+          "msg": "Successfully generated data analysis insights using NVIDIA LLM."
+        },
+        {
+          "ts": 1790341316.733,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Insights generated successfully."
+        }
+      ]
+    },
+    {
+      "mission_id": "retail_clothing_009",
+      "mission_name": "Price Ratio Anomaly",
+      "domain": "retail_clothing",
+      "severity": "LOW",
+      "risk_score": 0,
+      "risk_factors": {},
+      "sql": "SELECT p.sku, p.style_name, p.category, p.size, p.color, i.stock_count, i.reorder_point, s.supplier_name, s.lead_time_days FROM products p JOIN inventory i ON p.sku = i.sku JOIN suppliers s ON p.supplier_id = s.supplier_id WHERE i.stock_count <= i.reorder_point ORDER BY i.stock_count ASC LIMIT 20;",
+      "data_count": 0,
+      "results": [],
+      "visualization_config": null,
+      "insight": "No data found to analyze.",
+      "recommendation": "Try broadening your search criteria or checking if the data for this period is available.",
+      "original_query": "SELECT style_name, AVG(unit_cost) / AVG(retail_price) AS price_ratio FROM products GROUP BY style_name HAVING AVG(unit_cost) / AVG(retail_price) > 1.2",
+      "depth": 0,
+      "parent_mission_id": null,
+      "rationale": "",
+      "timestamp": "LIVE AUDIT",
+      "logs": [
+        {
+          "ts": 1790341313.146,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [classify_intent]"
+        },
+        {
+          "ts": 1790341313.148,
+          "level": "INFO",
+          "node": "INTENT",
+          "msg": "[IntentModule] Using Custom ML Intent Classifier for query: 'SELECT style_name, AVG(unit_cost) / AVG(retail_price) AS price_ratio FROM products GROUP BY style_name HAVING AVG(unit_cost) / AVG(retail_price) > 1.2'"
+        },
+        {
+          "ts": 1790341313.148,
+          "level": "INFO",
+          "node": "model.py",
+          "msg": "[IntentClassifier] ML prediction: stockout_risk (conf: 0.519) -> workflow: SELECT"
+        },
+        {
+          "ts": 1790341313.149,
+          "level": "INFO",
+          "node": "intent_service.py",
+          "msg": "[IntentService] Custom model result: retail=stockout_risk, workflow=SELECT, conf=0.519, complexity=Complex, clarify=False"
+        },
+        {
+          "ts": 1790341313.239,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Intent classified: SELECT (conf: 0.5189267310560316) | Needs Clarification: False"
+        },
+        {
+          "ts": 1790341313.261,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [generate_sql]"
+        },
+        {
+          "ts": 1790341313.262,
+          "level": "INFO",
+          "node": "SQL_GEN",
+          "msg": "Generating SQL for domain: retail_clothing | Query: SELECT style_name, AVG(unit_cost) / AVG(retail_price) AS price_ratio FROM products GROUP BY style_name HAVING AVG(unit_cost) / AVG(retail_price) > 1.2"
+        },
+        {
+          "ts": 1790341313.262,
+          "level": "INFO",
+          "node": "model.py",
+          "msg": "[IntentClassifier] ML prediction: stockout_risk (conf: 0.519) -> workflow: SELECT"
+        },
+        {
+          "ts": 1790341313.263,
+          "level": "INFO",
+          "node": "rule_engine.py",
+          "msg": "[SQLGenerator] Intent: stockout_risk -> SQL: SELECT p.sku, p.style_name, p.category, p.size, p.color, i.stock_count, i.reorde..."
+        },
+        {
+          "ts": 1790341313.263,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "SQL Generated: SELECT p.sku, p.style_name, p.category, p.size, p...."
+        },
+        {
+          "ts": 1790341313.287,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [validate_sql]"
+        },
+        {
+          "ts": 1790341313.318,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [execute_query]"
+        },
+        {
+          "ts": 1790341313.318,
+          "level": "INFO",
+          "node": "DB_EXEC",
+          "msg": "Executing SQL: SELECT p.sku, p.style_name, p.category, p.size, p.color, i.stock_count, i.reorder_point, s.supplier_name, s.lead_time_days FROM products p JOIN inventory i ON p.sku = i.sku JOIN suppliers s ON p.supplier_id = s.supplier_id WHERE i.stock_count <= i.reorder_point ORDER BY i.stock_count ASC LIMIT 20;"
+        },
+        {
+          "ts": 1790341313.319,
+          "level": "INFO",
+          "node": "DB_EXEC",
+          "msg": "Execution complete. Returned 0 rows."
+        },
+        {
+          "ts": 1790341313.319,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Query execution successful. Rows: 0"
+        },
+        {
+          "ts": 1790341313.334,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [analyze_stockout]"
+        },
+        {
+          "ts": 1790341313.335,
+          "level": "INFO",
+          "node": "stockout_analyzer.py",
+          "msg": "Stockout analysis for retail_clothing: 0 at-risk products found"
+        },
+        {
+          "ts": 1790341313.335,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Stockout analysis complete: 0 at-risk products"
+        },
+        {
+          "ts": 1790341313.348,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [insight_recommendation]"
+        },
+        {
+          "ts": 1790341313.348,
+          "level": "INFO",
+          "node": "INSIGHT",
+          "msg": "Generating insights for 0 rows in domain: retail_clothing"
+        },
+        {
+          "ts": 1790341313.348,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Insights generated successfully."
+        },
+        {
+          "ts": 1790341313.348,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [recommend_visualization]"
+        },
+        {
+          "ts": 1790341313.348,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "No results for visualization recommendation."
+        }
+      ]
+    },
+    {
+      "mission_id": "retail_clothing_010",
+      "mission_name": "Inventory Turnover Rate",
+      "domain": "retail_clothing",
+      "severity": "LOW",
+      "risk_score": 0,
+      "risk_factors": {},
+      "sql": "SELECT p.sku, p.style_name, p.category, i.stock_count, i.reorder_point, (i.reorder_point - i.stock_count + i.reorder_point) AS suggested_reorder_qty, s.supplier_name, s.lead_time_days FROM products p JOIN inventory i ON p.sku = i.sku JOIN suppliers s ON p.supplier_id = s.supplier_id WHERE i.stock_count < i.reorder_point ORDER BY (i.reorder_point - i.stock_count) DESC LIMIT 20;",
+      "data_count": 0,
+      "results": [],
+      "visualization_config": null,
+      "insight": "No data found to analyze.",
+      "recommendation": "Try broadening your search criteria or checking if the data for this period is available.",
+      "original_query": "SELECT sku, inventory.turnover_rate FROM (SELECT sku, stock_count, reorder_point, last_restocked_at FROM inventory) inventory, (SELECT sku, AVG(lead_time_days) AS lead_time FROM suppliers GROUP BY sku) suppliers WHERE inventory.sku = suppliers.sku AND lead_time > 30 AND inventory.stock_count < reorder_point",
+      "depth": 0,
+      "parent_mission_id": null,
+      "rationale": "",
+      "timestamp": "LIVE AUDIT",
+      "logs": [
+        {
+          "ts": 1790341313.149,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [classify_intent]"
+        },
+        {
+          "ts": 1790341313.15,
+          "level": "INFO",
+          "node": "INTENT",
+          "msg": "[IntentModule] Using Custom ML Intent Classifier for query: 'SELECT sku, inventory.turnover_rate FROM (SELECT sku, stock_count, reorder_point, last_restocked_at FROM inventory) inventory, (SELECT sku, AVG(lead_time_days) AS lead_time FROM suppliers GROUP BY sku) suppliers WHERE inventory.sku = suppliers.sku AND lead_time > 30 AND inventory.stock_count < reorder_point'"
+        },
+        {
+          "ts": 1790341313.151,
+          "level": "INFO",
+          "node": "model.py",
+          "msg": "[IntentClassifier] ML prediction: reorder_recommendation (conf: 0.900) -> workflow: SELECT"
+        },
+        {
+          "ts": 1790341313.151,
+          "level": "INFO",
+          "node": "intent_service.py",
+          "msg": "[IntentService] Custom model result: retail=reorder_recommendation, workflow=SELECT, conf=0.900, complexity=Complex, clarify=False"
+        },
+        {
+          "ts": 1790341313.24,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Intent classified: SELECT (conf: 0.9) | Needs Clarification: False"
+        },
+        {
+          "ts": 1790341313.266,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [generate_sql]"
+        },
+        {
+          "ts": 1790341313.267,
+          "level": "INFO",
+          "node": "SQL_GEN",
+          "msg": "Generating SQL for domain: retail_clothing | Query: SELECT sku, inventory.turnover_rate FROM (SELECT sku, stock_count, reorder_point, last_restocked_at FROM inventory) inventory, (SELECT sku, AVG(lead_time_days) AS lead_time FROM suppliers GROUP BY sku) suppliers WHERE inventory.sku = suppliers.sku AND lead_time > 30 AND inventory.stock_count < reorder_point"
+        },
+        {
+          "ts": 1790341313.267,
+          "level": "INFO",
+          "node": "model.py",
+          "msg": "[IntentClassifier] ML prediction: reorder_recommendation (conf: 0.900) -> workflow: SELECT"
+        },
+        {
+          "ts": 1790341313.268,
+          "level": "INFO",
+          "node": "rule_engine.py",
+          "msg": "[SQLGenerator] Intent: reorder_recommendation -> SQL: SELECT p.sku, p.style_name, p.category, i.stock_count, i.reorder_point, (i.reord..."
+        },
+        {
+          "ts": 1790341313.268,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "SQL Generated: SELECT p.sku, p.style_name, p.category, i.stock_co..."
+        },
+        {
+          "ts": 1790341313.283,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [validate_sql]"
+        },
+        {
+          "ts": 1790341313.316,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [execute_query]"
+        },
+        {
+          "ts": 1790341313.316,
+          "level": "INFO",
+          "node": "DB_EXEC",
+          "msg": "Executing SQL: SELECT p.sku, p.style_name, p.category, i.stock_count, i.reorder_point, (i.reorder_point - i.stock_count + i.reorder_point) AS suggested_reorder_qty, s.supplier_name, s.lead_time_days FROM products p JOIN inventory i ON p.sku = i.sku JOIN suppliers s ON p.supplier_id = s.supplier_id WHERE i.stock_count < i.reorder_point ORDER BY (i.reorder_point - i.stock_count) DESC LIMIT 20;"
+        },
+        {
+          "ts": 1790341313.317,
+          "level": "INFO",
+          "node": "DB_EXEC",
+          "msg": "Execution complete. Returned 0 rows."
+        },
+        {
+          "ts": 1790341313.317,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Query execution successful. Rows: 0"
+        },
+        {
+          "ts": 1790341313.332,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [analyze_stockout]"
+        },
+        {
+          "ts": 1790341313.333,
+          "level": "INFO",
+          "node": "stockout_analyzer.py",
+          "msg": "Stockout analysis for retail_clothing: 0 at-risk products found"
+        },
+        {
+          "ts": 1790341313.333,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Stockout analysis complete: 0 at-risk products"
+        },
+        {
+          "ts": 1790341313.345,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [insight_recommendation]"
+        },
+        {
+          "ts": 1790341313.345,
+          "level": "INFO",
+          "node": "INSIGHT",
+          "msg": "Generating insights for 0 rows in domain: retail_clothing"
+        },
+        {
+          "ts": 1790341313.345,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Insights generated successfully."
+        },
+        {
+          "ts": 1790341313.345,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [recommend_visualization]"
+        },
+        {
+          "ts": 1790341313.345,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "No results for visualization recommendation."
+        }
+      ]
+    },
+    {
+      "mission_id": "retail_clothing_011",
+      "mission_name": "Supplier Country Concentration",
+      "domain": "retail_clothing",
+      "severity": "LOW",
+      "risk_score": 20,
+      "risk_factors": {
+        "affected_entities": {
+          "value": 6,
+          "score": 60,
+          "detail": "6 unique entities"
+        },
+        "dollar_exposure": {
+          "value": 0,
+          "score": 0,
+          "detail": "$0 exposure"
+        },
+        "velocity": {
+          "value": 6,
+          "score": 30,
+          "detail": "6 events"
+        },
+        "pep_involvement": {
+          "value": 0,
+          "score": 0,
+          "detail": "0 PEP accounts"
+        },
+        "kyc_gaps": {
+          "value": 0,
+          "score": 0,
+          "detail": "0 KYC gaps"
+        },
+        "severity_escalation": {
+          "value": "MEDIUM",
+          "score": 25,
+          "detail": "Base: MEDIUM"
+        }
+      },
+      "sql": "SELECT supplier_id, supplier_name, lead_time_days, on_time_rate, country FROM suppliers ORDER BY lead_time_days ASC;",
+      "data_count": 6,
+      "results": [
+        {
+          "supplier_id": "Apex Audio Dist.",
+          "supplier_name": "Apex Audio Dist.",
+          "lead_time_days": 7,
+          "on_time_rate": 0.95,
+          "country": "Global"
+        },
+        {
+          "supplier_id": "Vanguard Goods",
+          "supplier_name": "Vanguard Goods",
+          "lead_time_days": 7,
+          "on_time_rate": 0.95,
+          "country": "Global"
+        },
+        {
+          "supplier_id": "ThreadCraft Apparel",
+          "supplier_name": "ThreadCraft Apparel",
+          "lead_time_days": 7,
+          "on_time_rate": 0.95,
+          "country": "Global"
+        },
+        {
+          "supplier_id": "Urban Cargo Co.",
+          "supplier_name": "Urban Cargo Co.",
+          "lead_time_days": 7,
+          "on_time_rate": 0.95,
+          "country": "Global"
+        },
+        {
+          "supplier_id": "Aroma Botanics",
+          "supplier_name": "Aroma Botanics",
+          "lead_time_days": 7,
+          "on_time_rate": 0.95,
+          "country": "Global"
+        },
+        {
+          "supplier_id": "SUP-001",
+          "supplier_name": "SUP-001",
+          "lead_time_days": 7,
+          "on_time_rate": 0.95,
+          "country": "Global"
+        }
+      ],
+      "visualization_config": {
+        "chart_type": "line",
+        "title": "lead_time_days by lead_time_days",
+        "x_axis_key": "lead_time_days",
+        "y_axis_key": "lead_time_days",
+        "label": "lead_time_days",
+        "description": "Auto-generated fallback chart"
+      },
+      "insight": "The retrieved data reveals that all suppliers are from the 'Global' country, indicating a lack of geographic diversification in the retail clothing supply chain. This concentration of suppliers in a single country may pose a risk to the business in case of global disruptions or supply chain disruptions.",
+      "recommendation": "To mitigate this risk, the company should consider diversifying its supplier base by exploring and partnering with suppliers from different countries. This can be achieved by conducting market research, attending industry events, and establishing relationships with local suppliers. Additionally, the company should prioritize building strong relationships with its current suppliers to ensure a stable supply chain.",
+      "original_query": "SELECT country, COUNT(*) AS supplier_count FROM suppliers GROUP BY country HAVING COUNT(*) > 0.2 * (SELECT COUNT(*) FROM suppliers)",
+      "depth": 0,
+      "parent_mission_id": null,
+      "rationale": "",
+      "timestamp": "LIVE AUDIT",
+      "logs": [
+        {
+          "ts": 1790341313.151,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [classify_intent]"
+        },
+        {
+          "ts": 1790341313.152,
+          "level": "INFO",
+          "node": "INTENT",
+          "msg": "[IntentModule] Using Custom ML Intent Classifier for query: 'SELECT country, COUNT(*) AS supplier_count FROM suppliers GROUP BY country HAVING COUNT(*) > 0.2 * (SELECT COUNT(*) FROM suppliers)'"
+        },
+        {
+          "ts": 1790341313.153,
+          "level": "INFO",
+          "node": "model.py",
+          "msg": "[IntentClassifier] ML prediction: general_query (conf: 0.900) -> workflow: SELECT"
+        },
+        {
+          "ts": 1790341313.153,
+          "level": "INFO",
+          "node": "intent_service.py",
+          "msg": "[IntentService] Custom model result: retail=general_query, workflow=SELECT, conf=0.900, complexity=Complex, clarify=False"
+        },
+        {
+          "ts": 1790341313.24,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Intent classified: SELECT (conf: 0.9) | Needs Clarification: False"
+        },
+        {
+          "ts": 1790341313.263,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [generate_sql]"
+        },
+        {
+          "ts": 1790341313.263,
+          "level": "INFO",
+          "node": "SQL_GEN",
+          "msg": "Generating SQL for domain: retail_clothing | Query: SELECT country, COUNT(*) AS supplier_count FROM suppliers GROUP BY country HAVING COUNT(*) > 0.2 * (SELECT COUNT(*) FROM suppliers)"
+        },
+        {
+          "ts": 1790341313.264,
+          "level": "INFO",
+          "node": "model.py",
+          "msg": "[IntentClassifier] ML prediction: general_query (conf: 0.900) -> workflow: SELECT"
+        },
+        {
+          "ts": 1790341313.264,
+          "level": "INFO",
+          "node": "rule_engine.py",
+          "msg": "[SQLGenerator] Intent: general_query -> SQL: SELECT supplier_id, supplier_name, lead_time_days, on_time_rate, country FROM su..."
+        },
+        {
+          "ts": 1790341313.265,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "SQL Generated: SELECT supplier_id, supplier_name, lead_time_days,..."
+        },
+        {
+          "ts": 1790341313.282,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [validate_sql]"
+        },
+        {
+          "ts": 1790341313.312,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [execute_query]"
+        },
+        {
+          "ts": 1790341313.313,
+          "level": "INFO",
+          "node": "DB_EXEC",
+          "msg": "Executing SQL: SELECT supplier_id, supplier_name, lead_time_days, on_time_rate, country FROM suppliers ORDER BY lead_time_days ASC;"
+        },
+        {
+          "ts": 1790341313.313,
+          "level": "INFO",
+          "node": "DB_EXEC",
+          "msg": "Execution complete. Returned 6 rows."
+        },
+        {
+          "ts": 1790341313.313,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Query execution successful. Rows: 6"
+        },
+        {
+          "ts": 1790341313.33,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [analyze_stockout]"
+        },
+        {
+          "ts": 1790341313.339,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [insight_recommendation]"
+        },
+        {
+          "ts": 1790341313.339,
+          "level": "INFO",
+          "node": "INSIGHT",
+          "msg": "Generating insights for 6 rows in domain: retail_clothing"
+        },
+        {
+          "ts": 1790341313.34,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM [nvidia] using model [meta/llama-3.2-11b-vision-instruct] generating response..."
+        },
+        {
+          "ts": 1790341313.342,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [recommend_visualization]"
+        },
+        {
+          "ts": 1790341313.342,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Visualization recommended: line"
+        },
+        {
+          "ts": 1790341317.905,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM response received from [meta/llama-3.2-11b-vision-instruct]. Snippet: {\n  \"insight\": \"The retrieved data reveals that al..."
+        },
+        {
+          "ts": 1790341317.905,
+          "level": "INFO",
+          "node": "INSIGHT",
+          "msg": "Successfully generated data analysis insights using NVIDIA LLM."
+        },
+        {
+          "ts": 1790341317.906,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Insights generated successfully."
+        }
+      ]
+    }
+  ],
+  "clusters": [],
+  "narrative": {
+    "executive_summary": "Our real-time threat detection system has identified several low-severity threat vectors in the retail clothing domain, primarily related to supplier lead time variability, on-time rate fluctuation, and supplier country concentration. While these issues are not currently critical, they require attention to mitigate potential risks. Immediate action is necessary to address these vulnerabilities and ensure supply chain resilience.",
+    "threat_vectors": [
+      {
+        "name": "Supplier Lead Time Variability",
+        "severity": "LOW",
+        "description": "All suppliers have an average lead time of 7 days, which is below the threshold of 30 days, but may pose issues with timely delivery."
+      },
+      {
+        "name": "Supplier Country Concentration",
+        "severity": "LOW",
+        "description": "All suppliers are from the 'Global' country, indicating a lack of geographic diversification in the retail clothing supply chain, which may pose a risk to the business in case of global disruptions or supply chain disruptions."
+      },
+      {
+        "name": "Supplier On-Time Rate Fluctuation",
+        "severity": "LOW",
+        "description": "The on-time rate of 95% is below the target of 80%, suggesting potential issues with timely delivery."
+      }
+    ],
+    "immediate_actions": [
+      "Conduct a thorough review of supplier lead times and on-time rates to identify potential issues and develop strategies to improve performance.",
+      "Develop a plan to diversify suppliers across different geographic regions to mitigate risks associated with supplier country concentration.",
+      "Establish a regular monitoring process to track supplier performance and address any emerging issues promptly."
+    ],
+    "monitoring_recommendations": [
+      "Continuously monitor supplier lead times, on-time rates, and geographic concentration to ensure supply chain resilience.",
+      "Establish a dashboard to track key performance indicators (KPIs) related to supplier performance and supply chain risk."
+    ],
+    "overall_risk": 23,
+    "overall_severity": "LOW",
+    "title": "Intelligence Brief - LIVE"
+  }
+}

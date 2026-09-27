@@ -2,8 +2,48 @@ from typing import Dict, Any, List
 import json
 import asyncio
 import difflib
+import os
 from app.services.llm import llm_service
 from app.core.logger import logger
+
+# Ontology path
+_ONTOLoGY_PATH = os.path.join(os.path.dirname(__file__), "..", "..", "..", "data", "ontology", "ontology.json")
+_ONTOLoGY_CACHE = None
+
+def _load_ontology():
+    """Load ontology JSON once and cache it."""
+    global _ONTOLoGY_CACHE
+    if _ONTOLoGY_CACHE is None:
+        try:
+            with open(_ONTOLoGY_PATH, "r", encoding="utf-8") as f:
+                _ONTOLoGY_CACHE = json.load(f)
+        except Exception as e:
+            logger.error(f"Failed to load ontology.json: {e}")
+            _ONTOLoGY_CACHE = {}
+    return _ONTOLoGY_CACHE
+
+def _get_synonyms_from_ontology(domain: str, term: str) -> List[str]:
+    """Get synonyms for a term from the ontology."""
+    ontology = _load_ontology()
+    domain_data = ontology.get("domains", {}).get(domain, {})
+    all_synonyms = []
+    for d_name, d_data in domain_data.items():
+        synonyms = d_data.get("synonyms", {})
+        if term in synonyms:
+            all_synonyms.extend(synonyms[term])
+        # Also check reverse: if term is a key, get its synonyms
+        for key, val_list in synonyms.items():
+            if term in key or term in val_list:
+                all_synonyms.extend(val_list)
+    return all_synonyms
+
+def _get_category_parent_from_ontology(domain: str, category: str) -> str:
+    """Get parent category from ontology."""
+    ontology = _load_ontology()
+    domain_data = ontology.get("domains", {}).get(domain, {})
+    if category in domain_data:
+        return domain_data[category].get("parent", "")
+    return ""
 
 class EntityExtractor:
     """
@@ -15,15 +55,34 @@ class EntityExtractor:
 
     async def extract(self, query: str, domain: str = "general", relevant_tables: List[str] = None) -> Dict[str, Any]:
         """
-        Extracts entities and resolves them against database values using LLM reasoning 
-        informed by the domain schema context.
+        Extracts entities and resolves them against database values using LLM reasoning
+        informed by the domain schema context and ontology synonym expansion.
+
+        Ontology enhances resolution by:
+        - Expanding synonyms (e.g., "perishable items" → Dairy/Bakery/Produce)
+        - Mapping categories to parent classes
+        - Enriching search values with domain-specific terminology
         """
         from app.modules.learning import learning_service
-        
+
         # 1. Get learned domain knowledge (contains unique values and schema context)
         config = learning_service.get_domain_config(domain)
         schema_context = config.get("schema_context", "")
         db_profile = config.get("db_profile", {})
+
+        # 2. Load ontology and get synonym expansion for query enrichment
+        ontology = _load_ontology()
+        domain_data = ontology.get("domains", {}).get(domain, {})
+        synonym_expansion = {}
+
+        # Extract synonyms from ontology for relevant categories
+        if domain_data:
+            for cat_name, cat_data in domain_data.items():
+                cat_synonyms = cat_data.get("synonyms", {})
+                for synonym_key, synonym_list in cat_synonyms.items():
+                    if synonym_key.lower() in query.lower():
+                        # User query mentions a synonym - expand to all mapped terms
+                        synonym_expansion[synonym_key] = synonym_list
         
         # Exclude high-cardinality or unnecessary columns from value resolution context
         EXCLUDED_COLUMNS = {
@@ -42,12 +101,15 @@ class EntityExtractor:
             if relevant_tables is None or table in relevant_tables
         }
 
-        # 2. Build a prompt that asks the LLM to extract AND resolve
+        # 2. Build unique_values_str and skip redundant LLM call if empty
         unique_values_str = ""
         for table, cols in unique_values_map.items():
             for col, vals in cols.items():
                 if vals:
                     unique_values_str += f"- {table}.{col}: {', '.join(str(v) for v in vals[:30])}\n"
+
+        if not unique_values_str:
+            return {"resolved_entities": {}, "metadata": {}}
 
         prompt = f"""
 You are a Precise Entity Extractor and Resolver.

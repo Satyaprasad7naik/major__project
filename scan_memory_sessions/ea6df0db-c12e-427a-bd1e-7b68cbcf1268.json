@@ -1,0 +1,78 @@
+{
+  "_last_touched": 1790248447.83546,
+  "history": [
+    {
+      "timestamp": "2026-09-24T11:14:07.835430",
+      "missions": [
+        {
+          "name": "Dead Stock Analysis",
+          "query": "What products have a stock count of 0 at all locations and were not reordered in the last 30 days?",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        },
+        {
+          "name": "Supplier Lead Time Comparison",
+          "query": "What suppliers have a lead time greater than the average lead time across all suppliers?",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        },
+        {
+          "name": "Sizing Anomaly Detection",
+          "query": "What product styles have a size distribution skew greater than 2 standard deviations from the mean?",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        },
+        {
+          "name": "Reorder Point Breach Analysis",
+          "query": "What products have a stock count less than their reorder point at any location and were not reordered in the last 30 days?",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        },
+        {
+          "name": "Supplier Delay Analysis",
+          "query": "What products have a supplier lead time greater than 30 days and were not reordered in the last 30 days?",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        },
+        {
+          "name": "Return Cause Analysis",
+          "query": "What products have a high return rate (> 20%) in the last 30 days?",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        },
+        {
+          "name": "Supplier Performance Monitoring",
+          "query": "What suppliers have an on-time rate less than 90% in the last 30 days?",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        },
+        {
+          "name": "Demand Level Monitoring",
+          "query": "What products have a sales volume greater than 2 standard deviations from the mean in the last 30 days?",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        }
+      ],
+      "domain_scores": {
+        "retail_clothing": 0
+      },
+      "critical_domains": []
+    }
+  ]
+}

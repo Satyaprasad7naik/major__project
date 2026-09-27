@@ -4,8 +4,11 @@ from app.alert_system.metric_models import MetricRequest, MetricResponse
 from app.alert_system.metric_workflow import metric_app_graph
 from app.orchestration.workflow import app_graph
 from app.core.logger import logger
+from app.api.stockout_endpoints import router as stockout_router
 
 router = APIRouter()
+
+router.include_router(stockout_router)
 
 @router.post("/query", response_model=QueryResponse)
 async def query_database(request: QueryRequest):
@@ -20,11 +23,11 @@ async def query_database(request: QueryRequest):
         "conversation_history": request.conversation_history,
         "retry_count": 0
     }
-    
+
     # Run the graph
     result = await app_graph.ainvoke(initial_state)
     logger.info(f"Graph execution status: {result.get('status')} for query: {request.query}")
-    
+
     # Check if clarification is needed
     if result.get("status") == "needs_clarification":
         return QueryResponse(
@@ -34,7 +37,7 @@ async def query_database(request: QueryRequest):
             clarification_question=result.get("clarification_question"),
             is_final=False
         )
-    
+
     # Check for validation errors
     if result.get("validation_error") and not result.get("query_result"):
         logger.warning(f"Validation failure for query: {request.query} | Error: {result['validation_error']}")
@@ -45,7 +48,7 @@ async def query_database(request: QueryRequest):
             error=result["validation_error"],
             is_final=True
         )
-    
+
     # Success - SQL generated and executed
     logger.info(f"Query success! {len(result.get('query_result', []))} rows returned.")
     return QueryResponse(
@@ -64,7 +67,7 @@ async def create_alert(request: MetricRequest):
     Process a request to create a data metric/alert.
     """
     logger.info(f"Relaying alert request to Metric Workflow: {request.query}")
-    
+
     initial_state = {
         "user_query": request.query,
         "domain": request.domain,
@@ -73,9 +76,9 @@ async def create_alert(request: MetricRequest):
         "status": "pending",
         "explanation": ""
     }
-    
+
     result = await metric_app_graph.ainvoke(initial_state)
-    
+
     return MetricResponse(
         status=result.get("status", "failed"),
         metric=result.get("metric"),

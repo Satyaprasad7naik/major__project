@@ -1,0 +1,256 @@
+{
+  "_last_touched": 1790189175.2506568,
+  "history": [
+    {
+      "timestamp": "2026-09-23T18:44:16.305942",
+      "missions": [
+        {
+          "name": "Dead Stock Risk Assessment",
+          "query": "Which products have a stock count of zero in all inventory locations, indicating potential dead stock?",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        },
+        {
+          "name": "Sizing Anomalies Across Suppliers",
+          "query": "Which product styles have inconsistent sizes across different suppliers?",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        },
+        {
+          "name": "Supplier Lead Time Delays",
+          "query": "Which suppliers consistently fail to meet their lead time commitments, resulting in stockouts?",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        },
+        {
+          "name": "Reorder Point Breaches by Channel",
+          "query": "Which sales channels have consistently breached reorder points for specific products, indicating stockouts?",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        },
+        {
+          "name": "Inventory Imbalances Across Locations",
+          "query": "Which products have stock count imbalances across different inventory locations?",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        },
+        {
+          "name": "Supplier On-Time Delivery Performance",
+          "query": "Which suppliers have consistently failed to deliver products on time, impacting stock levels?",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        },
+        {
+          "name": "Sales Event Product Bundling",
+          "query": "Which products are frequently bundled together in sales events, indicating potential demand patterns?",
+          "domain": "retail_clothing",
+          "risk_score": 31,
+          "severity": "MEDIUM",
+          "data_count": 10
+        },
+        {
+          "name": "Product Seasonality and Demand Patterns",
+          "query": "Which products have consistently varying demand patterns throughout the year, indicating seasonality?",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        }
+      ],
+      "domain_scores": {
+        "retail_clothing": 4
+      },
+      "critical_domains": []
+    },
+    {
+      "timestamp": "2026-09-23T18:46:04.153163",
+      "missions": [
+        {
+          "name": "Supplier Lead Time Distribution",
+          "query": "Which suppliers have a non-uniform lead time distribution across all products, indicating potential stockout risks?",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        },
+        {
+          "name": "Stock Imbalance by Location and Supplier",
+          "query": "Which products have stock count imbalances across different inventory locations, and which suppliers are responsible for these imbalances?",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        },
+        {
+          "name": "Product Demand Seasonality",
+          "query": "Which products have consistently varying demand patterns throughout the year, indicating seasonality, and which sales channels are driving these trends?",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        },
+        {
+          "name": "Supplier On-Time Delivery Performance",
+          "query": "Which suppliers have consistently delivered products on time, and which suppliers have consistently failed to meet their on-time commitments?",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        },
+        {
+          "name": "Reorder Point Breaches by Channel and Product",
+          "query": "Which sales channels have consistently breached reorder points for specific products, indicating stockouts, and which products are most affected?",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        },
+        {
+          "name": "Product Supplier Concentration Risk",
+          "query": "Which products have a high concentration of suppliers, and which suppliers are responsible for these concentrations, indicating potential supply chain risks?",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        },
+        {
+          "name": "Supplier Lead Time Variance by Product",
+          "query": "Which suppliers have a high variance in lead time across different products, indicating potential stockout risks, and which products are most affected?",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        },
+        {
+          "name": "Inventory Location Optimization",
+          "query": "Which inventory locations have the highest stock turnover rates, indicating potential optimization opportunities, and which products are driving these trends?",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        },
+        {
+          "name": "Supplier Country Risk",
+          "query": "Which suppliers are located in countries with high risk profiles, and which products are most affected by these risks?",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        },
+        {
+          "name": "Product Bundle Analysis",
+          "query": "Which products are frequently bundled together in sales events, indicating potential demand patterns, and which bundles are most popular?",
+          "domain": "retail_clothing",
+          "risk_score": 31,
+          "severity": "MEDIUM",
+          "data_count": 10
+        }
+      ],
+      "domain_scores": {
+        "retail_clothing": 3
+      },
+      "critical_domains": []
+    },
+    {
+      "timestamp": "2026-09-23T18:46:15.250609",
+      "missions": [
+        {
+          "name": "Supplier Lead Time Variance",
+          "query": "Which suppliers have a lead time variance greater than 20% compared to the average lead time across all suppliers?",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        },
+        {
+          "name": "Product Size Distribution Across Suppliers",
+          "query": "For each product style, calculate the distribution of sizes across different suppliers, and identify styles with an uneven distribution of sizes (e.g., one supplier dominates the market for a particular size)",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        },
+        {
+          "name": "Reorder Point Optimization",
+          "query": "Analyze the sales history and inventory levels for each product to identify optimal reorder points that minimize stockouts and overstocking",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        },
+        {
+          "name": "Supplier On-Time Delivery Rate Trend",
+          "query": "Plot the on-time delivery rate trend for each supplier over the past year to identify any significant changes or anomalies",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        },
+        {
+          "name": "Product Seasonality Analysis",
+          "query": "Analyze the sales history for each product to identify any seasonality patterns, and calculate the average sales volume for each product during peak and off-peak seasons",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        },
+        {
+          "name": "Inventory Turnover Ratio",
+          "query": "Calculate the inventory turnover ratio for each product and supplier to identify slow-moving or dead stock, and analyze the ratio over time to identify any trends or anomalies",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        },
+        {
+          "name": "Supplier Country-Based Lead Time Analysis",
+          "query": "Analyze the lead time for each supplier by country to identify any regional differences or trends, and calculate the average lead time for each country",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        },
+        {
+          "name": "Product Channel-Specific Demand Analysis",
+          "query": "Analyze the sales history for each product by sales channel to identify any channel-specific demand patterns or anomalies, and calculate the average sales volume for each product by channel",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        },
+        {
+          "name": "Supplier Rating Based on On-Time Delivery and Lead Time",
+          "query": "Assign a rating to each supplier based on their on-time delivery rate and lead time, and calculate the average rating for each supplier over time",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        },
+        {
+          "name": "Inventory Location-Based Stock Imbalance Analysis",
+          "query": "Analyze the stock levels for each product across different inventory locations to identify any imbalances or anomalies, and calculate the average stock imbalance for each product over time",
+          "domain": "retail_clothing",
+          "risk_score": 39,
+          "severity": "MEDIUM",
+          "data_count": 50
+        }
+      ],
+      "domain_scores": {
+        "retail_clothing": 4
+      },
+      "critical_domains": []
+    }
+  ]
+}

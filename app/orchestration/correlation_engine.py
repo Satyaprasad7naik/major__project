@@ -3,20 +3,16 @@ Cross-Domain Correlation Engine.
 Analyzes ALL completed mission results across domains to find connected threats —
 entities (user_ids, IPs, countries) appearing in multiple findings.
 """
-from langchain_google_genai import ChatGoogleGenerativeAI
 from langchain_core.prompts import ChatPromptTemplate
 from app.core.config import settings
+from app.services.llm import get_langchain_llm
 import json
 
 
 class CorrelationEngine:
 
     def __init__(self):
-        self.llm = ChatGoogleGenerativeAI(
-            model=settings.GEMINI_MODEL_NAME,
-            google_api_key=settings.GEMINI_API_KEY,
-            temperature=0.4,
-        )
+        self.llm = get_langchain_llm(temperature=0.4)
 
     async def correlate(self, all_detections: list) -> list:
         """

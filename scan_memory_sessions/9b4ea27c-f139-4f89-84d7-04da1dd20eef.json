@@ -1,0 +1,240 @@
+{
+  "_last_touched": 1788351326.0528593,
+  "history": [
+    {
+      "timestamp": "2026-09-02T12:12:20.640015",
+      "missions": [
+        {
+          "name": "Dead Stock Detector",
+          "query": "Identify products with a stock count of 0 across all locations and categorize them by category and supplier.",
+          "domain": "retail_clothing",
+          "risk_score": 15,
+          "severity": "LOW",
+          "data_count": 1
+        },
+        {
+          "name": "Sizing Anomaly Investigator",
+          "query": "Find products with inconsistent size information across different suppliers and suggest the most common size for each product.",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        },
+        {
+          "name": "Supplier Delay Risk Assessor",
+          "query": "Calculate the average lead time for each supplier and identify those with a lead time exceeding 30 days, along with the products affected.",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        },
+        {
+          "name": "Reorder Point Breach Detector",
+          "query": "Identify products with a stock count below their reorder point and calculate the total stock needed to meet demand until the next restock.",
+          "domain": "retail_clothing",
+          "risk_score": 38,
+          "severity": "MEDIUM",
+          "data_count": 14
+        },
+        {
+          "name": "Channel-Specific Sales Analysis",
+          "query": "Analyze sales events by channel and product category to identify trends and opportunities for improvement.",
+          "domain": "retail_clothing",
+          "risk_score": 37,
+          "severity": "MEDIUM",
+          "data_count": 18
+        },
+        {
+          "name": "Product Segmentation by Supplier",
+          "query": "Segment products by supplier and calculate the average retail price, unit cost, and profit margin for each supplier.",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        },
+        {
+          "name": "Lead Time and On-Time Rate Analysis",
+          "query": "Analyze the lead time and on-time rate for each supplier and identify areas for improvement.",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        },
+        {
+          "name": "Unit Cost and Profit Margin Analysis",
+          "query": "Calculate the unit cost and profit margin for each product and identify opportunities to reduce costs or increase profitability.",
+          "domain": "retail_clothing",
+          "risk_score": 39,
+          "severity": "MEDIUM",
+          "data_count": 119
+        }
+      ],
+      "domain_scores": {
+        "retail_clothing": 16
+      },
+      "critical_domains": []
+    },
+    {
+      "timestamp": "2026-09-02T12:12:27.660598",
+      "missions": [
+        {
+          "name": "Dead Stock Alert",
+          "query": "List all products with a stock count of 0 across all locations, grouped by supplier.",
+          "domain": "retail_clothing",
+          "risk_score": 15,
+          "severity": "LOW",
+          "data_count": 1
+        },
+        {
+          "name": "Sizing Anomaly Detection",
+          "query": "Find all products with a size that is not present in at least 20% of its categories, ordered by category and size.",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        },
+        {
+          "name": "Supplier Delay Warning",
+          "query": "Identify suppliers with a lead time exceeding 30 days, ordered by lead time and supplier name.",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        },
+        {
+          "name": "Reorder Point Breach Alert",
+          "query": "List all products with a stock count below its reorder point, grouped by supplier and location.",
+          "domain": "retail_clothing",
+          "risk_score": 42,
+          "severity": "MEDIUM",
+          "data_count": 14
+        },
+        {
+          "name": "Pricing Anomaly Detection",
+          "query": "Find all products with a retail price that is more than 10% higher than its average retail price across all channels, ordered by product name and retail price.",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        },
+        {
+          "name": "Sales Trends Analysis",
+          "query": "Analyze sales trends across all products, channels, and time periods to identify top-selling products and channels, ordered by sales volume.",
+          "domain": "retail_clothing",
+          "risk_score": 39,
+          "severity": "MEDIUM",
+          "data_count": 199
+        },
+        {
+          "name": "Supplier On-Time Rate Analysis",
+          "query": "Evaluate the on-time rate of all suppliers, grouped by supplier name and on-time rate.",
+          "domain": "retail_clothing",
+          "risk_score": 20,
+          "severity": "LOW",
+          "data_count": 6
+        },
+        {
+          "name": "Inventory Variance Analysis",
+          "query": "Calculate the variance of stock counts across all locations and suppliers for each product, ordered by product name and variance.",
+          "domain": "retail_clothing",
+          "risk_score": 39,
+          "severity": "MEDIUM",
+          "data_count": 120
+        }
+      ],
+      "domain_scores": {
+        "retail_clothing": 19
+      },
+      "critical_domains": []
+    },
+    {
+      "timestamp": "2026-09-02T12:15:26.052792",
+      "missions": [
+        {
+          "name": "Dead Stock Analysis",
+          "query": "Find all products with a stock count of 0 across all locations, grouped by supplier and category.",
+          "domain": "retail_clothing",
+          "risk_score": 10,
+          "severity": "LOW",
+          "data_count": 1
+        },
+        {
+          "name": "Sizing Anomalies",
+          "query": "Find all products with a size that is present in less than 5% of its categories, ordered by category and size.",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        },
+        {
+          "name": "Supplier Lead Time Analysis",
+          "query": "Find all suppliers with a lead time exceeding 60 days, ordered by lead time and supplier name.",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        },
+        {
+          "name": "Stock Needs Analysis",
+          "query": "Find all products with a stock count below their reorder point and calculate the total stock needed to meet demand until the next restock, grouped by supplier and location.",
+          "domain": "retail_clothing",
+          "risk_score": 6,
+          "severity": "LOW",
+          "data_count": 1
+        },
+        {
+          "name": "Sales Trends Analysis",
+          "query": "Analyze sales events by channel and product category to identify trends and opportunities for improvement, ordered by sales volume and product name.",
+          "domain": "retail_clothing",
+          "risk_score": 41,
+          "severity": "MEDIUM",
+          "data_count": 18
+        },
+        {
+          "name": "Returns Rate Analysis",
+          "query": "Find all products with a returns rate exceeding 5% across all channels, ordered by returns rate and product name.",
+          "domain": "retail_clothing",
+          "risk_score": 39,
+          "severity": "MEDIUM",
+          "data_count": 120
+        },
+        {
+          "name": "Profit Margin Analysis",
+          "query": "Calculate the average profit margin for each supplier and identify opportunities to increase profitability, ordered by profit margin and supplier name.",
+          "domain": "retail_clothing",
+          "risk_score": 21,
+          "severity": "LOW",
+          "data_count": 5
+        },
+        {
+          "name": "Stock Variance Analysis",
+          "query": "Calculate the variance of stock counts across all locations and suppliers for each product, ordered by product name and variance.",
+          "domain": "retail_clothing",
+          "risk_score": 39,
+          "severity": "MEDIUM",
+          "data_count": 120
+        },
+        {
+          "name": "On-Time Rate Analysis",
+          "query": "Analyze the on-time rate for each supplier and identify areas for improvement, ordered by on-time rate and supplier name.",
+          "domain": "retail_clothing",
+          "risk_score": 13,
+          "severity": "LOW",
+          "data_count": 2
+        },
+        {
+          "name": "Category Sales Analysis",
+          "query": "Analyze sales trends across all products, channels, and time periods to identify top-selling categories, ordered by sales volume and category name.",
+          "domain": "retail_clothing",
+          "risk_score": 20,
+          "severity": "LOW",
+          "data_count": 6
+        }
+      ],
+      "domain_scores": {
+        "retail_clothing": 19
+      },
+      "critical_domains": []
+    }
+  ]
+}

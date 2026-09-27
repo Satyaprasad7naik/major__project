@@ -1,0 +1,2114 @@
+{
+  "scan_id": "scan-20260902T043708",
+  "timestamp": "2026-09-02T04:37:08.772795",
+  "stats": {
+    "total_missions": 8,
+    "critical_count": 0,
+    "high_count": 0,
+    "overall_risk": 26,
+    "overall_severity": "LOW"
+  },
+  "detections": [
+    {
+      "mission_id": "MSS-001",
+      "mission_name": "Dead Stock by Category",
+      "domain": "retail_clothing",
+      "severity": "LOW",
+      "risk_score": 6,
+      "risk_factors": {
+        "affected_entities": {
+          "value": 1,
+          "score": 10,
+          "detail": "1 unique entities"
+        },
+        "dollar_exposure": {
+          "value": 0,
+          "score": 0,
+          "detail": "$0 exposure"
+        },
+        "velocity": {
+          "value": 1,
+          "score": 5,
+          "detail": "1 events"
+        },
+        "pep_involvement": {
+          "value": 0,
+          "score": 0,
+          "detail": "0 PEP accounts"
+        },
+        "kyc_gaps": {
+          "value": 0,
+          "score": 0,
+          "detail": "0 KYC gaps"
+        },
+        "severity_escalation": {
+          "value": "MEDIUM",
+          "score": 25,
+          "detail": "Base: MEDIUM"
+        }
+      },
+      "sql": "SELECT p.category, p.style_name, p.retail_price FROM products p JOIN inventory i ON p.sku = i.sku WHERE i.stock_count = 0 AND p.retail_price > 50",
+      "data_count": 1,
+      "results": [
+        {
+          "category": "Outerwear",
+          "style_name": "Wool Blend Blazer",
+          "retail_price": 89.99
+        }
+      ],
+      "visualization_config": {
+        "chart_type": "line",
+        "title": "retail_price by category",
+        "x_axis_key": "category",
+        "y_axis_key": "retail_price",
+        "label": "retail_price",
+        "description": "Auto-generated fallback chart"
+      },
+      "insight": "Data analysis complete. Results retrieved.",
+      "recommendation": "Review the returned data for specific patterns.",
+      "original_query": "What are the product categories with stock count zero and retail price greater than $50?",
+      "depth": 0,
+      "parent_mission_id": null,
+      "rationale": "",
+      "timestamp": "LIVE AUDIT",
+      "logs": [
+        {
+          "ts": 1788323628.409,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [classify_intent]"
+        },
+        {
+          "ts": 1788323628.41,
+          "level": "INFO",
+          "node": "INTENT",
+          "msg": "Classifying intent for domain: retail_clothing | Query: What are the product categories with stock count zero and retail price greater than $50?"
+        },
+        {
+          "ts": 1788323628.413,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM [openai] using model [meta/llama-3.2-11b-vision-instruct] generating response..."
+        },
+        {
+          "ts": 1788323700.587,
+          "level": "ERROR",
+          "node": "llm.py",
+          "msg": "LLM Error: Request timed out."
+        },
+        {
+          "ts": 1788323700.588,
+          "level": "WARNING",
+          "node": "resilient_llm.py",
+          "msg": "LLM JSON decode failed after repair: Expecting value: line 1 column 1 (char 0)"
+        },
+        {
+          "ts": 1788323701.094,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM [openai] using model [meta/llama-3.2-11b-vision-instruct] generating response..."
+        },
+        {
+          "ts": 1788323790.59,
+          "level": "ERROR",
+          "node": "llm.py",
+          "msg": "LLM Error: Request timed out."
+        },
+        {
+          "ts": 1788323790.59,
+          "level": "WARNING",
+          "node": "resilient_llm.py",
+          "msg": "LLM JSON decode failed after repair: Expecting value: line 1 column 1 (char 0)"
+        },
+        {
+          "ts": 1788323791.599,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM [openai] using model [meta/llama-3.2-11b-vision-instruct] generating response..."
+        },
+        {
+          "ts": 1788323803.515,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM response received from [meta/llama-3.2-11b-vision-instruct]. Snippet: **Intent Classification**\n\nBased on the user query..."
+        },
+        {
+          "ts": 1788323803.517,
+          "level": "INFO",
+          "node": "INTENT",
+          "msg": "Classification Result: SELECT (conf: 1.0) | Needs Clarification: False"
+        },
+        {
+          "ts": 1788323803.578,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Intent classified: SELECT (conf: 1.0) | Needs Clarification: False"
+        },
+        {
+          "ts": 1788323803.579,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [generate_sql]"
+        },
+        {
+          "ts": 1788323803.579,
+          "level": "INFO",
+          "node": "SQL_GEN",
+          "msg": "Generating SQL for domain: retail_clothing | Query: What are the product categories with stock count zero and retail price greater than $50?"
+        },
+        {
+          "ts": 1788323803.584,
+          "level": "INFO",
+          "node": "SQL_GEN",
+          "msg": "Using custom SQL prompt for domain: retail_clothing"
+        },
+        {
+          "ts": 1788323803.584,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM [openai] using model [meta/llama-3.2-11b-vision-instruct] generating response..."
+        },
+        {
+          "ts": 1788323805.308,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM response received from [meta/llama-3.2-11b-vision-instruct]. Snippet: SELECT p.category, p.style_name, p.retail_price FR..."
+        },
+        {
+          "ts": 1788323805.309,
+          "level": "INFO",
+          "node": "SQL_GEN",
+          "msg": "SQL Generated and cleaned: SELECT p.category, p.style_name, p.retail_price FR..."
+        },
+        {
+          "ts": 1788323805.309,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "SQL Generated: SELECT p.category, p.style_name, p.retail_price FR..."
+        },
+        {
+          "ts": 1788323805.31,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [validate_sql]"
+        },
+        {
+          "ts": 1788323805.312,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [execute_query]"
+        },
+        {
+          "ts": 1788323805.312,
+          "level": "INFO",
+          "node": "DB_EXEC",
+          "msg": "Executing SQL: SELECT p.category, p.style_name, p.retail_price FROM products p JOIN inventory i ON p.sku = i.sku WHERE i.stock_count = 0 AND p.retail_price > 50"
+        },
+        {
+          "ts": 1788323805.313,
+          "level": "INFO",
+          "node": "DB_EXEC",
+          "msg": "Execution complete. Returned 1 rows."
+        },
+        {
+          "ts": 1788323805.313,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Query execution successful. Rows: 1"
+        },
+        {
+          "ts": 1788323805.314,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [analyze_stockout]"
+        },
+        {
+          "ts": 1788323805.321,
+          "level": "INFO",
+          "node": "stockout_analyzer.py",
+          "msg": "Stockout analysis for retail_clothing: 14 at-risk products found"
+        },
+        {
+          "ts": 1788323805.322,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Stockout analysis complete: 14 at-risk products"
+        },
+        {
+          "ts": 1788323805.323,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [insight_recommendation]"
+        },
+        {
+          "ts": 1788323805.323,
+          "level": "INFO",
+          "node": "INSIGHT",
+          "msg": "Generating insights for 1 rows in domain: retail_clothing"
+        },
+        {
+          "ts": 1788323805.323,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM [openai] using model [meta/llama-3.2-11b-vision-instruct] generating response..."
+        },
+        {
+          "ts": 1788323805.325,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [recommend_visualization]"
+        },
+        {
+          "ts": 1788323805.325,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Visualization recommended: line"
+        },
+        {
+          "ts": 1788323814.97,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM response received from [meta/llama-3.2-11b-vision-instruct]. Snippet: { \n  \"insight\": \"The data indicates a potential in..."
+        },
+        {
+          "ts": 1788323814.97,
+          "level": "ERROR",
+          "node": "INSIGHT",
+          "msg": "Insight Generation Error: Expecting ',' delimiter: line 3 column 67 (char 535)"
+        },
+        {
+          "ts": 1788323814.97,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Insights generated successfully."
+        }
+      ]
+    },
+    {
+      "mission_id": "MSS-002",
+      "mission_name": "Supplier Lead Time Anomalies",
+      "domain": "retail_clothing",
+      "severity": "LOW",
+      "risk_score": 0,
+      "risk_factors": {},
+      "sql": "SELECT supplier_name, lead_time_days, on_time_rate FROM suppliers WHERE UPPER(supplier_name) LIKE '%%' AND lead_time_days > 30 AND on_time_rate < 0.9",
+      "data_count": 0,
+      "results": [],
+      "visualization_config": null,
+      "insight": "No data found to analyze.",
+      "recommendation": "Try broadening your search criteria or checking if the data for this period is available.",
+      "original_query": "Which suppliers have a lead time greater than 30 days and on-time rate less than 90%?",
+      "depth": 0,
+      "parent_mission_id": null,
+      "rationale": "",
+      "timestamp": "LIVE AUDIT",
+      "logs": [
+        {
+          "ts": 1788323628.414,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [classify_intent]"
+        },
+        {
+          "ts": 1788323628.415,
+          "level": "INFO",
+          "node": "INTENT",
+          "msg": "Classifying intent for domain: retail_clothing | Query: Which suppliers have a lead time greater than 30 days and on-time rate less than 90%?"
+        },
+        {
+          "ts": 1788323628.415,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM [openai] using model [meta/llama-3.2-11b-vision-instruct] generating response..."
+        },
+        {
+          "ts": 1788323700.589,
+          "level": "ERROR",
+          "node": "llm.py",
+          "msg": "LLM Error: Request timed out."
+        },
+        {
+          "ts": 1788323700.589,
+          "level": "WARNING",
+          "node": "resilient_llm.py",
+          "msg": "LLM JSON decode failed after repair: Expecting value: line 1 column 1 (char 0)"
+        },
+        {
+          "ts": 1788323701.099,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM [openai] using model [meta/llama-3.2-11b-vision-instruct] generating response..."
+        },
+        {
+          "ts": 1788323779.728,
+          "level": "WARNING",
+          "node": "llm.py",
+          "msg": "LLM rate limit / resource exhaustion encountered, retrying in 2s (attempt 1)"
+        },
+        {
+          "ts": 1788323790.241,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM response received from [meta/llama-3.2-11b-vision-instruct]. Snippet: **Intent Classification**\n\nBased on the provided q..."
+        },
+        {
+          "ts": 1788323790.242,
+          "level": "INFO",
+          "node": "INTENT",
+          "msg": "Classification Result: SELECT (conf: 1.0) | Needs Clarification: False"
+        },
+        {
+          "ts": 1788323790.31,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Intent classified: SELECT (conf: 1.0) | Needs Clarification: False"
+        },
+        {
+          "ts": 1788323790.311,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [generate_sql]"
+        },
+        {
+          "ts": 1788323790.312,
+          "level": "INFO",
+          "node": "SQL_GEN",
+          "msg": "Generating SQL for domain: retail_clothing | Query: Which suppliers have a lead time greater than 30 days and on-time rate less than 90%?"
+        },
+        {
+          "ts": 1788323790.315,
+          "level": "INFO",
+          "node": "SQL_GEN",
+          "msg": "Using custom SQL prompt for domain: retail_clothing"
+        },
+        {
+          "ts": 1788323790.316,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM [openai] using model [meta/llama-3.2-11b-vision-instruct] generating response..."
+        },
+        {
+          "ts": 1788323792.018,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM response received from [meta/llama-3.2-11b-vision-instruct]. Snippet: SELECT supplier_name, lead_time_days, on_time_rate..."
+        },
+        {
+          "ts": 1788323792.019,
+          "level": "INFO",
+          "node": "SQL_GEN",
+          "msg": "SQL Generated and cleaned: SELECT supplier_name, lead_time_days, on_time_rate..."
+        },
+        {
+          "ts": 1788323792.019,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "SQL Generated: SELECT supplier_name, lead_time_days, on_time_rate..."
+        },
+        {
+          "ts": 1788323792.02,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [validate_sql]"
+        },
+        {
+          "ts": 1788323792.022,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [execute_query]"
+        },
+        {
+          "ts": 1788323792.023,
+          "level": "INFO",
+          "node": "DB_EXEC",
+          "msg": "Executing SQL: SELECT supplier_name, lead_time_days, on_time_rate FROM suppliers WHERE UPPER(supplier_name) LIKE '%%' AND lead_time_days > 30 AND on_time_rate < 0.9"
+        },
+        {
+          "ts": 1788323792.023,
+          "level": "INFO",
+          "node": "DB_EXEC",
+          "msg": "Execution complete. Returned 0 rows."
+        },
+        {
+          "ts": 1788323792.023,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Query execution successful. Rows: 0"
+        },
+        {
+          "ts": 1788323792.024,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [analyze_stockout]"
+        },
+        {
+          "ts": 1788323792.025,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [insight_recommendation]"
+        },
+        {
+          "ts": 1788323792.025,
+          "level": "INFO",
+          "node": "INSIGHT",
+          "msg": "Generating insights for 0 rows in domain: retail_clothing"
+        },
+        {
+          "ts": 1788323792.025,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Insights generated successfully."
+        },
+        {
+          "ts": 1788323792.025,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [recommend_visualization]"
+        },
+        {
+          "ts": 1788323792.025,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "No results for visualization recommendation."
+        }
+      ]
+    },
+    {
+      "mission_id": "MSS-003",
+      "mission_name": "Reorder Point Breaches",
+      "domain": "retail_clothing",
+      "severity": "MEDIUM",
+      "risk_score": 37,
+      "risk_factors": {
+        "affected_entities": {
+          "value": 13,
+          "score": 100,
+          "detail": "13 unique entities"
+        },
+        "dollar_exposure": {
+          "value": 0,
+          "score": 0,
+          "detail": "$0 exposure"
+        },
+        "velocity": {
+          "value": 13,
+          "score": 65,
+          "detail": "13 events"
+        },
+        "pep_involvement": {
+          "value": 0,
+          "score": 0,
+          "detail": "0 PEP accounts"
+        },
+        "kyc_gaps": {
+          "value": 0,
+          "score": 0,
+          "detail": "0 KYC gaps"
+        },
+        "severity_escalation": {
+          "value": "HIGH",
+          "score": 50,
+          "detail": "Base: HIGH"
+        }
+      },
+      "sql": "SELECT p.sku, p.style_name, p.size, i.stock_count, i.reorder_point \nFROM products p \nJOIN inventory i ON p.sku = i.sku \nWHERE i.stock_count <= i.reorder_point AND i.last_restocked_at < date('now', '-30 days');",
+      "data_count": 13,
+      "results": [
+        {
+          "sku": "CL-00018",
+          "style_name": "Classic Polo",
+          "size": "M",
+          "stock_count": 5,
+          "reorder_point": 5
+        },
+        {
+          "sku": "CL-00029",
+          "style_name": "Classic Polo",
+          "size": "L",
+          "stock_count": 5,
+          "reorder_point": 5
+        },
+        {
+          "sku": "CL-00062",
+          "style_name": "Wool Blend Blazer",
+          "size": "S",
+          "stock_count": 4,
+          "reorder_point": 5
+        },
+        {
+          "sku": "CL-00065",
+          "style_name": "Wool Blend Blazer",
+          "size": "XL",
+          "stock_count": 3,
+          "reorder_point": 5
+        },
+        {
+          "sku": "CL-00066",
+          "style_name": "Wool Blend Blazer",
+          "size": "XS",
+          "stock_count": 5,
+          "reorder_point": 5
+        },
+        {
+          "sku": "CL-00067",
+          "style_name": "Wool Blend Blazer",
+          "size": "S",
+          "stock_count": 3,
+          "reorder_point": 5
+        },
+        {
+          "sku": "CL-00068",
+          "style_name": "Wool Blend Blazer",
+          "size": "M",
+          "stock_count": 1,
+          "reorder_point": 5
+        },
+        {
+          "sku": "CL-00069",
+          "style_name": "Wool Blend Blazer",
+          "size": "L",
+          "stock_count": 5,
+          "reorder_point": 5
+        },
+        {
+          "sku": "CL-00070",
+          "style_name": "Wool Blend Blazer",
+          "size": "XL",
+          "stock_count": 4,
+          "reorder_point": 5
+        },
+        {
+          "sku": "CL-00071",
+          "style_name": "Wool Blend Blazer",
+          "size": "XS",
+          "stock_count": 0,
+          "reorder_point": 5
+        },
+        {
+          "sku": "CL-00072",
+          "style_name": "Wool Blend Blazer",
+          "size": "S",
+          "stock_count": 1,
+          "reorder_point": 5
+        },
+        {
+          "sku": "CL-00073",
+          "style_name": "Wool Blend Blazer",
+          "size": "M",
+          "stock_count": 3,
+          "reorder_point": 5
+        },
+        {
+          "sku": "CL-00075",
+          "style_name": "Wool Blend Blazer",
+          "size": "XL",
+          "stock_count": 1,
+          "reorder_point": 5
+        }
+      ],
+      "visualization_config": {
+        "chart_type": "bar",
+        "title": "stock_count by sku",
+        "x_axis_key": "sku",
+        "y_axis_key": "stock_count",
+        "label": "stock_count",
+        "description": "Auto-generated fallback chart"
+      },
+      "insight": "Data analysis complete. Results retrieved.",
+      "recommendation": "Review the returned data for specific patterns.",
+      "original_query": "What products have a stock count below their reorder point and no restocking planned within the next 30 days?",
+      "depth": 0,
+      "parent_mission_id": null,
+      "rationale": "",
+      "timestamp": "LIVE AUDIT",
+      "logs": [
+        {
+          "ts": 1788323628.416,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [classify_intent]"
+        },
+        {
+          "ts": 1788323628.416,
+          "level": "INFO",
+          "node": "INTENT",
+          "msg": "Classifying intent for domain: retail_clothing | Query: What products have a stock count below their reorder point and no restocking planned within the next 30 days?"
+        },
+        {
+          "ts": 1788323628.417,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM [openai] using model [meta/llama-3.2-11b-vision-instruct] generating response..."
+        },
+        {
+          "ts": 1788323700.493,
+          "level": "ERROR",
+          "node": "llm.py",
+          "msg": "LLM Error: Request timed out."
+        },
+        {
+          "ts": 1788323700.494,
+          "level": "WARNING",
+          "node": "resilient_llm.py",
+          "msg": "LLM JSON decode failed after repair: Expecting value: line 1 column 1 (char 0)"
+        },
+        {
+          "ts": 1788323701.0,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM [openai] using model [meta/llama-3.2-11b-vision-instruct] generating response..."
+        },
+        {
+          "ts": 1788323779.728,
+          "level": "WARNING",
+          "node": "llm.py",
+          "msg": "LLM rate limit / resource exhaustion encountered, retrying in 2s (attempt 1)"
+        },
+        {
+          "ts": 1788323793.161,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM response received from [meta/llama-3.2-11b-vision-instruct]. Snippet: **Intent Classification**\n\nBased on the provided q..."
+        },
+        {
+          "ts": 1788323793.161,
+          "level": "INFO",
+          "node": "INTENT",
+          "msg": "Classification Result: SELECT (conf: 1.0) | Needs Clarification: False"
+        },
+        {
+          "ts": 1788323793.223,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Intent classified: SELECT (conf: 1.0) | Needs Clarification: False"
+        },
+        {
+          "ts": 1788323793.225,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [generate_sql]"
+        },
+        {
+          "ts": 1788323793.225,
+          "level": "INFO",
+          "node": "SQL_GEN",
+          "msg": "Generating SQL for domain: retail_clothing | Query: What products have a stock count below their reorder point and no restocking planned within the next 30 days?"
+        },
+        {
+          "ts": 1788323793.229,
+          "level": "INFO",
+          "node": "SQL_GEN",
+          "msg": "Using custom SQL prompt for domain: retail_clothing"
+        },
+        {
+          "ts": 1788323793.229,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM [openai] using model [meta/llama-3.2-11b-vision-instruct] generating response..."
+        },
+        {
+          "ts": 1788323798.293,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM response received from [meta/llama-3.2-11b-vision-instruct]. Snippet: SELECT p.sku, p.style_name, p.size, i.stock_count,..."
+        },
+        {
+          "ts": 1788323798.294,
+          "level": "INFO",
+          "node": "SQL_GEN",
+          "msg": "SQL Generated and cleaned: SELECT p.sku, p.style_name, p.size, i.stock_count,..."
+        },
+        {
+          "ts": 1788323798.294,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "SQL Generated: SELECT p.sku, p.style_name, p.size, i.stock_count,..."
+        },
+        {
+          "ts": 1788323798.295,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [validate_sql]"
+        },
+        {
+          "ts": 1788323798.298,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [execute_query]"
+        },
+        {
+          "ts": 1788323798.299,
+          "level": "INFO",
+          "node": "DB_EXEC",
+          "msg": "Executing SQL: SELECT p.sku, p.style_name, p.size, i.stock_count, i.reorder_point \nFROM products p \nJOIN inventory i ON p.sku = i.sku \nWHERE i.stock_count <= i.reorder_point AND i.last_restocked_at < date('now', '-30 days');"
+        },
+        {
+          "ts": 1788323798.3,
+          "level": "INFO",
+          "node": "DB_EXEC",
+          "msg": "Execution complete. Returned 13 rows."
+        },
+        {
+          "ts": 1788323798.3,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Query execution successful. Rows: 13"
+        },
+        {
+          "ts": 1788323798.302,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [analyze_stockout]"
+        },
+        {
+          "ts": 1788323798.312,
+          "level": "INFO",
+          "node": "stockout_analyzer.py",
+          "msg": "Stockout analysis for retail_clothing: 14 at-risk products found"
+        },
+        {
+          "ts": 1788323798.313,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Stockout analysis complete: 14 at-risk products"
+        },
+        {
+          "ts": 1788323798.314,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [insight_recommendation]"
+        },
+        {
+          "ts": 1788323798.314,
+          "level": "INFO",
+          "node": "INSIGHT",
+          "msg": "Generating insights for 13 rows in domain: retail_clothing"
+        },
+        {
+          "ts": 1788323798.314,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM [openai] using model [meta/llama-3.2-11b-vision-instruct] generating response..."
+        },
+        {
+          "ts": 1788323798.316,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [recommend_visualization]"
+        },
+        {
+          "ts": 1788323798.316,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Visualization recommended: bar"
+        },
+        {
+          "ts": 1788323806.501,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM response received from [meta/llama-3.2-11b-vision-instruct]. Snippet: { \n  \"insight\": \"The data indicates a high risk of..."
+        },
+        {
+          "ts": 1788323806.501,
+          "level": "ERROR",
+          "node": "INSIGHT",
+          "msg": "Insight Generation Error: Expecting ',' delimiter: line 3 column 37 (char 582)"
+        },
+        {
+          "ts": 1788323806.502,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Insights generated successfully."
+        }
+      ]
+    },
+    {
+      "mission_id": "MSS-004",
+      "mission_name": "Sizing Anomalies by Color",
+      "domain": "retail_clothing",
+      "severity": "MEDIUM",
+      "risk_score": 35,
+      "risk_factors": {
+        "affected_entities": {
+          "value": 15,
+          "score": 100,
+          "detail": "15 unique entities"
+        },
+        "dollar_exposure": {
+          "value": 0,
+          "score": 0,
+          "detail": "$0 exposure"
+        },
+        "velocity": {
+          "value": 15,
+          "score": 75,
+          "detail": "15 events"
+        },
+        "pep_involvement": {
+          "value": 0,
+          "score": 0,
+          "detail": "0 PEP accounts"
+        },
+        "kyc_gaps": {
+          "value": 0,
+          "score": 0,
+          "detail": "0 KYC gaps"
+        },
+        "severity_escalation": {
+          "value": "MEDIUM",
+          "score": 25,
+          "detail": "Base: MEDIUM"
+        }
+      },
+      "sql": "SELECT p.size, p.color, AVG(i.stock_count) AS avg_stock_count \nFROM products p JOIN inventory i ON p.sku = i.sku \nGROUP BY p.size, p.color \nHAVING AVG(i.stock_count) < (SELECT AVG(stock_count) FROM inventory)",
+      "data_count": 15,
+      "results": [
+        {
+          "size": "L",
+          "color": "Navy",
+          "avg_stock_count": 28.0
+        },
+        {
+          "size": "L",
+          "color": "Olive",
+          "avg_stock_count": 21.142857142857142
+        },
+        {
+          "size": "L",
+          "color": "White",
+          "avg_stock_count": 15.333333333333334
+        },
+        {
+          "size": "M",
+          "color": "Grey",
+          "avg_stock_count": 28.0
+        },
+        {
+          "size": "S",
+          "color": "Navy",
+          "avg_stock_count": 22.166666666666668
+        },
+        {
+          "size": "S",
+          "color": "Olive",
+          "avg_stock_count": 31.142857142857142
+        },
+        {
+          "size": "S",
+          "color": "White",
+          "avg_stock_count": 17.0
+        },
+        {
+          "size": "XL",
+          "color": "Grey",
+          "avg_stock_count": 25.333333333333332
+        },
+        {
+          "size": "XL",
+          "color": "Navy",
+          "avg_stock_count": 25.0
+        },
+        {
+          "size": "XL",
+          "color": "Olive",
+          "avg_stock_count": 19.0
+        },
+        {
+          "size": "XL",
+          "color": "White",
+          "avg_stock_count": 28.666666666666668
+        },
+        {
+          "size": "XS",
+          "color": "Black",
+          "avg_stock_count": 29.2
+        },
+        {
+          "size": "XS",
+          "color": "Navy",
+          "avg_stock_count": 23.333333333333332
+        },
+        {
+          "size": "XS",
+          "color": "Olive",
+          "avg_stock_count": 17.142857142857142
+        },
+        {
+          "size": "XS",
+          "color": "White",
+          "avg_stock_count": 30.666666666666668
+        }
+      ],
+      "visualization_config": {
+        "chart_type": "bar",
+        "title": "avg_stock_count by size",
+        "x_axis_key": "size",
+        "y_axis_key": "avg_stock_count",
+        "label": "avg_stock_count",
+        "description": "Auto-generated fallback chart"
+      },
+      "insight": "Data analysis complete. Results retrieved.",
+      "recommendation": "Review the returned data for specific patterns.",
+      "original_query": "For each product size, what are the average stock counts by color, and are there any sizes with significantly low stock counts across all colors?",
+      "depth": 0,
+      "parent_mission_id": null,
+      "rationale": "",
+      "timestamp": "LIVE AUDIT",
+      "logs": [
+        {
+          "ts": 1788323628.417,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [classify_intent]"
+        },
+        {
+          "ts": 1788323628.418,
+          "level": "INFO",
+          "node": "INTENT",
+          "msg": "Classifying intent for domain: retail_clothing | Query: For each product size, what are the average stock counts by color, and are there any sizes with significantly low stock counts across all colors?"
+        },
+        {
+          "ts": 1788323628.419,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM [openai] using model [meta/llama-3.2-11b-vision-instruct] generating response..."
+        },
+        {
+          "ts": 1788323692.151,
+          "level": "ERROR",
+          "node": "llm.py",
+          "msg": "LLM Error: Request timed out."
+        },
+        {
+          "ts": 1788323692.152,
+          "level": "WARNING",
+          "node": "resilient_llm.py",
+          "msg": "LLM JSON decode failed after repair: Expecting value: line 1 column 1 (char 0)"
+        },
+        {
+          "ts": 1788323692.69,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM [openai] using model [meta/llama-3.2-11b-vision-instruct] generating response..."
+        },
+        {
+          "ts": 1788323771.715,
+          "level": "ERROR",
+          "node": "llm.py",
+          "msg": "LLM Error: Request timed out."
+        },
+        {
+          "ts": 1788323771.715,
+          "level": "WARNING",
+          "node": "resilient_llm.py",
+          "msg": "LLM JSON decode failed after repair: Expecting value: line 1 column 1 (char 0)"
+        },
+        {
+          "ts": 1788323772.728,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM [openai] using model [meta/llama-3.2-11b-vision-instruct] generating response..."
+        },
+        {
+          "ts": 1788323782.317,
+          "level": "WARNING",
+          "node": "llm.py",
+          "msg": "LLM rate limit / resource exhaustion encountered, retrying in 2s (attempt 1)"
+        },
+        {
+          "ts": 1788323795.621,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM response received from [meta/llama-3.2-11b-vision-instruct]. Snippet: **Intent Classification**\n\nBased on the provided q..."
+        },
+        {
+          "ts": 1788323795.622,
+          "level": "INFO",
+          "node": "INTENT",
+          "msg": "Classification Result: SELECT (conf: 0.9) | Needs Clarification: False"
+        },
+        {
+          "ts": 1788323795.678,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Intent classified: SELECT (conf: 0.9) | Needs Clarification: False"
+        },
+        {
+          "ts": 1788323795.68,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [generate_sql]"
+        },
+        {
+          "ts": 1788323795.68,
+          "level": "INFO",
+          "node": "SQL_GEN",
+          "msg": "Generating SQL for domain: retail_clothing | Query: For each product size, what are the average stock counts by color, and are there any sizes with significantly low stock counts across all colors?"
+        },
+        {
+          "ts": 1788323795.684,
+          "level": "INFO",
+          "node": "SQL_GEN",
+          "msg": "Using custom SQL prompt for domain: retail_clothing"
+        },
+        {
+          "ts": 1788323795.684,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM [openai] using model [meta/llama-3.2-11b-vision-instruct] generating response..."
+        },
+        {
+          "ts": 1788323799.265,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM response received from [meta/llama-3.2-11b-vision-instruct]. Snippet: SELECT p.size, p.color, AVG(i.stock_count) AS avg_..."
+        },
+        {
+          "ts": 1788323799.266,
+          "level": "INFO",
+          "node": "SQL_GEN",
+          "msg": "SQL Generated and cleaned: SELECT p.size, p.color, AVG(i.stock_count) AS avg_..."
+        },
+        {
+          "ts": 1788323799.266,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "SQL Generated: SELECT p.size, p.color, AVG(i.stock_count) AS avg_..."
+        },
+        {
+          "ts": 1788323799.268,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [validate_sql]"
+        },
+        {
+          "ts": 1788323799.272,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [execute_query]"
+        },
+        {
+          "ts": 1788323799.273,
+          "level": "INFO",
+          "node": "DB_EXEC",
+          "msg": "Executing SQL: SELECT p.size, p.color, AVG(i.stock_count) AS avg_stock_count \nFROM products p JOIN inventory i ON p.sku = i.sku \nGROUP BY p.size, p.color \nHAVING AVG(i.stock_count) < (SELECT AVG(stock_count) FROM inventory)"
+        },
+        {
+          "ts": 1788323799.274,
+          "level": "INFO",
+          "node": "DB_EXEC",
+          "msg": "Execution complete. Returned 15 rows."
+        },
+        {
+          "ts": 1788323799.274,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Query execution successful. Rows: 15"
+        },
+        {
+          "ts": 1788323799.275,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [analyze_stockout]"
+        },
+        {
+          "ts": 1788323799.284,
+          "level": "INFO",
+          "node": "stockout_analyzer.py",
+          "msg": "Stockout analysis for retail_clothing: 14 at-risk products found"
+        },
+        {
+          "ts": 1788323799.284,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Stockout analysis complete: 14 at-risk products"
+        },
+        {
+          "ts": 1788323799.285,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [insight_recommendation]"
+        },
+        {
+          "ts": 1788323799.286,
+          "level": "INFO",
+          "node": "INSIGHT",
+          "msg": "Generating insights for 15 rows in domain: retail_clothing"
+        },
+        {
+          "ts": 1788323799.286,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM [openai] using model [meta/llama-3.2-11b-vision-instruct] generating response..."
+        },
+        {
+          "ts": 1788323799.288,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [recommend_visualization]"
+        },
+        {
+          "ts": 1788323799.289,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Visualization recommended: bar"
+        },
+        {
+          "ts": 1788323809.342,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM response received from [meta/llama-3.2-11b-vision-instruct]. Snippet: { \n  \"insight\": \"The data indicates a concerning t..."
+        },
+        {
+          "ts": 1788323809.343,
+          "level": "ERROR",
+          "node": "INSIGHT",
+          "msg": "Insight Generation Error: Expecting ',' delimiter: line 3 column 121 (char 746)"
+        },
+        {
+          "ts": 1788323809.343,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Insights generated successfully."
+        }
+      ]
+    },
+    {
+      "mission_id": "MSS-005",
+      "mission_name": "Supplier Delay Impact on Sales",
+      "domain": "retail_clothing",
+      "severity": "LOW",
+      "risk_score": 0,
+      "risk_factors": {},
+      "sql": "SELECT s.supplier_name, AVG(DATEDIFF(sale_date, last_restocked_at)) AS avg_delay, \n       CASE \n           WHEN AVG(DATEDIFF(sale_date, last_restocked_at)) > 30 THEN 'High'\n           ELSE 'Low'\n       END AS delay_status\nFROM sales_events se\nJOIN suppliers s ON se.sku IN (SELECT sku FROM products WHERE supplier_id = s.supplier_id)\nGROUP BY s.supplier_name",
+      "data_count": 0,
+      "results": [],
+      "visualization_config": null,
+      "insight": "No data found to analyze.",
+      "recommendation": "Try broadening your search criteria or checking if the data for this period is available.",
+      "original_query": "For each supplier, what is the average delay in days between the last restocked date and the sale date, and are there any suppliers with significantly high average delays?",
+      "depth": 0,
+      "parent_mission_id": null,
+      "rationale": "",
+      "timestamp": "LIVE AUDIT",
+      "logs": [
+        {
+          "ts": 1788323628.42,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [classify_intent]"
+        },
+        {
+          "ts": 1788323628.42,
+          "level": "INFO",
+          "node": "INTENT",
+          "msg": "Classifying intent for domain: retail_clothing | Query: For each supplier, what is the average delay in days between the last restocked date and the sale date, and are there any suppliers with significantly high average delays?"
+        },
+        {
+          "ts": 1788323628.421,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM [openai] using model [meta/llama-3.2-11b-vision-instruct] generating response..."
+        },
+        {
+          "ts": 1788323700.507,
+          "level": "ERROR",
+          "node": "llm.py",
+          "msg": "LLM Error: Request timed out."
+        },
+        {
+          "ts": 1788323700.507,
+          "level": "WARNING",
+          "node": "resilient_llm.py",
+          "msg": "LLM JSON decode failed after repair: Expecting value: line 1 column 1 (char 0)"
+        },
+        {
+          "ts": 1788323701.014,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM [openai] using model [meta/llama-3.2-11b-vision-instruct] generating response..."
+        },
+        {
+          "ts": 1788323790.588,
+          "level": "ERROR",
+          "node": "llm.py",
+          "msg": "LLM Error: Request timed out."
+        },
+        {
+          "ts": 1788323790.589,
+          "level": "WARNING",
+          "node": "resilient_llm.py",
+          "msg": "LLM JSON decode failed after repair: Expecting value: line 1 column 1 (char 0)"
+        },
+        {
+          "ts": 1788323791.597,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM [openai] using model [meta/llama-3.2-11b-vision-instruct] generating response..."
+        },
+        {
+          "ts": 1788323802.151,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM response received from [meta/llama-3.2-11b-vision-instruct]. Snippet: To classify the user's intent, I will analyze the ..."
+        },
+        {
+          "ts": 1788323802.152,
+          "level": "INFO",
+          "node": "INTENT",
+          "msg": "Classification Result: SELECT (conf: 0.9) | Needs Clarification: False"
+        },
+        {
+          "ts": 1788323802.212,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Intent classified: SELECT (conf: 0.9) | Needs Clarification: False"
+        },
+        {
+          "ts": 1788323802.215,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [generate_sql]"
+        },
+        {
+          "ts": 1788323802.215,
+          "level": "INFO",
+          "node": "SQL_GEN",
+          "msg": "Generating SQL for domain: retail_clothing | Query: For each supplier, what is the average delay in days between the last restocked date and the sale date, and are there any suppliers with significantly high average delays?"
+        },
+        {
+          "ts": 1788323802.221,
+          "level": "INFO",
+          "node": "SQL_GEN",
+          "msg": "Using custom SQL prompt for domain: retail_clothing"
+        },
+        {
+          "ts": 1788323802.221,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM [openai] using model [meta/llama-3.2-11b-vision-instruct] generating response..."
+        },
+        {
+          "ts": 1788323806.148,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM response received from [meta/llama-3.2-11b-vision-instruct]. Snippet: SELECT s.supplier_name, AVG(DATEDIFF(sale_date, la..."
+        },
+        {
+          "ts": 1788323806.148,
+          "level": "INFO",
+          "node": "SQL_GEN",
+          "msg": "SQL Generated and cleaned: SELECT s.supplier_name, AVG(DATEDIFF(sale_date, la..."
+        },
+        {
+          "ts": 1788323806.148,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "SQL Generated: SELECT s.supplier_name, AVG(DATEDIFF(sale_date, la..."
+        },
+        {
+          "ts": 1788323806.153,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [validate_sql]"
+        },
+        {
+          "ts": 1788323806.158,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [execute_query]"
+        },
+        {
+          "ts": 1788323806.158,
+          "level": "INFO",
+          "node": "DB_EXEC",
+          "msg": "Executing SQL: SELECT s.supplier_name, AVG(DATEDIFF(sale_date, last_restocked_at)) AS avg_delay, \n       CASE \n           WHEN AVG(DATEDIFF(sale_date, last_restocked_at)) > 30 THEN 'High'\n           ELSE 'Low'\n       END AS delay_status\nFROM sales_events se\nJOIN suppliers s ON se.sku IN (SELECT sku FROM products WHERE supplier_id = s.supplier_id)\nGROUP BY s.supplier_name"
+        },
+        {
+          "ts": 1788323806.159,
+          "level": "ERROR",
+          "node": "DB_EXEC",
+          "msg": "DATABASE EXECUTION ERROR: (sqlite3.OperationalError) no such column: last_restocked_at\n[SQL: SELECT s.supplier_name, AVG(DATEDIFF(sale_date, last_restocked_at)) AS avg_delay, \n       CASE \n           WHEN AVG(DATEDIFF(sale_date, last_restocked_at)) > 30 THEN 'High'\n           ELSE 'Low'\n       END AS delay_status\nFROM sales_events se\nJOIN suppliers s ON se.sku IN (SELECT sku FROM products WHERE supplier_id = s.supplier_id)\nGROUP BY s.supplier_name]\n(Background on this error at: https://sqlalche.me/e/20/e3q8) | Query: SELECT s.supplier_name, AVG(DATEDIFF(sale_date, last_restocked_at)) AS avg_delay, \n       CASE \n           WHEN AVG(DATEDIFF(sale_date, last_restocked_at)) > 30 THEN 'High'\n           ELSE 'Low'\n       END AS delay_status\nFROM sales_events se\nJOIN suppliers s ON se.sku IN (SELECT sku FROM products WHERE supplier_id = s.supplier_id)\nGROUP BY s.supplier_name"
+        },
+        {
+          "ts": 1788323806.159,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Query execution successful. Rows: 0"
+        },
+        {
+          "ts": 1788323806.16,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [analyze_stockout]"
+        },
+        {
+          "ts": 1788323806.172,
+          "level": "INFO",
+          "node": "stockout_analyzer.py",
+          "msg": "Stockout analysis for retail_clothing: 14 at-risk products found"
+        },
+        {
+          "ts": 1788323806.173,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Stockout analysis complete: 14 at-risk products"
+        },
+        {
+          "ts": 1788323806.174,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [insight_recommendation]"
+        },
+        {
+          "ts": 1788323806.174,
+          "level": "INFO",
+          "node": "INSIGHT",
+          "msg": "Generating insights for 0 rows in domain: retail_clothing"
+        },
+        {
+          "ts": 1788323806.175,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Insights generated successfully."
+        },
+        {
+          "ts": 1788323806.175,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [recommend_visualization]"
+        },
+        {
+          "ts": 1788323806.175,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "No results for visualization recommendation."
+        }
+      ]
+    },
+    {
+      "mission_id": "MSS-006",
+      "mission_name": "Retail Price Variance",
+      "domain": "retail_clothing",
+      "severity": "LOW",
+      "risk_score": 0,
+      "risk_factors": {},
+      "sql": "SELECT p.category, p.retail_price, i1.stock_count, i2.stock_count, ABS(i1.retail_price - i2.retail_price) / i1.retail_price * 100 AS retail_price_variance FROM products p JOIN inventory i1 ON p.sku = i1.sku JOIN inventory i2 ON p.sku = i2.sku WHERE i1.location != i2.location AND ABS(i1.retail_price - i2.retail_price) / i1.retail_price * 100 > 20",
+      "data_count": 0,
+      "results": [],
+      "visualization_config": null,
+      "insight": "No data found to analyze.",
+      "recommendation": "Try broadening your search criteria or checking if the data for this period is available.",
+      "original_query": "What are the product categories with a retail price variance greater than 20% across different locations?",
+      "depth": 0,
+      "parent_mission_id": null,
+      "rationale": "",
+      "timestamp": "LIVE AUDIT",
+      "logs": [
+        {
+          "ts": 1788323628.422,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [classify_intent]"
+        },
+        {
+          "ts": 1788323628.423,
+          "level": "INFO",
+          "node": "INTENT",
+          "msg": "Classifying intent for domain: retail_clothing | Query: What are the product categories with a retail price variance greater than 20% across different locations?"
+        },
+        {
+          "ts": 1788323628.424,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM [openai] using model [meta/llama-3.2-11b-vision-instruct] generating response..."
+        },
+        {
+          "ts": 1788323700.492,
+          "level": "ERROR",
+          "node": "llm.py",
+          "msg": "LLM Error: Request timed out."
+        },
+        {
+          "ts": 1788323700.493,
+          "level": "WARNING",
+          "node": "resilient_llm.py",
+          "msg": "LLM JSON decode failed after repair: Expecting value: line 1 column 1 (char 0)"
+        },
+        {
+          "ts": 1788323700.998,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM [openai] using model [meta/llama-3.2-11b-vision-instruct] generating response..."
+        },
+        {
+          "ts": 1788323788.742,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM response received from [meta/llama-3.2-11b-vision-instruct]. Snippet: **Intent Classification**\n\nBased on the provided q..."
+        },
+        {
+          "ts": 1788323788.743,
+          "level": "INFO",
+          "node": "INTENT",
+          "msg": "Classification Result: SELECT (conf: 0.9) | Needs Clarification: False"
+        },
+        {
+          "ts": 1788323788.804,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Intent classified: SELECT (conf: 0.9) | Needs Clarification: False"
+        },
+        {
+          "ts": 1788323788.806,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [generate_sql]"
+        },
+        {
+          "ts": 1788323788.806,
+          "level": "INFO",
+          "node": "SQL_GEN",
+          "msg": "Generating SQL for domain: retail_clothing | Query: What are the product categories with a retail price variance greater than 20% across different locations?"
+        },
+        {
+          "ts": 1788323788.811,
+          "level": "INFO",
+          "node": "SQL_GEN",
+          "msg": "Using custom SQL prompt for domain: retail_clothing"
+        },
+        {
+          "ts": 1788323788.811,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM [openai] using model [meta/llama-3.2-11b-vision-instruct] generating response..."
+        },
+        {
+          "ts": 1788323797.999,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM response received from [meta/llama-3.2-11b-vision-instruct]. Snippet: SELECT p.category, p.retail_price, i1.stock_count,..."
+        },
+        {
+          "ts": 1788323797.999,
+          "level": "INFO",
+          "node": "SQL_GEN",
+          "msg": "SQL Generated and cleaned: SELECT p.category, p.retail_price, i1.stock_count,..."
+        },
+        {
+          "ts": 1788323797.999,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "SQL Generated: SELECT p.category, p.retail_price, i1.stock_count,..."
+        },
+        {
+          "ts": 1788323798.001,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [validate_sql]"
+        },
+        {
+          "ts": 1788323798.003,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [execute_query]"
+        },
+        {
+          "ts": 1788323798.004,
+          "level": "INFO",
+          "node": "DB_EXEC",
+          "msg": "Executing SQL: SELECT p.category, p.retail_price, i1.stock_count, i2.stock_count, ABS(i1.retail_price - i2.retail_price) / i1.retail_price * 100 AS retail_price_variance FROM products p JOIN inventory i1 ON p.sku = i1.sku JOIN inventory i2 ON p.sku = i2.sku WHERE i1.location != i2.location AND ABS(i1.retail_price - i2.retail_price) / i1.retail_price * 100 > 20"
+        },
+        {
+          "ts": 1788323798.006,
+          "level": "ERROR",
+          "node": "DB_EXEC",
+          "msg": "DATABASE EXECUTION ERROR: (sqlite3.OperationalError) no such column: i1.retail_price\n[SQL: SELECT p.category, p.retail_price, i1.stock_count, i2.stock_count, ABS(i1.retail_price - i2.retail_price) / i1.retail_price * 100 AS retail_price_variance FROM products p JOIN inventory i1 ON p.sku = i1.sku JOIN inventory i2 ON p.sku = i2.sku WHERE i1.location != i2.location AND ABS(i1.retail_price - i2.retail_price) / i1.retail_price * 100 > 20]\n(Background on this error at: https://sqlalche.me/e/20/e3q8) | Query: SELECT p.category, p.retail_price, i1.stock_count, i2.stock_count, ABS(i1.retail_price - i2.retail_price) / i1.retail_price * 100 AS retail_price_variance FROM products p JOIN inventory i1 ON p.sku = i1.sku JOIN inventory i2 ON p.sku = i2.sku WHERE i1.location != i2.location AND ABS(i1.retail_price - i2.retail_price) / i1.retail_price * 100 > 20"
+        },
+        {
+          "ts": 1788323798.007,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Query execution successful. Rows: 0"
+        },
+        {
+          "ts": 1788323798.008,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [analyze_stockout]"
+        },
+        {
+          "ts": 1788323798.015,
+          "level": "INFO",
+          "node": "stockout_analyzer.py",
+          "msg": "Stockout analysis for retail_clothing: 14 at-risk products found"
+        },
+        {
+          "ts": 1788323798.016,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Stockout analysis complete: 14 at-risk products"
+        },
+        {
+          "ts": 1788323798.018,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [insight_recommendation]"
+        },
+        {
+          "ts": 1788323798.019,
+          "level": "INFO",
+          "node": "INSIGHT",
+          "msg": "Generating insights for 0 rows in domain: retail_clothing"
+        },
+        {
+          "ts": 1788323798.019,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Insights generated successfully."
+        },
+        {
+          "ts": 1788323798.019,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [recommend_visualization]"
+        },
+        {
+          "ts": 1788323798.02,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "No results for visualization recommendation."
+        }
+      ]
+    },
+    {
+      "mission_id": "MSS-007",
+      "mission_name": "Inventory Turnover by Channel",
+      "domain": "retail_clothing",
+      "severity": "LOW",
+      "risk_score": 0,
+      "risk_factors": {},
+      "sql": "SELECT \n  channel, \n  AVG(CASE WHEN units_sold > 0 THEN 1.0 * stock_count / units_sold ELSE NULL END) AS avg_turnover_ratio\nFROM \n  sales_events se\nJOIN \n  inventory i ON se.sku = i.sku\nGROUP BY \n  channel\nHAVING \n  AVG(CASE WHEN units_sold > 0 THEN 1.0 * stock_count / units_sold ELSE NULL END) < 2",
+      "data_count": 0,
+      "results": [],
+      "visualization_config": null,
+      "insight": "No data found to analyze.",
+      "recommendation": "Try broadening your search criteria or checking if the data for this period is available.",
+      "original_query": "For each sales channel, what is the average inventory turnover ratio, and are there any channels with significantly low turnover ratios?",
+      "depth": 0,
+      "parent_mission_id": null,
+      "rationale": "",
+      "timestamp": "LIVE AUDIT",
+      "logs": [
+        {
+          "ts": 1788323628.424,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [classify_intent]"
+        },
+        {
+          "ts": 1788323628.425,
+          "level": "INFO",
+          "node": "INTENT",
+          "msg": "Classifying intent for domain: retail_clothing | Query: For each sales channel, what is the average inventory turnover ratio, and are there any channels with significantly low turnover ratios?"
+        },
+        {
+          "ts": 1788323628.425,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM [openai] using model [meta/llama-3.2-11b-vision-instruct] generating response..."
+        },
+        {
+          "ts": 1788323700.494,
+          "level": "ERROR",
+          "node": "llm.py",
+          "msg": "LLM Error: Request timed out."
+        },
+        {
+          "ts": 1788323700.494,
+          "level": "WARNING",
+          "node": "resilient_llm.py",
+          "msg": "LLM JSON decode failed after repair: Expecting value: line 1 column 1 (char 0)"
+        },
+        {
+          "ts": 1788323701.0,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM [openai] using model [meta/llama-3.2-11b-vision-instruct] generating response..."
+        },
+        {
+          "ts": 1788323780.209,
+          "level": "WARNING",
+          "node": "llm.py",
+          "msg": "LLM rate limit / resource exhaustion encountered, retrying in 2s (attempt 1)"
+        },
+        {
+          "ts": 1788323793.071,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM response received from [meta/llama-3.2-11b-vision-instruct]. Snippet: **Intent Classification**\n\nAnalyzing the user quer..."
+        },
+        {
+          "ts": 1788323793.072,
+          "level": "WARNING",
+          "node": "resilient_llm.py",
+          "msg": "LLM JSON decode failed after repair: Expecting value: line 1 column 1 (char 0)"
+        },
+        {
+          "ts": 1788323794.088,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM [openai] using model [meta/llama-3.2-11b-vision-instruct] generating response..."
+        },
+        {
+          "ts": 1788323803.423,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM response received from [meta/llama-3.2-11b-vision-instruct]. Snippet: **Intent Classification**\n\nAnalyzing the user quer..."
+        },
+        {
+          "ts": 1788323803.423,
+          "level": "INFO",
+          "node": "INTENT",
+          "msg": "Classification Result: SELECT (conf: 0.9) | Needs Clarification: False"
+        },
+        {
+          "ts": 1788323803.487,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Intent classified: SELECT (conf: 0.9) | Needs Clarification: False"
+        },
+        {
+          "ts": 1788323803.489,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [generate_sql]"
+        },
+        {
+          "ts": 1788323803.49,
+          "level": "INFO",
+          "node": "SQL_GEN",
+          "msg": "Generating SQL for domain: retail_clothing | Query: For each sales channel, what is the average inventory turnover ratio, and are there any channels with significantly low turnover ratios?"
+        },
+        {
+          "ts": 1788323803.495,
+          "level": "INFO",
+          "node": "SQL_GEN",
+          "msg": "Using custom SQL prompt for domain: retail_clothing"
+        },
+        {
+          "ts": 1788323803.496,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM [openai] using model [meta/llama-3.2-11b-vision-instruct] generating response..."
+        },
+        {
+          "ts": 1788323807.909,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM response received from [meta/llama-3.2-11b-vision-instruct]. Snippet: SELECT \n  channel, \n  AVG(CASE WHEN units_sold > 0..."
+        },
+        {
+          "ts": 1788323807.909,
+          "level": "INFO",
+          "node": "SQL_GEN",
+          "msg": "SQL Generated and cleaned: SELECT \n  channel, \n  AVG(CASE WHEN units_sold > 0..."
+        },
+        {
+          "ts": 1788323807.91,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "SQL Generated: SELECT \n  channel, \n  AVG(CASE WHEN units_sold > 0..."
+        },
+        {
+          "ts": 1788323807.911,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [validate_sql]"
+        },
+        {
+          "ts": 1788323807.915,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [execute_query]"
+        },
+        {
+          "ts": 1788323807.915,
+          "level": "INFO",
+          "node": "DB_EXEC",
+          "msg": "Executing SQL: SELECT \n  channel, \n  AVG(CASE WHEN units_sold > 0 THEN 1.0 * stock_count / units_sold ELSE NULL END) AS avg_turnover_ratio\nFROM \n  sales_events se\nJOIN \n  inventory i ON se.sku = i.sku\nGROUP BY \n  channel\nHAVING \n  AVG(CASE WHEN units_sold > 0 THEN 1.0 * stock_count / units_sold ELSE NULL END) < 2"
+        },
+        {
+          "ts": 1788323807.916,
+          "level": "INFO",
+          "node": "DB_EXEC",
+          "msg": "Execution complete. Returned 0 rows."
+        },
+        {
+          "ts": 1788323807.916,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Query execution successful. Rows: 0"
+        },
+        {
+          "ts": 1788323807.917,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [analyze_stockout]"
+        },
+        {
+          "ts": 1788323807.925,
+          "level": "INFO",
+          "node": "stockout_analyzer.py",
+          "msg": "Stockout analysis for retail_clothing: 14 at-risk products found"
+        },
+        {
+          "ts": 1788323807.925,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Stockout analysis complete: 14 at-risk products"
+        },
+        {
+          "ts": 1788323807.926,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [insight_recommendation]"
+        },
+        {
+          "ts": 1788323807.927,
+          "level": "INFO",
+          "node": "INSIGHT",
+          "msg": "Generating insights for 0 rows in domain: retail_clothing"
+        },
+        {
+          "ts": 1788323807.927,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Insights generated successfully."
+        },
+        {
+          "ts": 1788323807.927,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [recommend_visualization]"
+        },
+        {
+          "ts": 1788323807.927,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "No results for visualization recommendation."
+        }
+      ]
+    },
+    {
+      "mission_id": "MSS-008",
+      "mission_name": "Supplier Risk Assessment",
+      "domain": "retail_clothing",
+      "severity": "MEDIUM",
+      "risk_score": 28,
+      "risk_factors": {
+        "affected_entities": {
+          "value": 6,
+          "score": 60,
+          "detail": "6 unique entities"
+        },
+        "dollar_exposure": {
+          "value": 0,
+          "score": 0,
+          "detail": "$0 exposure"
+        },
+        "velocity": {
+          "value": 6,
+          "score": 30,
+          "detail": "6 events"
+        },
+        "pep_involvement": {
+          "value": 0,
+          "score": 0,
+          "detail": "0 PEP accounts"
+        },
+        "kyc_gaps": {
+          "value": 0,
+          "score": 0,
+          "detail": "0 KYC gaps"
+        },
+        "severity_escalation": {
+          "value": "CRITICAL",
+          "score": 80,
+          "detail": "Base: CRITICAL"
+        }
+      },
+      "sql": "SELECT supplier_name, AVG(lead_time_days) AS avg_lead_time, AVG(on_time_rate) AS avg_on_time_rate, country FROM suppliers GROUP BY supplier_name",
+      "data_count": 6,
+      "results": [
+        {
+          "supplier_name": "Bangalore Textile Mills",
+          "avg_lead_time": 12.0,
+          "avg_on_time_rate": 0.94,
+          "country": "India"
+        },
+        {
+          "supplier_name": "Dhaka Garment Works",
+          "avg_lead_time": 30.0,
+          "avg_on_time_rate": 0.72,
+          "country": "Bangladesh"
+        },
+        {
+          "supplier_name": "Guangzhou Apparel Co.",
+          "avg_lead_time": 25.0,
+          "avg_on_time_rate": 0.81,
+          "country": "China"
+        },
+        {
+          "supplier_name": "Ho Chi Minh Stitch Co.",
+          "avg_lead_time": 20.0,
+          "avg_on_time_rate": 0.9,
+          "country": "Vietnam"
+        },
+        {
+          "supplier_name": "Istanbul Weave House",
+          "avg_lead_time": 18.0,
+          "avg_on_time_rate": 0.88,
+          "country": "Turkey"
+        },
+        {
+          "supplier_name": "Tirupur Knitwear Ltd.",
+          "avg_lead_time": 10.0,
+          "avg_on_time_rate": 0.96,
+          "country": "India"
+        }
+      ],
+      "visualization_config": {
+        "chart_type": "line",
+        "title": "avg_lead_time by avg_lead_time",
+        "x_axis_key": "avg_lead_time",
+        "y_axis_key": "avg_lead_time",
+        "label": "avg_lead_time",
+        "description": "Auto-generated fallback chart"
+      },
+      "insight": "The data reveals a concerning trend of inconsistent lead times and on-time delivery rates across suppliers, with Dhaka Garment Works and Guangzhou Apparel Co. exhibiting significantly lower on-time rates (0.72 and 0.81, respectively). This variability poses operational risk, potentially impacting inventory management, customer satisfaction, and ultimately, revenue. Furthermore, the data highlights a concentration of suppliers from Asia, which may indicate a reliance on a single region, increasing supply chain vulnerability to regional disruptions.",
+      "recommendation": "To mitigate these risks, I recommend: 1. Conducting a thorough risk assessment of the top suppliers, focusing on lead time variability and on-time delivery rates, to identify potential vulnerabilities and develop targeted mitigation strategies. 2. Exploring diversification of the supplier base, particularly in regions with lower risk profiles, to enhance supply chain resilience and reduce reliance on a single region.",
+      "original_query": "For each supplier, what is the average lead time, on-time rate, and country of origin, and are there any suppliers with significantly high risk profiles?",
+      "depth": 0,
+      "parent_mission_id": null,
+      "rationale": "",
+      "timestamp": "LIVE AUDIT",
+      "logs": [
+        {
+          "ts": 1788323628.427,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [classify_intent]"
+        },
+        {
+          "ts": 1788323628.427,
+          "level": "INFO",
+          "node": "INTENT",
+          "msg": "Classifying intent for domain: retail_clothing | Query: For each supplier, what is the average lead time, on-time rate, and country of origin, and are there any suppliers with significantly high risk profiles?"
+        },
+        {
+          "ts": 1788323628.428,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM [openai] using model [meta/llama-3.2-11b-vision-instruct] generating response..."
+        },
+        {
+          "ts": 1788323700.588,
+          "level": "ERROR",
+          "node": "llm.py",
+          "msg": "LLM Error: Request timed out."
+        },
+        {
+          "ts": 1788323700.589,
+          "level": "WARNING",
+          "node": "resilient_llm.py",
+          "msg": "LLM JSON decode failed after repair: Expecting value: line 1 column 1 (char 0)"
+        },
+        {
+          "ts": 1788323701.098,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM [openai] using model [meta/llama-3.2-11b-vision-instruct] generating response..."
+        },
+        {
+          "ts": 1788323779.731,
+          "level": "WARNING",
+          "node": "llm.py",
+          "msg": "LLM rate limit / resource exhaustion encountered, retrying in 2s (attempt 1)"
+        },
+        {
+          "ts": 1788323794.064,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM response received from [meta/llama-3.2-11b-vision-instruct]. Snippet: **Intent Classification**\n\nBased on the provided q..."
+        },
+        {
+          "ts": 1788323794.064,
+          "level": "INFO",
+          "node": "INTENT",
+          "msg": "Classification Result: SELECT (conf: 0.9) | Needs Clarification: False"
+        },
+        {
+          "ts": 1788323794.12,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Intent classified: SELECT (conf: 0.9) | Needs Clarification: False"
+        },
+        {
+          "ts": 1788323794.122,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [generate_sql]"
+        },
+        {
+          "ts": 1788323794.122,
+          "level": "INFO",
+          "node": "SQL_GEN",
+          "msg": "Generating SQL for domain: retail_clothing | Query: For each supplier, what is the average lead time, on-time rate, and country of origin, and are there any suppliers with significantly high risk profiles?"
+        },
+        {
+          "ts": 1788323794.126,
+          "level": "INFO",
+          "node": "SQL_GEN",
+          "msg": "Using custom SQL prompt for domain: retail_clothing"
+        },
+        {
+          "ts": 1788323794.126,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM [openai] using model [meta/llama-3.2-11b-vision-instruct] generating response..."
+        },
+        {
+          "ts": 1788323796.433,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM response received from [meta/llama-3.2-11b-vision-instruct]. Snippet: SELECT supplier_name, AVG(lead_time_days) AS avg_l..."
+        },
+        {
+          "ts": 1788323796.433,
+          "level": "INFO",
+          "node": "SQL_GEN",
+          "msg": "SQL Generated and cleaned: SELECT supplier_name, AVG(lead_time_days) AS avg_l..."
+        },
+        {
+          "ts": 1788323796.433,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "SQL Generated: SELECT supplier_name, AVG(lead_time_days) AS avg_l..."
+        },
+        {
+          "ts": 1788323796.435,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [validate_sql]"
+        },
+        {
+          "ts": 1788323796.439,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [execute_query]"
+        },
+        {
+          "ts": 1788323796.44,
+          "level": "INFO",
+          "node": "DB_EXEC",
+          "msg": "Executing SQL: SELECT supplier_name, AVG(lead_time_days) AS avg_lead_time, AVG(on_time_rate) AS avg_on_time_rate, country FROM suppliers GROUP BY supplier_name"
+        },
+        {
+          "ts": 1788323796.441,
+          "level": "INFO",
+          "node": "DB_EXEC",
+          "msg": "Execution complete. Returned 6 rows."
+        },
+        {
+          "ts": 1788323796.441,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Query execution successful. Rows: 6"
+        },
+        {
+          "ts": 1788323796.442,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [analyze_stockout]"
+        },
+        {
+          "ts": 1788323796.443,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [insight_recommendation]"
+        },
+        {
+          "ts": 1788323796.443,
+          "level": "INFO",
+          "node": "INSIGHT",
+          "msg": "Generating insights for 6 rows in domain: retail_clothing"
+        },
+        {
+          "ts": 1788323796.444,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM [openai] using model [meta/llama-3.2-11b-vision-instruct] generating response..."
+        },
+        {
+          "ts": 1788323796.446,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [recommend_visualization]"
+        },
+        {
+          "ts": 1788323796.446,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Visualization recommended: line"
+        },
+        {
+          "ts": 1788323817.663,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM response received from [meta/llama-3.2-11b-vision-instruct]. Snippet: { \n  \"insight\": \"The data reveals a concerning tre..."
+        },
+        {
+          "ts": 1788323817.664,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Insights generated successfully."
+        }
+      ]
+    }
+  ],
+  "clusters": [],
+  "narrative": {
+    "executive_summary": "Our platform is currently facing operational risks stemming from inconsistent supplier lead times and inventory management issues, which pose a medium to high threat level. Specifically, we have detected medium severity threats in supplier lead time anomalies and reorder point breaches, while supplier risk assessment reveals a concerning trend of inconsistent lead times and on-time delivery rates across suppliers. Immediate action is required to mitigate these risks and prevent potential operational disruptions.",
+    "threat_vectors": [
+      {
+        "name": "Supplier Lead Time Anomalies",
+        "severity": "MEDIUM",
+        "description": "Inconsistent lead times and on-time delivery rates across suppliers pose operational risk, potentially impacting inventory management and sales."
+      },
+      {
+        "name": "Reorder Point Breaches",
+        "severity": "MEDIUM",
+        "description": "13 instances of reorder point breaches detected, indicating potential inventory management issues and operational risks."
+      },
+      {
+        "name": "Supplier Risk Assessment",
+        "severity": "MEDIUM",
+        "description": "Concerning trend of inconsistent lead times and on-time delivery rates across suppliers, with Dhaka Garment Works and Guangzhou Apparel Co. exhibiting significantly lower on-time rates."
+      }
+    ],
+    "immediate_actions": [
+      "Immediately engage with Dhaka Garment Works and Guangzhou Apparel Co. to discuss and rectify their inconsistent lead times and on-time delivery rates.",
+      "Review and adjust reorder points for high-risk products to prevent further breaches and mitigate operational risks.",
+      "Schedule an emergency meeting with the supply chain management team to discuss and address the detected supplier lead time anomalies and reorder point breaches."
+    ],
+    "monitoring_recommendations": [
+      "Continuously monitor supplier lead times and on-time delivery rates to detect any further inconsistencies or anomalies.",
+      "Implement real-time alerts for reorder point breaches to ensure prompt action and mitigate operational risks.",
+      "Schedule regular risk assessments for suppliers to ensure ongoing vigilance and proactive risk management."
+    ],
+    "overall_risk": 26,
+    "overall_severity": "MEDIUM",
+    "title": "Intelligence Brief - LIVE"
+  }
+}

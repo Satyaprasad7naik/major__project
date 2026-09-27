@@ -3,20 +3,16 @@ Narrative Generator - Executive Intelligence Brief.
 Weaves ALL detections and correlations into a cohesive executive summary
 with threat vectors, immediate actions, and monitoring recommendations.
 """
-from langchain_google_genai import ChatGoogleGenerativeAI
 from langchain_core.prompts import ChatPromptTemplate
 from app.core.config import settings
+from app.services.llm import get_langchain_llm
 import json
 
 
 class NarrativeGenerator:
 
     def __init__(self):
-        self.llm = ChatGoogleGenerativeAI(
-            model=settings.GEMINI_MODEL_NAME,
-            google_api_key=settings.GEMINI_API_KEY,
-            temperature=0.6,
-        )
+        self.llm = get_langchain_llm(temperature=0.6)
 
     async def generate(self, detections: list, clusters: list, scan_metadata: dict) -> dict:
         det_summaries = []

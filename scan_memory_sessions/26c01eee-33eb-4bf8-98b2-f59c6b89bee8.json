@@ -1,0 +1,78 @@
+{
+  "_last_touched": 1788013332.2206738,
+  "history": [
+    {
+      "timestamp": "2026-08-29T14:22:12.220651",
+      "missions": [
+        {
+          "name": "Dead Stock Analysis by Category",
+          "query": "What are the top 3 product categories with the highest dead stock count across all locations?",
+          "domain": "retail_clothing",
+          "risk_score": 12,
+          "severity": "LOW",
+          "data_count": 3
+        },
+        {
+          "name": "Sizing Anomaly Detection by Style",
+          "query": "Identify styles with inconsistent size distributions across different locations. (e.g., size 8 in one location is more common than size 10 in another location)",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        },
+        {
+          "name": "Supplier Lead Time Assessment by Country",
+          "query": "Analyze the lead time for suppliers by country and identify countries with consistently delayed shipments",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        },
+        {
+          "name": "Reorder Point Breach Analysis by Supplier",
+          "query": "For each supplier, identify products that have breached their reorder points in the last 3 months and calculate the total stockout value",
+          "domain": "retail_clothing",
+          "risk_score": 6,
+          "severity": "LOW",
+          "data_count": 1
+        },
+        {
+          "name": "Sales Event Channel Analysis by Product Category",
+          "query": "Analyze the sales event channel distribution by product category and identify categories with uneven channel participation",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        },
+        {
+          "name": "Inventory Location Analysis by Stock Count",
+          "query": "For each inventory location, calculate the average stock count and identify locations with significantly high or low stock counts",
+          "domain": "retail_clothing",
+          "risk_score": 15,
+          "severity": "LOW",
+          "data_count": 4
+        },
+        {
+          "name": "Supplier On-Time Delivery Rate Analysis by Lead Time",
+          "query": "Analyze the on-time delivery rate for each supplier by lead time and identify suppliers with low on-time delivery rates",
+          "domain": "retail_clothing",
+          "risk_score": 13,
+          "severity": "LOW",
+          "data_count": 2
+        },
+        {
+          "name": "Product Lifecycle Analysis by Sales Volume",
+          "query": "Analyze the sales volume distribution for products across their lifecycle (new, established, declining) and identify products with abnormal sales volume patterns",
+          "domain": "retail_clothing",
+          "risk_score": 47,
+          "severity": "MEDIUM",
+          "data_count": 328
+        }
+      ],
+      "domain_scores": {
+        "retail_clothing": 12
+      },
+      "critical_domains": []
+    }
+  ]
+}

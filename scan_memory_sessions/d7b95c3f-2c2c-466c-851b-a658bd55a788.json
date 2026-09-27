@@ -1,0 +1,78 @@
+{
+  "_last_touched": 1788342986.1233206,
+  "history": [
+    {
+      "timestamp": "2026-09-02T09:56:26.123279",
+      "missions": [
+        {
+          "name": "Dead Stock Detection",
+          "query": "Find all products with stock count below 5 and retail price above $50, grouped by category",
+          "domain": "retail_clothing",
+          "risk_score": 40,
+          "severity": "MEDIUM",
+          "data_count": 10
+        },
+        {
+          "name": "Sizing Anomaly Identification",
+          "query": "Find all product styles with inconsistent size availability across different locations, grouped by size",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        },
+        {
+          "name": "Supplier Delay Detection",
+          "query": "Find all suppliers with a lead time above 30 days and an on-time rate below 90%, grouped by country",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        },
+        {
+          "name": "Reorder Point Breach Detection",
+          "query": "Find all products with a stock count below the reorder point and a stock count above 50% of the reorder point, grouped by category",
+          "domain": "retail_clothing",
+          "risk_score": 35,
+          "severity": "MEDIUM",
+          "data_count": 10
+        },
+        {
+          "name": "Product Sizing Pattern Analysis",
+          "query": "Find all product styles with a size distribution skewness above 2, indicating potential sizing anomalies, grouped by style name",
+          "domain": "retail_clothing",
+          "risk_score": 34,
+          "severity": "MEDIUM",
+          "data_count": 14
+        },
+        {
+          "name": "Supplier Country Risk Analysis",
+          "query": "Find all suppliers from countries with a high risk rating, grouped by supplier name and country",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        },
+        {
+          "name": "Lead Time Variance Analysis",
+          "query": "Find all products with a lead time variance above 20% and a lead time above 30 days, grouped by supplier name",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        },
+        {
+          "name": "Restock Frequency Analysis",
+          "query": "Find all products with a restock frequency above 10 times per year and a stock count above 100 units, grouped by category",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        }
+      ],
+      "domain_scores": {
+        "retail_clothing": 14
+      },
+      "critical_domains": []
+    }
+  ]
+}

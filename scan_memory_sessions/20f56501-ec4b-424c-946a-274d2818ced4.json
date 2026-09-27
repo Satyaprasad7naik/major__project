@@ -1,0 +1,80 @@
+{
+  "_last_touched": 1787680816.255316,
+  "history": [
+    {
+      "timestamp": "2026-08-25T18:00:16.255276",
+      "missions": [
+        {
+          "name": "Dead Stock Identification",
+          "query": "",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "HIGH",
+          "data_count": 0
+        },
+        {
+          "name": "Sizing Anomalies Detection",
+          "query": "",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "MEDIUM",
+          "data_count": 0
+        },
+        {
+          "name": "Supplier Delays Analysis",
+          "query": "",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "CRITICAL",
+          "data_count": 0
+        },
+        {
+          "name": "Reorder Point Breaches Detection",
+          "query": "",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "HIGH",
+          "data_count": 0
+        },
+        {
+          "name": "Sales Channel Anomalies Detection",
+          "query": "",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "MEDIUM",
+          "data_count": 0
+        },
+        {
+          "name": "Supplier On-Time Rate Analysis",
+          "query": "",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "CRITICAL",
+          "data_count": 0
+        },
+        {
+          "name": "Units Sold Anomalies Detection",
+          "query": "",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "MEDIUM",
+          "data_count": 0
+        },
+        {
+          "name": "Stock Rotation Analysis",
+          "query": "",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "HIGH",
+          "data_count": 0
+        }
+      ],
+      "domain_scores": {
+        "retail_clothing": 0
+      },
+      "critical_domains": [
+        "retail_clothing"
+      ]
+    }
+  ]
+}

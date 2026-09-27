@@ -1,0 +1,78 @@
+{
+  "_last_touched": 1787926667.1754525,
+  "history": [
+    {
+      "timestamp": "2026-08-28T14:17:47.175414",
+      "missions": [
+        {
+          "name": "Sizing Anomalies Across Suppliers",
+          "query": "Which styles have a size variance greater than 10% across all suppliers?",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        },
+        {
+          "name": "Supplier Delayed Deliveries",
+          "query": "List all styles with a supplier lead time greater than 30 days and reorder point breaches within the last 60 days.",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        },
+        {
+          "name": "Dead Stock by Supplier and Category",
+          "query": "Group by supplier and category, show the top 5 styles with the highest dead stock count (units not sold for 6 months or more).",
+          "domain": "retail_clothing",
+          "risk_score": 21,
+          "severity": "LOW",
+          "data_count": 5
+        },
+        {
+          "name": "Price Variance Across Channels",
+          "query": "For each style, calculate the average price variance across all sales channels (retail vs online).",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        },
+        {
+          "name": "Supplier Performance by Category",
+          "query": "For each category, show the top 3 suppliers with the highest on-time delivery rate and their corresponding lead times.",
+          "domain": "retail_clothing",
+          "risk_score": 12,
+          "severity": "LOW",
+          "data_count": 3
+        },
+        {
+          "name": "Sales Event Channel Mix",
+          "query": "For each style, calculate the sales event channel mix (online vs retail) and show the top 5 styles with the highest online sales mix.",
+          "domain": "retail_clothing",
+          "risk_score": 18,
+          "severity": "LOW",
+          "data_count": 5
+        },
+        {
+          "name": "Inventory Turns by Category",
+          "query": "Calculate the inventory turns (sales / average inventory) for each category and show the top 3 categories with the lowest inventory turns.",
+          "domain": "retail_clothing",
+          "risk_score": 16,
+          "severity": "LOW",
+          "data_count": 3
+        },
+        {
+          "name": "Supplier Risk Assessment",
+          "query": "For each supplier, calculate a risk score based on lead time, on-time delivery rate, and country of origin, and show the top 5 suppliers with the highest risk scores.",
+          "domain": "retail_clothing",
+          "risk_score": 26,
+          "severity": "MEDIUM",
+          "data_count": 5
+        }
+      ],
+      "domain_scores": {
+        "retail_clothing": 12
+      },
+      "critical_domains": []
+    }
+  ]
+}

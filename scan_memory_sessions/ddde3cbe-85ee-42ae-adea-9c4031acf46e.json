@@ -1,0 +1,78 @@
+{
+  "_last_touched": 1787719530.528857,
+  "history": [
+    {
+      "timestamp": "2026-08-26T04:45:30.528836",
+      "missions": [
+        {
+          "name": "Dead Stock Detection",
+          "query": "What products have been in inventory for over 365 days with a stock count of 0?",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        },
+        {
+          "name": "Sizing Anomalies",
+          "query": "Which product styles have a size distribution that deviates from the global average by more than 20%?",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        },
+        {
+          "name": "Supplier Delay Detection",
+          "query": "Which suppliers have consistently failed to meet their lead times, resulting in delayed restocking?",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        },
+        {
+          "name": "Reorder Point Breaches",
+          "query": "Which products have had their reorder points consistently breached, leading to stockouts?",
+          "domain": "retail_clothing",
+          "risk_score": 34,
+          "severity": "MEDIUM",
+          "data_count": 14
+        },
+        {
+          "name": "Channel-Specific Stockouts",
+          "query": "Which sales channels have experienced the most frequent and severe stockouts across different product styles?",
+          "domain": "retail_clothing",
+          "risk_score": 12,
+          "severity": "LOW",
+          "data_count": 3
+        },
+        {
+          "name": "Regional Stock Imbalance",
+          "query": "Which inventory locations have a significant stock imbalance compared to the global average?",
+          "domain": "retail_clothing",
+          "risk_score": 9,
+          "severity": "LOW",
+          "data_count": 2
+        },
+        {
+          "name": "Supplier Performance Evaluation",
+          "query": "Which suppliers have the highest on-time delivery rates and what are the corresponding lead times?",
+          "domain": "retail_clothing",
+          "risk_score": 18,
+          "severity": "LOW",
+          "data_count": 4
+        },
+        {
+          "name": "Price Elasticity Analysis",
+          "query": "How do price changes affect sales across different product styles and channels?",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        }
+      ],
+      "domain_scores": {
+        "retail_clothing": 9
+      },
+      "critical_domains": []
+    }
+  ]
+}

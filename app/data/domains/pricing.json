@@ -1,0 +1,33 @@
+{
+  "domain": "pricing",
+  "display_name": "Dynamic Pricing & Revenue",
+  "description": "Queries related to product pricing, transaction amounts, revenue trends, discount analysis, and price elasticity across SKUs and categories.",
+  "schema_context": "The transactions table stores all financial activity. Key pricing fields: amount_usd (transaction amount in USD), instrument (product SKU/type), txn_type (purchase/refund/adjustment), status (completed/failed/pending). No dedicated price catalog table exists — derive pricing metrics from completed transaction aggregates.",
+  "sql_rules": [
+    "Always use status = 'completed' when calculating average prices or revenue",
+    "Use instrument column as the SKU/product identifier",
+    "For price trend queries use DATE(created_at) or strftime('%Y-%m', created_at) for grouping",
+    "amount_usd is the canonical price field — prefer it over amount when both exist",
+    "For discount analysis compare average amounts across time periods",
+    "Use HAVING clause not WHERE for filtering aggregated values"
+  ],
+  "few_shot_examples": [
+    {
+      "question": "What is the average transaction price per product type?",
+      "sql": "SELECT instrument AS sku, ROUND(AVG(amount_usd), 2) AS avg_price_usd, COUNT(*) AS tx_count FROM transactions WHERE status = 'completed' GROUP BY instrument ORDER BY avg_price_usd DESC;"
+    },
+    {
+      "question": "Which SKUs have the highest sales velocity in the last 7 days?",
+      "sql": "SELECT instrument AS sku, COUNT(*) AS tx_count, ROUND(SUM(amount_usd), 2) AS total_revenue FROM transactions WHERE status = 'completed' AND created_at >= datetime('now', '-7 days') GROUP BY instrument ORDER BY tx_count DESC LIMIT 20;"
+    },
+    {
+      "question": "Show me revenue trend by month",
+      "sql": "SELECT strftime('%Y-%m', created_at) AS month, ROUND(SUM(amount_usd), 2) AS revenue, COUNT(*) AS transactions FROM transactions WHERE status = 'completed' GROUP BY month ORDER BY month DESC;"
+    },
+    {
+      "question": "What percentage of transactions are refunds?",
+      "sql": "SELECT txn_type, COUNT(*) AS count, ROUND(COUNT(*) * 100.0 / SUM(COUNT(*)) OVER (), 2) AS pct FROM transactions GROUP BY txn_type ORDER BY count DESC;"
+    }
+  ],
+  "system_prompt_addition": "You are a pricing analytics expert. Focus on revenue, price optimisation, and transaction velocity insights. Always include confidence intervals or counts alongside averages to give context on data reliability."
+}

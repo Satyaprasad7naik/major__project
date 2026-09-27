@@ -1,0 +1,78 @@
+{
+  "_last_touched": 1790249200.2448297,
+  "history": [
+    {
+      "timestamp": "2026-09-24T11:26:40.244803",
+      "missions": [
+        {
+          "name": "Dead Stock Detection",
+          "query": "Find all products with stock count below reorder point, across all locations, for the past 6 months.",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        },
+        {
+          "name": "Sizing Anomalies",
+          "query": "Identify products with significant price differences (> 20%) between small and large sizes, across all categories.",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        },
+        {
+          "name": "Supplier Delays",
+          "query": "Find suppliers with lead time days greater than 30, and on-time delivery rate below 80%, for the past 3 months.",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        },
+        {
+          "name": "Reorder Point Breaches",
+          "query": "Determine the number of times reorder points have been breached across all products, in the past quarter.",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        },
+        {
+          "name": "Stock Availability by Category",
+          "query": "Show stock availability (count and percentage) for each category, across all locations, for the past month.",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        },
+        {
+          "name": "Price Variability by Supplier",
+          "query": "Calculate price variability (coefficient of variation) for each supplier, across all products, in the past 6 months.",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        },
+        {
+          "name": "Supplier Lead Time and On-time Delivery",
+          "query": "Analyze the relationship between supplier lead time days and on-time delivery rate, across all products, in the past quarter.",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        },
+        {
+          "name": "Last Restocked Analysis",
+          "query": "Determine the number of products with last restocked dates older than 90 days, across all locations, for the past 6 months.",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        }
+      ],
+      "domain_scores": {
+        "retail_clothing": 0
+      },
+      "critical_domains": []
+    }
+  ]
+}

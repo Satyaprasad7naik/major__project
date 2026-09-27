@@ -2,12 +2,12 @@ from typing import List, Dict, Any, Optional, Union, TypedDict, Literal
 from pydantic import BaseModel, Field
 
 # Domain types for the NL2SQL pipeline
-DomainType = Literal["security", "compliance", "risk", "operations", "general"]
+DomainType = Literal["retail_clothing", "banking_finance", "insurance", "security", "compliance", "risk", "operations", "general"]
 
 # HLD Section 4.2: Graph State Definition
 class GraphState(TypedDict):
     user_question: str
-    domain: str  # security | compliance | risk | operations | general
+    domain: str  # retail_clothing | banking_finance | insurance | security | compliance | risk | operations | general
     conversation_history: List[Dict[str, str]]
     intent: Optional[str]
     confidence: float

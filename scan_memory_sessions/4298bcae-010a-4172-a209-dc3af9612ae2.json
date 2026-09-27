@@ -1,0 +1,80 @@
+{
+  "_last_touched": 1787686711.7400756,
+  "history": [
+    {
+      "timestamp": "2026-08-25T19:38:31.740058",
+      "missions": [
+        {
+          "name": "Dead Stock Detection",
+          "query": "",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "CRITICAL",
+          "data_count": 0
+        },
+        {
+          "name": "Sizing Anomalies",
+          "query": "",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "HIGH",
+          "data_count": 0
+        },
+        {
+          "name": "Supplier Delays",
+          "query": "",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "MEDIUM",
+          "data_count": 0
+        },
+        {
+          "name": "Reorder Point Breaches",
+          "query": "",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "CRITICAL",
+          "data_count": 0
+        },
+        {
+          "name": "Overstocked Items",
+          "query": "",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "HIGH",
+          "data_count": 0
+        },
+        {
+          "name": "Channel-Specific Sales",
+          "query": "",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "MEDIUM",
+          "data_count": 0
+        },
+        {
+          "name": "Supplier Performance",
+          "query": "",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "CRITICAL",
+          "data_count": 0
+        },
+        {
+          "name": "Product Category Analysis",
+          "query": "",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "MEDIUM",
+          "data_count": 0
+        }
+      ],
+      "domain_scores": {
+        "retail_clothing": 0
+      },
+      "critical_domains": [
+        "retail_clothing"
+      ]
+    }
+  ]
+}

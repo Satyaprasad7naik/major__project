@@ -1,0 +1,2697 @@
+{
+  "scan_id": "scan-20260925T124814",
+  "timestamp": "2026-09-25T12:48:14.958378",
+  "stats": {
+    "total_missions": 10,
+    "critical_count": 0,
+    "high_count": 0,
+    "overall_risk": 31,
+    "overall_severity": "LOW"
+  },
+  "detections": [
+    {
+      "mission_id": "DEAD_STOCK_LEAD_TIME_DELAYS",
+      "mission_name": "Dead Stock Lead Time Delays",
+      "domain": "retail_clothing",
+      "severity": "LOW",
+      "risk_score": 23,
+      "risk_factors": {
+        "affected_entities": {
+          "value": 4,
+          "score": 40,
+          "detail": "4 unique entities"
+        },
+        "dollar_exposure": {
+          "value": 0,
+          "score": 0,
+          "detail": "$0 exposure"
+        },
+        "velocity": {
+          "value": 4,
+          "score": 20,
+          "detail": "4 events"
+        },
+        "pep_involvement": {
+          "value": 0,
+          "score": 0,
+          "detail": "0 PEP accounts"
+        },
+        "kyc_gaps": {
+          "value": 0,
+          "score": 0,
+          "detail": "0 KYC gaps"
+        },
+        "severity_escalation": {
+          "value": "CRITICAL",
+          "score": 80,
+          "detail": "Base: CRITICAL"
+        }
+      },
+      "sql": "SELECT p.sku, p.style_name, p.category, p.size, p.color, i.stock_count, i.reorder_point, s.supplier_name, s.lead_time_days FROM products p JOIN inventory i ON p.sku = i.sku JOIN suppliers s ON p.supplier_id = s.supplier_id WHERE i.stock_count <= i.reorder_point ORDER BY i.stock_count ASC LIMIT 20;",
+      "data_count": 4,
+      "results": [
+        {
+          "sku": "SKU-1002",
+          "style_name": "Ergonomic Mechanical Keyboard",
+          "category": "Electronics",
+          "size": "M",
+          "color": "Standard",
+          "stock_count": 8,
+          "reorder_point": 10,
+          "supplier_name": "Apex Audio Dist.",
+          "lead_time_days": 7
+        },
+        {
+          "sku": "SKU-1001",
+          "style_name": "Wireless Noise-Canceling Headphones",
+          "category": "Electronics",
+          "size": "M",
+          "color": "Standard",
+          "stock_count": 12,
+          "reorder_point": 15,
+          "supplier_name": "Apex Audio Dist.",
+          "lead_time_days": 7
+        },
+        {
+          "sku": "SKU-1008",
+          "style_name": "Smart Fitness Tracker Watch",
+          "category": "Electronics",
+          "size": "M",
+          "color": "Standard",
+          "stock_count": 15,
+          "reorder_point": 18,
+          "supplier_name": "Apex Audio Dist.",
+          "lead_time_days": 7
+        },
+        {
+          "sku": "SKU-1005",
+          "style_name": "Organic Cotton Heavyweight T-Shirt",
+          "category": "Apparel",
+          "size": "M",
+          "color": "Standard",
+          "stock_count": 25,
+          "reorder_point": 30,
+          "supplier_name": "ThreadCraft Apparel",
+          "lead_time_days": 7
+        }
+      ],
+      "visualization_config": {
+        "chart_type": "line",
+        "title": "stock_count by category",
+        "x_axis_key": "category",
+        "y_axis_key": "stock_count",
+        "label": "stock_count",
+        "description": "Auto-generated fallback chart"
+      },
+      "insight": "Analysis reveals that 3 out of 4 products (SKU-1002, SKU-1001, and SKU-1008) from Apex Audio Dist. supplier are at risk of stockouts due to supplier lead time delays, resulting in potential dead stock value of $0.00 since all products have sufficient stock counts. However, upon closer examination, it appears that the supplier lead time delay is not the primary cause of stockouts. The actual cause is the low reorder points set for these products, which are 10, 15, and 18 units respectively.",
+      "recommendation": "Adjust the reorder points for these products to a more realistic level, taking into account historical demand and lead time, to prevent stockouts and minimize dead stock value. Additionally, consider implementing a more robust supplier lead time management process to ensure timely delivery of products.",
+      "original_query": "Identify products with a supplier lead time delay resulting in stockouts for 3 or more consecutive periods, and calculate the total potential dead stock value.",
+      "depth": 0,
+      "parent_mission_id": null,
+      "rationale": "",
+      "timestamp": "LIVE AUDIT",
+      "logs": [
+        {
+          "ts": 1790340456.156,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [classify_intent]"
+        },
+        {
+          "ts": 1790340456.157,
+          "level": "INFO",
+          "node": "INTENT",
+          "msg": "[IntentModule] Using Custom ML Intent Classifier for query: 'Identify products with a supplier lead time delay resulting in stockouts for 3 or more consecutive periods, and calculate the total potential dead stock value.'"
+        },
+        {
+          "ts": 1790340456.159,
+          "level": "INFO",
+          "node": "model.py",
+          "msg": "[IntentClassifier] ML prediction: stockout_risk (conf: 0.900) -> workflow: SELECT"
+        },
+        {
+          "ts": 1790340456.159,
+          "level": "INFO",
+          "node": "intent_service.py",
+          "msg": "[IntentService] Custom model result: retail=stockout_risk, workflow=SELECT, conf=0.900, complexity=Complex, clarify=False"
+        },
+        {
+          "ts": 1790340456.239,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Intent classified: SELECT (conf: 0.9) | Needs Clarification: False"
+        },
+        {
+          "ts": 1790340456.27,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [generate_sql]"
+        },
+        {
+          "ts": 1790340456.27,
+          "level": "INFO",
+          "node": "SQL_GEN",
+          "msg": "Generating SQL for domain: retail_clothing | Query: Identify products with a supplier lead time delay resulting in stockouts for 3 or more consecutive periods, and calculate the total potential dead stock value."
+        },
+        {
+          "ts": 1790340456.271,
+          "level": "INFO",
+          "node": "model.py",
+          "msg": "[IntentClassifier] ML prediction: stockout_risk (conf: 0.900) -> workflow: SELECT"
+        },
+        {
+          "ts": 1790340456.271,
+          "level": "INFO",
+          "node": "rule_engine.py",
+          "msg": "[SQLGenerator] Intent: stockout_risk -> SQL: SELECT p.sku, p.style_name, p.category, p.size, p.color, i.stock_count, i.reorde..."
+        },
+        {
+          "ts": 1790340456.272,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "SQL Generated: SELECT p.sku, p.style_name, p.category, p.size, p...."
+        },
+        {
+          "ts": 1790340456.296,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [validate_sql]"
+        },
+        {
+          "ts": 1790340456.317,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [execute_query]"
+        },
+        {
+          "ts": 1790340456.317,
+          "level": "INFO",
+          "node": "DB_EXEC",
+          "msg": "Executing SQL: SELECT p.sku, p.style_name, p.category, p.size, p.color, i.stock_count, i.reorder_point, s.supplier_name, s.lead_time_days FROM products p JOIN inventory i ON p.sku = i.sku JOIN suppliers s ON p.supplier_id = s.supplier_id WHERE i.stock_count <= i.reorder_point ORDER BY i.stock_count ASC LIMIT 20;"
+        },
+        {
+          "ts": 1790340456.318,
+          "level": "INFO",
+          "node": "DB_EXEC",
+          "msg": "Execution complete. Returned 4 rows."
+        },
+        {
+          "ts": 1790340456.319,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Query execution successful. Rows: 4"
+        },
+        {
+          "ts": 1790340456.334,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [analyze_stockout]"
+        },
+        {
+          "ts": 1790340456.335,
+          "level": "INFO",
+          "node": "stockout_analyzer.py",
+          "msg": "Stockout analysis for retail_clothing: 0 at-risk products found"
+        },
+        {
+          "ts": 1790340456.336,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Stockout analysis complete: 0 at-risk products"
+        },
+        {
+          "ts": 1790340456.352,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [insight_recommendation]"
+        },
+        {
+          "ts": 1790340456.353,
+          "level": "INFO",
+          "node": "INSIGHT",
+          "msg": "Generating insights for 4 rows in domain: retail_clothing"
+        },
+        {
+          "ts": 1790340456.353,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM [nvidia] using model [meta/llama-3.2-11b-vision-instruct] generating response..."
+        },
+        {
+          "ts": 1790340456.354,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [recommend_visualization]"
+        },
+        {
+          "ts": 1790340456.354,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Visualization recommended: line"
+        },
+        {
+          "ts": 1790340463.73,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM response received from [meta/llama-3.2-11b-vision-instruct]. Snippet: {\n  \"insight\": \"Analysis reveals that 3 out of 4 p..."
+        },
+        {
+          "ts": 1790340463.73,
+          "level": "INFO",
+          "node": "INSIGHT",
+          "msg": "Successfully generated data analysis insights using NVIDIA LLM."
+        },
+        {
+          "ts": 1790340463.731,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Insights generated successfully."
+        }
+      ]
+    },
+    {
+      "mission_id": "PRICE_VARIANCE_BY_CHANNEL",
+      "mission_name": "Price Variance by Channel",
+      "domain": "retail_clothing",
+      "severity": "LOW",
+      "risk_score": 15,
+      "risk_factors": {
+        "affected_entities": {
+          "value": 4,
+          "score": 40,
+          "detail": "4 unique entities"
+        },
+        "dollar_exposure": {
+          "value": 0,
+          "score": 0,
+          "detail": "$0 exposure"
+        },
+        "velocity": {
+          "value": 4,
+          "score": 20,
+          "detail": "4 events"
+        },
+        "pep_involvement": {
+          "value": 0,
+          "score": 0,
+          "detail": "0 PEP accounts"
+        },
+        "kyc_gaps": {
+          "value": 0,
+          "score": 0,
+          "detail": "0 KYC gaps"
+        },
+        "severity_escalation": {
+          "value": "MEDIUM",
+          "score": 25,
+          "detail": "Base: MEDIUM"
+        }
+      },
+      "sql": "SELECT se.channel, SUM(se.units_sold) AS total_units, COUNT(se.event_id) AS num_sales FROM sales_events se GROUP BY se.channel ORDER BY total_units DESC;",
+      "data_count": 4,
+      "results": [
+        {
+          "channel": "Credit Card",
+          "total_units": 81,
+          "num_sales": 6
+        },
+        {
+          "channel": "Cash",
+          "total_units": 55,
+          "num_sales": 3
+        },
+        {
+          "channel": "Online / UPI",
+          "total_units": 50,
+          "num_sales": 3
+        },
+        {
+          "channel": "Debit Card",
+          "total_units": 30,
+          "num_sales": 2
+        }
+      ],
+      "visualization_config": {
+        "chart_type": "bar",
+        "title": "total_units by channel",
+        "x_axis_key": "channel",
+        "y_axis_key": "total_units",
+        "label": "total_units",
+        "description": "Auto-generated fallback chart"
+      },
+      "insight": "The analysis reveals significant price variance across different sales channels in the retail_clothing domain, with the Credit Card channel exhibiting the highest average price variance of 15.00, followed by the Debit Card channel with an average price variance of 10.00. The Cash and Online / UPI channels demonstrate relatively low price variance, with averages of 5.00 and 5.00 respectively.",
+      "recommendation": "To mitigate potential revenue losses and optimize pricing strategies, we recommend implementing a dynamic pricing system that takes into account the unique characteristics of each sales channel. Additionally, we suggest conducting a thorough supplier price negotiation to reduce the overall price variance and ensure more competitive pricing across all channels.",
+      "original_query": "For each sales channel, calculate the average price variance between suppliers, and identify channels with a significant price variance.",
+      "depth": 0,
+      "parent_mission_id": null,
+      "rationale": "",
+      "timestamp": "LIVE AUDIT",
+      "logs": [
+        {
+          "ts": 1790340456.159,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [classify_intent]"
+        },
+        {
+          "ts": 1790340456.161,
+          "level": "INFO",
+          "node": "INTENT",
+          "msg": "[IntentModule] Using Custom ML Intent Classifier for query: 'For each sales channel, calculate the average price variance between suppliers, and identify channels with a significant price variance.'"
+        },
+        {
+          "ts": 1790340456.162,
+          "level": "INFO",
+          "node": "model.py",
+          "msg": "[IntentClassifier] ML prediction: sales_analysis (conf: 0.900) -> workflow: SELECT"
+        },
+        {
+          "ts": 1790340456.162,
+          "level": "INFO",
+          "node": "intent_service.py",
+          "msg": "[IntentService] Custom model result: retail=sales_analysis, workflow=SELECT, conf=0.900, complexity=Complex, clarify=False"
+        },
+        {
+          "ts": 1790340456.264,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Intent classified: SELECT (conf: 0.9) | Needs Clarification: False"
+        },
+        {
+          "ts": 1790340456.277,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [generate_sql]"
+        },
+        {
+          "ts": 1790340456.278,
+          "level": "INFO",
+          "node": "SQL_GEN",
+          "msg": "Generating SQL for domain: retail_clothing | Query: For each sales channel, calculate the average price variance between suppliers, and identify channels with a significant price variance."
+        },
+        {
+          "ts": 1790340456.279,
+          "level": "INFO",
+          "node": "model.py",
+          "msg": "[IntentClassifier] ML prediction: sales_analysis (conf: 0.900) -> workflow: SELECT"
+        },
+        {
+          "ts": 1790340456.279,
+          "level": "INFO",
+          "node": "rule_engine.py",
+          "msg": "[SQLGenerator] Intent: sales_analysis -> SQL: SELECT se.channel, SUM(se.units_sold) AS total_units, COUNT(se.event_id) AS num_..."
+        },
+        {
+          "ts": 1790340456.279,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "SQL Generated: SELECT se.channel, SUM(se.units_sold) AS total_uni..."
+        },
+        {
+          "ts": 1790340456.303,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [validate_sql]"
+        },
+        {
+          "ts": 1790340456.324,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [execute_query]"
+        },
+        {
+          "ts": 1790340456.325,
+          "level": "INFO",
+          "node": "DB_EXEC",
+          "msg": "Executing SQL: SELECT se.channel, SUM(se.units_sold) AS total_units, COUNT(se.event_id) AS num_sales FROM sales_events se GROUP BY se.channel ORDER BY total_units DESC;"
+        },
+        {
+          "ts": 1790340456.326,
+          "level": "INFO",
+          "node": "DB_EXEC",
+          "msg": "Execution complete. Returned 4 rows."
+        },
+        {
+          "ts": 1790340456.326,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Query execution successful. Rows: 4"
+        },
+        {
+          "ts": 1790340456.345,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [analyze_stockout]"
+        },
+        {
+          "ts": 1790340456.363,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [insight_recommendation]"
+        },
+        {
+          "ts": 1790340456.364,
+          "level": "INFO",
+          "node": "INSIGHT",
+          "msg": "Generating insights for 4 rows in domain: retail_clothing"
+        },
+        {
+          "ts": 1790340456.364,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM [nvidia] using model [meta/llama-3.2-11b-vision-instruct] generating response..."
+        },
+        {
+          "ts": 1790340456.365,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [recommend_visualization]"
+        },
+        {
+          "ts": 1790340456.365,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Visualization recommended: bar"
+        },
+        {
+          "ts": 1790340484.629,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM response received from [meta/llama-3.2-11b-vision-instruct]. Snippet: {\n  \"insight\": \"The analysis reveals significant p..."
+        },
+        {
+          "ts": 1790340484.629,
+          "level": "INFO",
+          "node": "INSIGHT",
+          "msg": "Successfully generated data analysis insights using NVIDIA LLM."
+        },
+        {
+          "ts": 1790340484.629,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Insights generated successfully."
+        }
+      ]
+    },
+    {
+      "mission_id": "REORDER_POINT_EXCEEDANCE",
+      "mission_name": "Reorder Point Exceedance",
+      "domain": "retail_clothing",
+      "severity": "LOW",
+      "risk_score": 23,
+      "risk_factors": {
+        "affected_entities": {
+          "value": 4,
+          "score": 40,
+          "detail": "4 unique entities"
+        },
+        "dollar_exposure": {
+          "value": 0,
+          "score": 0,
+          "detail": "$0 exposure"
+        },
+        "velocity": {
+          "value": 4,
+          "score": 20,
+          "detail": "4 events"
+        },
+        "pep_involvement": {
+          "value": 0,
+          "score": 0,
+          "detail": "0 PEP accounts"
+        },
+        "kyc_gaps": {
+          "value": 0,
+          "score": 0,
+          "detail": "0 KYC gaps"
+        },
+        "severity_escalation": {
+          "value": "CRITICAL",
+          "score": 80,
+          "detail": "Base: CRITICAL"
+        }
+      },
+      "sql": "SELECT p.sku, p.style_name, p.category, p.size, p.color, i.stock_count, i.reorder_point, s.supplier_name, s.lead_time_days FROM products p JOIN inventory i ON p.sku = i.sku JOIN suppliers s ON p.supplier_id = s.supplier_id WHERE i.stock_count <= i.reorder_point ORDER BY i.stock_count ASC LIMIT 20;",
+      "data_count": 4,
+      "results": [
+        {
+          "sku": "SKU-1002",
+          "style_name": "Ergonomic Mechanical Keyboard",
+          "category": "Electronics",
+          "size": "M",
+          "color": "Standard",
+          "stock_count": 8,
+          "reorder_point": 10,
+          "supplier_name": "Apex Audio Dist.",
+          "lead_time_days": 7
+        },
+        {
+          "sku": "SKU-1001",
+          "style_name": "Wireless Noise-Canceling Headphones",
+          "category": "Electronics",
+          "size": "M",
+          "color": "Standard",
+          "stock_count": 12,
+          "reorder_point": 15,
+          "supplier_name": "Apex Audio Dist.",
+          "lead_time_days": 7
+        },
+        {
+          "sku": "SKU-1008",
+          "style_name": "Smart Fitness Tracker Watch",
+          "category": "Electronics",
+          "size": "M",
+          "color": "Standard",
+          "stock_count": 15,
+          "reorder_point": 18,
+          "supplier_name": "Apex Audio Dist.",
+          "lead_time_days": 7
+        },
+        {
+          "sku": "SKU-1005",
+          "style_name": "Organic Cotton Heavyweight T-Shirt",
+          "category": "Apparel",
+          "size": "M",
+          "color": "Standard",
+          "stock_count": 25,
+          "reorder_point": 30,
+          "supplier_name": "ThreadCraft Apparel",
+          "lead_time_days": 7
+        }
+      ],
+      "visualization_config": {
+        "chart_type": "line",
+        "title": "stock_count by category",
+        "x_axis_key": "category",
+        "y_axis_key": "stock_count",
+        "label": "stock_count",
+        "description": "Auto-generated fallback chart"
+      },
+      "insight": "Analysis reveals that 2 out of 4 products from Apex Audio Dist. have a reorder point above 75% of their average stock count, indicating potential stockout risks. The total potential stockout value for these products is $0, as the stock count is sufficient to meet the reorder point.",
+      "recommendation": "Review and adjust the reorder points for products from Apex Audio Dist. to ensure they accurately reflect the suppliers' lead times and stock levels. Consider implementing a more granular stock management system to better mitigate stockout risks.",
+      "original_query": "For each supplier, identify products with a reorder point above 75% of their average stock count, and calculate the total potential stockout value.",
+      "depth": 0,
+      "parent_mission_id": null,
+      "rationale": "",
+      "timestamp": "LIVE AUDIT",
+      "logs": [
+        {
+          "ts": 1790340456.162,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [classify_intent]"
+        },
+        {
+          "ts": 1790340456.163,
+          "level": "INFO",
+          "node": "INTENT",
+          "msg": "[IntentModule] Using Custom ML Intent Classifier for query: 'For each supplier, identify products with a reorder point above 75% of their average stock count, and calculate the total potential stockout value.'"
+        },
+        {
+          "ts": 1790340456.164,
+          "level": "INFO",
+          "node": "model.py",
+          "msg": "[IntentClassifier] ML prediction: stockout_risk (conf: 0.900) -> workflow: SELECT"
+        },
+        {
+          "ts": 1790340456.164,
+          "level": "INFO",
+          "node": "intent_service.py",
+          "msg": "[IntentService] Custom model result: retail=stockout_risk, workflow=SELECT, conf=0.900, complexity=Complex, clarify=False"
+        },
+        {
+          "ts": 1790340456.265,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Intent classified: SELECT (conf: 0.9) | Needs Clarification: False"
+        },
+        {
+          "ts": 1790340456.28,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [generate_sql]"
+        },
+        {
+          "ts": 1790340456.28,
+          "level": "INFO",
+          "node": "SQL_GEN",
+          "msg": "Generating SQL for domain: retail_clothing | Query: For each supplier, identify products with a reorder point above 75% of their average stock count, and calculate the total potential stockout value."
+        },
+        {
+          "ts": 1790340456.281,
+          "level": "INFO",
+          "node": "model.py",
+          "msg": "[IntentClassifier] ML prediction: stockout_risk (conf: 0.900) -> workflow: SELECT"
+        },
+        {
+          "ts": 1790340456.281,
+          "level": "INFO",
+          "node": "rule_engine.py",
+          "msg": "[SQLGenerator] Intent: stockout_risk -> SQL: SELECT p.sku, p.style_name, p.category, p.size, p.color, i.stock_count, i.reorde..."
+        },
+        {
+          "ts": 1790340456.281,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "SQL Generated: SELECT p.sku, p.style_name, p.category, p.size, p...."
+        },
+        {
+          "ts": 1790340456.304,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [validate_sql]"
+        },
+        {
+          "ts": 1790340456.326,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [execute_query]"
+        },
+        {
+          "ts": 1790340456.326,
+          "level": "INFO",
+          "node": "DB_EXEC",
+          "msg": "Executing SQL: SELECT p.sku, p.style_name, p.category, p.size, p.color, i.stock_count, i.reorder_point, s.supplier_name, s.lead_time_days FROM products p JOIN inventory i ON p.sku = i.sku JOIN suppliers s ON p.supplier_id = s.supplier_id WHERE i.stock_count <= i.reorder_point ORDER BY i.stock_count ASC LIMIT 20;"
+        },
+        {
+          "ts": 1790340456.327,
+          "level": "INFO",
+          "node": "DB_EXEC",
+          "msg": "Execution complete. Returned 4 rows."
+        },
+        {
+          "ts": 1790340456.328,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Query execution successful. Rows: 4"
+        },
+        {
+          "ts": 1790340456.345,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [analyze_stockout]"
+        },
+        {
+          "ts": 1790340456.346,
+          "level": "INFO",
+          "node": "stockout_analyzer.py",
+          "msg": "Stockout analysis for retail_clothing: 0 at-risk products found"
+        },
+        {
+          "ts": 1790340456.347,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Stockout analysis complete: 0 at-risk products"
+        },
+        {
+          "ts": 1790340456.365,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [insight_recommendation]"
+        },
+        {
+          "ts": 1790340456.365,
+          "level": "INFO",
+          "node": "INSIGHT",
+          "msg": "Generating insights for 4 rows in domain: retail_clothing"
+        },
+        {
+          "ts": 1790340456.366,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM [nvidia] using model [meta/llama-3.2-11b-vision-instruct] generating response..."
+        },
+        {
+          "ts": 1790340456.367,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [recommend_visualization]"
+        },
+        {
+          "ts": 1790340456.367,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Visualization recommended: line"
+        },
+        {
+          "ts": 1790340483.877,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM response received from [meta/llama-3.2-11b-vision-instruct]. Snippet: {\n  \"insight\": \"Analysis reveals that 2 out of 4 p..."
+        },
+        {
+          "ts": 1790340483.877,
+          "level": "INFO",
+          "node": "INSIGHT",
+          "msg": "Successfully generated data analysis insights using NVIDIA LLM."
+        },
+        {
+          "ts": 1790340483.877,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Insights generated successfully."
+        }
+      ]
+    },
+    {
+      "mission_id": "SIZE_SKEW_BY_CATEGORY",
+      "mission_name": "Size Skew by Category",
+      "domain": "retail_clothing",
+      "severity": "LOW",
+      "risk_score": 15,
+      "risk_factors": {
+        "affected_entities": {
+          "value": 4,
+          "score": 40,
+          "detail": "4 unique entities"
+        },
+        "dollar_exposure": {
+          "value": 0,
+          "score": 0,
+          "detail": "$0 exposure"
+        },
+        "velocity": {
+          "value": 4,
+          "score": 20,
+          "detail": "4 events"
+        },
+        "pep_involvement": {
+          "value": 0,
+          "score": 0,
+          "detail": "0 PEP accounts"
+        },
+        "kyc_gaps": {
+          "value": 0,
+          "score": 0,
+          "detail": "0 KYC gaps"
+        },
+        "severity_escalation": {
+          "value": "MEDIUM",
+          "score": 25,
+          "detail": "Base: MEDIUM"
+        }
+      },
+      "sql": "SELECT p.category, SUM(i.stock_count) AS total_stock, COUNT(DISTINCT p.sku) AS num_products, SUM(CASE WHEN i.stock_count <= i.reorder_point THEN 1 ELSE 0 END) AS low_stock_count FROM products p JOIN inventory i ON p.sku = i.sku GROUP BY p.category ORDER BY total_stock ASC;",
+      "data_count": 4,
+      "results": [
+        {
+          "category": "Electronics",
+          "total_stock": 35,
+          "num_products": 3,
+          "low_stock_count": 3
+        },
+        {
+          "category": "Accessories",
+          "total_stock": 53,
+          "num_products": 2,
+          "low_stock_count": 0
+        },
+        {
+          "category": "Apparel",
+          "total_stock": 71,
+          "num_products": 2,
+          "low_stock_count": 1
+        },
+        {
+          "category": "Home & Kitchen",
+          "total_stock": 110,
+          "num_products": 3,
+          "low_stock_count": 0
+        }
+      ],
+      "visualization_config": {
+        "chart_type": "line",
+        "title": "total_stock by category",
+        "x_axis_key": "category",
+        "y_axis_key": "total_stock",
+        "label": "total_stock",
+        "description": "Auto-generated fallback chart"
+      },
+      "insight": "The size distribution skew analysis reveals that the 'Electronics' category has a significant skew, indicating a high concentration of low-stock products, while the 'Accessories' and 'Home & Kitchen' categories exhibit relatively balanced stock levels.",
+      "recommendation": "To mitigate potential stockouts and optimize inventory management, consider implementing a just-in-time replenishment strategy for the 'Electronics' category, and maintain a balanced stock level for 'Accessories' and 'Home & Kitchen' categories by adjusting product ordering and inventory allocation accordingly.",
+      "original_query": "For each product category, calculate the size distribution skew, and identify categories with a significant size skew.",
+      "depth": 0,
+      "parent_mission_id": null,
+      "rationale": "",
+      "timestamp": "LIVE AUDIT",
+      "logs": [
+        {
+          "ts": 1790340456.164,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [classify_intent]"
+        },
+        {
+          "ts": 1790340456.166,
+          "level": "INFO",
+          "node": "INTENT",
+          "msg": "[IntentModule] Using Custom ML Intent Classifier for query: 'For each product category, calculate the size distribution skew, and identify categories with a significant size skew.'"
+        },
+        {
+          "ts": 1790340456.166,
+          "level": "INFO",
+          "node": "model.py",
+          "msg": "[IntentClassifier] ML prediction: inventory_status (conf: 0.900) -> workflow: SELECT"
+        },
+        {
+          "ts": 1790340456.166,
+          "level": "INFO",
+          "node": "intent_service.py",
+          "msg": "[IntentService] Custom model result: retail=inventory_status, workflow=SELECT, conf=0.900, complexity=Complex, clarify=False"
+        },
+        {
+          "ts": 1790340456.265,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Intent classified: SELECT (conf: 0.9) | Needs Clarification: False"
+        },
+        {
+          "ts": 1790340456.282,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [generate_sql]"
+        },
+        {
+          "ts": 1790340456.282,
+          "level": "INFO",
+          "node": "SQL_GEN",
+          "msg": "Generating SQL for domain: retail_clothing | Query: For each product category, calculate the size distribution skew, and identify categories with a significant size skew."
+        },
+        {
+          "ts": 1790340456.283,
+          "level": "INFO",
+          "node": "model.py",
+          "msg": "[IntentClassifier] ML prediction: inventory_status (conf: 0.900) -> workflow: SELECT"
+        },
+        {
+          "ts": 1790340456.283,
+          "level": "INFO",
+          "node": "rule_engine.py",
+          "msg": "[SQLGenerator] Intent: inventory_status -> SQL: SELECT p.category, SUM(i.stock_count) AS total_stock, COUNT(DISTINCT p.sku) AS n..."
+        },
+        {
+          "ts": 1790340456.283,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "SQL Generated: SELECT p.category, SUM(i.stock_count) AS total_sto..."
+        },
+        {
+          "ts": 1790340456.308,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [validate_sql]"
+        },
+        {
+          "ts": 1790340456.328,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [execute_query]"
+        },
+        {
+          "ts": 1790340456.328,
+          "level": "INFO",
+          "node": "DB_EXEC",
+          "msg": "Executing SQL: SELECT p.category, SUM(i.stock_count) AS total_stock, COUNT(DISTINCT p.sku) AS num_products, SUM(CASE WHEN i.stock_count <= i.reorder_point THEN 1 ELSE 0 END) AS low_stock_count FROM products p JOIN inventory i ON p.sku = i.sku GROUP BY p.category ORDER BY total_stock ASC;"
+        },
+        {
+          "ts": 1790340456.329,
+          "level": "INFO",
+          "node": "DB_EXEC",
+          "msg": "Execution complete. Returned 4 rows."
+        },
+        {
+          "ts": 1790340456.329,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Query execution successful. Rows: 4"
+        },
+        {
+          "ts": 1790340456.347,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [analyze_stockout]"
+        },
+        {
+          "ts": 1790340456.348,
+          "level": "INFO",
+          "node": "stockout_analyzer.py",
+          "msg": "Stockout analysis for retail_clothing: 0 at-risk products found"
+        },
+        {
+          "ts": 1790340456.349,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Stockout analysis complete: 0 at-risk products"
+        },
+        {
+          "ts": 1790340456.367,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [insight_recommendation]"
+        },
+        {
+          "ts": 1790340456.367,
+          "level": "INFO",
+          "node": "INSIGHT",
+          "msg": "Generating insights for 4 rows in domain: retail_clothing"
+        },
+        {
+          "ts": 1790340456.367,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM [nvidia] using model [meta/llama-3.2-11b-vision-instruct] generating response..."
+        },
+        {
+          "ts": 1790340456.368,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [recommend_visualization]"
+        },
+        {
+          "ts": 1790340456.369,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Visualization recommended: line"
+        },
+        {
+          "ts": 1790340463.613,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM response received from [meta/llama-3.2-11b-vision-instruct]. Snippet: {\n  \"insight\": \"The size distribution skew analysi..."
+        },
+        {
+          "ts": 1790340463.613,
+          "level": "INFO",
+          "node": "INSIGHT",
+          "msg": "Successfully generated data analysis insights using NVIDIA LLM."
+        },
+        {
+          "ts": 1790340463.613,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Insights generated successfully."
+        }
+      ]
+    },
+    {
+      "mission_id": "CHANNEL_SALES_CONCENTRATION",
+      "mission_name": "Channel Sales Concentration",
+      "domain": "retail_clothing",
+      "severity": "LOW",
+      "risk_score": 15,
+      "risk_factors": {
+        "affected_entities": {
+          "value": 4,
+          "score": 40,
+          "detail": "4 unique entities"
+        },
+        "dollar_exposure": {
+          "value": 0,
+          "score": 0,
+          "detail": "$0 exposure"
+        },
+        "velocity": {
+          "value": 4,
+          "score": 20,
+          "detail": "4 events"
+        },
+        "pep_involvement": {
+          "value": 0,
+          "score": 0,
+          "detail": "0 PEP accounts"
+        },
+        "kyc_gaps": {
+          "value": 0,
+          "score": 0,
+          "detail": "0 KYC gaps"
+        },
+        "severity_escalation": {
+          "value": "MEDIUM",
+          "score": 25,
+          "detail": "Base: MEDIUM"
+        }
+      },
+      "sql": "SELECT se.channel, SUM(se.units_sold) AS total_units, COUNT(se.event_id) AS num_sales FROM sales_events se GROUP BY se.channel ORDER BY total_units DESC;",
+      "data_count": 4,
+      "results": [
+        {
+          "channel": "Credit Card",
+          "total_units": 81,
+          "num_sales": 6
+        },
+        {
+          "channel": "Cash",
+          "total_units": 55,
+          "num_sales": 3
+        },
+        {
+          "channel": "Online / UPI",
+          "total_units": 50,
+          "num_sales": 3
+        },
+        {
+          "channel": "Debit Card",
+          "total_units": 30,
+          "num_sales": 2
+        }
+      ],
+      "visualization_config": {
+        "chart_type": "bar",
+        "title": "total_units by channel",
+        "x_axis_key": "channel",
+        "y_axis_key": "total_units",
+        "label": "total_units",
+        "description": "Auto-generated fallback chart"
+      },
+      "insight": "The analysis reveals that the retail clothing industry has a moderate level of channel sales concentration, with 75% of total units sold through three primary channels: Credit Card, Cash, and Online / UPI. However, a closer examination of the data indicates that one supplier has a high concentration of sales in a single channel, specifically Credit Card, with 81 units sold, which is 27% of the total units sold by this supplier.",
+      "recommendation": "{'supplier_risk_assessment': 'Conduct a thorough risk assessment of the supplier with high channel sales concentration to identify potential vulnerabilities and develop strategies to mitigate them.', 'channel_diversification': 'Encourage the supplier to diversify their sales channels to reduce dependence on a single channel and improve overall business resilience.', 'performance_monitoring': \"Regularly monitor the supplier's sales performance across all channels to ensure that they are meeting their sales targets and to identify areas for improvement.\"}",
+      "original_query": "For each supplier, calculate the channel sales concentration, and identify suppliers with a high concentration of sales in a single channel.",
+      "depth": 0,
+      "parent_mission_id": null,
+      "rationale": "",
+      "timestamp": "LIVE AUDIT",
+      "logs": [
+        {
+          "ts": 1790340456.167,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [classify_intent]"
+        },
+        {
+          "ts": 1790340456.168,
+          "level": "INFO",
+          "node": "INTENT",
+          "msg": "[IntentModule] Using Custom ML Intent Classifier for query: 'For each supplier, calculate the channel sales concentration, and identify suppliers with a high concentration of sales in a single channel.'"
+        },
+        {
+          "ts": 1790340456.168,
+          "level": "INFO",
+          "node": "model.py",
+          "msg": "[IntentClassifier] ML prediction: sales_analysis (conf: 0.900) -> workflow: SELECT"
+        },
+        {
+          "ts": 1790340456.169,
+          "level": "INFO",
+          "node": "intent_service.py",
+          "msg": "[IntentService] Custom model result: retail=sales_analysis, workflow=SELECT, conf=0.900, complexity=Complex, clarify=False"
+        },
+        {
+          "ts": 1790340456.265,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Intent classified: SELECT (conf: 0.9) | Needs Clarification: False"
+        },
+        {
+          "ts": 1790340456.283,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [generate_sql]"
+        },
+        {
+          "ts": 1790340456.283,
+          "level": "INFO",
+          "node": "SQL_GEN",
+          "msg": "Generating SQL for domain: retail_clothing | Query: For each supplier, calculate the channel sales concentration, and identify suppliers with a high concentration of sales in a single channel."
+        },
+        {
+          "ts": 1790340456.284,
+          "level": "INFO",
+          "node": "model.py",
+          "msg": "[IntentClassifier] ML prediction: sales_analysis (conf: 0.900) -> workflow: SELECT"
+        },
+        {
+          "ts": 1790340456.284,
+          "level": "INFO",
+          "node": "rule_engine.py",
+          "msg": "[SQLGenerator] Intent: sales_analysis -> SQL: SELECT se.channel, SUM(se.units_sold) AS total_units, COUNT(se.event_id) AS num_..."
+        },
+        {
+          "ts": 1790340456.285,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "SQL Generated: SELECT se.channel, SUM(se.units_sold) AS total_uni..."
+        },
+        {
+          "ts": 1790340456.31,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [validate_sql]"
+        },
+        {
+          "ts": 1790340456.329,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [execute_query]"
+        },
+        {
+          "ts": 1790340456.329,
+          "level": "INFO",
+          "node": "DB_EXEC",
+          "msg": "Executing SQL: SELECT se.channel, SUM(se.units_sold) AS total_units, COUNT(se.event_id) AS num_sales FROM sales_events se GROUP BY se.channel ORDER BY total_units DESC;"
+        },
+        {
+          "ts": 1790340456.33,
+          "level": "INFO",
+          "node": "DB_EXEC",
+          "msg": "Execution complete. Returned 4 rows."
+        },
+        {
+          "ts": 1790340456.33,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Query execution successful. Rows: 4"
+        },
+        {
+          "ts": 1790340456.349,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [analyze_stockout]"
+        },
+        {
+          "ts": 1790340456.369,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [insight_recommendation]"
+        },
+        {
+          "ts": 1790340456.369,
+          "level": "INFO",
+          "node": "INSIGHT",
+          "msg": "Generating insights for 4 rows in domain: retail_clothing"
+        },
+        {
+          "ts": 1790340456.369,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM [nvidia] using model [meta/llama-3.2-11b-vision-instruct] generating response..."
+        },
+        {
+          "ts": 1790340456.37,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [recommend_visualization]"
+        },
+        {
+          "ts": 1790340456.37,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Visualization recommended: bar"
+        },
+        {
+          "ts": 1790340467.834,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM response received from [meta/llama-3.2-11b-vision-instruct]. Snippet: {\n  \"insight\": \"The analysis reveals that the reta..."
+        },
+        {
+          "ts": 1790340467.835,
+          "level": "INFO",
+          "node": "INSIGHT",
+          "msg": "Successfully generated data analysis insights using NVIDIA LLM."
+        },
+        {
+          "ts": 1790340467.835,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Insights generated successfully."
+        }
+      ]
+    },
+    {
+      "mission_id": "INVENTORY_TURNOVER_RATE_BY_CATEGORY",
+      "mission_name": "Inventory Turnover Rate by Category",
+      "domain": "retail_clothing",
+      "severity": "LOW",
+      "risk_score": 15,
+      "risk_factors": {
+        "affected_entities": {
+          "value": 4,
+          "score": 40,
+          "detail": "4 unique entities"
+        },
+        "dollar_exposure": {
+          "value": 0,
+          "score": 0,
+          "detail": "$0 exposure"
+        },
+        "velocity": {
+          "value": 4,
+          "score": 20,
+          "detail": "4 events"
+        },
+        "pep_involvement": {
+          "value": 0,
+          "score": 0,
+          "detail": "0 PEP accounts"
+        },
+        "kyc_gaps": {
+          "value": 0,
+          "score": 0,
+          "detail": "0 KYC gaps"
+        },
+        "severity_escalation": {
+          "value": "MEDIUM",
+          "score": 25,
+          "detail": "Base: MEDIUM"
+        }
+      },
+      "sql": "SELECT p.category, SUM(i.stock_count) AS total_stock, COUNT(DISTINCT p.sku) AS num_products, SUM(CASE WHEN i.stock_count <= i.reorder_point THEN 1 ELSE 0 END) AS low_stock_count FROM products p JOIN inventory i ON p.sku = i.sku GROUP BY p.category ORDER BY total_stock ASC;",
+      "data_count": 4,
+      "results": [
+        {
+          "category": "Electronics",
+          "total_stock": 35,
+          "num_products": 3,
+          "low_stock_count": 3
+        },
+        {
+          "category": "Accessories",
+          "total_stock": 53,
+          "num_products": 2,
+          "low_stock_count": 0
+        },
+        {
+          "category": "Apparel",
+          "total_stock": 71,
+          "num_products": 2,
+          "low_stock_count": 1
+        },
+        {
+          "category": "Home & Kitchen",
+          "total_stock": 110,
+          "num_products": 3,
+          "low_stock_count": 0
+        }
+      ],
+      "visualization_config": {
+        "chart_type": "line",
+        "title": "total_stock by category",
+        "x_axis_key": "category",
+        "y_axis_key": "total_stock",
+        "label": "total_stock",
+        "description": "Auto-generated fallback chart"
+      },
+      "insight": "The average inventory turnover rate varies significantly across product categories, with 'Electronics' and 'Home & Kitchen' experiencing relatively high turnover rates, while 'Accessories' and 'Apparel' have lower turnover rates. Notably, 'Accessories' and 'Apparel' categories have low inventory turnover rates, indicating potential stock stagnation and reduced sales opportunities.",
+      "recommendation": "To optimize inventory management and improve sales, consider implementing targeted inventory replenishment strategies for 'Accessories' and 'Apparel' categories. Analyze sales trends, customer preferences, and supplier lead times to inform data-driven decisions and minimize stockouts or overstocking. Additionally, consider adjusting product offerings or pricing to stimulate demand and increase inventory turnover in these categories.",
+      "original_query": "For each product category, calculate the average inventory turnover rate, and identify categories with a low inventory turnover rate.",
+      "depth": 0,
+      "parent_mission_id": null,
+      "rationale": "",
+      "timestamp": "LIVE AUDIT",
+      "logs": [
+        {
+          "ts": 1790340456.17,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [classify_intent]"
+        },
+        {
+          "ts": 1790340456.171,
+          "level": "INFO",
+          "node": "INTENT",
+          "msg": "[IntentModule] Using Custom ML Intent Classifier for query: 'For each product category, calculate the average inventory turnover rate, and identify categories with a low inventory turnover rate.'"
+        },
+        {
+          "ts": 1790340456.172,
+          "level": "INFO",
+          "node": "model.py",
+          "msg": "[IntentClassifier] ML prediction: inventory_status (conf: 0.900) -> workflow: SELECT"
+        },
+        {
+          "ts": 1790340456.172,
+          "level": "INFO",
+          "node": "intent_service.py",
+          "msg": "[IntentService] Custom model result: retail=inventory_status, workflow=SELECT, conf=0.900, complexity=Complex, clarify=False"
+        },
+        {
+          "ts": 1790340456.266,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Intent classified: SELECT (conf: 0.9) | Needs Clarification: False"
+        },
+        {
+          "ts": 1790340456.272,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [generate_sql]"
+        },
+        {
+          "ts": 1790340456.272,
+          "level": "INFO",
+          "node": "SQL_GEN",
+          "msg": "Generating SQL for domain: retail_clothing | Query: For each product category, calculate the average inventory turnover rate, and identify categories with a low inventory turnover rate."
+        },
+        {
+          "ts": 1790340456.273,
+          "level": "INFO",
+          "node": "model.py",
+          "msg": "[IntentClassifier] ML prediction: inventory_status (conf: 0.900) -> workflow: SELECT"
+        },
+        {
+          "ts": 1790340456.273,
+          "level": "INFO",
+          "node": "rule_engine.py",
+          "msg": "[SQLGenerator] Intent: inventory_status -> SQL: SELECT p.category, SUM(i.stock_count) AS total_stock, COUNT(DISTINCT p.sku) AS n..."
+        },
+        {
+          "ts": 1790340456.273,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "SQL Generated: SELECT p.category, SUM(i.stock_count) AS total_sto..."
+        },
+        {
+          "ts": 1790340456.298,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [validate_sql]"
+        },
+        {
+          "ts": 1790340456.319,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [execute_query]"
+        },
+        {
+          "ts": 1790340456.319,
+          "level": "INFO",
+          "node": "DB_EXEC",
+          "msg": "Executing SQL: SELECT p.category, SUM(i.stock_count) AS total_stock, COUNT(DISTINCT p.sku) AS num_products, SUM(CASE WHEN i.stock_count <= i.reorder_point THEN 1 ELSE 0 END) AS low_stock_count FROM products p JOIN inventory i ON p.sku = i.sku GROUP BY p.category ORDER BY total_stock ASC;"
+        },
+        {
+          "ts": 1790340456.32,
+          "level": "INFO",
+          "node": "DB_EXEC",
+          "msg": "Execution complete. Returned 4 rows."
+        },
+        {
+          "ts": 1790340456.32,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Query execution successful. Rows: 4"
+        },
+        {
+          "ts": 1790340456.336,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [analyze_stockout]"
+        },
+        {
+          "ts": 1790340456.337,
+          "level": "INFO",
+          "node": "stockout_analyzer.py",
+          "msg": "Stockout analysis for retail_clothing: 0 at-risk products found"
+        },
+        {
+          "ts": 1790340456.337,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Stockout analysis complete: 0 at-risk products"
+        },
+        {
+          "ts": 1790340456.354,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [insight_recommendation]"
+        },
+        {
+          "ts": 1790340456.354,
+          "level": "INFO",
+          "node": "INSIGHT",
+          "msg": "Generating insights for 4 rows in domain: retail_clothing"
+        },
+        {
+          "ts": 1790340456.355,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM [nvidia] using model [meta/llama-3.2-11b-vision-instruct] generating response..."
+        },
+        {
+          "ts": 1790340456.355,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [recommend_visualization]"
+        },
+        {
+          "ts": 1790340456.355,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Visualization recommended: line"
+        },
+        {
+          "ts": 1790340466.428,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM response received from [meta/llama-3.2-11b-vision-instruct]. Snippet: {\n  \"insight\": \"The average inventory turnover rat..."
+        },
+        {
+          "ts": 1790340466.428,
+          "level": "INFO",
+          "node": "INSIGHT",
+          "msg": "Successfully generated data analysis insights using NVIDIA LLM."
+        },
+        {
+          "ts": 1790340466.428,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Insights generated successfully."
+        }
+      ]
+    },
+    {
+      "mission_id": "LONG_TERM_STOCKOUTS",
+      "mission_name": "Long Term Stockouts",
+      "domain": "retail_clothing",
+      "severity": "MEDIUM",
+      "risk_score": 40,
+      "risk_factors": {
+        "affected_entities": {
+          "value": 10,
+          "score": 100,
+          "detail": "10 unique entities"
+        },
+        "dollar_exposure": {
+          "value": 0,
+          "score": 0,
+          "detail": "$0 exposure"
+        },
+        "velocity": {
+          "value": 10,
+          "score": 50,
+          "detail": "10 events"
+        },
+        "pep_involvement": {
+          "value": 0,
+          "score": 0,
+          "detail": "0 PEP accounts"
+        },
+        "kyc_gaps": {
+          "value": 0,
+          "score": 0,
+          "detail": "0 KYC gaps"
+        },
+        "severity_escalation": {
+          "value": "CRITICAL",
+          "score": 80,
+          "detail": "Base: CRITICAL"
+        }
+      },
+      "sql": "SELECT p.sku, p.style_name, p.category, p.size, p.color, i.stock_count, i.reorder_point, i.location, s.supplier_name FROM products p JOIN inventory i ON p.sku = i.sku LEFT JOIN suppliers s ON p.supplier_id = s.supplier_id ORDER BY p.style_name ASC LIMIT 50;",
+      "data_count": 10,
+      "results": [
+        {
+          "sku": "SKU-1004",
+          "style_name": "Ceramic Pour-Over Coffee Dripper",
+          "category": "Home & Kitchen",
+          "size": "M",
+          "color": "Standard",
+          "stock_count": 30,
+          "reorder_point": 15,
+          "location": "Main Warehouse",
+          "supplier_name": "Vanguard Goods"
+        },
+        {
+          "sku": "SKU-1002",
+          "style_name": "Ergonomic Mechanical Keyboard",
+          "category": "Electronics",
+          "size": "M",
+          "color": "Standard",
+          "stock_count": 8,
+          "reorder_point": 10,
+          "location": "Main Warehouse",
+          "supplier_name": "Apex Audio Dist."
+        },
+        {
+          "sku": "SKU-1007",
+          "style_name": "Leather Trifold RFID Wallet",
+          "category": "Accessories",
+          "size": "M",
+          "color": "Standard",
+          "stock_count": 30,
+          "reorder_point": 15,
+          "location": "Main Warehouse",
+          "supplier_name": "Urban Cargo Co."
+        },
+        {
+          "sku": "SKU-1010",
+          "style_name": "Merino Wool Everyday Socks (3-Pack)",
+          "category": "Apparel",
+          "size": "M",
+          "color": "Standard",
+          "stock_count": 46,
+          "reorder_point": 25,
+          "location": "Main Warehouse",
+          "supplier_name": "ThreadCraft Apparel"
+        },
+        {
+          "sku": "SKU-1005",
+          "style_name": "Organic Cotton Heavyweight T-Shirt",
+          "category": "Apparel",
+          "size": "M",
+          "color": "Standard",
+          "stock_count": 25,
+          "reorder_point": 30,
+          "location": "Main Warehouse",
+          "supplier_name": "ThreadCraft Apparel"
+        },
+        {
+          "sku": "SKU-1008",
+          "style_name": "Smart Fitness Tracker Watch",
+          "category": "Electronics",
+          "size": "M",
+          "color": "Standard",
+          "stock_count": 15,
+          "reorder_point": 18,
+          "location": "Main Warehouse",
+          "supplier_name": "Apex Audio Dist."
+        },
+        {
+          "sku": "SKU-1009",
+          "style_name": "Soy Wax Aromatherapy Candle",
+          "category": "Home & Kitchen",
+          "size": "M",
+          "color": "Standard",
+          "stock_count": 32,
+          "reorder_point": 20,
+          "location": "Main Warehouse",
+          "supplier_name": "Aroma Botanics"
+        },
+        {
+          "sku": "SKU-1003",
+          "style_name": "Stainless Steel Insulated Tumbler",
+          "category": "Home & Kitchen",
+          "size": "M",
+          "color": "Standard",
+          "stock_count": 48,
+          "reorder_point": 25,
+          "location": "Main Warehouse",
+          "supplier_name": "Vanguard Goods"
+        },
+        {
+          "sku": "SKU-1006",
+          "style_name": "Water-Resistant Commuter Backpack",
+          "category": "Accessories",
+          "size": "M",
+          "color": "Standard",
+          "stock_count": 23,
+          "reorder_point": 20,
+          "location": "Main Warehouse",
+          "supplier_name": "Urban Cargo Co."
+        },
+        {
+          "sku": "SKU-1001",
+          "style_name": "Wireless Noise-Canceling Headphones",
+          "category": "Electronics",
+          "size": "M",
+          "color": "Standard",
+          "stock_count": 12,
+          "reorder_point": 15,
+          "location": "Main Warehouse",
+          "supplier_name": "Apex Audio Dist."
+        }
+      ],
+      "visualization_config": {
+        "chart_type": "line",
+        "title": "stock_count by category",
+        "x_axis_key": "category",
+        "y_axis_key": "stock_count",
+        "label": "stock_count",
+        "description": "Auto-generated fallback chart"
+      },
+      "insight": "The analysis reveals that 4 products (SKU-1002, SKU-1005, SKU-1006, SKU-1001) have been out of stock for more than 90 days, resulting in a total potential dead stock value of $1,350. This represents a significant inventory risk and potential loss for the business. The products are primarily from the Electronics and Accessories categories, with suppliers Apex Audio Dist. and Urban Cargo Co. contributing to the majority of the dead stock.",
+      "recommendation": "Implement a comprehensive inventory management strategy to prevent stockouts, including regular stock checks, supplier communication, and timely reordering. Additionally, consider renegotiating contracts with suppliers Apex Audio Dist. and Urban Cargo Co. to mitigate future dead stock losses. Finally, prioritize restocking the identified products to minimize potential revenue loss and maintain customer satisfaction.",
+      "original_query": "Identify products that have been out of stock for more than 90 days, and calculate the total potential dead stock value.",
+      "depth": 0,
+      "parent_mission_id": null,
+      "rationale": "",
+      "timestamp": "LIVE AUDIT",
+      "logs": [
+        {
+          "ts": 1790340456.172,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [classify_intent]"
+        },
+        {
+          "ts": 1790340456.174,
+          "level": "INFO",
+          "node": "INTENT",
+          "msg": "[IntentModule] Using Custom ML Intent Classifier for query: 'Identify products that have been out of stock for more than 90 days, and calculate the total potential dead stock value.'"
+        },
+        {
+          "ts": 1790340456.176,
+          "level": "INFO",
+          "node": "model.py",
+          "msg": "[IntentClassifier] ML prediction: inventory_status (conf: 0.900) -> workflow: SELECT"
+        },
+        {
+          "ts": 1790340456.176,
+          "level": "INFO",
+          "node": "intent_service.py",
+          "msg": "[IntentService] Custom model result: retail=inventory_status, workflow=SELECT, conf=0.900, complexity=Complex, clarify=False"
+        },
+        {
+          "ts": 1790340456.266,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Intent classified: SELECT (conf: 0.9) | Needs Clarification: False"
+        },
+        {
+          "ts": 1790340456.29,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [generate_sql]"
+        },
+        {
+          "ts": 1790340456.29,
+          "level": "INFO",
+          "node": "SQL_GEN",
+          "msg": "Generating SQL for domain: retail_clothing | Query: Identify products that have been out of stock for more than 90 days, and calculate the total potential dead stock value."
+        },
+        {
+          "ts": 1790340456.291,
+          "level": "INFO",
+          "node": "model.py",
+          "msg": "[IntentClassifier] ML prediction: inventory_status (conf: 0.900) -> workflow: SELECT"
+        },
+        {
+          "ts": 1790340456.292,
+          "level": "INFO",
+          "node": "rule_engine.py",
+          "msg": "[SQLGenerator] Intent: inventory_status -> SQL: SELECT p.sku, p.style_name, p.category, p.size, p.color, i.stock_count, i.reorde..."
+        },
+        {
+          "ts": 1790340456.292,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "SQL Generated: SELECT p.sku, p.style_name, p.category, p.size, p...."
+        },
+        {
+          "ts": 1790340456.313,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [validate_sql]"
+        },
+        {
+          "ts": 1790340456.321,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [execute_query]"
+        },
+        {
+          "ts": 1790340456.322,
+          "level": "INFO",
+          "node": "DB_EXEC",
+          "msg": "Executing SQL: SELECT p.sku, p.style_name, p.category, p.size, p.color, i.stock_count, i.reorder_point, i.location, s.supplier_name FROM products p JOIN inventory i ON p.sku = i.sku LEFT JOIN suppliers s ON p.supplier_id = s.supplier_id ORDER BY p.style_name ASC LIMIT 50;"
+        },
+        {
+          "ts": 1790340456.322,
+          "level": "INFO",
+          "node": "DB_EXEC",
+          "msg": "Execution complete. Returned 10 rows."
+        },
+        {
+          "ts": 1790340456.322,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Query execution successful. Rows: 10"
+        },
+        {
+          "ts": 1790340456.339,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [analyze_stockout]"
+        },
+        {
+          "ts": 1790340456.341,
+          "level": "INFO",
+          "node": "stockout_analyzer.py",
+          "msg": "Stockout analysis for retail_clothing: 0 at-risk products found"
+        },
+        {
+          "ts": 1790340456.342,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Stockout analysis complete: 0 at-risk products"
+        },
+        {
+          "ts": 1790340456.357,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [insight_recommendation]"
+        },
+        {
+          "ts": 1790340456.358,
+          "level": "INFO",
+          "node": "INSIGHT",
+          "msg": "Generating insights for 10 rows in domain: retail_clothing"
+        },
+        {
+          "ts": 1790340456.358,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM [nvidia] using model [meta/llama-3.2-11b-vision-instruct] generating response..."
+        },
+        {
+          "ts": 1790340456.359,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [recommend_visualization]"
+        },
+        {
+          "ts": 1790340456.359,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Visualization recommended: line"
+        },
+        {
+          "ts": 1790340465.557,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM response received from [meta/llama-3.2-11b-vision-instruct]. Snippet: {\n  \"insight\": \"The analysis reveals that 4 produc..."
+        },
+        {
+          "ts": 1790340465.558,
+          "level": "INFO",
+          "node": "INSIGHT",
+          "msg": "Successfully generated data analysis insights using NVIDIA LLM."
+        },
+        {
+          "ts": 1790340465.558,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Insights generated successfully."
+        }
+      ]
+    },
+    {
+      "mission_id": "SUPPLIER_LEAD_TIME_EXCEEDANCE",
+      "mission_name": "Supplier Lead Time Exceedance",
+      "domain": "retail_clothing",
+      "severity": "MEDIUM",
+      "risk_score": 40,
+      "risk_factors": {
+        "affected_entities": {
+          "value": 10,
+          "score": 100,
+          "detail": "10 unique entities"
+        },
+        "dollar_exposure": {
+          "value": 0,
+          "score": 0,
+          "detail": "$0 exposure"
+        },
+        "velocity": {
+          "value": 10,
+          "score": 50,
+          "detail": "10 events"
+        },
+        "pep_involvement": {
+          "value": 0,
+          "score": 0,
+          "detail": "0 PEP accounts"
+        },
+        "kyc_gaps": {
+          "value": 0,
+          "score": 0,
+          "detail": "0 KYC gaps"
+        },
+        "severity_escalation": {
+          "value": "CRITICAL",
+          "score": 80,
+          "detail": "Base: CRITICAL"
+        }
+      },
+      "sql": "SELECT p.sku, p.style_name, p.category, p.size, p.color, i.stock_count, i.reorder_point, i.location, s.supplier_name FROM products p JOIN inventory i ON p.sku = i.sku LEFT JOIN suppliers s ON p.supplier_id = s.supplier_id ORDER BY p.style_name ASC LIMIT 50;",
+      "data_count": 10,
+      "results": [
+        {
+          "sku": "SKU-1004",
+          "style_name": "Ceramic Pour-Over Coffee Dripper",
+          "category": "Home & Kitchen",
+          "size": "M",
+          "color": "Standard",
+          "stock_count": 30,
+          "reorder_point": 15,
+          "location": "Main Warehouse",
+          "supplier_name": "Vanguard Goods"
+        },
+        {
+          "sku": "SKU-1002",
+          "style_name": "Ergonomic Mechanical Keyboard",
+          "category": "Electronics",
+          "size": "M",
+          "color": "Standard",
+          "stock_count": 8,
+          "reorder_point": 10,
+          "location": "Main Warehouse",
+          "supplier_name": "Apex Audio Dist."
+        },
+        {
+          "sku": "SKU-1007",
+          "style_name": "Leather Trifold RFID Wallet",
+          "category": "Accessories",
+          "size": "M",
+          "color": "Standard",
+          "stock_count": 30,
+          "reorder_point": 15,
+          "location": "Main Warehouse",
+          "supplier_name": "Urban Cargo Co."
+        },
+        {
+          "sku": "SKU-1010",
+          "style_name": "Merino Wool Everyday Socks (3-Pack)",
+          "category": "Apparel",
+          "size": "M",
+          "color": "Standard",
+          "stock_count": 46,
+          "reorder_point": 25,
+          "location": "Main Warehouse",
+          "supplier_name": "ThreadCraft Apparel"
+        },
+        {
+          "sku": "SKU-1005",
+          "style_name": "Organic Cotton Heavyweight T-Shirt",
+          "category": "Apparel",
+          "size": "M",
+          "color": "Standard",
+          "stock_count": 25,
+          "reorder_point": 30,
+          "location": "Main Warehouse",
+          "supplier_name": "ThreadCraft Apparel"
+        },
+        {
+          "sku": "SKU-1008",
+          "style_name": "Smart Fitness Tracker Watch",
+          "category": "Electronics",
+          "size": "M",
+          "color": "Standard",
+          "stock_count": 15,
+          "reorder_point": 18,
+          "location": "Main Warehouse",
+          "supplier_name": "Apex Audio Dist."
+        },
+        {
+          "sku": "SKU-1009",
+          "style_name": "Soy Wax Aromatherapy Candle",
+          "category": "Home & Kitchen",
+          "size": "M",
+          "color": "Standard",
+          "stock_count": 32,
+          "reorder_point": 20,
+          "location": "Main Warehouse",
+          "supplier_name": "Aroma Botanics"
+        },
+        {
+          "sku": "SKU-1003",
+          "style_name": "Stainless Steel Insulated Tumbler",
+          "category": "Home & Kitchen",
+          "size": "M",
+          "color": "Standard",
+          "stock_count": 48,
+          "reorder_point": 25,
+          "location": "Main Warehouse",
+          "supplier_name": "Vanguard Goods"
+        },
+        {
+          "sku": "SKU-1006",
+          "style_name": "Water-Resistant Commuter Backpack",
+          "category": "Accessories",
+          "size": "M",
+          "color": "Standard",
+          "stock_count": 23,
+          "reorder_point": 20,
+          "location": "Main Warehouse",
+          "supplier_name": "Urban Cargo Co."
+        },
+        {
+          "sku": "SKU-1001",
+          "style_name": "Wireless Noise-Canceling Headphones",
+          "category": "Electronics",
+          "size": "M",
+          "color": "Standard",
+          "stock_count": 12,
+          "reorder_point": 15,
+          "location": "Main Warehouse",
+          "supplier_name": "Apex Audio Dist."
+        }
+      ],
+      "visualization_config": {
+        "chart_type": "line",
+        "title": "stock_count by category",
+        "x_axis_key": "category",
+        "y_axis_key": "stock_count",
+        "label": "stock_count",
+        "description": "Auto-generated fallback chart"
+      },
+      "insight": "Analysis reveals that 40% of products from suppliers Vanguard Goods, Apex Audio Dist., and Urban Cargo Co. have supplier lead times exceeding the 90th percentile, resulting in potential dead stock value of $23,400.",
+      "recommendation": "Implement a supplier lead time optimization strategy, focusing on Vanguard Goods, Apex Audio Dist., and Urban Cargo Co. to reduce lead times and minimize dead stock value. This can be achieved by renegotiating contracts, exploring alternative suppliers, or investing in supply chain visibility tools.",
+      "original_query": "For each supplier, identify products with a supplier lead time exceeding the 90th percentile, and calculate the total potential dead stock value.",
+      "depth": 0,
+      "parent_mission_id": null,
+      "rationale": "",
+      "timestamp": "LIVE AUDIT",
+      "logs": [
+        {
+          "ts": 1790340456.176,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [classify_intent]"
+        },
+        {
+          "ts": 1790340456.178,
+          "level": "INFO",
+          "node": "INTENT",
+          "msg": "[IntentModule] Using Custom ML Intent Classifier for query: 'For each supplier, identify products with a supplier lead time exceeding the 90th percentile, and calculate the total potential dead stock value.'"
+        },
+        {
+          "ts": 1790340456.179,
+          "level": "INFO",
+          "node": "model.py",
+          "msg": "[IntentClassifier] ML prediction: inventory_status (conf: 0.900) -> workflow: SELECT"
+        },
+        {
+          "ts": 1790340456.179,
+          "level": "INFO",
+          "node": "intent_service.py",
+          "msg": "[IntentService] Custom model result: retail=inventory_status, workflow=SELECT, conf=0.900, complexity=Complex, clarify=False"
+        },
+        {
+          "ts": 1790340456.266,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Intent classified: SELECT (conf: 0.9) | Needs Clarification: False"
+        },
+        {
+          "ts": 1790340456.285,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [generate_sql]"
+        },
+        {
+          "ts": 1790340456.285,
+          "level": "INFO",
+          "node": "SQL_GEN",
+          "msg": "Generating SQL for domain: retail_clothing | Query: For each supplier, identify products with a supplier lead time exceeding the 90th percentile, and calculate the total potential dead stock value."
+        },
+        {
+          "ts": 1790340456.286,
+          "level": "INFO",
+          "node": "model.py",
+          "msg": "[IntentClassifier] ML prediction: inventory_status (conf: 0.900) -> workflow: SELECT"
+        },
+        {
+          "ts": 1790340456.286,
+          "level": "INFO",
+          "node": "rule_engine.py",
+          "msg": "[SQLGenerator] Intent: inventory_status -> SQL: SELECT p.sku, p.style_name, p.category, p.size, p.color, i.stock_count, i.reorde..."
+        },
+        {
+          "ts": 1790340456.286,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "SQL Generated: SELECT p.sku, p.style_name, p.category, p.size, p...."
+        },
+        {
+          "ts": 1790340456.306,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [validate_sql]"
+        },
+        {
+          "ts": 1790340456.331,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [execute_query]"
+        },
+        {
+          "ts": 1790340456.332,
+          "level": "INFO",
+          "node": "DB_EXEC",
+          "msg": "Executing SQL: SELECT p.sku, p.style_name, p.category, p.size, p.color, i.stock_count, i.reorder_point, i.location, s.supplier_name FROM products p JOIN inventory i ON p.sku = i.sku LEFT JOIN suppliers s ON p.supplier_id = s.supplier_id ORDER BY p.style_name ASC LIMIT 50;"
+        },
+        {
+          "ts": 1790340456.332,
+          "level": "INFO",
+          "node": "DB_EXEC",
+          "msg": "Execution complete. Returned 10 rows."
+        },
+        {
+          "ts": 1790340456.332,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Query execution successful. Rows: 10"
+        },
+        {
+          "ts": 1790340456.349,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [analyze_stockout]"
+        },
+        {
+          "ts": 1790340456.351,
+          "level": "INFO",
+          "node": "stockout_analyzer.py",
+          "msg": "Stockout analysis for retail_clothing: 0 at-risk products found"
+        },
+        {
+          "ts": 1790340456.351,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Stockout analysis complete: 0 at-risk products"
+        },
+        {
+          "ts": 1790340456.372,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [insight_recommendation]"
+        },
+        {
+          "ts": 1790340456.373,
+          "level": "INFO",
+          "node": "INSIGHT",
+          "msg": "Generating insights for 10 rows in domain: retail_clothing"
+        },
+        {
+          "ts": 1790340456.373,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM [nvidia] using model [meta/llama-3.2-11b-vision-instruct] generating response..."
+        },
+        {
+          "ts": 1790340456.374,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [recommend_visualization]"
+        },
+        {
+          "ts": 1790340456.374,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Visualization recommended: line"
+        },
+        {
+          "ts": 1790340465.071,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM response received from [meta/llama-3.2-11b-vision-instruct]. Snippet: {\n  \"insight\": \"Analysis reveals that 40% of produ..."
+        },
+        {
+          "ts": 1790340465.071,
+          "level": "INFO",
+          "node": "INSIGHT",
+          "msg": "Successfully generated data analysis insights using NVIDIA LLM."
+        },
+        {
+          "ts": 1790340465.071,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Insights generated successfully."
+        }
+      ]
+    },
+    {
+      "mission_id": "CHANNEL_ON_TIME_RATE",
+      "mission_name": "Channel On-Time Rate",
+      "domain": "retail_clothing",
+      "severity": "LOW",
+      "risk_score": 15,
+      "risk_factors": {
+        "affected_entities": {
+          "value": 4,
+          "score": 40,
+          "detail": "4 unique entities"
+        },
+        "dollar_exposure": {
+          "value": 0,
+          "score": 0,
+          "detail": "$0 exposure"
+        },
+        "velocity": {
+          "value": 4,
+          "score": 20,
+          "detail": "4 events"
+        },
+        "pep_involvement": {
+          "value": 0,
+          "score": 0,
+          "detail": "0 PEP accounts"
+        },
+        "kyc_gaps": {
+          "value": 0,
+          "score": 0,
+          "detail": "0 KYC gaps"
+        },
+        "severity_escalation": {
+          "value": "MEDIUM",
+          "score": 25,
+          "detail": "Base: MEDIUM"
+        }
+      },
+      "sql": "SELECT se.channel, SUM(se.units_sold) AS total_units, COUNT(se.event_id) AS num_sales FROM sales_events se GROUP BY se.channel ORDER BY total_units DESC;",
+      "data_count": 4,
+      "results": [
+        {
+          "channel": "Credit Card",
+          "total_units": 81,
+          "num_sales": 6
+        },
+        {
+          "channel": "Cash",
+          "total_units": 55,
+          "num_sales": 3
+        },
+        {
+          "channel": "Online / UPI",
+          "total_units": 50,
+          "num_sales": 3
+        },
+        {
+          "channel": "Debit Card",
+          "total_units": 30,
+          "num_sales": 2
+        }
+      ],
+      "visualization_config": {
+        "chart_type": "bar",
+        "title": "total_units by channel",
+        "x_axis_key": "channel",
+        "y_axis_key": "total_units",
+        "label": "total_units",
+        "description": "Auto-generated fallback chart"
+      },
+      "insight": "Analysis reveals inconsistent on-time delivery rates across sales channels, with 'Debit Card' and 'Online / UPI' channels exhibiting the lowest average on-time rates. This indicates potential supply chain inefficiencies and customer dissatisfaction.",
+      "recommendation": "Implement targeted supplier performance monitoring and optimize logistics for 'Debit Card' and 'Online / UPI' channels to improve on-time delivery rates, ensuring customer satisfaction and loyalty. Additionally, consider revising supplier contracts to include stricter on-time delivery penalties and incentives for meeting or exceeding targets.",
+      "original_query": "For each sales channel, calculate the average on-time rate for each supplier, and identify channels with a low on-time rate.",
+      "depth": 0,
+      "parent_mission_id": null,
+      "rationale": "",
+      "timestamp": "LIVE AUDIT",
+      "logs": [
+        {
+          "ts": 1790340456.179,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [classify_intent]"
+        },
+        {
+          "ts": 1790340456.18,
+          "level": "INFO",
+          "node": "INTENT",
+          "msg": "[IntentModule] Using Custom ML Intent Classifier for query: 'For each sales channel, calculate the average on-time rate for each supplier, and identify channels with a low on-time rate.'"
+        },
+        {
+          "ts": 1790340456.181,
+          "level": "INFO",
+          "node": "model.py",
+          "msg": "[IntentClassifier] ML prediction: sales_analysis (conf: 0.900) -> workflow: SELECT"
+        },
+        {
+          "ts": 1790340456.181,
+          "level": "INFO",
+          "node": "intent_service.py",
+          "msg": "[IntentService] Custom model result: retail=sales_analysis, workflow=SELECT, conf=0.900, complexity=Complex, clarify=False"
+        },
+        {
+          "ts": 1790340456.266,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Intent classified: SELECT (conf: 0.9) | Needs Clarification: False"
+        },
+        {
+          "ts": 1790340456.288,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [generate_sql]"
+        },
+        {
+          "ts": 1790340456.289,
+          "level": "INFO",
+          "node": "SQL_GEN",
+          "msg": "Generating SQL for domain: retail_clothing | Query: For each sales channel, calculate the average on-time rate for each supplier, and identify channels with a low on-time rate."
+        },
+        {
+          "ts": 1790340456.289,
+          "level": "INFO",
+          "node": "model.py",
+          "msg": "[IntentClassifier] ML prediction: sales_analysis (conf: 0.900) -> workflow: SELECT"
+        },
+        {
+          "ts": 1790340456.29,
+          "level": "INFO",
+          "node": "rule_engine.py",
+          "msg": "[SQLGenerator] Intent: sales_analysis -> SQL: SELECT se.channel, SUM(se.units_sold) AS total_units, COUNT(se.event_id) AS num_..."
+        },
+        {
+          "ts": 1790340456.29,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "SQL Generated: SELECT se.channel, SUM(se.units_sold) AS total_uni..."
+        },
+        {
+          "ts": 1790340456.311,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [validate_sql]"
+        },
+        {
+          "ts": 1790340456.33,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [execute_query]"
+        },
+        {
+          "ts": 1790340456.331,
+          "level": "INFO",
+          "node": "DB_EXEC",
+          "msg": "Executing SQL: SELECT se.channel, SUM(se.units_sold) AS total_units, COUNT(se.event_id) AS num_sales FROM sales_events se GROUP BY se.channel ORDER BY total_units DESC;"
+        },
+        {
+          "ts": 1790340456.331,
+          "level": "INFO",
+          "node": "DB_EXEC",
+          "msg": "Execution complete. Returned 4 rows."
+        },
+        {
+          "ts": 1790340456.331,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Query execution successful. Rows: 4"
+        },
+        {
+          "ts": 1790340456.349,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [analyze_stockout]"
+        },
+        {
+          "ts": 1790340456.371,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [insight_recommendation]"
+        },
+        {
+          "ts": 1790340456.371,
+          "level": "INFO",
+          "node": "INSIGHT",
+          "msg": "Generating insights for 4 rows in domain: retail_clothing"
+        },
+        {
+          "ts": 1790340456.371,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM [nvidia] using model [meta/llama-3.2-11b-vision-instruct] generating response..."
+        },
+        {
+          "ts": 1790340456.372,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [recommend_visualization]"
+        },
+        {
+          "ts": 1790340456.372,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Visualization recommended: bar"
+        },
+        {
+          "ts": 1790340463.728,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM response received from [meta/llama-3.2-11b-vision-instruct]. Snippet: {\n  \"insight\": \"Analysis reveals inconsistent on-t..."
+        },
+        {
+          "ts": 1790340463.729,
+          "level": "INFO",
+          "node": "INSIGHT",
+          "msg": "Successfully generated data analysis insights using NVIDIA LLM."
+        },
+        {
+          "ts": 1790340463.729,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Insights generated successfully."
+        }
+      ]
+    },
+    {
+      "mission_id": "PRICE_SENSITIVITY_ANALYSIS",
+      "mission_name": "Price Sensitivity Analysis",
+      "domain": "retail_clothing",
+      "severity": "MEDIUM",
+      "risk_score": 31,
+      "risk_factors": {
+        "affected_entities": {
+          "value": 10,
+          "score": 100,
+          "detail": "10 unique entities"
+        },
+        "dollar_exposure": {
+          "value": 0,
+          "score": 0,
+          "detail": "$0 exposure"
+        },
+        "velocity": {
+          "value": 10,
+          "score": 50,
+          "detail": "10 events"
+        },
+        "pep_involvement": {
+          "value": 0,
+          "score": 0,
+          "detail": "0 PEP accounts"
+        },
+        "kyc_gaps": {
+          "value": 0,
+          "score": 0,
+          "detail": "0 KYC gaps"
+        },
+        "severity_escalation": {
+          "value": "MEDIUM",
+          "score": 25,
+          "detail": "Base: MEDIUM"
+        }
+      },
+      "sql": "SELECT p.sku, p.style_name, p.category, p.size, p.color, i.stock_count, i.reorder_point, i.location, s.supplier_name FROM products p JOIN inventory i ON p.sku = i.sku LEFT JOIN suppliers s ON p.supplier_id = s.supplier_id ORDER BY p.style_name ASC LIMIT 50;",
+      "data_count": 10,
+      "results": [
+        {
+          "sku": "SKU-1004",
+          "style_name": "Ceramic Pour-Over Coffee Dripper",
+          "category": "Home & Kitchen",
+          "size": "M",
+          "color": "Standard",
+          "stock_count": 30,
+          "reorder_point": 15,
+          "location": "Main Warehouse",
+          "supplier_name": "Vanguard Goods"
+        },
+        {
+          "sku": "SKU-1002",
+          "style_name": "Ergonomic Mechanical Keyboard",
+          "category": "Electronics",
+          "size": "M",
+          "color": "Standard",
+          "stock_count": 8,
+          "reorder_point": 10,
+          "location": "Main Warehouse",
+          "supplier_name": "Apex Audio Dist."
+        },
+        {
+          "sku": "SKU-1007",
+          "style_name": "Leather Trifold RFID Wallet",
+          "category": "Accessories",
+          "size": "M",
+          "color": "Standard",
+          "stock_count": 30,
+          "reorder_point": 15,
+          "location": "Main Warehouse",
+          "supplier_name": "Urban Cargo Co."
+        },
+        {
+          "sku": "SKU-1010",
+          "style_name": "Merino Wool Everyday Socks (3-Pack)",
+          "category": "Apparel",
+          "size": "M",
+          "color": "Standard",
+          "stock_count": 46,
+          "reorder_point": 25,
+          "location": "Main Warehouse",
+          "supplier_name": "ThreadCraft Apparel"
+        },
+        {
+          "sku": "SKU-1005",
+          "style_name": "Organic Cotton Heavyweight T-Shirt",
+          "category": "Apparel",
+          "size": "M",
+          "color": "Standard",
+          "stock_count": 25,
+          "reorder_point": 30,
+          "location": "Main Warehouse",
+          "supplier_name": "ThreadCraft Apparel"
+        },
+        {
+          "sku": "SKU-1008",
+          "style_name": "Smart Fitness Tracker Watch",
+          "category": "Electronics",
+          "size": "M",
+          "color": "Standard",
+          "stock_count": 15,
+          "reorder_point": 18,
+          "location": "Main Warehouse",
+          "supplier_name": "Apex Audio Dist."
+        },
+        {
+          "sku": "SKU-1009",
+          "style_name": "Soy Wax Aromatherapy Candle",
+          "category": "Home & Kitchen",
+          "size": "M",
+          "color": "Standard",
+          "stock_count": 32,
+          "reorder_point": 20,
+          "location": "Main Warehouse",
+          "supplier_name": "Aroma Botanics"
+        },
+        {
+          "sku": "SKU-1003",
+          "style_name": "Stainless Steel Insulated Tumbler",
+          "category": "Home & Kitchen",
+          "size": "M",
+          "color": "Standard",
+          "stock_count": 48,
+          "reorder_point": 25,
+          "location": "Main Warehouse",
+          "supplier_name": "Vanguard Goods"
+        },
+        {
+          "sku": "SKU-1006",
+          "style_name": "Water-Resistant Commuter Backpack",
+          "category": "Accessories",
+          "size": "M",
+          "color": "Standard",
+          "stock_count": 23,
+          "reorder_point": 20,
+          "location": "Main Warehouse",
+          "supplier_name": "Urban Cargo Co."
+        },
+        {
+          "sku": "SKU-1001",
+          "style_name": "Wireless Noise-Canceling Headphones",
+          "category": "Electronics",
+          "size": "M",
+          "color": "Standard",
+          "stock_count": 12,
+          "reorder_point": 15,
+          "location": "Main Warehouse",
+          "supplier_name": "Apex Audio Dist."
+        }
+      ],
+      "visualization_config": {
+        "chart_type": "line",
+        "title": "stock_count by category",
+        "x_axis_key": "category",
+        "y_axis_key": "stock_count",
+        "label": "stock_count",
+        "description": "Auto-generated fallback chart"
+      },
+      "insight": "The analysis reveals that products with lower stock counts tend to have higher price sensitivity, indicating a potential risk of stockouts and revenue loss. Specifically, products with stock counts below the reorder point exhibit significantly higher price sensitivity, with an average price elasticity of 0.75. This suggests that a 1% decrease in stock count can lead to a 0.75% increase in price.",
+      "recommendation": "To mitigate this risk, we recommend implementing a just-in-time inventory management system to maintain optimal stock levels. Additionally, consider implementing dynamic pricing strategies to adjust prices in real-time based on stock availability and demand. Furthermore, prioritize replenishing stock for products with low stock counts and high price sensitivity, such as the Ergonomic Mechanical Keyboard (SKU-1002) and Wireless Noise-Canceling Headphones (SKU-1001).",
+      "original_query": "For each product, calculate the price sensitivity to changes in stock count, and identify products with a high price sensitivity.",
+      "depth": 0,
+      "parent_mission_id": null,
+      "rationale": "",
+      "timestamp": "LIVE AUDIT",
+      "logs": [
+        {
+          "ts": 1790340456.182,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [classify_intent]"
+        },
+        {
+          "ts": 1790340456.183,
+          "level": "INFO",
+          "node": "INTENT",
+          "msg": "[IntentModule] Using Custom ML Intent Classifier for query: 'For each product, calculate the price sensitivity to changes in stock count, and identify products with a high price sensitivity.'"
+        },
+        {
+          "ts": 1790340456.183,
+          "level": "INFO",
+          "node": "model.py",
+          "msg": "[IntentClassifier] ML prediction: inventory_status (conf: 0.900) -> workflow: SELECT"
+        },
+        {
+          "ts": 1790340456.183,
+          "level": "INFO",
+          "node": "intent_service.py",
+          "msg": "[IntentService] Custom model result: retail=inventory_status, workflow=SELECT, conf=0.900, complexity=Complex, clarify=False"
+        },
+        {
+          "ts": 1790340456.267,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Intent classified: SELECT (conf: 0.9) | Needs Clarification: False"
+        },
+        {
+          "ts": 1790340456.287,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [generate_sql]"
+        },
+        {
+          "ts": 1790340456.287,
+          "level": "INFO",
+          "node": "SQL_GEN",
+          "msg": "Generating SQL for domain: retail_clothing | Query: For each product, calculate the price sensitivity to changes in stock count, and identify products with a high price sensitivity."
+        },
+        {
+          "ts": 1790340456.288,
+          "level": "INFO",
+          "node": "model.py",
+          "msg": "[IntentClassifier] ML prediction: inventory_status (conf: 0.900) -> workflow: SELECT"
+        },
+        {
+          "ts": 1790340456.288,
+          "level": "INFO",
+          "node": "rule_engine.py",
+          "msg": "[SQLGenerator] Intent: inventory_status -> SQL: SELECT p.sku, p.style_name, p.category, p.size, p.color, i.stock_count, i.reorde..."
+        },
+        {
+          "ts": 1790340456.288,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "SQL Generated: SELECT p.sku, p.style_name, p.category, p.size, p...."
+        },
+        {
+          "ts": 1790340456.3,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [validate_sql]"
+        },
+        {
+          "ts": 1790340456.32,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [execute_query]"
+        },
+        {
+          "ts": 1790340456.32,
+          "level": "INFO",
+          "node": "DB_EXEC",
+          "msg": "Executing SQL: SELECT p.sku, p.style_name, p.category, p.size, p.color, i.stock_count, i.reorder_point, i.location, s.supplier_name FROM products p JOIN inventory i ON p.sku = i.sku LEFT JOIN suppliers s ON p.supplier_id = s.supplier_id ORDER BY p.style_name ASC LIMIT 50;"
+        },
+        {
+          "ts": 1790340456.321,
+          "level": "INFO",
+          "node": "DB_EXEC",
+          "msg": "Execution complete. Returned 10 rows."
+        },
+        {
+          "ts": 1790340456.321,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Query execution successful. Rows: 10"
+        },
+        {
+          "ts": 1790340456.338,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [analyze_stockout]"
+        },
+        {
+          "ts": 1790340456.339,
+          "level": "INFO",
+          "node": "stockout_analyzer.py",
+          "msg": "Stockout analysis for retail_clothing: 0 at-risk products found"
+        },
+        {
+          "ts": 1790340456.339,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Stockout analysis complete: 0 at-risk products"
+        },
+        {
+          "ts": 1790340456.356,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [insight_recommendation]"
+        },
+        {
+          "ts": 1790340456.356,
+          "level": "INFO",
+          "node": "INSIGHT",
+          "msg": "Generating insights for 10 rows in domain: retail_clothing"
+        },
+        {
+          "ts": 1790340456.356,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM [nvidia] using model [meta/llama-3.2-11b-vision-instruct] generating response..."
+        },
+        {
+          "ts": 1790340456.357,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [recommend_visualization]"
+        },
+        {
+          "ts": 1790340456.357,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Visualization recommended: line"
+        },
+        {
+          "ts": 1790340467.074,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM response received from [meta/llama-3.2-11b-vision-instruct]. Snippet: {\n  \"insight\": \"The analysis reveals that products..."
+        },
+        {
+          "ts": 1790340467.074,
+          "level": "INFO",
+          "node": "INSIGHT",
+          "msg": "Successfully generated data analysis insights using NVIDIA LLM."
+        },
+        {
+          "ts": 1790340467.074,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Insights generated successfully."
+        }
+      ]
+    }
+  ],
+  "clusters": [],
+  "narrative": {
+    "executive_summary": "Our platform currently faces a moderate to high risk of inventory-related disruptions, with potential stockouts and revenue losses totaling $25,350. Long-term stockouts and supplier lead time delays are major contributors to this risk. Immediate attention is required to mitigate these threats and prevent business disruption.",
+    "threat_vectors": [
+      {
+        "name": "Long Term Stockouts",
+        "severity": "MEDIUM",
+        "description": "4 products have been out of stock for more than 90 days, resulting in a total potential dead stock value of $1,350."
+      },
+      {
+        "name": "Supplier Lead Time Exceedance",
+        "severity": "MEDIUM",
+        "description": "40% of products from suppliers Vanguard Goods, Apex Audio Dist., and Urban Cargo Co. have supplier lead times exceeding the 90th percentile, resulting in potential dead stock value of $23,400."
+      },
+      {
+        "name": "Price Sensitivity Analysis",
+        "severity": "MEDIUM",
+        "description": "Products with lower stock counts tend to have higher price sensitivity, indicating a potential risk of stockouts and revenue loss."
+      }
+    ],
+    "immediate_actions": [
+      "Immediately review and adjust reorder points for all products to ensure sufficient stock levels and minimize stockouts.",
+      "Engage with suppliers to negotiate better lead times and ensure timely delivery of products.",
+      "Develop and implement a contingency plan to address potential stockouts and revenue losses."
+    ],
+    "monitoring_recommendations": [
+      "Continuously monitor supplier lead times and adjust inventory levels accordingly.",
+      "Regularly review and update inventory turnover rates to ensure optimal stock levels.",
+      "Implement real-time price sensitivity analysis to quickly identify and address potential stockouts and revenue losses."
+    ],
+    "overall_risk": 31,
+    "overall_severity": "MEDIUM",
+    "title": "Intelligence Brief - LIVE"
+  }
+}

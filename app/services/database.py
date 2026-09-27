@@ -222,12 +222,12 @@ class DatabaseService:
             logger.error(f"Bulk ingest rolled back for table '{table}': {exc}")
             raise
 
-    def execute(self, sql: str) -> List[Dict[str, Any]]:
-        """Execute a raw SQL query and return results as a list of dicts."""
+    def execute(self, sql: str, params: dict = None) -> List[Dict[str, Any]]:
+        """Execute a raw SQL query with optional params and return results as a list of dicts."""
         logger.info(f"Executing SQL: {sql}")
         try:
             with self.engine.connect() as conn:
-                result = conn.execute(text(sql))
+                result = conn.execute(text(sql), params or {})
                 # Check if it's a SELECT query (returns rows)
                 if result.returns_rows:
                     data = [dict(row) for row in result.mappings()]
@@ -237,6 +237,21 @@ class DatabaseService:
                     conn.commit()
                     logger.info(f"Execution complete. Rows affected: {result.rowcount}")
                     return [{"status": "success", "rows_affected": result.rowcount}]
+        except Exception as e:
+            logger.error(f"DATABASE EXECUTION ERROR: {str(e)} | Query: {sql}")
+            return []
+
+    def execute_query(self, sql: str, params: dict = None) -> List[tuple] | List[Dict[str, Any]]:
+        """Alias for execute() returning tuple rows when indexed or dicts when mapped."""
+        logger.info(f"Executing Query: {sql}")
+        try:
+            with self.engine.connect() as conn:
+                result = conn.execute(text(sql), params or {})
+                if result.returns_rows:
+                    return result.fetchall()
+                else:
+                    conn.commit()
+                    return []
         except Exception as e:
             logger.error(f"DATABASE EXECUTION ERROR: {str(e)} | Query: {sql}")
             return []

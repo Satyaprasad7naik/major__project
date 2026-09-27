@@ -1,0 +1,552 @@
+{
+  "scan_id": "scan-20260924T064828",
+  "timestamp": "2026-09-24T06:48:28.699948",
+  "stats": {
+    "total_missions": 10,
+    "critical_count": 0,
+    "high_count": 0,
+    "overall_risk": 0,
+    "overall_severity": "LOW"
+  },
+  "detections": [
+    {
+      "mission_id": "dead-stock-suppliers",
+      "mission_name": "Dead Stock Suppliers",
+      "domain": "retail_clothing",
+      "severity": "LOW",
+      "risk_score": 0,
+      "risk_factors": {},
+      "sql": null,
+      "data_count": 0,
+      "results": [],
+      "visualization_config": null,
+      "insight": null,
+      "recommendation": null,
+      "original_query": "For each supplier, list products with stock count <= 0 and retail price > 50.00, grouped by supplier name.",
+      "depth": 0,
+      "parent_mission_id": null,
+      "rationale": "",
+      "timestamp": "LIVE AUDIT",
+      "logs": [
+        {
+          "ts": 1790232485.466,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [classify_intent]"
+        },
+        {
+          "ts": 1790232485.467,
+          "level": "INFO",
+          "node": "INTENT",
+          "msg": "[IntentModule] Using Custom ML Intent Classifier for query: 'For each supplier, list products with stock count <= 0 and retail price > 50.00, grouped by supplier name.'"
+        },
+        {
+          "ts": 1790232485.469,
+          "level": "INFO",
+          "node": "model.py",
+          "msg": "[IntentClassifier] ML prediction: inventory_status (conf: 0.243) -> workflow: SELECT"
+        },
+        {
+          "ts": 1790232485.469,
+          "level": "INFO",
+          "node": "intent_service.py",
+          "msg": "[IntentService] Custom model result: retail=inventory_status, workflow=SELECT, conf=0.243, complexity=Complex, clarify=True"
+        },
+        {
+          "ts": 1790232485.559,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Intent classified: SELECT (conf: 0.24341799466638198) | Needs Clarification: True"
+        }
+      ]
+    },
+    {
+      "mission_id": "supplier-lead-time-variability",
+      "mission_name": "Supplier Lead Time Variability",
+      "domain": "retail_clothing",
+      "severity": "LOW",
+      "risk_score": 0,
+      "risk_factors": {},
+      "sql": null,
+      "data_count": 0,
+      "results": [],
+      "visualization_config": null,
+      "insight": null,
+      "recommendation": null,
+      "original_query": "For each supplier, calculate the coefficient of variation (CV) of lead times. List suppliers with CV > 0.3.",
+      "depth": 0,
+      "parent_mission_id": null,
+      "rationale": "",
+      "timestamp": "LIVE AUDIT",
+      "logs": [
+        {
+          "ts": 1790232485.47,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [classify_intent]"
+        },
+        {
+          "ts": 1790232485.47,
+          "level": "INFO",
+          "node": "INTENT",
+          "msg": "[IntentModule] Using Custom ML Intent Classifier for query: 'For each supplier, calculate the coefficient of variation (CV) of lead times. List suppliers with CV > 0.3.'"
+        },
+        {
+          "ts": 1790232485.474,
+          "level": "INFO",
+          "node": "model.py",
+          "msg": "[IntentClassifier] ML prediction: general_query (conf: 0.361) -> workflow: SELECT"
+        },
+        {
+          "ts": 1790232485.474,
+          "level": "INFO",
+          "node": "intent_service.py",
+          "msg": "[IntentService] Custom model result: retail=general_query, workflow=SELECT, conf=0.361, complexity=Complex, clarify=True"
+        },
+        {
+          "ts": 1790232485.641,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Intent classified: SELECT (conf: 0.36148224173176396) | Needs Clarification: True"
+        }
+      ]
+    },
+    {
+      "mission_id": "sizing-anomalies-across-categories",
+      "mission_name": "Sizing Anomalies Across Categories",
+      "domain": "retail_clothing",
+      "severity": "LOW",
+      "risk_score": 0,
+      "risk_factors": {},
+      "sql": null,
+      "data_count": 0,
+      "results": [],
+      "visualization_config": null,
+      "insight": null,
+      "recommendation": null,
+      "original_query": "For each category, list products with a size range that spans more than 3 sizes. Group results by category name.",
+      "depth": 0,
+      "parent_mission_id": null,
+      "rationale": "",
+      "timestamp": "LIVE AUDIT",
+      "logs": [
+        {
+          "ts": 1790232485.474,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [classify_intent]"
+        },
+        {
+          "ts": 1790232485.475,
+          "level": "INFO",
+          "node": "INTENT",
+          "msg": "[IntentModule] Using Custom ML Intent Classifier for query: 'For each category, list products with a size range that spans more than 3 sizes. Group results by category name.'"
+        },
+        {
+          "ts": 1790232485.476,
+          "level": "INFO",
+          "node": "model.py",
+          "msg": "[IntentClassifier] ML prediction: sales_analysis (conf: 0.191) -> workflow: SELECT"
+        },
+        {
+          "ts": 1790232485.476,
+          "level": "INFO",
+          "node": "intent_service.py",
+          "msg": "[IntentService] Custom model result: retail=sales_analysis, workflow=SELECT, conf=0.191, complexity=Complex, clarify=True"
+        },
+        {
+          "ts": 1790232485.642,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Intent classified: SELECT (conf: 0.19091585070538156) | Needs Clarification: True"
+        }
+      ]
+    },
+    {
+      "mission_id": "reorder-point-breaches-by-channel",
+      "mission_name": "Reorder Point Breaches by Channel",
+      "domain": "retail_clothing",
+      "severity": "LOW",
+      "risk_score": 0,
+      "risk_factors": {},
+      "sql": null,
+      "data_count": 0,
+      "results": [],
+      "visualization_config": null,
+      "insight": null,
+      "recommendation": null,
+      "original_query": "For each sales channel, list products with stock count <= reorder point. Group results by channel name.",
+      "depth": 0,
+      "parent_mission_id": null,
+      "rationale": "",
+      "timestamp": "LIVE AUDIT",
+      "logs": [
+        {
+          "ts": 1790232485.477,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [classify_intent]"
+        },
+        {
+          "ts": 1790232485.477,
+          "level": "INFO",
+          "node": "INTENT",
+          "msg": "[IntentModule] Using Custom ML Intent Classifier for query: 'For each sales channel, list products with stock count <= reorder point. Group results by channel name.'"
+        },
+        {
+          "ts": 1790232485.479,
+          "level": "INFO",
+          "node": "model.py",
+          "msg": "[IntentClassifier] ML prediction: stockout_risk (conf: 0.271) -> workflow: SELECT"
+        },
+        {
+          "ts": 1790232485.479,
+          "level": "INFO",
+          "node": "intent_service.py",
+          "msg": "[IntentService] Custom model result: retail=stockout_risk, workflow=SELECT, conf=0.271, complexity=Complex, clarify=True"
+        },
+        {
+          "ts": 1790232485.642,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Intent classified: SELECT (conf: 0.27111173981379044) | Needs Clarification: True"
+        }
+      ]
+    },
+    {
+      "mission_id": "supplier-delays-by-category",
+      "mission_name": "Supplier Delays by Category",
+      "domain": "retail_clothing",
+      "severity": "LOW",
+      "risk_score": 0,
+      "risk_factors": {},
+      "sql": null,
+      "data_count": 0,
+      "results": [],
+      "visualization_config": null,
+      "insight": null,
+      "recommendation": null,
+      "original_query": "For each category, list suppliers with lead time > 30 days. Group results by category name.",
+      "depth": 0,
+      "parent_mission_id": null,
+      "rationale": "",
+      "timestamp": "LIVE AUDIT",
+      "logs": [
+        {
+          "ts": 1790232485.48,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [classify_intent]"
+        },
+        {
+          "ts": 1790232485.48,
+          "level": "INFO",
+          "node": "INTENT",
+          "msg": "[IntentModule] Using Custom ML Intent Classifier for query: 'For each category, list suppliers with lead time > 30 days. Group results by category name.'"
+        },
+        {
+          "ts": 1790232485.482,
+          "level": "INFO",
+          "node": "model.py",
+          "msg": "[IntentClassifier] ML prediction: general_query (conf: 0.236) -> workflow: SELECT"
+        },
+        {
+          "ts": 1790232485.482,
+          "level": "INFO",
+          "node": "intent_service.py",
+          "msg": "[IntentService] Custom model result: retail=general_query, workflow=SELECT, conf=0.236, complexity=Complex, clarify=True"
+        },
+        {
+          "ts": 1790232485.642,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Intent classified: SELECT (conf: 0.23632260338550118) | Needs Clarification: True"
+        }
+      ]
+    },
+    {
+      "mission_id": "stock-out-probability-hotspots",
+      "mission_name": "Stock-out Probability Hotspots",
+      "domain": "retail_clothing",
+      "severity": "LOW",
+      "risk_score": 0,
+      "risk_factors": {},
+      "sql": null,
+      "data_count": 0,
+      "results": [],
+      "visualization_config": null,
+      "insight": null,
+      "recommendation": null,
+      "original_query": "For each product, calculate the stock-out probability based on reorder point, lead time, and stock count. List products with probability > 0.2.",
+      "depth": 0,
+      "parent_mission_id": null,
+      "rationale": "",
+      "timestamp": "LIVE AUDIT",
+      "logs": [
+        {
+          "ts": 1790232485.482,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [classify_intent]"
+        },
+        {
+          "ts": 1790232485.482,
+          "level": "INFO",
+          "node": "INTENT",
+          "msg": "[IntentModule] Using Custom ML Intent Classifier for query: 'For each product, calculate the stock-out probability based on reorder point, lead time, and stock count. List products with probability > 0.2.'"
+        },
+        {
+          "ts": 1790232485.484,
+          "level": "INFO",
+          "node": "model.py",
+          "msg": "[IntentClassifier] ML prediction: stockout_risk (conf: 0.289) -> workflow: SELECT"
+        },
+        {
+          "ts": 1790232485.484,
+          "level": "INFO",
+          "node": "intent_service.py",
+          "msg": "[IntentService] Custom model result: retail=stockout_risk, workflow=SELECT, conf=0.289, complexity=Complex, clarify=True"
+        },
+        {
+          "ts": 1790232485.642,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Intent classified: SELECT (conf: 0.2887234709859684) | Needs Clarification: True"
+        }
+      ]
+    },
+    {
+      "mission_id": "average-retail-price-by-category",
+      "mission_name": "Average Retail Price by Category",
+      "domain": "retail_clothing",
+      "severity": "LOW",
+      "risk_score": 0,
+      "risk_factors": {},
+      "sql": null,
+      "data_count": 0,
+      "results": [],
+      "visualization_config": null,
+      "insight": null,
+      "recommendation": null,
+      "original_query": "For each category, calculate the average retail price of products. List categories with average price > 75.00.",
+      "depth": 0,
+      "parent_mission_id": null,
+      "rationale": "",
+      "timestamp": "LIVE AUDIT",
+      "logs": [
+        {
+          "ts": 1790232485.484,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [classify_intent]"
+        },
+        {
+          "ts": 1790232485.485,
+          "level": "INFO",
+          "node": "INTENT",
+          "msg": "[IntentModule] Using Custom ML Intent Classifier for query: 'For each category, calculate the average retail price of products. List categories with average price > 75.00.'"
+        },
+        {
+          "ts": 1790232485.487,
+          "level": "INFO",
+          "node": "model.py",
+          "msg": "[IntentClassifier] ML prediction: stockout_risk (conf: 0.223) -> workflow: SELECT"
+        },
+        {
+          "ts": 1790232485.487,
+          "level": "INFO",
+          "node": "intent_service.py",
+          "msg": "[IntentService] Custom model result: retail=stockout_risk, workflow=SELECT, conf=0.223, complexity=Complex, clarify=True"
+        },
+        {
+          "ts": 1790232485.642,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Intent classified: SELECT (conf: 0.22341131073294068) | Needs Clarification: True"
+        }
+      ]
+    },
+    {
+      "mission_id": "supplier-country-risk",
+      "mission_name": "Supplier Country Risk",
+      "domain": "retail_clothing",
+      "severity": "LOW",
+      "risk_score": 0,
+      "risk_factors": {},
+      "sql": null,
+      "data_count": 0,
+      "results": [],
+      "visualization_config": null,
+      "insight": null,
+      "recommendation": null,
+      "original_query": "For each supplier country, calculate the average on-time rate of suppliers. List countries with average on-time rate < 85.0.",
+      "depth": 0,
+      "parent_mission_id": null,
+      "rationale": "",
+      "timestamp": "LIVE AUDIT",
+      "logs": [
+        {
+          "ts": 1790232485.488,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [classify_intent]"
+        },
+        {
+          "ts": 1790232485.488,
+          "level": "INFO",
+          "node": "INTENT",
+          "msg": "[IntentModule] Using Custom ML Intent Classifier for query: 'For each supplier country, calculate the average on-time rate of suppliers. List countries with average on-time rate < 85.0.'"
+        },
+        {
+          "ts": 1790232485.491,
+          "level": "INFO",
+          "node": "model.py",
+          "msg": "[IntentClassifier] ML prediction: general_query (conf: 0.279) -> workflow: SELECT"
+        },
+        {
+          "ts": 1790232485.492,
+          "level": "INFO",
+          "node": "intent_service.py",
+          "msg": "[IntentService] Custom model result: retail=general_query, workflow=SELECT, conf=0.279, complexity=Complex, clarify=True"
+        },
+        {
+          "ts": 1790232485.642,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Intent classified: SELECT (conf: 0.27875566339615765) | Needs Clarification: True"
+        }
+      ]
+    },
+    {
+      "mission_id": "stock-count-volatility-by-location",
+      "mission_name": "Stock Count Volatility by Location",
+      "domain": "retail_clothing",
+      "severity": "LOW",
+      "risk_score": 0,
+      "risk_factors": {},
+      "sql": null,
+      "data_count": 0,
+      "results": [],
+      "visualization_config": null,
+      "insight": null,
+      "recommendation": null,
+      "original_query": "For each inventory location, calculate the standard deviation of stock counts across products. List locations with standard deviation > 10.",
+      "depth": 0,
+      "parent_mission_id": null,
+      "rationale": "",
+      "timestamp": "LIVE AUDIT",
+      "logs": [
+        {
+          "ts": 1790232485.492,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [classify_intent]"
+        },
+        {
+          "ts": 1790232485.492,
+          "level": "INFO",
+          "node": "INTENT",
+          "msg": "[IntentModule] Using Custom ML Intent Classifier for query: 'For each inventory location, calculate the standard deviation of stock counts across products. List locations with standard deviation > 10.'"
+        },
+        {
+          "ts": 1790232485.494,
+          "level": "INFO",
+          "node": "model.py",
+          "msg": "[IntentClassifier] ML prediction: inventory_status (conf: 0.361) -> workflow: SELECT"
+        },
+        {
+          "ts": 1790232485.494,
+          "level": "INFO",
+          "node": "intent_service.py",
+          "msg": "[IntentService] Custom model result: retail=inventory_status, workflow=SELECT, conf=0.361, complexity=Complex, clarify=True"
+        },
+        {
+          "ts": 1790232485.643,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Intent classified: SELECT (conf: 0.36124721727468634) | Needs Clarification: True"
+        }
+      ]
+    },
+    {
+      "mission_id": "supplier-lead-time-bucketing",
+      "mission_name": "Supplier Lead Time Bucketing",
+      "domain": "retail_clothing",
+      "severity": "LOW",
+      "risk_score": 0,
+      "risk_factors": {},
+      "sql": null,
+      "data_count": 0,
+      "results": [],
+      "visualization_config": null,
+      "insight": null,
+      "recommendation": null,
+      "original_query": "For each supplier, bucket lead times into 4 quartiles. List suppliers with lead times in the highest quartile (> 30 days).",
+      "depth": 0,
+      "parent_mission_id": null,
+      "rationale": "",
+      "timestamp": "LIVE AUDIT",
+      "logs": [
+        {
+          "ts": 1790232485.494,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [classify_intent]"
+        },
+        {
+          "ts": 1790232485.495,
+          "level": "INFO",
+          "node": "INTENT",
+          "msg": "[IntentModule] Using Custom ML Intent Classifier for query: 'For each supplier, bucket lead times into 4 quartiles. List suppliers with lead times in the highest quartile (> 30 days).'"
+        },
+        {
+          "ts": 1790232485.496,
+          "level": "INFO",
+          "node": "model.py",
+          "msg": "[IntentClassifier] ML prediction: general_query (conf: 0.316) -> workflow: SELECT"
+        },
+        {
+          "ts": 1790232485.497,
+          "level": "INFO",
+          "node": "intent_service.py",
+          "msg": "[IntentService] Custom model result: retail=general_query, workflow=SELECT, conf=0.316, complexity=Complex, clarify=True"
+        },
+        {
+          "ts": 1790232485.643,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Intent classified: SELECT (conf: 0.3160428790614063) | Needs Clarification: True"
+        }
+      ]
+    }
+  ],
+  "clusters": [],
+  "narrative": {
+    "executive_summary": "Our real-time threat detection system has identified no high-severity threats, but ongoing monitoring is essential to mitigate potential risks. The retail clothing domain is currently facing low-severity threats, primarily related to supplier lead time variability and stock count volatility. Immediate action is required to address these issues and prevent potential disruptions to our operations.",
+    "threat_vectors": [
+      {
+        "name": "Supplier Lead Time Variability",
+        "severity": "LOW",
+        "description": "Supplier lead times are varying significantly, potentially impacting our ability to meet customer demand. We must review and adjust our inventory management strategies to mitigate this risk."
+      },
+      {
+        "name": "Stock Count Volatility by Location",
+        "severity": "LOW",
+        "description": "Stock counts are experiencing high volatility across different locations, which may lead to stockouts or overstocking. We need to implement more accurate inventory tracking systems to minimize these risks."
+      }
+    ],
+    "immediate_actions": [
+      "Review and adjust our inventory management strategies to mitigate supplier lead time variability.",
+      "Implement more accurate inventory tracking systems to minimize stock count volatility by location.",
+      "Conduct a thorough review of our supplier base to identify potential risks and develop contingency plans."
+    ],
+    "monitoring_recommendations": [
+      "Continue to monitor supplier lead times and adjust our inventory management strategies as needed.",
+      "Regularly review and update our inventory tracking systems to ensure accuracy and minimize risks.",
+      "Schedule regular reviews with our supplier base to ensure compliance with our requirements and identify potential risks."
+    ],
+    "overall_risk": 0,
+    "overall_severity": "LOW",
+    "title": "Intelligence Brief - LIVE"
+  }
+}

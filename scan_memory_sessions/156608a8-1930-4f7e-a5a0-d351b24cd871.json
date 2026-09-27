@@ -1,0 +1,78 @@
+{
+  "_last_touched": 1786520963.2443986,
+  "history": [
+    {
+      "timestamp": "2026-08-12T07:49:23.244345",
+      "missions": [
+        {
+          "name": "Supplier Lead Time Anomalies",
+          "query": "For each supplier, identify products with lead times exceeding the 75th percentile of lead times for that supplier.",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        },
+        {
+          "name": "Inventory Reorder Point Breaches",
+          "query": "List all products with reorder points that are less than or equal to the current stock count.",
+          "domain": "retail_clothing",
+          "risk_score": 39,
+          "severity": "MEDIUM",
+          "data_count": 110
+        },
+        {
+          "name": "Dead Stock Detection",
+          "query": "Identify products that have not been sold for more than 6 months and have a stock count of 0.",
+          "domain": "retail_clothing",
+          "risk_score": 6,
+          "severity": "LOW",
+          "data_count": 1
+        },
+        {
+          "name": "Sizing Anomalies",
+          "query": "For each category, calculate the average unit cost and identify categories with a standard deviation in unit cost greater than 20% of the average.",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        },
+        {
+          "name": "Supplier Delayed Shipments",
+          "query": "Identify products with supplier delays exceeding 30 days for the last quarter.",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        },
+        {
+          "name": "Product Margin Analysis",
+          "query": "For each product, calculate the margin as (retail_price - unit_cost) / retail_price and identify products with a margin less than 30%.",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        },
+        {
+          "name": "Inventory Location Optimization",
+          "query": "Identify the top 5 locations with the highest average stock count and recommend relocation to improve inventory management.",
+          "domain": "retail_clothing",
+          "risk_score": 15,
+          "severity": "LOW",
+          "data_count": 4
+        },
+        {
+          "name": "Sales Event Product Mix",
+          "query": "For each sales channel, calculate the top 3 products by units sold and identify channels with a product mix skewness greater than 0.5.",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        }
+      ],
+      "domain_scores": {
+        "retail_clothing": 8
+      },
+      "critical_domains": []
+    }
+  ]
+}

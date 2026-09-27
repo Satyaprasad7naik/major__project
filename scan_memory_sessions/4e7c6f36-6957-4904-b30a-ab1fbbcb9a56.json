@@ -1,0 +1,663 @@
+{
+  "_last_touched": 1788108590.5665772,
+  "history": [
+    {
+      "timestamp": "2026-08-30T16:40:01.988861",
+      "missions": [
+        {
+          "name": "Dead Stock Detection",
+          "query": "Find all products with stock count less than 5 and their corresponding supplier's on-time rate less than 80%",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        },
+        {
+          "name": "Sizing Anomalies",
+          "query": "Identify products with inconsistent size mappings across different suppliers",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        },
+        {
+          "name": "Supplier Lead Time Analysis",
+          "query": "Analyze the lead time days for each supplier and identify those with a lead time greater than 30 days",
+          "domain": "retail_clothing",
+          "risk_score": 20,
+          "severity": "LOW",
+          "data_count": 6
+        },
+        {
+          "name": "Reorder Point Breaches",
+          "query": "Find all products with stock count less than their reorder point and identify the corresponding supplier's on-time rate",
+          "domain": "retail_clothing",
+          "risk_score": 42,
+          "severity": "MEDIUM",
+          "data_count": 14
+        },
+        {
+          "name": "Average Sales by Product Category",
+          "query": "Calculate the average units sold for each product category over the past year",
+          "domain": "retail_clothing",
+          "risk_score": 20,
+          "severity": "LOW",
+          "data_count": 6
+        },
+        {
+          "name": "Supplier Country Compliance",
+          "query": "Identify suppliers from countries with known compliance issues and assess their on-time rate",
+          "domain": "retail_clothing",
+          "risk_score": 16,
+          "severity": "LOW",
+          "data_count": 3
+        },
+        {
+          "name": "Product Price Variance",
+          "query": "Analyze the price variance between different suppliers for the same product and identify significant discrepancies",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        },
+        {
+          "name": "Inventory Turnover Analysis",
+          "query": "Calculate the inventory turnover rate for each product and identify those with a turnover rate less than 4",
+          "domain": "retail_clothing",
+          "risk_score": 42,
+          "severity": "MEDIUM",
+          "data_count": 14
+        }
+      ],
+      "domain_scores": {
+        "retail_clothing": 18
+      },
+      "critical_domains": []
+    },
+    {
+      "timestamp": "2026-08-30T16:40:46.282338",
+      "missions": [
+        {
+          "name": "Dead Stock Reorder Analysis",
+          "query": "What products with stock counts below reorder point have been continuously restocked for over 6 months without sales?",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        },
+        {
+          "name": "Sizing Anomaly Detection",
+          "query": "Which product styles have inconsistent size distribution across locations, indicating potential inventory misplacement?",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        },
+        {
+          "name": "Supplier Lead Time Risk Assessment",
+          "query": "What suppliers have a lead time above the industry average, putting sales and restocking at risk?",
+          "domain": "retail_clothing",
+          "risk_score": 16,
+          "severity": "LOW",
+          "data_count": 3
+        },
+        {
+          "name": "Channel-Specific Sales Trends",
+          "query": "Which sales channels (e.g. online, physical stores) show inconsistent sales patterns for specific products, indicating potential inventory misalignment?",
+          "domain": "retail_clothing",
+          "risk_score": 12,
+          "severity": "LOW",
+          "data_count": 3
+        },
+        {
+          "name": "Stock Obsolescence Risk",
+          "query": "What products have not been reordered for over a year, indicating potential stock obsolescence?",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        },
+        {
+          "name": "Supplier Performance Over Time",
+          "query": "Which suppliers have shown a decline in on-time delivery rate over the past quarter, indicating potential supply chain risk?",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        },
+        {
+          "name": "Inventory Movement Patterns",
+          "query": "What products show unusual inventory movement patterns (e.g. frequent restocking, rapid stock depletion) across locations?",
+          "domain": "retail_clothing",
+          "risk_score": 42,
+          "severity": "MEDIUM",
+          "data_count": 74
+        },
+        {
+          "name": "Supplier Capacity Utilization",
+          "query": "Which suppliers have shown high capacity utilization rates, indicating potential supply chain bottlenecks?",
+          "domain": "retail_clothing",
+          "risk_score": 15,
+          "severity": "LOW",
+          "data_count": 4
+        }
+      ],
+      "domain_scores": {
+        "retail_clothing": 11
+      },
+      "critical_domains": []
+    },
+    {
+      "timestamp": "2026-08-30T16:44:00.104380",
+      "missions": [
+        {
+          "name": "Supplier Lead Time Variance",
+          "query": "What suppliers have a lead time greater than 30 days for at least 20% of their products?",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        },
+        {
+          "name": "Dead Stock and Low Sales",
+          "query": "Which products have a stock count below their reorder point and have not been sold for over 6 months?",
+          "domain": "retail_clothing",
+          "risk_score": 41,
+          "severity": "MEDIUM",
+          "data_count": 12
+        },
+        {
+          "name": "Inconsistent Inventory Movement",
+          "query": "What products have a standard deviation in stock count greater than 50 across all locations over the past 3 months?",
+          "domain": "retail_clothing",
+          "risk_score": 39,
+          "severity": "MEDIUM",
+          "data_count": 58
+        },
+        {
+          "name": "Price Discrepancies by Supplier",
+          "query": "What products have a price variance greater than 10% between the cheapest and most expensive supplier?",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        },
+        {
+          "name": "Supplier On-Time Rate Correlation",
+          "query": "Do suppliers with a high on-time rate also have a high lead time, indicating potential trade-offs?",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        },
+        {
+          "name": "Inventory Turnover and Stock Obsolescence",
+          "query": "What products have an inventory turnover rate less than 4 and have not been reordered for over a year?",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        },
+        {
+          "name": "Sales Channel Inconsistencies",
+          "query": "What products show inconsistent sales patterns across different sales channels over the past 6 months?",
+          "domain": "retail_clothing",
+          "risk_score": 39,
+          "severity": "MEDIUM",
+          "data_count": 72
+        },
+        {
+          "name": "Supplier Capacity Utilization",
+          "query": "Which suppliers have shown a capacity utilization rate greater than 80% for at least 20% of their products?",
+          "domain": "retail_clothing",
+          "risk_score": 42,
+          "severity": "MEDIUM",
+          "data_count": 119
+        },
+        {
+          "name": "Sizing Anomalies and Inventory Misplacement",
+          "query": "What product styles have an inconsistent size distribution across locations, indicating potential inventory misplacement?",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        },
+        {
+          "name": "Country-Based Compliance Risk",
+          "query": "What suppliers are based in countries with known compliance issues and have a low on-time rate?",
+          "domain": "retail_clothing",
+          "risk_score": 10,
+          "severity": "LOW",
+          "data_count": 1
+        }
+      ],
+      "domain_scores": {
+        "retail_clothing": 17
+      },
+      "critical_domains": []
+    },
+    {
+      "timestamp": "2026-08-30T16:46:53.866757",
+      "missions": [
+        {
+          "name": "Dead Stock by Category",
+          "query": "Find all product categories with a stock count below the reorder point for at least 80% of their products across all locations, indicating potential dead stock.",
+          "domain": "retail_clothing",
+          "risk_score": 18,
+          "severity": "LOW",
+          "data_count": 2
+        },
+        {
+          "name": "Size Distribution Anomalies",
+          "query": "Identify product styles with a size distribution skewness greater than 2 across all locations, indicating potential inventory misplacement.",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        },
+        {
+          "name": "Supplier Delay Risk",
+          "query": "Find all suppliers with a lead time greater than 30 days for at least 40% of their products, indicating potential supplier delay risk.",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        },
+        {
+          "name": "Price Variance Analysis",
+          "query": "Determine the top 20 products with a price variance greater than 15% between the cheapest and most expensive supplier, indicating potential supplier price risk.",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        },
+        {
+          "name": "Reorder Point Breach",
+          "query": "Find all products with a stock count below their reorder point for at least 6 consecutive months, indicating potential reorder point breach.",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        },
+        {
+          "name": "Time-to-Sell Analysis",
+          "query": "Determine the top 20 products with a time-to-sell greater than 6 months, indicating potential inventory obsolescence.",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        },
+        {
+          "name": "Capacity Utilization Risk",
+          "query": "Find all suppliers with a capacity utilization rate greater than 90% for at least 30% of their products, indicating potential capacity utilization risk.",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        },
+        {
+          "name": "Compliance Risk",
+          "query": "Identify suppliers based in countries with known compliance issues and have a low on-time rate, indicating potential compliance risk.",
+          "domain": "retail_clothing",
+          "risk_score": 15,
+          "severity": "LOW",
+          "data_count": 1
+        },
+        {
+          "name": "Inventory Turnover Analysis",
+          "query": "Determine the top 20 products with an inventory turnover rate less than 3, indicating potential inventory stagnation.",
+          "domain": "retail_clothing",
+          "risk_score": 32,
+          "severity": "MEDIUM",
+          "data_count": 11
+        },
+        {
+          "name": "Material Sourcing Risk",
+          "query": "Find all suppliers with a high material sourcing risk based on their supplier name and country of origin, indicating potential material sourcing risk.",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        }
+      ],
+      "domain_scores": {
+        "retail_clothing": 6
+      },
+      "critical_domains": []
+    },
+    {
+      "timestamp": "2026-08-30T16:47:33.985901",
+      "missions": [
+        {
+          "name": "Compliance Domain Scan",
+          "query": "Show recent compliance violations or audit findings",
+          "domain": "compliance",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        }
+      ],
+      "domain_scores": {
+        "compliance": 0
+      },
+      "critical_domains": []
+    },
+    {
+      "timestamp": "2026-08-30T16:47:41.800437",
+      "missions": [
+        {
+          "name": "Security Domain Scan",
+          "query": "Show users with risk_level HIGH and account_status ACTIVE",
+          "domain": "security",
+          "risk_score": 49,
+          "severity": "MEDIUM",
+          "data_count": 58
+        }
+      ],
+      "domain_scores": {
+        "security": 49
+      },
+      "critical_domains": []
+    },
+    {
+      "timestamp": "2026-08-30T16:47:49.677180",
+      "missions": [
+        {
+          "name": "Supplier Lead Time Variance",
+          "query": "Which suppliers have a lead time variance greater than 10 days for more than 50% of their products?",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        },
+        {
+          "name": "Inventory Age by Location",
+          "query": "What is the average age of inventory across all locations, and which locations have an average inventory age greater than 6 months?",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        },
+        {
+          "name": "Product Sales Channel Concentration",
+          "query": "Which products have more than 70% of their sales coming from a single sales channel, indicating potential inventory misalignment?",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        },
+        {
+          "name": "Supplier Capacity Utilization Correlation",
+          "query": "Do suppliers with a high capacity utilization rate also have a high on-time rate, indicating potential trade-offs?",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        },
+        {
+          "name": "Inventory Turnover Rate by Product Style",
+          "query": "What product styles have an inventory turnover rate less than 3, indicating potential stock obsolescence?",
+          "domain": "retail_clothing",
+          "risk_score": 34,
+          "severity": "MEDIUM",
+          "data_count": 14
+        },
+        {
+          "name": "Supplier Country Compliance Risk",
+          "query": "Which suppliers are based in countries with known compliance issues and have a high lead time, indicating potential supply chain risk?",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        },
+        {
+          "name": "Stock Count Variance by Location",
+          "query": "What products have a stock count variance greater than 20% across all locations, indicating potential inventory misplacement?",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        },
+        {
+          "name": "Product Size Distribution Anomalies",
+          "query": "Which product styles have an inconsistent size distribution across locations, indicating potential inventory misplacement?",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        },
+        {
+          "name": "Supplier On-Time Rate by Product",
+          "query": "Which suppliers have an on-time rate less than 80% for more than 20% of their products, indicating potential supply chain risk?",
+          "domain": "retail_clothing",
+          "risk_score": 6,
+          "severity": "LOW",
+          "data_count": 1
+        },
+        {
+          "name": "Inventory Reorder Point Breaches",
+          "query": "Which products have a stock count below their reorder point for more than 3 months, indicating potential stock obsolescence?",
+          "domain": "retail_clothing",
+          "risk_score": 18,
+          "severity": "LOW",
+          "data_count": 5
+        }
+      ],
+      "domain_scores": {
+        "retail_clothing": 6
+      },
+      "critical_domains": []
+    },
+    {
+      "timestamp": "2026-08-30T16:48:03.748610",
+      "missions": [
+        {
+          "name": "Operations Domain Scan",
+          "query": "Show system performance metrics and operational alerts",
+          "domain": "operations",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        }
+      ],
+      "domain_scores": {
+        "operations": 0
+      },
+      "critical_domains": []
+    },
+    {
+      "timestamp": "2026-08-30T16:49:42.079503",
+      "missions": [
+        {
+          "name": "Dead Stock Alert",
+          "query": "What products have a stock count of 0 across all locations, indicating potential dead stock?",
+          "domain": "retail_clothing",
+          "risk_score": 15,
+          "severity": "LOW",
+          "data_count": 1
+        },
+        {
+          "name": "Sizing Anomalies Detection",
+          "query": "What product styles have an inconsistent size distribution across locations, indicating potential inventory misplacement?",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        },
+        {
+          "name": "Supplier Delay Analysis",
+          "query": "Which suppliers have a lead time variance greater than 10 days for more than 20% of their products, indicating potential supplier delays?",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        },
+        {
+          "name": "Reorder Point Breach Detection",
+          "query": "Which products have a stock count below their reorder point for more than 1 month, indicating potential stock obsolescence?",
+          "domain": "retail_clothing",
+          "risk_score": 42,
+          "severity": "MEDIUM",
+          "data_count": 13
+        },
+        {
+          "name": "Channel Concentration Analysis",
+          "query": "Which products have more than 50% of their sales coming from a single sales channel, indicating potential inventory misalignment?",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        },
+        {
+          "name": "Supplier Capacity Utilization Analysis",
+          "query": "Which suppliers have a capacity utilization rate greater than 80% for more than 50% of their products, indicating potential capacity constraints?",
+          "domain": "retail_clothing",
+          "risk_score": 39,
+          "severity": "MEDIUM",
+          "data_count": 119
+        },
+        {
+          "name": "Inventory Turnover Analysis",
+          "query": "Which product styles have an inventory turnover rate less than 4, indicating potential stock obsolescence?",
+          "domain": "retail_clothing",
+          "risk_score": 13,
+          "severity": "LOW",
+          "data_count": 2
+        },
+        {
+          "name": "Supplier Compliance Risk Assessment",
+          "query": "Which suppliers are based in countries with known compliance issues and have a high lead time, indicating potential supply chain risk?",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        },
+        {
+          "name": "Stock Count Variance Analysis",
+          "query": "Which products have a stock count variance greater than 15% across all locations, indicating potential inventory misplacement?",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        },
+        {
+          "name": "Inventory Aging Analysis",
+          "query": "Which locations have an average inventory age greater than 3 months, indicating potential inventory stagnation?",
+          "domain": "retail_clothing",
+          "risk_score": 18,
+          "severity": "LOW",
+          "data_count": 4
+        },
+        {
+          "name": "Product Lifespan Analysis",
+          "query": "Which products have a retail price decrease greater than 20% within the last 6 months, indicating potential product lifespan issues?",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        }
+      ],
+      "domain_scores": {
+        "retail_clothing": 12
+      },
+      "critical_domains": []
+    },
+    {
+      "timestamp": "2026-08-30T16:49:50.566554",
+      "missions": [
+        {
+          "name": "Dead Stock Detection",
+          "query": "What products have a stock count below their reorder point for more than 6 months, indicating potential dead stock?",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        },
+        {
+          "name": "Sizing Anomalies Identification",
+          "query": "Which product styles have a size distribution variance greater than 20% across all locations, indicating potential inventory misplacement?",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        },
+        {
+          "name": "Supplier Lead Time Analysis",
+          "query": "Do suppliers with a high on-time rate also have a low lead time, indicating potential trade-offs?",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        },
+        {
+          "name": "Inventory Turnover Rate Analysis",
+          "query": "What product styles have an inventory turnover rate less than 2 for more than 50% of their sales, indicating potential stock obsolescence?",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        },
+        {
+          "name": "Supplier Country Compliance Risk",
+          "query": "Which suppliers are based in countries with known compliance issues and have a high stock count variance across all locations, indicating potential supply chain risk?",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        },
+        {
+          "name": "Product Style Demand Analysis",
+          "query": "Which product styles have a sales channel concentration greater than 70% for more than 3 months, indicating potential inventory misalignment?",
+          "domain": "retail_clothing",
+          "risk_score": 39,
+          "severity": "MEDIUM",
+          "data_count": 31
+        },
+        {
+          "name": "Inventory Reorder Point Optimization",
+          "query": "What products have a stock count below their reorder point for more than 3 months and have a high stock count variance across all locations, indicating potential stock obsolescence?",
+          "domain": "retail_clothing",
+          "risk_score": 21,
+          "severity": "LOW",
+          "data_count": 5
+        },
+        {
+          "name": "Supplier Performance Analysis",
+          "query": "Which suppliers have an on-time rate less than 80% for more than 10% of their products, indicating potential supply chain risk?",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        },
+        {
+          "name": "Product Style Size Distribution Analysis",
+          "query": "Which product styles have an inconsistent size distribution across locations and have a high stock count variance across all locations, indicating potential inventory misplacement?",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        },
+        {
+          "name": "Inventory Age Analysis",
+          "query": "What locations have an average inventory age greater than 9 months and have a high stock count variance across all locations, indicating potential inventory misplacement?",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        },
+        {
+          "name": "Supplier Capacity Utilization Analysis",
+          "query": "Do suppliers with a high capacity utilization rate also have a high on-time rate, indicating potential trade-offs?",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        }
+      ],
+      "domain_scores": {
+        "retail_clothing": 5
+      },
+      "critical_domains": []
+    }
+  ]
+}

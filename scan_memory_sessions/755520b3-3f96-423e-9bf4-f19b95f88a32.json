@@ -1,0 +1,78 @@
+{
+  "_last_touched": 1787687926.9033926,
+  "history": [
+    {
+      "timestamp": "2026-08-25T19:58:46.903368",
+      "missions": [
+        {
+          "name": "Dead Stock Detection",
+          "query": "Which products have been in stock for over 6 months without being reordered?",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        },
+        {
+          "name": "Sizing Anomalies",
+          "query": "Are there any size variants that have a significantly different stock count compared to other sizes of the same product?",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        },
+        {
+          "name": "Supplier Delay Analysis",
+          "query": "Which suppliers have consistently delayed shipments, resulting in stockouts and lost sales?",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        },
+        {
+          "name": "Reorder Point Breaches",
+          "query": "Have any products' stock levels fallen below their reorder points, potentially leading to stockouts and lost sales?",
+          "domain": "retail_clothing",
+          "risk_score": 38,
+          "severity": "MEDIUM",
+          "data_count": 14
+        },
+        {
+          "name": "Channel-Specific Sales Trends",
+          "query": "Are there any sales channels (e.g., online, in-store) where sales of specific products are significantly higher or lower than average?",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        },
+        {
+          "name": "Supplier Lead Time Analysis",
+          "query": "How do different suppliers' lead times impact the timing of restocking and sales events?",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        },
+        {
+          "name": "Color-Specific Sales Trends",
+          "query": "Are there any product colors that are consistently selling at a higher or lower rate than other colors of the same product?",
+          "domain": "retail_clothing",
+          "risk_score": 18,
+          "severity": "LOW",
+          "data_count": 5
+        },
+        {
+          "name": "Stock Count Inconsistencies",
+          "query": "Are there any discrepancies between the stock counts reported by different locations or at different times?",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        }
+      ],
+      "domain_scores": {
+        "retail_clothing": 7
+      },
+      "critical_domains": []
+    }
+  ]
+}

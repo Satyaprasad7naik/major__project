@@ -1,0 +1,167 @@
+{
+  "_last_touched": 1789999136.0171466,
+  "history": [
+    {
+      "timestamp": "2026-09-21T13:56:10.659695",
+      "missions": [
+        {
+          "name": "Supplier Lead Time Alert",
+          "query": "What products with supplier lead times greater than 30 days are nearing their reorder point?",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        },
+        {
+          "name": "Dead Stock Identification",
+          "query": "Which products have not sold any units in the past 12 months and have a remaining stock count greater than 10 units?",
+          "domain": "retail_clothing",
+          "risk_score": 38,
+          "severity": "MEDIUM",
+          "data_count": 14
+        },
+        {
+          "name": "Sizing Anomaly Detection",
+          "query": "What product sizes have a stock count variance greater than 20% compared to the average stock count across all sizes?",
+          "domain": "retail_clothing",
+          "risk_score": 39,
+          "severity": "MEDIUM",
+          "data_count": 37
+        },
+        {
+          "name": "Reorder Point Breach Detection",
+          "query": "Which products have breached their reorder points in the past 3 months?",
+          "domain": "retail_clothing",
+          "risk_score": 37,
+          "severity": "MEDIUM",
+          "data_count": 9
+        },
+        {
+          "name": "Supplier Delay Impact Analysis",
+          "query": "What products have experienced supplier delays (lead time > 30 days) and have a corresponding impact on their reorder points?",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        },
+        {
+          "name": "Inventory Location Optimization",
+          "query": "Which inventory locations have a stock count variance greater than 10% compared to the average stock count across all locations?",
+          "domain": "retail_clothing",
+          "risk_score": 15,
+          "severity": "LOW",
+          "data_count": 4
+        },
+        {
+          "name": "Sales Channel Performance Analysis",
+          "query": "What sales channels have a sales volume variance greater than 20% compared to the average sales volume across all channels?",
+          "domain": "retail_clothing",
+          "risk_score": 12,
+          "severity": "LOW",
+          "data_count": 3
+        },
+        {
+          "name": "Supplier Performance Monitoring",
+          "query": "Which suppliers have an on-time delivery rate less than 90% in the past 6 months?",
+          "domain": "retail_clothing",
+          "risk_score": 20,
+          "severity": "LOW",
+          "data_count": 3
+        }
+      ],
+      "domain_scores": {
+        "retail_clothing": 20
+      },
+      "critical_domains": []
+    },
+    {
+      "timestamp": "2026-09-21T13:58:56.017127",
+      "missions": [
+        {
+          "name": "Dead Stock Products by Supplier",
+          "query": "What products have a stock count of zero and a supplier lead time greater than 30 days?",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        },
+        {
+          "name": "Supplier Delays and Reorder Point Breaches",
+          "query": "What products have supplier lead times greater than 30 days and have breached their reorder points in the past 3 months?",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        },
+        {
+          "name": "Sizing Anomalies in Inventory Locations",
+          "query": "What inventory locations have a stock count variance greater than 20% compared to the average stock count across all sizes?",
+          "domain": "retail_clothing",
+          "risk_score": 42,
+          "severity": "MEDIUM",
+          "data_count": 37
+        },
+        {
+          "name": "Low-Velocity Products with High Remaining Stock",
+          "query": "What products have not sold any units in the past 12 months and have a remaining stock count greater than 50 units?",
+          "domain": "retail_clothing",
+          "risk_score": 13,
+          "severity": "LOW",
+          "data_count": 2
+        },
+        {
+          "name": "Supplier Performance Over Time",
+          "query": "What suppliers have an on-time delivery rate less than 95% in the past 12 months?",
+          "domain": "retail_clothing",
+          "risk_score": 18,
+          "severity": "LOW",
+          "data_count": 5
+        },
+        {
+          "name": "Stock Count Variance by Size and Location",
+          "query": "What product sizes have a stock count variance greater than 15% compared to the average stock count across all sizes and locations?",
+          "domain": "retail_clothing",
+          "risk_score": 39,
+          "severity": "MEDIUM",
+          "data_count": 38
+        },
+        {
+          "name": "Sales Channel Performance Over Time",
+          "query": "What sales channels have a sales volume variance greater than 15% compared to the average sales volume across all channels in the past 6 months?",
+          "domain": "retail_clothing",
+          "risk_score": 12,
+          "severity": "LOW",
+          "data_count": 3
+        },
+        {
+          "name": "Reorder Point Breaches by Channel",
+          "query": "What products have breached their reorder points in the past 3 months and have sold units through multiple sales channels?",
+          "domain": "retail_clothing",
+          "risk_score": 31,
+          "severity": "MEDIUM",
+          "data_count": 7
+        },
+        {
+          "name": "Inventory Location Performance Over Time",
+          "query": "What inventory locations have a stock count variance greater than 10% compared to the average stock count across all locations in the past 12 months?",
+          "domain": "retail_clothing",
+          "risk_score": 12,
+          "severity": "LOW",
+          "data_count": 3
+        },
+        {
+          "name": "Supplier Lead Time and Retail Price Correlation",
+          "query": "What products have a supplier lead time greater than 30 days and a retail price greater than the average retail price across all products?",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        }
+      ],
+      "domain_scores": {
+        "retail_clothing": 17
+      },
+      "critical_domains": []
+    }
+  ]
+}

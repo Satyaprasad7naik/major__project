@@ -1,0 +1,235 @@
+{
+  "_last_touched": 1788374558.9097042,
+  "history": [
+    {
+      "timestamp": "2026-09-02T18:35:23.102792",
+      "missions": [
+        {
+          "name": "Dead Stock Identification",
+          "query": "What are the top 3 product SKUs with the highest inventory levels that have not been sold within the last 12 months, grouped by supplier?",
+          "domain": "retail_clothing",
+          "risk_score": 20,
+          "severity": "LOW",
+          "data_count": 3
+        },
+        {
+          "name": "Sizing Anomalies Detection",
+          "query": "What are the product SKUs with size discrepancies (i.e., different sizes have different retail prices) and have sold at least 100 units within the last quarter?",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        },
+        {
+          "name": "Supplier Delay Impact Analysis",
+          "query": "What is the average delay in lead time for suppliers who have not met their on-time delivery rate (OTDR) and how does it impact the inventory levels of their products?",
+          "domain": "retail_clothing",
+          "risk_score": 6,
+          "severity": "LOW",
+          "data_count": 1
+        },
+        {
+          "name": "Reorder Point Breaches Identification",
+          "query": "Which product SKUs have breached their reorder point and have not been restocked within the last 30 days, grouped by supplier?",
+          "domain": "retail_clothing",
+          "risk_score": 42,
+          "severity": "MEDIUM",
+          "data_count": 13
+        },
+        {
+          "name": "Inventory Obsolescence Risk Assessment",
+          "query": "What are the product SKUs that are no longer sold through any channel and have a remaining inventory level above 50 units, grouped by supplier?",
+          "domain": "retail_clothing",
+          "risk_score": 13,
+          "severity": "LOW",
+          "data_count": 2
+        },
+        {
+          "name": "Supplier Performance Correlation with Sales",
+          "query": "Do suppliers who have a higher on-time delivery rate (OTDR) also have higher sales volumes, and if so, what is the correlation coefficient?",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        },
+        {
+          "name": "Product Price Variance Analysis",
+          "query": "What are the product SKUs with the highest price variance (i.e., difference between retail price and supplier cost) and have sold at least 100 units within the last quarter?",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        },
+        {
+          "name": "Channel-Specific Sales Trends Identification",
+          "query": "What are the top 3 product SKUs that have shown significant sales trends (i.e., > 20% increase or decrease) on a specific channel (e.g., online, in-store) within the last quarter?",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        }
+      ],
+      "domain_scores": {
+        "retail_clothing": 10
+      },
+      "critical_domains": []
+    },
+    {
+      "timestamp": "2026-09-02T18:40:15.660401",
+      "missions": [
+        {
+          "name": "Security Domain Scan",
+          "query": "Show users with risk_level HIGH and account_status ACTIVE",
+          "domain": "security",
+          "risk_score": 39,
+          "severity": "MEDIUM",
+          "data_count": 58
+        }
+      ],
+      "domain_scores": {
+        "security": 39
+      },
+      "critical_domains": []
+    },
+    {
+      "timestamp": "2026-09-02T18:40:27.847863",
+      "missions": [
+        {
+          "name": "Supplier Lead Time Correlation",
+          "query": "What is the correlation between supplier lead time and product sales volumes, grouped by supplier?",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        },
+        {
+          "name": "Inventory Holding Cost Analysis",
+          "query": "What are the top 3 product SKUs with the highest holding cost (retail price - supplier cost) within the last quarter, grouped by supplier?",
+          "domain": "retail_clothing",
+          "risk_score": 16,
+          "severity": "LOW",
+          "data_count": 3
+        },
+        {
+          "name": "Sales Channel Concentration",
+          "query": "What are the product SKUs that are sold through a single channel (e.g., online, in-store) and have a sales volume above 50 units within the last quarter, grouped by supplier?",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        },
+        {
+          "name": "Supplier On-Time Delivery Rate Impact",
+          "query": "What is the average impact on inventory levels for suppliers who have not met their on-time delivery rate (OTDR) within the last quarter?",
+          "domain": "retail_clothing",
+          "risk_score": 15,
+          "severity": "LOW",
+          "data_count": 1
+        },
+        {
+          "name": "Product Life Cycle Analysis",
+          "query": "What are the product SKUs that have not been sold within the last 2 years and have a remaining inventory level above 20 units, grouped by supplier?",
+          "domain": "retail_clothing",
+          "risk_score": 31,
+          "severity": "MEDIUM",
+          "data_count": 10
+        },
+        {
+          "name": "Price Elasticity Analysis",
+          "query": "What are the product SKUs with the highest price elasticity (i.e., change in sales volume due to price change) within the last quarter, grouped by supplier?",
+          "domain": "retail_clothing",
+          "risk_score": 42,
+          "severity": "MEDIUM",
+          "data_count": 90
+        },
+        {
+          "name": "Supplier Performance Scorecard",
+          "query": "What are the top 3 suppliers with the highest performance score (based on lead time, OTDR, and sales volume) within the last quarter, grouped by supplier?",
+          "domain": "retail_clothing",
+          "risk_score": 20,
+          "severity": "LOW",
+          "data_count": 3
+        },
+        {
+          "name": "Inventory Turnover Analysis",
+          "query": "What are the product SKUs with the lowest inventory turnover rate (i.e., days inventory outstanding) within the last quarter, grouped by supplier?",
+          "domain": "retail_clothing",
+          "risk_score": 39,
+          "severity": "MEDIUM",
+          "data_count": 120
+        },
+        {
+          "name": "Seasonal Sales Trend Analysis",
+          "query": "What are the product SKUs that show significant seasonal sales trends (i.e., > 20% increase or decrease) within the last year, grouped by supplier?",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        },
+        {
+          "name": "Supplier Risk Assessment",
+          "query": "What are the suppliers with the highest risk score (based on lead time, OTDR, and sales volume) within the last quarter, grouped by supplier?",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        }
+      ],
+      "domain_scores": {
+        "retail_clothing": 16
+      },
+      "critical_domains": []
+    },
+    {
+      "timestamp": "2026-09-02T18:42:10.828099",
+      "missions": [
+        {
+          "name": "Compliance Domain Scan",
+          "query": "Show recent compliance violations or audit findings",
+          "domain": "compliance",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        }
+      ],
+      "domain_scores": {
+        "compliance": 0
+      },
+      "critical_domains": []
+    },
+    {
+      "timestamp": "2026-09-02T18:42:28.584931",
+      "missions": [
+        {
+          "name": "Operations Domain Scan",
+          "query": "Show system performance metrics and operational alerts",
+          "domain": "operations",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        }
+      ],
+      "domain_scores": {
+        "operations": 0
+      },
+      "critical_domains": []
+    },
+    {
+      "timestamp": "2026-09-02T18:42:38.909687",
+      "missions": [
+        {
+          "name": "Security Domain Scan",
+          "query": "Show users with risk_level HIGH and account_status ACTIVE",
+          "domain": "security",
+          "risk_score": 39,
+          "severity": "MEDIUM",
+          "data_count": 58
+        }
+      ],
+      "domain_scores": {
+        "security": 39
+      },
+      "critical_domains": []
+    }
+  ]
+}

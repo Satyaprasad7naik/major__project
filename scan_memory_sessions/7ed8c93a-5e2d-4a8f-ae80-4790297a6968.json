@@ -1,0 +1,248 @@
+{
+  "_last_touched": 1790341362.3357537,
+  "history": [
+    {
+      "timestamp": "2026-09-25T12:59:59.999108",
+      "missions": [
+        {
+          "name": "Dead Stock Detection",
+          "query": "What products have a stock count of 0 across all locations and have not been reordered within the last 90 days?",
+          "domain": "retail_clothing",
+          "risk_score": 23,
+          "severity": "LOW",
+          "data_count": 4
+        },
+        {
+          "name": "Sizing Anomaly Analysis",
+          "query": "What product sizes have a standard deviation of size distribution across all locations greater than 1?",
+          "domain": "retail_clothing",
+          "risk_score": 31,
+          "severity": "MEDIUM",
+          "data_count": 10
+        },
+        {
+          "name": "Supplier Delay Risk",
+          "query": "Which suppliers have a lead time greater than 30 days and an on-time rate less than 80%?",
+          "domain": "retail_clothing",
+          "risk_score": 21,
+          "severity": "LOW",
+          "data_count": 5
+        },
+        {
+          "name": "Reorder Point Breach Detection",
+          "query": "What products have a stock count less than their reorder point across all locations and have not been reordered within the last 30 days?",
+          "domain": "retail_clothing",
+          "risk_score": 23,
+          "severity": "LOW",
+          "data_count": 4
+        },
+        {
+          "name": "Inventory Imbalance",
+          "query": "What products have a stock count imbalance greater than 20% across all locations?",
+          "domain": "retail_clothing",
+          "risk_score": 31,
+          "severity": "MEDIUM",
+          "data_count": 10
+        },
+        {
+          "name": "Supplier Performance Monitoring",
+          "query": "Which suppliers have a lead time greater than 20 days and an on-time rate less than 90% within the last 6 months?",
+          "domain": "retail_clothing",
+          "risk_score": 21,
+          "severity": "LOW",
+          "data_count": 5
+        },
+        {
+          "name": "Channel-Specific Sales Analysis",
+          "query": "What channels have a sales growth rate greater than 20% within the last quarter and what products are driving this growth?",
+          "domain": "retail_clothing",
+          "risk_score": 15,
+          "severity": "LOW",
+          "data_count": 4
+        },
+        {
+          "name": "Product Line Obsolescence",
+          "query": "What product lines have a sales decline rate greater than 15% within the last year and have not been reordered within the last 6 months?",
+          "domain": "retail_clothing",
+          "risk_score": 28,
+          "severity": "MEDIUM",
+          "data_count": 6
+        }
+      ],
+      "domain_scores": {
+        "retail_clothing": 24
+      },
+      "critical_domains": []
+    },
+    {
+      "timestamp": "2026-09-25T13:00:10.545887",
+      "missions": [
+        {
+          "name": "Identify dead stock products across all locations",
+          "query": "SELECT sku FROM inventory WHERE stock_count = 0",
+          "domain": "retail_clothing",
+          "risk_score": 40,
+          "severity": "MEDIUM",
+          "data_count": 10
+        },
+        {
+          "name": "Detect sizing anomalies across products",
+          "query": "SELECT style_name, size FROM products GROUP BY style_name, size HAVING COUNT(*) > 1",
+          "domain": "retail_clothing",
+          "risk_score": 31,
+          "severity": "MEDIUM",
+          "data_count": 10
+        },
+        {
+          "name": "Find suppliers with lead times exceeding 30 days",
+          "query": "SELECT supplier_id FROM suppliers WHERE lead_time_days > 30",
+          "domain": "retail_clothing",
+          "risk_score": 21,
+          "severity": "LOW",
+          "data_count": 5
+        },
+        {
+          "name": "Identify products with stock count below reorder point",
+          "query": "SELECT sku FROM inventory WHERE stock_count < reorder_point",
+          "domain": "retail_clothing",
+          "risk_score": 23,
+          "severity": "LOW",
+          "data_count": 4
+        },
+        {
+          "name": "Analyze on-time rate of suppliers",
+          "query": "SELECT supplier_id, AVG(on_time_rate) AS average_on_time_rate FROM suppliers GROUP BY supplier_id",
+          "domain": "retail_clothing",
+          "risk_score": 18,
+          "severity": "LOW",
+          "data_count": 5
+        },
+        {
+          "name": "Analyze sales distribution across channels",
+          "query": "SELECT channel, SUM(units_sold) AS total_units_sold FROM sales_events GROUP BY channel",
+          "domain": "retail_clothing",
+          "risk_score": 15,
+          "severity": "LOW",
+          "data_count": 4
+        },
+        {
+          "name": "Analyze unit cost and retail price ratio",
+          "query": "SELECT style_name, AVG(unit_cost) / AVG(retail_price) AS price_ratio FROM products GROUP BY style_name",
+          "domain": "retail_clothing",
+          "risk_score": 15,
+          "severity": "LOW",
+          "data_count": 4
+        },
+        {
+          "name": "Analyze supplier geographic distribution",
+          "query": "SELECT country, COUNT(*) AS supplier_count FROM suppliers GROUP BY country",
+          "domain": "retail_clothing",
+          "risk_score": 18,
+          "severity": "LOW",
+          "data_count": 5
+        }
+      ],
+      "domain_scores": {
+        "retail_clothing": 23
+      },
+      "critical_domains": []
+    },
+    {
+      "timestamp": "2026-09-25T13:02:42.335726",
+      "missions": [
+        {
+          "name": "Size Distribution Inconsistency",
+          "query": "SELECT style_name, size, AVG(stock_count) AS average_stock_count FROM inventory GROUP BY style_name, size HAVING AVG(stock_count) < 10 OR AVG(stock_count) > 50",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        },
+        {
+          "name": "Supplier Lead Time Variability",
+          "query": "SELECT supplier_id, AVG(lead_time_days) AS average_lead_time FROM suppliers WHERE lead_time_days > 20 GROUP BY supplier_id HAVING AVG(lead_time_days) > 30",
+          "domain": "retail_clothing",
+          "risk_score": 24,
+          "severity": "LOW",
+          "data_count": 6
+        },
+        {
+          "name": "Inventory Imbalance by Location",
+          "query": "SELECT sku, location, stock_count, reorder_point FROM inventory WHERE stock_count < reorder_point AND sku NOT IN (SELECT sku FROM inventory WHERE stock_count > reorder_point)",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        },
+        {
+          "name": "Product Line Sales Decline",
+          "query": "SELECT style_name, SUM(units_sold) AS total_units_sold FROM sales_events WHERE sale_date < DATE_SUB(CURRENT_DATE, INTERVAL 1 YEAR) GROUP BY style_name HAVING SUM(units_sold) < 0.8 * (SELECT SUM(units_sold) FROM sales_events WHERE style_name = inventory.style_name)",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        },
+        {
+          "name": "Supplier On-Time Rate Fluctuation",
+          "query": "SELECT supplier_id, AVG(on_time_rate) AS average_on_time_rate FROM suppliers WHERE on_time_rate < 80 GROUP BY supplier_id HAVING AVG(on_time_rate) > 0.9 * (SELECT AVG(on_time_rate) FROM suppliers WHERE supplier_id = products.supplier_id)",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        },
+        {
+          "name": "Channel Sales Growth",
+          "query": "SELECT channel, SUM(units_sold) AS total_units_sold FROM sales_events WHERE sale_date > DATE_SUB(CURRENT_DATE, INTERVAL 1 QUARTER) GROUP BY channel HAVING SUM(units_sold) > 1.2 * (SELECT SUM(units_sold) FROM sales_events WHERE channel = sales_events.channel)",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        },
+        {
+          "name": "Dead Stock Identification",
+          "query": "SELECT sku FROM inventory WHERE stock_count = 0 AND last_restocked_at < DATE_SUB(CURRENT_DATE, INTERVAL 6 MONTH)",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        },
+        {
+          "name": "Supplier Delay Risk",
+          "query": "SELECT supplier_id, AVG(lead_time_days) AS average_lead_time FROM suppliers WHERE lead_time_days > 20 AND on_time_rate < 80 GROUP BY supplier_id HAVING AVG(lead_time_days) > 30",
+          "domain": "retail_clothing",
+          "risk_score": 24,
+          "severity": "LOW",
+          "data_count": 6
+        },
+        {
+          "name": "Price Ratio Anomaly",
+          "query": "SELECT style_name, AVG(unit_cost) / AVG(retail_price) AS price_ratio FROM products GROUP BY style_name HAVING AVG(unit_cost) / AVG(retail_price) > 1.2",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        },
+        {
+          "name": "Inventory Turnover Rate",
+          "query": "SELECT sku, inventory.turnover_rate FROM (SELECT sku, stock_count, reorder_point, last_restocked_at FROM inventory) inventory, (SELECT sku, AVG(lead_time_days) AS lead_time FROM suppliers GROUP BY sku) suppliers WHERE inventory.sku = suppliers.sku AND lead_time > 30 AND inventory.stock_count < reorder_point",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        },
+        {
+          "name": "Supplier Country Concentration",
+          "query": "SELECT country, COUNT(*) AS supplier_count FROM suppliers GROUP BY country HAVING COUNT(*) > 0.2 * (SELECT COUNT(*) FROM suppliers)",
+          "domain": "retail_clothing",
+          "risk_score": 20,
+          "severity": "LOW",
+          "data_count": 6
+        }
+      ],
+      "domain_scores": {
+        "retail_clothing": 6
+      },
+      "critical_domains": []
+    }
+  ]
+}

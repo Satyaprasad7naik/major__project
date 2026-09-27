@@ -1,0 +1,527 @@
+{
+  "_last_touched": 1790234556.255199,
+  "history": [
+    {
+      "timestamp": "2026-09-24T06:35:11.988818",
+      "missions": [
+        {
+          "name": "Identify Dead Stock by Category",
+          "query": "For each category, list products with stock count <= 0 and retail price > 50.00.",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        },
+        {
+          "name": "Sizing Anomalies by Style",
+          "query": "List products where the standard deviation of sizes in stock is greater than 2.",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        },
+        {
+          "name": "Identify Suppliers with Delays",
+          "query": "For each supplier, calculate the average lead time and on-time rate. List suppliers with lead time > 30 days or on-time rate < 80.",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        },
+        {
+          "name": "Reorder Point Breaches by Location",
+          "query": "List inventory locations where the stock count is less than or equal to the reorder point for any product.",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        },
+        {
+          "name": "Identify Slow-Moving Products",
+          "query": "List products with a stock count <= 5 and last restocked at > 90 days ago.",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        },
+        {
+          "name": "Supplier Lead Time Variance",
+          "query": "For each supplier, calculate the standard deviation of lead times. List suppliers with variance > 10.",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        },
+        {
+          "name": "Optimize Sales Channels",
+          "query": "List sales channels with a units sold ratio of < 1:5 compared to the average channel units sold.",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        },
+        {
+          "name": "Calculate Stock-Out Probability by Product",
+          "query": "For each product, calculate the stock-out probability based on the reorder point, lead time, and stock count.",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        }
+      ],
+      "domain_scores": {
+        "retail_clothing": 0
+      },
+      "critical_domains": []
+    },
+    {
+      "timestamp": "2026-09-24T06:48:28.698040",
+      "missions": [
+        {
+          "name": "Dead Stock Suppliers",
+          "query": "For each supplier, list products with stock count <= 0 and retail price > 50.00, grouped by supplier name.",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        },
+        {
+          "name": "Supplier Lead Time Variability",
+          "query": "For each supplier, calculate the coefficient of variation (CV) of lead times. List suppliers with CV > 0.3.",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        },
+        {
+          "name": "Sizing Anomalies Across Categories",
+          "query": "For each category, list products with a size range that spans more than 3 sizes. Group results by category name.",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        },
+        {
+          "name": "Reorder Point Breaches by Channel",
+          "query": "For each sales channel, list products with stock count <= reorder point. Group results by channel name.",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        },
+        {
+          "name": "Supplier Delays by Category",
+          "query": "For each category, list suppliers with lead time > 30 days. Group results by category name.",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        },
+        {
+          "name": "Stock-out Probability Hotspots",
+          "query": "For each product, calculate the stock-out probability based on reorder point, lead time, and stock count. List products with probability > 0.2.",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        },
+        {
+          "name": "Average Retail Price by Category",
+          "query": "For each category, calculate the average retail price of products. List categories with average price > 75.00.",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        },
+        {
+          "name": "Supplier Country Risk",
+          "query": "For each supplier country, calculate the average on-time rate of suppliers. List countries with average on-time rate < 85.0.",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        },
+        {
+          "name": "Stock Count Volatility by Location",
+          "query": "For each inventory location, calculate the standard deviation of stock counts across products. List locations with standard deviation > 10.",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        },
+        {
+          "name": "Supplier Lead Time Bucketing",
+          "query": "For each supplier, bucket lead times into 4 quartiles. List suppliers with lead times in the highest quartile (> 30 days).",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        }
+      ],
+      "domain_scores": {
+        "retail_clothing": 0
+      },
+      "critical_domains": []
+    },
+    {
+      "timestamp": "2026-09-24T07:01:13.404084",
+      "missions": [
+        {
+          "name": "Supplier Lead Time Variability",
+          "query": "For each supplier, calculate the coefficient of variation (CV) of lead times and list suppliers with CV > 0.4",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        },
+        {
+          "name": "Inventory Location Stock Count Distribution",
+          "query": "For each inventory location, calculate the 25th and 75th percentile of stock counts across products and list locations with a difference between percentiles > 10",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        },
+        {
+          "name": "Sizing Anomalies Across Categories",
+          "query": "For each category, list products with a size range that spans more than 4 sizes, grouped by category name",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        },
+        {
+          "name": "Stock-Out Probability by Channel",
+          "query": "For each sales channel, list products with stock count <= reorder point and retail price > 30.00, grouped by channel name",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        },
+        {
+          "name": "Supplier On-Time Rate by Country",
+          "query": "For each supplier country, calculate the average on-time rate of suppliers and list countries with average on-time rate < 80.0",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        },
+        {
+          "name": "Inventory Turnover Rate by Product",
+          "query": "For each product, calculate the inventory turnover rate (ITR) and list products with ITR < 4",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        },
+        {
+          "name": "Supplier Lead Time Quartiles",
+          "query": "For each supplier, bucket lead times into 4 quartiles and list suppliers with lead times in the highest quartile (> 40 days)",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        },
+        {
+          "name": "Product Price Variability by Category",
+          "query": "For each category, calculate the coefficient of variation (CV) of retail prices and list categories with CV > 0.2",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        },
+        {
+          "name": "Supplier Stock-Out Risk",
+          "query": "For each supplier, list products with stock count <= 0 and retail price > 40.00, grouped by supplier name",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        },
+        {
+          "name": "Channel Sales Concentration",
+          "query": "For each sales channel, calculate the Herfindahl-Hirschman Index (HHI) of product sales and list channels with HHI > 0.7",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        }
+      ],
+      "domain_scores": {
+        "retail_clothing": 0
+      },
+      "critical_domains": []
+    },
+    {
+      "timestamp": "2026-09-24T07:02:20.787558",
+      "missions": [
+        {
+          "name": "Dead Stock Hotspots",
+          "query": "List inventory locations where the average stock count across products is less than 10 and the standard deviation of stock counts is greater than 5.",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        },
+        {
+          "name": "Supplier Lead Time Variability",
+          "query": "For each supplier, calculate the difference between the 90th percentile and 10th percentile of lead times. List suppliers with a difference greater than 15 days.",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        },
+        {
+          "name": "Sizing Anomalies by Category",
+          "query": "For each category, list products with a size range that spans more than 3 sizes and the standard deviation of unit costs is greater than 5. Group results by category name.",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        },
+        {
+          "name": "Inventory Imbalances",
+          "query": "List products where the stock count is greater than 50 and the reorder point is less than 20. Group results by product category.",
+          "domain": "inventory",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        },
+        {
+          "name": "Stock Count Variability by Location",
+          "query": "For each inventory location, calculate the coefficient of variation (CV) of stock counts across products. List locations with CV > 0.2.",
+          "domain": "inventory",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        },
+        {
+          "name": "Supplier On-Time Rate Variability",
+          "query": "For each supplier country, calculate the standard deviation of on-time rates across suppliers. List countries with a standard deviation greater than 10.",
+          "domain": "suppliers",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        },
+        {
+          "name": "Channel Sales Performance",
+          "query": "For each sales channel, calculate the average units sold per product. List channels with an average less than 10.",
+          "domain": "sales_events",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        },
+        {
+          "name": "Product Stock-out Risk",
+          "query": "For each product, calculate the stock-out probability based on the reorder point, lead time, and stock count. List products with a probability greater than 0.3.",
+          "domain": "sales_events",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        },
+        {
+          "name": "Product Price Variability",
+          "query": "For each category, calculate the standard deviation of retail prices across products. List categories with a standard deviation greater than 10.",
+          "domain": "products",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        },
+        {
+          "name": "Supplier Retail Price Variability",
+          "query": "For each supplier, calculate the coefficient of variation (CV) of retail prices across products. List suppliers with a CV greater than 0.2.",
+          "domain": "products",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        }
+      ],
+      "domain_scores": {
+        "retail_clothing": 0,
+        "inventory": 0,
+        "suppliers": 0,
+        "sales_events": 0,
+        "products": 0
+      },
+      "critical_domains": []
+    },
+    {
+      "timestamp": "2026-09-24T07:10:37.641042",
+      "missions": [
+        {
+          "name": "Dead Stock Categories",
+          "query": "List product categories with stock count > 0 but no sales in the last 30 days, grouped by category name",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        },
+        {
+          "name": "Supplier Lead Time Distribution",
+          "query": "For each supplier, calculate the distribution of lead times across products and list suppliers with a non-uniform distribution (i.e., a large range of lead times)",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        },
+        {
+          "name": "Inventory Replenishment Issues",
+          "query": "List products with stock count <= 0 and the last restocked at date is more than 30 days ago, grouped by product category",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        },
+        {
+          "name": "Product Category Profitability",
+          "query": "For each product category, calculate the average profit margin (retail price - unit cost) and list categories with an average profit margin < 20%",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        },
+        {
+          "name": "Supplier Country Risk",
+          "query": "For each supplier country, calculate the average on-time rate across suppliers and list countries with an average on-time rate < 80%",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        },
+        {
+          "name": "Location Concentration",
+          "query": "List inventory locations with a concentration of products (i.e., a small number of products account for a large portion of the total stock count)",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        },
+        {
+          "name": "Supplier Time-to-Delivery",
+          "query": "For each supplier, calculate the average time-to-delivery (lead time + days since last restocked) and list suppliers with an average time-to-delivery > 60 days",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        },
+        {
+          "name": "Size and Price Anomalies",
+          "query": "For each product, calculate the correlation between size and retail price and list products with a strong positive correlation (> 0.7)",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        },
+        {
+          "name": "Reorder Point and Lead Time",
+          "query": "List products with a reorder point > 50 and a lead time > 30 days, grouped by product category",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        },
+        {
+          "name": "Channel Loyalty",
+          "query": "For each sales channel, calculate the average customer loyalty (i.e., the proportion of repeat customers) and list channels with an average customer loyalty < 30%",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        }
+      ],
+      "domain_scores": {
+        "retail_clothing": 0
+      },
+      "critical_domains": []
+    },
+    {
+      "timestamp": "2026-09-24T07:22:36.255170",
+      "missions": [
+        {
+          "name": "Supplier Lead Time Outliers",
+          "query": "For each supplier, identify products with a lead time > 50% of the maximum lead time across all suppliers",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        },
+        {
+          "name": "Inventory Concentration",
+          "query": "Identify inventory locations with a concentration of products (i.e., a small number of products account for a large portion of the total stock count) and calculate the top 3 most concentrated locations",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        },
+        {
+          "name": "Sizing Price Correlation",
+          "query": "For each product category, calculate the average correlation between size and retail price across all products in the category and identify categories with an average correlation > 0.5",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        },
+        {
+          "name": "Supplier Time-to-Delivery",
+          "query": "For each supplier, calculate the average time-to-delivery (lead time + days since last restocked) and identify suppliers with an average time-to-delivery > 60 days",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        },
+        {
+          "name": "Channel Loyalty Variation",
+          "query": "For each sales channel, calculate the standard deviation of customer loyalty across products and identify channels with a standard deviation > 20%",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        },
+        {
+          "name": "Product Reorder Point Breaches",
+          "query": "For each product, calculate the probability of a stock-out based on the reorder point, lead time, and stock count, and identify products with a probability > 0.4",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        },
+        {
+          "name": "Supplier Country Concentration",
+          "query": "For each supplier country, calculate the proportion of total sales and identify countries with a proportion > 20%",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        },
+        {
+          "name": "Product Category Profitability",
+          "query": "For each product category, calculate the average profit margin (retail price - unit cost) and identify categories with an average profit margin < 25%",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        },
+        {
+          "name": "Inventory Age",
+          "query": "Identify products with a stock count <= 0 and the last restocked at date is more than 30 days ago, grouped by product category and calculate the average age of inventory",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        },
+        {
+          "name": "Supplier Lead Time Distribution",
+          "query": "For each supplier, calculate the distribution of lead times across products and identify suppliers with a non-uniform distribution (i.e., a large range of lead times)",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        }
+      ],
+      "domain_scores": {
+        "retail_clothing": 0
+      },
+      "critical_domains": []
+    }
+  ]
+}

@@ -19,6 +19,224 @@
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 
     <link rel="stylesheet" href="styles.css">
+
+    <!-- Insights Dashboard Styles -->
+    <style>
+        .insights-dashboard {
+            padding: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .insights-header {
+            background: linear-gradient(135deg, #0a0a2b, #1a1a4f);
+            padding: 1.5rem 2rem;
+            border-radius: 12px 12px 0 0;
+            margin: -2rem -2rem 1.5rem;
+            color: #fff;
+        }
+
+        .insights-title-group {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .insights-badge {
+            background: #00e5ff;
+            color: #0a0a2b;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .insights-header h2 {
+            margin: 0;
+            font-size: 1.5rem;
+        }
+
+        .insights-status {
+            margin-top: 0.75rem;
+            opacity: 0.8;
+            font-size: 0.875rem;
+        }
+
+        .insights-rules-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .insight-rule-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            padding: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .insight-rule-card:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: #00e5ff;
+        }
+
+        .rule-header {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .rule-icon {
+            width: 24px;
+            height: 24px;
+        }
+
+        .rule-description {
+            color: #ccc;
+            font-size: 0.875rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .rule-stat {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #00e5ff;
+            margin-bottom: 0.25rem;
+        }
+
+        .rule-percent {
+            color: #7c4dff;
+            font-size: 0.875rem;
+        }
+
+        .insights-actions {
+            display: flex;
+            gap: 0.75rem;
+            justify-content: flex-end;
+            margin-top: 1rem;
+        }
+
+        .insights-findings {
+            margin-top: 1.5rem;
+        }
+
+        .insight-finding-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-left: 4px solid #7c4dff;
+            border-radius: 10px;
+            padding: 1rem 1.25rem;
+            margin-bottom: 0.75rem;
+            transition: all 0.3s ease;
+            animation: fadeInUp 0.4s ease forwards;
+            opacity: 0;
+        }
+        .insight-finding-card:hover {
+            background: rgba(255, 255, 255, 0.06);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 20px rgba(0, 229, 255, 0.1);
+        }
+        .insight-finding-card.severity-high, .insight-finding-card.severity-critical {
+            border-left-color: #ff5252;
+        }
+        .insight-finding-card.severity-medium {
+            border-left-color: #ffab00;
+        }
+        .insight-finding-card.severity-low {
+            border-left-color: #00e5ff;
+        }
+        .insight-finding-card .finding-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.5rem;
+        }
+        .insight-finding-card .finding-title {
+            font-weight: 600;
+            font-size: 0.95rem;
+            color: #fff;
+        }
+        .insight-finding-card .finding-severity {
+            text-transform: uppercase;
+            font-size: 0.65rem;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            padding: 0.2rem 0.6rem;
+            border-radius: 12px;
+        }
+        .finding-severity.sev-high, .finding-severity.sev-critical {
+            background: rgba(255, 82, 82, 0.2);
+            color: #ff5252;
+        }
+        .finding-severity.sev-medium {
+            background: rgba(255, 171, 0, 0.2);
+            color: #ffab00;
+        }
+        .finding-severity.sev-low {
+            background: rgba(0, 229, 255, 0.2);
+            color: #00e5ff;
+        }
+        .insight-finding-card .finding-description {
+            color: #b0b8c8;
+            font-size: 0.85rem;
+            line-height: 1.5;
+            margin-bottom: 0.5rem;
+        }
+        .insight-finding-card .finding-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.75rem;
+            color: #667;
+        }
+        .insight-finding-card .finding-product {
+            color: #7c4dff;
+            font-weight: 500;
+        }
+        .insight-finding-card .finding-time {
+            color: #555;
+        }
+        .insight-finding-card .mark-read-btn {
+            background: transparent;
+            border: 1px solid rgba(0, 229, 255, 0.3);
+            color: #00e5ff;
+            font-size: 0.7rem;
+            padding: 0.2rem 0.5rem;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .insight-finding-card .mark-read-btn:hover {
+            background: rgba(0, 229, 255, 0.1);
+        }
+        .insight-finding-card.is-read {
+            opacity: 0.5;
+        }
+        .insight-finding-card.is-read .mark-read-btn {
+            display: none;
+        }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(12px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .insights-empty-state {
+            text-align: center;
+            padding: 3rem 1rem;
+            color: #667;
+        }
+        .insights-empty-state .empty-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .hidden {
+            display: none !important;
+        }
+    </style>
 </head>
 
 <body>
@@ -47,6 +265,12 @@
                 </svg>
                 <h1>DerivInsight</h1>
             </div>
+            <div class="header-nav" style="display: flex; gap: 0.75rem; align-items: center;">
+                <button class="nav-tab active" id="tab-chat" onclick="switchToTab('chat')">💬 Query Assistant</button>
+                <button class="nav-tab" id="tab-sentinel" onclick="switchToTab('sentinel')">🛰️ Sentinel Mode</button>
+                <button class="nav-tab" id="tab-insights" onclick="switchToTab('insights')" style="background: rgba(255,171,0,0.15); border: 1px solid #ffab00; color: #ffab00; font-weight: 600; border-radius: 8px; padding: 0.4rem 0.85rem; cursor: pointer; transition: all 0.2s;">📊 Auto Insights</button>
+                <button class="nav-tab project2-tab" id="tab-project2" onclick="switchToTab('project2')" style="background: linear-gradient(135deg, #7c4dff, #00e5ff); color: #090d16; font-weight: 700; border: none; border-radius: 8px; padding: 0.4rem 0.85rem; cursor: pointer; transition: all 0.2s;">⚛️ Project 2 (Next.js Hub)</button>
+            </div>
             <div class="header-actions">
                 <div class="status-indicator">
                     <span class="status-dot"></span>
@@ -60,35 +284,27 @@
             <!-- Sidebar -->
             <aside class="sidebar">
                 <div class="sidebar-section">
-                    <button class="sentinel-toggle-btn" id="sentinel-btn">
+                    <button class="sentinel-toggle-btn" id="sentinel-btn" style="margin-bottom: 0.5rem;">
                         <span class="pulse-ring"></span>
                         <span class="icon">🛰️</span>
                         SENTINEL MODE
                     </button>
+                    <button class="sentinel-toggle-btn" id="project2-btn" onclick="switchToTab('project2')" style="background: linear-gradient(135deg, rgba(124, 77, 255, 0.2), rgba(0, 229, 255, 0.2)); border-color: #00e5ff; color: #fff;">
+                        <span class="icon">⚛️</span>
+                        NEXT.JS HUB (PROJECT 2)
+                    </button>
+                    <button class="sentinel-toggle-btn" id="insights-btn" onclick="switchToTab('insights')" style="background: rgba(255,171,0,0.1); border-color: #ffab00; color: #ffab00;">
+                        <span class="icon">📊</span>
+                        AUTO INSIGHTS
+                    </button>
                 </div>
 
                 <div class="sidebar-section">
-                    <h3>Domain Selection</h3>
+                    <h3>Active Data Source</h3>
                     <div class="domain-selector">
-                        <button class="domain-btn active" data-domain="general">
-                            <span class="domain-icon">🌐</span>
-                            General
-                        </button>
-                        <button class="domain-btn" data-domain="security">
-                            <span class="domain-icon">🔒</span>
-                            Security
-                        </button>
-                        <button class="domain-btn" data-domain="compliance">
-                            <span class="domain-icon">📋</span>
-                            Compliance
-                        </button>
-                        <button class="domain-btn" data-domain="risk">
-                            <span class="domain-icon">⚠️</span>
-                            Risk
-                        </button>
-                        <button class="domain-btn" data-domain="operations">
-                            <span class="domain-icon">⚙️</span>
-                            Operations
+                        <button class="domain-btn active" data-domain="retail_clothing" style="width: 100%; text-align: left; justify-content: flex-start;">
+                            <span class="domain-icon">🛍️</span>
+                            <span>Live Retail Dataset (.xlsx)</span>
                         </button>
                     </div>
                 </div>
@@ -96,22 +312,97 @@
                 <div class="sidebar-section">
                     <h3>Quick Examples</h3>
                     <div class="examples-list">
-                        <div class="example-item" data-query="Show me all high severity incidents">
-                            <span class="example-icon">💡</span>
-                            High severity incidents
+                        <div class="example-item" data-query="Which products are at risk of stockout this week?">
+                            <span class="example-icon">⚠️</span>
+                            Stockout Risk Alerts
                         </div>
-                        <div class="example-item" data-query="What are the compliance violations in the last 30 days?">
-                            <span class="example-icon">💡</span>
-                            Recent compliance violations
+                        <div class="example-item" data-query="Show top selling products">
+                            <span class="example-icon">🏆</span>
+                            Top Selling Products
                         </div>
-                        <div class="example-item" data-query="List all open security risks">
-                            <span class="example-icon">💡</span>
-                            Open security risks
+                        <div class="example-item" data-query="Which shop had highest sales?">
+                            <span class="example-icon">🏪</span>
+                            Shop / Store Sales
                         </div>
-                        <div class="example-item" data-query="Show operational metrics for last quarter">
-                            <span class="example-icon">💡</span>
-                            Quarterly metrics
+                        <div class="example-item" data-query="Show profit by product">
+                            <span class="example-icon">💰</span>
+                            Profit & Margins
                         </div>
+                        <div class="example-item" data-query="What are the sales by city?">
+                            <span class="example-icon">🏙️</span>
+                            Regional Sales by City
+                        </div>
+                        <div class="example-item" data-query="Show sales by payment method">
+                            <span class="example-icon">💳</span>
+                            Payment Methods (Card/UPI/Cash)
+                        </div>
+                        <div class="example-item" data-query="Show all transactions">
+                            <span class="example-icon">🧾</span>
+                            Recent Transactions Log
+                        </div>
+                    </div>
+                </div>
+
+                <div class="sidebar-section" id="live-data-sync-section">
+                    <h3>Live Excel Data Sync</h3>
+                    <div class="sync-widget" style="display: flex; flex-direction: column; gap: 0.6rem;">
+                        <div style="font-size: 0.72rem; color: #888; display: flex; align-items: center; gap: 0.3rem;">
+                            <span>📁</span> Folder: <strong style="color: #00e5ff;">live_data/</strong> (.xlsx)
+                        </div>
+                        <button id="btn-sync-excel" onclick="triggerLiveExcelSync()" style="display: flex; align-items: center; justify-content: center; gap: 0.5rem; background: linear-gradient(135deg, rgba(0, 229, 255, 0.25), rgba(124, 77, 255, 0.25)); border: 1px solid #00e5ff; color: #00e5ff; font-weight: 700; font-size: 0.85rem; border-radius: 6px; padding: 0.6rem 0.8rem; cursor: pointer; transition: all 0.2s; box-shadow: 0 0 10px rgba(0, 229, 255, 0.15);">
+                            <span>🔄</span> Sync Live Data Now
+                        </button>
+                        <div id="excel-sync-status" style="font-size: 0.75rem; color: #aaa; background: rgba(255,255,255,0.04); padding: 0.5rem; border-radius: 6px; border: 1px solid rgba(255,255,255,0.08);">
+                            <div style="display: flex; justify-content: space-between; margin-bottom: 2px;">
+                                <span>Status:</span> <strong id="excel-status-val" style="color: #00e5ff;">Ready</strong>
+                            </div>
+                            <div style="font-size: 0.7rem; color: #888;" id="excel-last-sync">Auto-sync: Every 5m</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Email Alert Settings -->
+                <div class="sidebar-section" id="email-notifications-section">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+                        <h3 style="margin: 0;">📧 Email Alerts</h3>
+                        <span id="email-mode-badge" style="font-size: 0.65rem; font-weight: bold; padding: 2px 6px; border-radius: 4px; background: rgba(255, 171, 0, 0.15); color: #ffab00; border: 1px solid rgba(255,171,0,0.3);">LOG FALLBACK</span>
+                    </div>
+                    <div class="email-config-widget" style="display: flex; flex-direction: column; gap: 0.65rem;">
+                        <div>
+                            <label for="email-sender-input" style="font-size: 0.7rem; color: #aaa; margin-bottom: 3px; display: block;">Sender Email (From):</label>
+                            <input type="email" id="email-sender-input" placeholder="e.g. notifications@mystore.com" style="width: 100%; background: rgba(0,0,0,0.4); border: 1px solid rgba(0,229,255,0.25); color: #fff; padding: 0.45rem 0.6rem; border-radius: 4px; font-size: 0.75rem; outline: none; box-sizing: border-box;">
+                        </div>
+
+                        <div>
+                            <label for="email-password-input" style="font-size: 0.7rem; color: #aaa; margin-bottom: 3px; display: block;">Sender App Password / SMTP Pass:</label>
+                            <input type="password" id="email-password-input" placeholder="••••••••••••" style="width: 100%; background: rgba(0,0,0,0.4); border: 1px solid rgba(0,229,255,0.25); color: #fff; padding: 0.45rem 0.6rem; border-radius: 4px; font-size: 0.75rem; outline: none; box-sizing: border-box;">
+                            <div style="font-size: 0.62rem; color: #78909c; margin-top: 3px; line-height: 1.2;">
+                                ℹ️ <em>For Gmail: Use a 16-character App Password (<a href="https://myaccount.google.com/apppasswords" target="_blank" style="color: #00e5ff; text-decoration: underline;">Google App Passwords</a>)</em>
+                            </div>
+                        </div>
+
+                        <div>
+                            <label for="email-receiver-input" style="font-size: 0.7rem; color: #aaa; margin-bottom: 3px; display: block;">Receiver Email(s) (To):</label>
+                            <input type="text" id="email-receiver-input" placeholder="e.g. manager@store.com, owner@store.com" style="width: 100%; background: rgba(0,0,0,0.4); border: 1px solid rgba(0,229,255,0.25); color: #fff; padding: 0.45rem 0.6rem; border-radius: 4px; font-size: 0.75rem; outline: none; box-sizing: border-box;">
+                        </div>
+
+                        <details style="font-size: 0.7rem; color: #888; cursor: pointer; background: rgba(255,255,255,0.02); padding: 4px 6px; border-radius: 4px; border: 1px solid rgba(255,255,255,0.05);">
+                            <summary style="outline: none; color: #00e5ff; font-weight: 600;">⚙️ Advanced SMTP Server</summary>
+                            <div style="display: flex; gap: 0.4rem; margin-top: 6px;">
+                                <input type="text" id="email-smtp-server" placeholder="smtp.gmail.com" style="flex: 2; background: rgba(0,0,0,0.5); border: 1px solid rgba(255,255,255,0.15); color: #fff; padding: 0.35rem 0.5rem; border-radius: 4px; font-size: 0.7rem; box-sizing: border-box;">
+                                <input type="number" id="email-smtp-port" placeholder="587" style="flex: 1; background: rgba(0,0,0,0.5); border: 1px solid rgba(255,255,255,0.15); color: #fff; padding: 0.35rem 0.5rem; border-radius: 4px; font-size: 0.7rem; box-sizing: border-box;">
+                            </div>
+                        </details>
+
+                        <div style="display: flex; gap: 0.4rem; margin-top: 0.2rem;">
+                            <button id="btn-save-email-config" onclick="saveEmailConfig()" style="flex: 1; display: flex; align-items: center; justify-content: center; gap: 4px; background: linear-gradient(135deg, #00e5ff, #7c4dff); color: #0a0a2b; font-weight: bold; font-size: 0.75rem; border: none; border-radius: 4px; padding: 0.55rem; cursor: pointer; transition: all 0.2s;">
+                                <span>💾</span> Save
+                            </button>
+                            <button id="btn-test-email-alert" onclick="testEmailAlert()" style="flex: 1; display: flex; align-items: center; justify-content: center; gap: 4px; background: rgba(0, 229, 255, 0.15); border: 1px solid #00e5ff; color: #00e5ff; font-weight: 600; font-size: 0.75rem; border-radius: 4px; padding: 0.55rem; cursor: pointer; transition: all 0.2s;">
+                                <span>✉️</span> Test Send
+                            </button>
+                        </div>
+                        <div id="email-config-feedback" style="font-size: 0.7rem; color: #aaa; line-height: 1.3; min-height: 14px;"></div>
                     </div>
                 </div>
 
@@ -141,8 +432,18 @@
                 <div class="messages-container" id="messages">
                     <div class="welcome-message">
                         <h2>👋 Welcome to DerivInsight</h2>
-                        <p>Ask me anything about your data in natural language. I'll convert it to SQL and show you the
-                            results!</p>
+                        <p>Ask natural language questions directly against your live Excel spreadsheet (<strong>live_data/shop_sales_test_dataset_100_rows.xlsx</strong>):</p>
+                        
+                        <div class="first-page-domain-selector">
+                            <div class="domain-card active" data-domain="retail_clothing" style="grid-column: 1 / -1;">
+                                <span class="domain-card-icon">🛍️</span>
+                                <div class="domain-card-content">
+                                    <div class="domain-card-title">Live Retail Store Sales & Inventory Dataset</div>
+                                    <div class="domain-card-desc">100 Transactions • 36 Products • 8 Cities • 10 Shops • Full Revenue, Cost & Profit Ledger</div>
+                                </div>
+                            </div>
+                        </div>
+
                         <div class="welcome-features">
                             <div class="feature">
                                 <span class="feature-icon">🤖</span>
@@ -239,6 +540,77 @@
                 </div>
             </div>
 
+            <!-- Project 2: Next.js Enterprise Hub Dashboard -->
+            <div class="project2-container hidden" id="project2-dashboard" style="padding: 1.5rem; background: rgba(9, 13, 22, 0.95); border-radius: 16px; border: 1px solid rgba(0, 229, 255, 0.4); grid-column: 2 / span 2; box-shadow: 0 0 30px rgba(0,229,255,0.15);">
+                <div class="project2-header" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.25rem; padding-bottom: 1rem; border-bottom: 1px solid rgba(255,255,255,0.1);">
+                    <div>
+                        <span class="insights-badge" style="background: linear-gradient(135deg, #7c4dff, #00e5ff); color: #090d16; font-weight: 700; font-size: 0.75rem;">PROJECT 2 INTEGRATION</span>
+                        <h2 style="margin: 0.5rem 0 0; color: #fff; font-size: 1.5rem;">Next.js Enterprise Hub & Palantir Foundry Architecture</h2>
+                        <p style="margin: 0.25rem 0 0; color: #aaa; font-size: 0.875rem;">Dynamic Pricing, Supply Chain Digital Twin, Scope 1–3 Carbon Accounting & JWT Gateway</p>
+                    </div>
+                    <div style="display: flex; gap: 0.75rem;">
+                        <button onclick="toggleProject2Mode()" id="p2-mode-toggle" class="action-btn" style="background: rgba(124, 77, 255, 0.2); border: 1px solid #7c4dff; color: #fff; font-weight: 600; padding: 0.5rem 1rem; border-radius: 8px; cursor: pointer;">
+                            🖥️ Switch View Mode
+                        </button>
+                        <a href="http://localhost:3000" target="_blank" class="action-btn" style="text-decoration: none; display: inline-flex; align-items: center; gap: 0.5rem; background: #00e5ff; color: #090d16; font-weight: bold; padding: 0.5rem 1rem; border-radius: 8px;">
+                            <span>🚀 Open Next.js App (Port 3000) ↗</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Native Control Center View -->
+                <div id="project2-native-view" style="display: block;">
+                    <!-- SKU Inspector Bar -->
+                    <div style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.1); padding: 1.25rem; border-radius: 12px; margin-bottom: 1.5rem; display: flex; gap: 1rem; align-items: center;">
+                        <input type="text" id="p2-sku-input" value="SKU-1001" placeholder="Enter SKU (e.g. SKU-1001)" style="flex: 1; background: rgba(0,0,0,0.5); border: 1px solid rgba(0, 229, 255, 0.3); color: #fff; padding: 0.75rem 1rem; border-radius: 8px; font-size: 1rem; outline: none;" />
+                        <button onclick="fetchProject2Ontology()" id="p2-inspect-btn" style="background: linear-gradient(135deg, #00e5ff, #7c4dff); color: #0a0a2b; font-weight: bold; border: none; padding: 0.75rem 1.5rem; border-radius: 8px; cursor: pointer; transition: all 0.2s;">
+                            🔍 Query Enterprise Ontology
+                        </button>
+                    </div>
+
+                    <!-- 3 Enterprise Module Cards -->
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.25rem;">
+                        <!-- Card 1: Dynamic Pricing -->
+                        <div style="background: rgba(255,255,255,0.02); border: 1px solid rgba(0, 229, 255, 0.2); border-radius: 12px; padding: 1.25rem;">
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                                <h3 style="margin: 0; color: #00e5ff; font-size: 1.1rem;">💲 Dynamic Pricing Engine</h3>
+                                <span style="font-size: 0.7rem; background: rgba(0,229,255,0.1); color: #00e5ff; padding: 0.25rem 0.5rem; border-radius: 4px;">Elasticity Alg.</span>
+                            </div>
+                            <div id="p2-pricing-content" style="font-size: 0.875rem; color: #ccc; line-height: 1.6;">
+                                <p style="color: #888; font-style: italic;">Click &quot;Query Enterprise Ontology&quot; to evaluate dynamic pricing.</p>
+                            </div>
+                        </div>
+
+                        <!-- Card 2: Supply Chain Digital Twin -->
+                        <div style="background: rgba(255,255,255,0.02); border: 1px solid rgba(0, 230, 118, 0.2); border-radius: 12px; padding: 1.25rem;">
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                                <h3 style="margin: 0; color: #00e676; font-size: 1.1rem;">🏭 Supply Chain Digital Twin</h3>
+                                <span style="font-size: 0.7rem; background: rgba(0,230,118,0.1); color: #00e676; padding: 0.25rem 0.5rem; border-radius: 4px;">5 Hubs (IN)</span>
+                            </div>
+                            <div id="p2-supply-content" style="font-size: 0.875rem; color: #ccc; line-height: 1.6;">
+                                <p style="color: #888; font-style: italic;">Click &quot;Query Enterprise Ontology&quot; to inspect inventory reserves.</p>
+                            </div>
+                        </div>
+
+                        <!-- Card 3: Scope 1-3 Carbon Accounting -->
+                        <div style="background: rgba(255,255,255,0.02); border: 1px solid rgba(124, 77, 255, 0.2); border-radius: 12px; padding: 1.25rem;">
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                                <h3 style="margin: 0; color: #7c4dff; font-size: 1.1rem;">🌱 Scope 1–3 Carbon</h3>
+                                <span style="font-size: 0.7rem; background: rgba(124,77,255,0.1); color: #7c4dff; padding: 0.25rem 0.5rem; border-radius: 4px;">GHG Protocol</span>
+                            </div>
+                            <div id="p2-carbon-content" style="font-size: 0.875rem; color: #ccc; line-height: 1.6;">
+                                <p style="color: #888; font-style: italic;">Click &quot;Query Enterprise Ontology&quot; to calculate carbon footprint.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- iFrame View (Hidden by Default) -->
+                <div id="project2-iframe-view" style="display: none; width: 100%; height: 750px; border-radius: 12px; overflow: hidden; border: 1px solid rgba(255,255,255,0.15);">
+                    <iframe id="project2-iframe" src="http://localhost:3000" style="width: 100%; height: 100%; border: none;"></iframe>
+                </div>
+            </div>
+
             <!-- Results Panel -->
             <div class="results-panel hidden" id="results-panel">
                 <div class="results-header">
@@ -291,6 +663,113 @@
                         <h3>No Results Yet</h3>
                         <p>Run a query to see data visualizations and tables here</p>
                     </div>
+
+                    <!-- Confidence & Trust Section -->
+                    <div class="confidence-section" id="confidence-section" style="margin-top: 1.5rem; padding-top: 1.5rem; border-top: 1px solid rgba(255,255,255,0.1);">
+                        <div class="confidence-badge" id="confidence-badge">
+                            <span class="confidence-value" id="confidence-value">—</span>
+                            <span class="confidence-label">Confidence</span>
+                        </div>
+                        <button class="action-btn tiny" id="details-btn" style="margin-left: 0.5rem; padding: 0.25rem 0.5rem; font-size: 0.75rem;">
+                            <span>Why should I trust this?</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Insights Dashboard -->
+            <div class="insights-dashboard hidden" id="insights-dashboard" style="grid-column: 2 / span 2;">
+                <div class="insights-header">
+                    <div class="insights-title-group">
+                        <span class="insights-badge">AUTO INSIGHTS</span>
+                        <h2>Today's Proactive Insights</h2>
+                    </div>
+                    <div class="insights-status">
+                        <span class="status-label">Last Update:</span>
+                        <span id="last-insights-update" class="status-value">Just now</span>
+                    </div>
+                </div>
+
+                <!-- Proactive Summary Headline Banner -->
+                <div class="proactive-headline-banner" id="proactive-headline-banner" style="background: linear-gradient(135deg, rgba(229, 62, 62, 0.15), rgba(221, 107, 32, 0.15)); border: 1px solid rgba(229, 62, 62, 0.4); border-radius: 10px; padding: 1rem 1.25rem; margin-bottom: 1.5rem; display: flex; align-items: center; justify-content: space-between;">
+                    <div style="display: flex; align-items: center; gap: 0.75rem;">
+                        <span style="font-size: 1.5rem;">⚡</span>
+                        <div>
+                            <h3 id="proactive-headline-text" style="margin: 0; color: #fff; font-size: 1.1rem; font-weight: 700;">Scanning system for proactive insights...</h3>
+                            <p style="margin: 0.25rem 0 0 0; color: rgba(255,255,255,0.7); font-size: 0.85rem;">System automatically scans data every 2 hours (Today's Insights)</p>
+                        </div>
+                    </div>
+                    <span id="urgent-badge" style="background: #e53e3e; color: #fff; font-size: 0.75rem; font-weight: bold; padding: 0.35rem 0.75rem; border-radius: 20px; text-transform: uppercase;">SCANNING</span>
+                </div>
+
+                <div class="insights-rules-grid">
+                    <div class="insight-rule-card stockout-risk-card">
+                        <div class="rule-header">
+                            <span class="rule-icon">🛡️</span>
+                            <h4>Stockout Risk</h4>
+                        </div>
+                        <div class="rule-description">
+                            Products at risk based on reorder point and days-of-cover
+                        </div>
+                        <div class="rule-stat" id="stockout-count">0</div>
+                        <div class="rule-percent" id="stockout-percent">0%</div>
+                    </div>
+
+                    <div class="insight-rule-card critical-inventory-card">
+                        <div class="rule-header">
+                            <span class="rule-icon">🔴</span>
+                            <h4>Critical Inventory</h4>
+                        </div>
+                        <div class="rule-description">
+                            Products with critically low stock levels
+                        </div>
+                        <div class="rule-stat" id="critical-count">0</div>
+                        <div class="rule-percent" id="critical-percent">0%</div>
+                    </div>
+
+                    <div class="insight-rule-card sales-drop-card">
+                        <div class="rule-header">
+                            <span class="rule-icon">📉</span>
+                            <h4>Sales Drop</h4>
+                        </div>
+                        <div class="rule-description">
+                            Products with significant sales velocity decrease
+                        </div>
+                        <div class="rule-stat" id="sales-drop-count">0</div>
+                        <div class="rule-percent" id="sales-drop-percent">0%</div>
+                    </div>
+
+                    <div class="insight-rule-card supplier-risk-card">
+                        <div class="rule-header">
+                            <span class="rule-icon">⚠️</span>
+                            <h4>Supplier Risk</h4>
+                        </div>
+                        <div class="rule-description">
+                            Suppliers with high risk of delayed deliveries
+                        </div>
+                        <div class="rule-stat" id="supplier-count">0</div>
+                        <div class="rule-percent" id="supplier-percent">0%</div>
+                    </div>
+                </div>
+
+                <div class="insights-actions">
+                    <button class="action-btn" id="refresh-insights-btn">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                            <path d="M7 5l10 5 5-10-10-5z" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round" />
+                        </svg>
+                        Refresh Insights
+                    </button>
+                    <button class="action-btn" id="email-setup-shortcut-btn" onclick="focusEmailSettings()" style="background: rgba(0, 229, 255, 0.1); border: 1px solid #00e5ff; color: #00e5ff;">
+                        <span>📧</span> Email Alert Settings
+                    </button>
+                    <button class="action-btn secondary" id="acknowledge-all-btn">
+                        <span>Mark All Acknowledged</span>
+                    </button>
+                </div>
+
+                <div class="insights-findings" id="insights-findings">
+                    <!-- Dynamic findings will be populated here -->
                 </div>
             </div>
         </div>

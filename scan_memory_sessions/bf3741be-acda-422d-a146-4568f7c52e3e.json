@@ -1,0 +1,524 @@
+{
+  "_last_touched": 1787732195.4425564,
+  "history": [
+    {
+      "timestamp": "2026-08-26T08:11:37.524684",
+      "missions": [
+        {
+          "name": "Dead Stock and Supplier Delay",
+          "query": "Find products with stock count below reorder point and suppliers with lead time exceeding 30 days",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        },
+        {
+          "name": "Sizing Anomalies and Inventory Imbalance",
+          "query": "Identify products with inconsistent size distribution across locations and detect inventory imbalance by category",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        },
+        {
+          "name": "Reorder Point Breaches and Stockouts",
+          "query": "Detect reorder point breaches and stockouts for products with high demand and low supply",
+          "domain": "retail_clothing",
+          "risk_score": 20,
+          "severity": "LOW",
+          "data_count": 3
+        },
+        {
+          "name": "Supplier On-Time Rate and Delay Analysis",
+          "query": "Analyze supplier on-time rate and delay patterns to identify potential risks and opportunities",
+          "domain": "retail_clothing",
+          "risk_score": 9,
+          "severity": "LOW",
+          "data_count": 2
+        },
+        {
+          "name": "Product Life Cycle and Retirement",
+          "query": "Identify products approaching end-of-life and recommend retirement or discontinuation",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        },
+        {
+          "name": "Channel-Specific Sales Performance",
+          "query": "Analyze sales performance by channel (e.g., online, in-store) and identify opportunities for optimization",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        },
+        {
+          "name": "Inventory Holding Costs and Turnover",
+          "query": "Calculate inventory holding costs and turnover for each product and location to optimize inventory management",
+          "domain": "retail_clothing",
+          "risk_score": 39,
+          "severity": "MEDIUM",
+          "data_count": 120
+        },
+        {
+          "name": "Supplier Performance and Risk Assessment",
+          "query": "Evaluate supplier performance and risk using lead time, on-time rate, and other metrics to identify potential risks",
+          "domain": "retail_clothing",
+          "risk_score": 18,
+          "severity": "LOW",
+          "data_count": 2
+        }
+      ],
+      "domain_scores": {
+        "retail_clothing": 11
+      },
+      "critical_domains": []
+    },
+    {
+      "timestamp": "2026-08-26T08:11:59.579941",
+      "missions": [
+        {
+          "name": "Hidden Stockouts",
+          "query": "Find products with stock count below reorder point and suppliers with lead time exceeding 60 days, indicating potential stockout risks.",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        },
+        {
+          "name": "Sizing Discrepancies",
+          "query": "Identify products with size distribution skewness across locations, indicating potential sizing anomalies.",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        },
+        {
+          "name": "Lead Time Leverage",
+          "query": "Analyze the impact of supplier lead time on product availability, identifying products with lead times exceeding 45 days and high demand.",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        },
+        {
+          "name": "Category Inventory Imbalance",
+          "query": "Detect inventory imbalance by category across locations, identifying categories with stock count variances exceeding 20%.",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        },
+        {
+          "name": "Supplier Performance",
+          "query": "Evaluate supplier performance using lead time, on-time rate, and other metrics to identify potential risks and opportunities.",
+          "domain": "retail_clothing",
+          "risk_score": 9,
+          "severity": "LOW",
+          "data_count": 2
+        },
+        {
+          "name": "Channel Sales Analysis",
+          "query": "Analyze sales performance by channel (e.g., online, in-store) to identify opportunities for optimization and channel-specific inventory management.",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        },
+        {
+          "name": "Inventory Holding Costs",
+          "query": "Calculate inventory holding costs and turnover for each product and location to optimize inventory management and reduce costs.",
+          "domain": "retail_clothing",
+          "risk_score": 42,
+          "severity": "MEDIUM",
+          "data_count": 120
+        },
+        {
+          "name": "Supplier On-Time Rate Analysis",
+          "query": "Analyze supplier on-time rate and delay patterns to identify potential risks and opportunities for improvement.",
+          "domain": "retail_clothing",
+          "risk_score": 9,
+          "severity": "LOW",
+          "data_count": 2
+        },
+        {
+          "name": "Product End-of-Life Analysis",
+          "query": "Identify products approaching end-of-life and recommend retirement or discontinuation to optimize inventory management and reduce waste.",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        },
+        {
+          "name": "SKU Reorder Point Optimization",
+          "query": "Optimize SKU reorder points based on historical demand and supply data to minimize stockouts and overstocking, and reduce inventory holding costs.",
+          "domain": "retail_clothing",
+          "risk_score": 38,
+          "severity": "MEDIUM",
+          "data_count": 14
+        }
+      ],
+      "domain_scores": {
+        "retail_clothing": 10
+      },
+      "critical_domains": []
+    },
+    {
+      "timestamp": "2026-08-26T08:13:09.275074",
+      "missions": [
+        {
+          "name": "Dead Stock Detection",
+          "query": "Identify products with stock count below reorder point and suppliers with lead time exceeding 90 days across all locations.",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        },
+        {
+          "name": "Sizing Anomalies Detection",
+          "query": "Find products with size distribution skewness exceeding 20% across locations, indicating potential sizing anomalies.",
+          "domain": "retail_clothing",
+          "risk_score": 34,
+          "severity": "MEDIUM",
+          "data_count": 14
+        },
+        {
+          "name": "Suppliers at Risk",
+          "query": "Identify suppliers with on-time rate below 80% and lead time exceeding 60 days, indicating potential supplier delays and risks.",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        },
+        {
+          "name": "Reorder Point Breaches Detection",
+          "query": "Find products with stock count below reorder point across all locations, indicating potential stockout risks.",
+          "domain": "retail_clothing",
+          "risk_score": 34,
+          "severity": "MEDIUM",
+          "data_count": 14
+        },
+        {
+          "name": "Channel-Specific Inventory Analysis",
+          "query": "Analyze sales performance by channel (e.g., online, in-store) to identify opportunities for optimization and channel-specific inventory management.",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        },
+        {
+          "name": "Product Lifecycle Analysis",
+          "query": "Identify products approaching end-of-life and recommend retirement or discontinuation to optimize inventory management and reduce waste.",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        },
+        {
+          "name": "Supplier Performance Evaluation",
+          "query": "Evaluate supplier performance using lead time, on-time rate, and other metrics to identify potential risks and opportunities.",
+          "domain": "retail_clothing",
+          "risk_score": 13,
+          "severity": "LOW",
+          "data_count": 2
+        },
+        {
+          "name": "Inventory Imbalance Detection",
+          "query": "Detect inventory imbalance by category across locations, identifying categories with stock count variances exceeding 30%.",
+          "domain": "retail_clothing",
+          "risk_score": 39,
+          "severity": "MEDIUM",
+          "data_count": 24
+        },
+        {
+          "name": "Supplier Lead Time Review",
+          "query": "Analyze the impact of supplier lead time on product availability, identifying products with lead times exceeding 45 days and high demand.",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        },
+        {
+          "name": "Holding Costs and Turnover Analysis",
+          "query": "Calculate inventory holding costs and turnover for each product and location to optimize inventory management and reduce costs.",
+          "domain": "retail_clothing",
+          "risk_score": 39,
+          "severity": "MEDIUM",
+          "data_count": 120
+        }
+      ],
+      "domain_scores": {
+        "retail_clothing": 16
+      },
+      "critical_domains": []
+    },
+    {
+      "timestamp": "2026-08-26T08:13:33.261583",
+      "missions": [
+        {
+          "name": "Supplier Lead Time Impact Analysis",
+          "query": "Identify products with high demand and suppliers with lead times exceeding 30 days, indicating potential stockout risks.",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        },
+        {
+          "name": "Sizing Anomalies Across Locations",
+          "query": "Detect products with size distribution skewness exceeding 15% across multiple locations, indicating potential sizing anomalies.",
+          "domain": "retail_clothing",
+          "risk_score": 39,
+          "severity": "MEDIUM",
+          "data_count": 119
+        },
+        {
+          "name": "Supplier Performance Evaluation",
+          "query": "Evaluate supplier performance using lead time, on-time rate, and other metrics to identify top-performing and underperforming suppliers.",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        },
+        {
+          "name": "Inventory Imbalance by Category",
+          "query": "Detect categories with stock count variances exceeding 25% across locations, indicating potential inventory imbalance.",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        },
+        {
+          "name": "End-of-Life Product Identification",
+          "query": "Identify products approaching end-of-life and recommend retirement or discontinuation to optimize inventory management and reduce waste.",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        },
+        {
+          "name": "Optimized SKU Reorder Points",
+          "query": "Calculate optimized SKU reorder points based on historical demand and supply data to minimize stockouts and overstocking, and reduce inventory holding costs.",
+          "domain": "retail_clothing",
+          "risk_score": 42,
+          "severity": "MEDIUM",
+          "data_count": 90
+        },
+        {
+          "name": "Supplier Delay Risk Assessment",
+          "query": "Identify suppliers with on-time rates below 85% and lead times exceeding 45 days, indicating potential supplier delays and risks.",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        },
+        {
+          "name": "Inventory Holding Costs Analysis",
+          "query": "Calculate inventory holding costs and turnover for each product and location to optimize inventory management and reduce costs.",
+          "domain": "retail_clothing",
+          "risk_score": 39,
+          "severity": "MEDIUM",
+          "data_count": 120
+        },
+        {
+          "name": "Sales Performance by Channel",
+          "query": "Analyze sales performance by channel (e.g., online, in-store) to identify opportunities for optimization and channel-specific inventory management.",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        },
+        {
+          "name": "Product Discontinuation Recommendation",
+          "query": "Identify products with low sales and recommend discontinuation to optimize inventory management and reduce waste.",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        }
+      ],
+      "domain_scores": {
+        "retail_clothing": 12
+      },
+      "critical_domains": []
+    },
+    {
+      "timestamp": "2026-08-26T08:15:58.563485",
+      "missions": [
+        {
+          "name": "Dead Stock Detection",
+          "query": "Identify products with stock count below reorder point across all locations, including those with suppliers' lead times exceeding 60 days.",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        },
+        {
+          "name": "Sizing Anomaly Detection",
+          "query": "Find products with size distribution skewness exceeding 25% across locations, including those with suppliers' on-time rates below 90%.",
+          "domain": "retail_clothing",
+          "risk_score": 13,
+          "severity": "LOW",
+          "data_count": 2
+        },
+        {
+          "name": "Supplier Delay Risk Assessment",
+          "query": "Identify suppliers with on-time rates below 85% and lead times exceeding 45 days, indicating potential supplier delays and risks.",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        },
+        {
+          "name": "Reorder Point Breach Analysis",
+          "query": "Detect products with stock count below reorder point across multiple locations, including those with suppliers' lead times exceeding 60 days.",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        },
+        {
+          "name": "Product Imbalance Identification",
+          "query": "Identify categories with stock count variances exceeding 30% across locations, indicating potential inventory imbalance.",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        },
+        {
+          "name": "Product Skewness Analysis",
+          "query": "Find products with size distribution skewness exceeding 20% across multiple locations, including those with suppliers' on-time rates below 90%.",
+          "domain": "retail_cthing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        },
+        {
+          "name": "Product Imbalance Investigation",
+          "query": "Detect inventory imbalance by category across locations, including products with stock count variances exceeding 25% across locations.",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        },
+        {
+          "name": "Supplier Rating System",
+          "query": "Evaluate supplier performance using lead time, on-time rate, and other metrics to identify top-performing and underperforming suppliers.",
+          "domain": "retail_clothing",
+          "risk_score": 24,
+          "severity": "LOW",
+          "data_count": 6
+        },
+        {
+          "name": "Product Sizing Anomaly Detection",
+          "query": "Find products with stock count below reorder point across multiple locations, including those with size distribution skewness exceeding 20% across locations.",
+          "domain": "retail_clothing",
+          "risk_score": 38,
+          "severity": "MEDIUM",
+          "data_count": 14
+        },
+        {
+          "name": "Product Imbalance Breach Detection",
+          "query": "Identify products with stock count below reorder point across multiple locations, including those with stock count variances exceeding 25% across locations.",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        }
+      ],
+      "domain_scores": {
+        "retail_clothing": 8,
+        "retail_cthing": 0
+      },
+      "critical_domains": []
+    },
+    {
+      "timestamp": "2026-08-26T08:16:35.442509",
+      "missions": [
+        {
+          "name": "Dead Stock",
+          "query": "Find all products with stock count below reorder point across multiple locations, including those with suppliers' lead times exceeding 60 days, and recommend discontinuation to optimize inventory management and reduce waste.",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        },
+        {
+          "name": "Sizing Anomalies",
+          "query": "Detect products with size distribution skewness exceeding 30% across multiple locations, including those with suppliers' on-time rates below 90%, and recommend adjustments to optimize inventory management.",
+          "domain": "retail_clothing",
+          "risk_score": 13,
+          "severity": "LOW",
+          "data_count": 2
+        },
+        {
+          "name": "Supplier Delays",
+          "query": "Identify suppliers with lead times exceeding 45 days and on-time rates below 85%, indicating potential supplier delays and risks, and recommend improvement plans to mitigate these risks.",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        },
+        {
+          "name": "Reorder Point Breaches",
+          "query": "Detect products with stock count below reorder point across multiple locations, including those with stock count variances exceeding 25% across locations, and recommend adjustments to optimize inventory management and reduce waste.",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        },
+        {
+          "name": "Demand Risks",
+          "query": "Identify products with high demand and suppliers with lead times exceeding 30 days, indicating potential stockout risks, and recommend proactive measures to mitigate these risks.",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        },
+        {
+          "name": "Inventory Imbalance",
+          "query": "Detect inventory imbalance by category across locations, including products with stock count variances exceeding 25% across locations, and recommend adjustments to optimize inventory management and reduce waste.",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        },
+        {
+          "name": "Stockout Risks",
+          "query": "Find products with stock count below reorder point across multiple locations, including those with suppliers' lead times exceeding 60 days, and recommend proactive measures to mitigate these risks.",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        },
+        {
+          "name": "Supplier Performance",
+          "query": "Evaluate supplier performance using lead time, on-time rate, and other metrics to identify top-performing and underperforming suppliers, and recommend improvement plans to optimize inventory management.",
+          "domain": "retail_clothing",
+          "risk_score": 42,
+          "severity": "MEDIUM",
+          "data_count": 120
+        },
+        {
+          "name": "Low Sales",
+          "query": "Identify products with low sales and recommend discontinuation to optimize inventory management and reduce waste, and also identify opportunities to adjust pricing or marketing strategies to improve sales.",
+          "domain": "retail_clothing",
+          "risk_score": 23,
+          "severity": "LOW",
+          "data_count": 7
+        },
+        {
+          "name": "Category Imbalance",
+          "query": "Detect categories with stock count variances exceeding 30% across locations, indicating potential inventory imbalance, and recommend adjustments to optimize inventory management and reduce waste.",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        }
+      ],
+      "domain_scores": {
+        "retail_clothing": 8
+      },
+      "critical_domains": []
+    }
+  ]
+}

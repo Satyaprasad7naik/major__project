@@ -1,0 +1,78 @@
+{
+  "_last_touched": 1786514001.0642126,
+  "history": [
+    {
+      "timestamp": "2026-08-12T05:53:21.064186",
+      "missions": [
+        {
+          "name": "Dead Stock Analysis",
+          "query": "What SKUs have not had any sales events in the last 6 months and have a stock count greater than 50?",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        },
+        {
+          "name": "Sizing Anomalies Detection",
+          "query": "Which products have a size distribution that significantly deviates from the average size distribution across all products in the same category?",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        },
+        {
+          "name": "Supplier Delay Risk Assessment",
+          "query": "Which suppliers have a lead time greater than 30 days and an on-time rate less than 90%, and what is the total value of inventory from these suppliers?",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        },
+        {
+          "name": "Reorder Point Breach Analysis",
+          "query": "Which SKUs have a stock count below their reorder point and have not been restocked in the last 30 days?",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        },
+        {
+          "name": "Overstock Risk Detection",
+          "query": "Which products have a stock count greater than 200 and a sales rate per day that is less than 1 unit, indicating potential overstocking?",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        },
+        {
+          "name": "Channel Sales Discrepancy",
+          "query": "Are there any discrepancies in sales events between different channels (e.g., online vs. in-store) that could indicate inventory management issues or channel-specific trends?",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        },
+        {
+          "name": "Product Category Profitability",
+          "query": "Which product categories have the highest and lowest profitability based on unit cost, retail price, and sales volume, and what are the implications for inventory management and pricing strategies?",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        },
+        {
+          "name": "Supplier Country Risk Assessment",
+          "query": "Are there any suppliers from countries with high geopolitical risk or trade restrictions, and what is the potential impact on inventory availability and lead times?",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        }
+      ],
+      "domain_scores": {
+        "retail_clothing": 0
+      },
+      "critical_domains": []
+    }
+  ]
+}

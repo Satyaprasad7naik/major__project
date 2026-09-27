@@ -17,11 +17,12 @@ async def test_classify_intent_success():
     }
     
     import json
-    with patch("app.services.llm.llm_service.generate_response", new_callable=AsyncMock) as mock_gen:
-        mock_gen.return_value = json.dumps(mock_json)
-        
-        # classify returns a tuple (intent, confidence, complexity, needs_clarification)
-        intent, conf, comp, clarifies = await module.classify("What is the transaction volume?", domain="operations")
+    with patch("app.modules.intent_classification.settings.USE_CUSTOM_MODELS", False):
+        with patch("app.services.llm.llm_service.generate_response", new_callable=AsyncMock) as mock_gen:
+            mock_gen.return_value = json.dumps(mock_json)
+            
+            # classify returns a tuple (intent, confidence, complexity, needs_clarification)
+            intent, conf, comp, clarifies = await module.classify("What is the transaction volume?", domain="operations")
         
         assert intent == "SELECT"
         assert conf == 0.95
@@ -34,7 +35,7 @@ async def test_classify_intent_clarification():
     module = IntentClassificationModule()
     
     mock_json = {
-        "intent": "SELECT",
+        "intent": "UNKNOWN",
         "confidence": 0.4,
         "complexity": "Simple",
         "needs_clarification": True,
@@ -42,9 +43,10 @@ async def test_classify_intent_clarification():
     }
     
     import json
-    with patch("app.services.llm.llm_service.generate_response", new_callable=AsyncMock) as mock_gen:
-        mock_gen.return_value = json.dumps(mock_json)
-        
-        intent, conf, comp, clarifies = await module.classify("Show me data", domain="general")
+    with patch("app.modules.intent_classification.settings.USE_CUSTOM_MODELS", False):
+        with patch("app.services.llm.llm_service.generate_response", new_callable=AsyncMock) as mock_gen:
+            mock_gen.return_value = json.dumps(mock_json)
+            
+            intent, conf, comp, clarifies = await module.classify("Show me data", domain="general")
         
         assert clarifies is True

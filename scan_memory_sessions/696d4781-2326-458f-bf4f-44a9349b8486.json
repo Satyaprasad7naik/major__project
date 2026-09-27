@@ -1,0 +1,297 @@
+{
+  "_last_touched": 1786517736.7651248,
+  "history": [
+    {
+      "timestamp": "2026-08-12T06:44:05.766966",
+      "missions": [
+        {
+          "name": "Dead Stock Analysis",
+          "query": "What SKUs have zero stock count across all locations and have not been sold in the last 6 months?",
+          "domain": "retail_clothing",
+          "risk_score": 6,
+          "severity": "LOW",
+          "data_count": 1
+        },
+        {
+          "name": "Sizing Anomalies Detection",
+          "query": "Which products have a significant discrepancy between their size distribution in inventory and sales events?",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        },
+        {
+          "name": "Supplier Delay Risk Assessment",
+          "query": "Which suppliers have a lead time greater than their average on-time rate, and what is the potential impact on inventory levels?",
+          "domain": "retail_clothing",
+          "risk_score": 28,
+          "severity": "MEDIUM",
+          "data_count": 6
+        },
+        {
+          "name": "Reorder Point Breach Detection",
+          "query": "What SKUs have a stock count below their reorder point and have not been restocked in the last 30 days?",
+          "domain": "retail_clothing",
+          "risk_score": 36,
+          "severity": "MEDIUM",
+          "data_count": 11
+        },
+        {
+          "name": "Overstocking Risk Analysis",
+          "query": "Which products have a high stock count relative to their sales velocity, and what is the potential cost of holding excess inventory?",
+          "domain": "retail_clothing",
+          "risk_score": 39,
+          "severity": "MEDIUM",
+          "data_count": 90
+        },
+        {
+          "name": "Product Category Performance",
+          "query": "Which product categories have the highest and lowest sales revenue, and what are the key factors contributing to their performance?",
+          "domain": "retail_clothing",
+          "risk_score": 6,
+          "severity": "LOW",
+          "data_count": 1
+        },
+        {
+          "name": "Supplier Country Risk Assessment",
+          "query": "Which suppliers are based in countries with high supply chain risk, and what is the potential impact on inventory levels and product availability?",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        },
+        {
+          "name": "Seasonal Sales Trends Analysis",
+          "query": "What are the seasonal sales trends for each product category, and how can this information be used to optimize inventory levels and minimize stockouts?",
+          "domain": "retail_clothing",
+          "risk_score": 24,
+          "severity": "LOW",
+          "data_count": 6
+        }
+      ],
+      "domain_scores": {
+        "retail_clothing": 17
+      },
+      "critical_domains": []
+    },
+    {
+      "timestamp": "2026-08-12T06:50:53.883657",
+      "missions": [
+        {
+          "name": "Dead Stock Identification",
+          "query": "What SKUs have zero stock count across all locations and have not had a sales event in the last 90 days?",
+          "domain": "retail_clothing",
+          "risk_score": 6,
+          "severity": "LOW",
+          "data_count": 1
+        },
+        {
+          "name": "Sizing Anomalies Detection",
+          "query": "Which products have a higher than average unit cost but lower than average sales volume, and what sizes are most affected?",
+          "domain": "retail_clothing",
+          "risk_score": 35,
+          "severity": "MEDIUM",
+          "data_count": 10
+        },
+        {
+          "name": "Supplier Delay Analysis",
+          "query": "Which suppliers have a lead time greater than their average lead time, and what products are most impacted by these delays?",
+          "domain": "retail_clothing",
+          "risk_score": 47,
+          "severity": "MEDIUM",
+          "data_count": 60
+        },
+        {
+          "name": "Reorder Point Breach Detection",
+          "query": "What products have a stock count below their reorder point and have not been restocked in the last 30 days?",
+          "domain": "retail_clothing",
+          "risk_score": 32,
+          "severity": "MEDIUM",
+          "data_count": 11
+        },
+        {
+          "name": "Channel-Specific Sales Discrepancies",
+          "query": "Are there any discrepancies in sales volume or revenue between different sales channels, and if so, which products are most affected?",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        },
+        {
+          "name": "Product Lifecycle Analysis",
+          "query": "Which products have been in the inventory for more than 180 days and have not had a sales event in the last 60 days, indicating potential end-of-life?",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        },
+        {
+          "name": "Color-Specific Sales Trends",
+          "query": "Are there any color-specific trends in sales data that could indicate changing consumer preferences or potential inventory imbalances?",
+          "domain": "retail_clothing",
+          "risk_score": 21,
+          "severity": "LOW",
+          "data_count": 5
+        },
+        {
+          "name": "Supplier Country Risk Assessment",
+          "query": "Which suppliers are from countries with high-risk profiles, and what products are sourced from these suppliers, potentially impacting supply chain resilience?",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        }
+      ],
+      "domain_scores": {
+        "retail_clothing": 18
+      },
+      "critical_domains": []
+    },
+    {
+      "timestamp": "2026-08-12T06:53:02.156614",
+      "missions": [
+        {
+          "name": "Dead Stock Analysis",
+          "query": "Which products have not had a sales event in the last 6 months and have a stock count greater than 50?",
+          "domain": "retail_clothing",
+          "risk_score": 9,
+          "severity": "LOW",
+          "data_count": 2
+        },
+        {
+          "name": "Sizing Anomalies Detection",
+          "query": "Identify products with a high standard deviation in unit sales across different sizes, indicating potential sizing issues",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        },
+        {
+          "name": "Supplier Lead Time Variance",
+          "query": "Which suppliers have an average lead time greater than 2 standard deviations above the mean lead time for all suppliers?",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        },
+        {
+          "name": "Reorder Point Breach Analysis",
+          "query": "Determine which products have a stock count below their reorder point and have not been restocked in the last 30 days",
+          "domain": "retail_clothing",
+          "risk_score": 36,
+          "severity": "MEDIUM",
+          "data_count": 11
+        },
+        {
+          "name": "Product Category Sales Disparity",
+          "query": "Identify product categories with a sales revenue below 20% of the total sales revenue, indicating potential product line issues",
+          "domain": "retail_clothing",
+          "risk_score": 18,
+          "severity": "LOW",
+          "data_count": 5
+        },
+        {
+          "name": "Color-Specific Sales Trends",
+          "query": "Analyze sales data to detect products with a significant disparity in sales between different colors, indicating potential style or trend issues",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        },
+        {
+          "name": "Supplier On-Time Rate Analysis",
+          "query": "Determine which suppliers have an on-time rate below 80%, indicating potential reliability issues",
+          "domain": "retail_clothing",
+          "risk_score": 15,
+          "severity": "LOW",
+          "data_count": 1
+        },
+        {
+          "name": "Location-Specific Inventory Optimization",
+          "query": "Identify locations with an average stock count above 150 and a reorder point below 50, indicating potential overstocking issues",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        }
+      ],
+      "domain_scores": {
+        "retail_clothing": 10
+      },
+      "critical_domains": []
+    },
+    {
+      "timestamp": "2026-08-12T06:55:36.765103",
+      "missions": [
+        {
+          "name": "Dead Stock Analysis",
+          "query": "What products have zero stock count across all locations and have not been restocked in the last 180 days, indicating potential dead stock?",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        },
+        {
+          "name": "Sizing Anomalies Detection",
+          "query": "Which products have a significant discrepancy between the number of units sold for different sizes, suggesting potential sizing issues or irregular sales patterns?",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        },
+        {
+          "name": "Supplier Lead Time Variance",
+          "query": "Which suppliers have an average lead time that exceeds their stated lead time by more than 20%, indicating potential supply chain disruptions?",
+          "domain": "retail_clothing",
+          "risk_score": 28,
+          "severity": "MEDIUM",
+          "data_count": 6
+        },
+        {
+          "name": "Reorder Point Breach Detection",
+          "query": "What products have a current stock count that is below their reorder point, and have not been reordered in the last 30 days, posing a risk of stockouts?",
+          "domain": "retail_clothing",
+          "risk_score": 36,
+          "severity": "MEDIUM",
+          "data_count": 11
+        },
+        {
+          "name": "On-Time Delivery Rate Analysis",
+          "query": "Which suppliers have an on-time delivery rate below 80%, and what are the most common products affected by these delays, indicating potential reliability issues?",
+          "domain": "retail_clothing",
+          "risk_score": 6,
+          "severity": "LOW",
+          "data_count": 1
+        },
+        {
+          "name": "Overstocked Products Identification",
+          "query": "What products have a stock count that exceeds 150% of their average monthly sales, and have not been sold in the last 60 days, suggesting potential overstocking?",
+          "domain": "retail_clothing",
+          "risk_score": 42,
+          "severity": "MEDIUM",
+          "data_count": 90
+        },
+        {
+          "name": "Sales Channel Discrepancy Detection",
+          "query": "Which products have a significant discrepancy in sales performance across different channels (e.g., online vs. in-store), indicating potential channel-specific issues?",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        },
+        {
+          "name": "Country-Specific Supplier Risk",
+          "query": "Which suppliers from countries with a high risk of supply chain disruptions (e.g., due to natural disasters, political instability) have the highest value of goods in transit, posing a potential risk to the business?",
+          "domain": "retail_clothing",
+          "risk_score": 18,
+          "severity": "LOW",
+          "data_count": 2
+        }
+      ],
+      "domain_scores": {
+        "retail_clothing": 16
+      },
+      "critical_domains": []
+    }
+  ]
+}

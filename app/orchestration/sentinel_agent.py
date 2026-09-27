@@ -1,16 +1,12 @@
-from langchain_google_genai import ChatGoogleGenerativeAI
 from langchain_core.prompts import ChatPromptTemplate
 from app.core.config import settings
+from app.services.llm import get_langchain_llm
 from app.orchestration.scan_memory import scan_memory
 import json
 
 class SentinelBrainstormer:
     def __init__(self):
-        self.llm = ChatGoogleGenerativeAI(
-            model=settings.GEMINI_MODEL_NAME,
-            google_api_key=settings.GEMINI_API_KEY,
-            temperature=0.8
-        )
+        self.llm = get_langchain_llm(temperature=0.8)
 
         self.schema_context = """
         ACTUAL TABLES (Retail Clothing Domain):

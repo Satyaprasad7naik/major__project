@@ -1,0 +1,329 @@
+{
+  "_last_touched": 1790340503.6945956,
+  "history": [
+    {
+      "timestamp": "2026-09-25T12:43:21.905373",
+      "missions": [
+        {
+          "name": "Sizing Anomalies Across Suppliers",
+          "query": "What are the top 3 suppliers with the most size-related inventory discrepancies across all products?",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        },
+        {
+          "name": "Lead Time Delays and Stockouts",
+          "query": "Which products have had a supplier lead time delay resulting in stockouts for 2 or more consecutive periods?",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        },
+        {
+          "name": "Unprofitable Products by Supplier",
+          "query": "What products from each supplier have a retail price less than 1.5 times the unit cost, and are they at risk of becoming dead stock?",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        },
+        {
+          "name": "Supplier Country-Based Reorder Point Analysis",
+          "query": "For each supplier country, identify products with a reorder point above 50% of their average stock count, and calculate the total potential stockout value",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        },
+        {
+          "name": "Sales Channel and Supplier Performance",
+          "query": "For each sales channel, what are the top 3 suppliers by average on-time rate, and what is the corresponding sales revenue for each supplier?",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        },
+        {
+          "name": "Inventory Turnover Rate by Product Category",
+          "query": "What are the top 3 product categories by average inventory turnover rate, and which products within these categories have the highest turnover rates?",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        },
+        {
+          "name": "Supplier Delay Impact on Retail Price",
+          "query": "For each product with a supplier delay, calculate the average retail price increase due to the delay, and identify products with a significant price increase",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        },
+        {
+          "name": "Dead Stock and Supplier Lead Time Analysis",
+          "query": "For each product with a stock count below the reorder point, identify the corresponding supplier lead time delay, and calculate the total potential dead stock value",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        }
+      ],
+      "domain_scores": {
+        "retail_clothing": 0
+      },
+      "critical_domains": []
+    },
+    {
+      "timestamp": "2026-09-25T12:43:48.640332",
+      "missions": [
+        {
+          "name": "Dead Stock Investigation",
+          "query": "What products have been out of stock for more than 60 days?",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        },
+        {
+          "name": "Sizing Anomaly Detection",
+          "query": "What styles have a size distribution skew of more than 20%?",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        },
+        {
+          "name": "Supplier Delay Analysis",
+          "query": "What suppliers have a lead time exceeding the 75th percentile?",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        },
+        {
+          "name": "Reorder Point Breach Identification",
+          "query": "What products have stock counts below the reorder point for more than 30 days?",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        },
+        {
+          "name": "Supplier On-Time Rate Analysis",
+          "query": "What suppliers have an on-time rate less than 80%?",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        },
+        {
+          "name": "Product Price Variance Detection",
+          "query": "What products have a price variance of more than 10% between suppliers?",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        },
+        {
+          "name": "Channel Sales Distribution Analysis",
+          "query": "What channels have a sales distribution skew of more than 30%?",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        },
+        {
+          "name": "Inventory Turnover Rate Optimization",
+          "query": "What products have an inventory turnover rate less than the 25th percentile?",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        }
+      ],
+      "domain_scores": {
+        "retail_clothing": 0
+      },
+      "critical_domains": []
+    },
+    {
+      "timestamp": "2026-09-25T12:48:14.956422",
+      "missions": [
+        {
+          "name": "Dead Stock Lead Time Delays",
+          "query": "Identify products with a supplier lead time delay resulting in stockouts for 3 or more consecutive periods, and calculate the total potential dead stock value.",
+          "domain": "retail_clothing",
+          "risk_score": 23,
+          "severity": "LOW",
+          "data_count": 4
+        },
+        {
+          "name": "Price Variance by Channel",
+          "query": "For each sales channel, calculate the average price variance between suppliers, and identify channels with a significant price variance.",
+          "domain": "retail_clothing",
+          "risk_score": 15,
+          "severity": "LOW",
+          "data_count": 4
+        },
+        {
+          "name": "Reorder Point Exceedance",
+          "query": "For each supplier, identify products with a reorder point above 75% of their average stock count, and calculate the total potential stockout value.",
+          "domain": "retail_clothing",
+          "risk_score": 23,
+          "severity": "LOW",
+          "data_count": 4
+        },
+        {
+          "name": "Size Skew by Category",
+          "query": "For each product category, calculate the size distribution skew, and identify categories with a significant size skew.",
+          "domain": "retail_clothing",
+          "risk_score": 15,
+          "severity": "LOW",
+          "data_count": 4
+        },
+        {
+          "name": "Channel Sales Concentration",
+          "query": "For each supplier, calculate the channel sales concentration, and identify suppliers with a high concentration of sales in a single channel.",
+          "domain": "retail_clothing",
+          "risk_score": 15,
+          "severity": "LOW",
+          "data_count": 4
+        },
+        {
+          "name": "Inventory Turnover Rate by Category",
+          "query": "For each product category, calculate the average inventory turnover rate, and identify categories with a low inventory turnover rate.",
+          "domain": "retail_clothing",
+          "risk_score": 15,
+          "severity": "LOW",
+          "data_count": 4
+        },
+        {
+          "name": "Long Term Stockouts",
+          "query": "Identify products that have been out of stock for more than 90 days, and calculate the total potential dead stock value.",
+          "domain": "retail_clothing",
+          "risk_score": 40,
+          "severity": "MEDIUM",
+          "data_count": 10
+        },
+        {
+          "name": "Supplier Lead Time Exceedance",
+          "query": "For each supplier, identify products with a supplier lead time exceeding the 90th percentile, and calculate the total potential dead stock value.",
+          "domain": "retail_clothing",
+          "risk_score": 40,
+          "severity": "MEDIUM",
+          "data_count": 10
+        },
+        {
+          "name": "Channel On-Time Rate",
+          "query": "For each sales channel, calculate the average on-time rate for each supplier, and identify channels with a low on-time rate.",
+          "domain": "retail_clothing",
+          "risk_score": 15,
+          "severity": "LOW",
+          "data_count": 4
+        },
+        {
+          "name": "Price Sensitivity Analysis",
+          "query": "For each product, calculate the price sensitivity to changes in stock count, and identify products with a high price sensitivity.",
+          "domain": "retail_clothing",
+          "risk_score": 31,
+          "severity": "MEDIUM",
+          "data_count": 10
+        }
+      ],
+      "domain_scores": {
+        "retail_clothing": 23
+      },
+      "critical_domains": []
+    },
+    {
+      "timestamp": "2026-09-25T12:48:23.694577",
+      "missions": [
+        {
+          "name": "Dead Stock at Reorder Point",
+          "query": "Identify products with a stock count below the reorder point for more than 30 days and calculate the total potential dead stock value.",
+          "domain": "retail_clothing",
+          "risk_score": 23,
+          "severity": "LOW",
+          "data_count": 4
+        },
+        {
+          "name": "Supplier Delay Impact",
+          "query": "For each product with a supplier delay, calculate the average retail price increase due to the delay, and identify products with a significant price increase.",
+          "domain": "retail_clothing",
+          "risk_score": 35,
+          "severity": "MEDIUM",
+          "data_count": 10
+        },
+        {
+          "name": "Stockout Risk by Category",
+          "query": "For each product category, identify the products with a reorder point above 50% of their average stock count, and calculate the total potential stockout value.",
+          "domain": "retail_clothing",
+          "risk_score": 15,
+          "severity": "LOW",
+          "data_count": 4
+        },
+        {
+          "name": "Size Distribution Anomalies",
+          "query": "Identify products with a size distribution skew of more than 20% and calculate the total number of units affected.",
+          "domain": "retail_clothing",
+          "risk_score": 35,
+          "severity": "MEDIUM",
+          "data_count": 10
+        },
+        {
+          "name": "Supplier Lead Time Exceedance",
+          "query": "Identify suppliers with a lead time exceeding the 75th percentile and calculate the total number of products affected.",
+          "domain": "retail_clothing",
+          "risk_score": 31,
+          "severity": "MEDIUM",
+          "data_count": 10
+        },
+        {
+          "name": "Channel Sales Distribution",
+          "query": "For each sales channel, identify the top 3 suppliers by average on-time rate and calculate the corresponding sales revenue for each supplier.",
+          "domain": "retail_clothing",
+          "risk_score": 12,
+          "severity": "LOW",
+          "data_count": 3
+        },
+        {
+          "name": "Price Variance by Supplier",
+          "query": "Identify products with a price variance of more than 10% between suppliers and calculate the total number of products affected.",
+          "domain": "retail_clothing",
+          "risk_score": 31,
+          "severity": "MEDIUM",
+          "data_count": 10
+        },
+        {
+          "name": "Inventory Turnover Rate",
+          "query": "For each product category, identify the products with an inventory turnover rate below the 25th percentile and calculate the total number of products affected.",
+          "domain": "retail_clothing",
+          "risk_score": 15,
+          "severity": "LOW",
+          "data_count": 4
+        },
+        {
+          "name": "Long-term Stockouts",
+          "query": "Identify products that have been out of stock for more than 60 days and calculate the total number of units affected.",
+          "domain": "retail_clothing",
+          "risk_score": 40,
+          "severity": "MEDIUM",
+          "data_count": 10
+        },
+        {
+          "name": "Reorder Point Breach",
+          "query": "Identify products with a stock count below the reorder point for more than 30 days and calculate the total potential dead stock value, considering the supplier lead time and on-time rate.",
+          "domain": "retail_clothing",
+          "risk_score": 18,
+          "severity": "LOW",
+          "data_count": 4
+        }
+      ],
+      "domain_scores": {
+        "retail_clothing": 26
+      },
+      "critical_domains": []
+    }
+  ]
+}

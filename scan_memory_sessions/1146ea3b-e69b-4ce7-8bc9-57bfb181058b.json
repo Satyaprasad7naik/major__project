@@ -1,0 +1,80 @@
+{
+  "_last_touched": 1787687517.5779097,
+  "history": [
+    {
+      "timestamp": "2026-08-25T19:51:57.577884",
+      "missions": [
+        {
+          "name": "Dead Stock Alert",
+          "query": "",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "CRITICAL",
+          "data_count": 0
+        },
+        {
+          "name": "Sizing Anomalies Detection",
+          "query": "",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "MEDIUM",
+          "data_count": 0
+        },
+        {
+          "name": "Supplier Delay Analysis",
+          "query": "",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "HIGH",
+          "data_count": 0
+        },
+        {
+          "name": "Reorder Point Breach Detection",
+          "query": "",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "CRITICAL",
+          "data_count": 0
+        },
+        {
+          "name": "Sales Event Analysis",
+          "query": "",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "MEDIUM",
+          "data_count": 0
+        },
+        {
+          "name": "Supplier On-Time Rate Analysis",
+          "query": "",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "HIGH",
+          "data_count": 0
+        },
+        {
+          "name": "Product Lifecycle Analysis",
+          "query": "",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "MEDIUM",
+          "data_count": 0
+        },
+        {
+          "name": "Inventory Turnover Analysis",
+          "query": "",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "CRITICAL",
+          "data_count": 0
+        }
+      ],
+      "domain_scores": {
+        "retail_clothing": 0
+      },
+      "critical_domains": [
+        "retail_clothing"
+      ]
+    }
+  ]
+}

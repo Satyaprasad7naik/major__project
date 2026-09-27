@@ -1,0 +1,78 @@
+{
+  "_last_touched": 1790248693.3341794,
+  "history": [
+    {
+      "timestamp": "2026-09-24T11:18:13.334136",
+      "missions": [
+        {
+          "name": "Dead Stock by Supplier",
+          "query": "List all products with stock count 0, grouped by supplier, along with their supplier's on-time rate and lead time days.",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        },
+        {
+          "name": "Sizing Anomalies by Category",
+          "query": "Find all product categories with size distributions significantly different from the overall average size distribution, along with the category names and their respective standard deviations.",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        },
+        {
+          "name": "Supplier Delay Impact on Sales",
+          "query": "Analyze the sales data for products supplied by late suppliers (on-time rate < 0.8) and identify the top 3 products with the highest revenue loss due to supplier delays.",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        },
+        {
+          "name": "Reorder Point Breaches by Channel",
+          "query": "For each sales channel, find the top 5 products with the highest number of reorder point breaches in the last 30 days, along with their respective reorder point values and stock counts.",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        },
+        {
+          "name": "Product Price Fluctuations by Category",
+          "query": "Identify product categories with significant price fluctuations in the last 3 months, along with the category names and their respective price volatility indices.",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        },
+        {
+          "name": "Inventory Turns by Supplier",
+          "query": "Calculate the inventory turns for each supplier and rank them in descending order, along with their respective inventory turns and average stock counts.",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        },
+        {
+          "name": "Stockout Costs by Location",
+          "query": "Estimate the total stockout costs for each location in the last 6 months, along with the average stockout duration and the top 3 products with the highest stockout costs.",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        },
+        {
+          "name": "Supplier Lead Time vs. Actual Restock Time",
+          "query": "Compare the supplier lead times with the actual restock times for each product and identify the top 3 products with the largest discrepancies, along with their respective lead times and actual restock times.",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        }
+      ],
+      "domain_scores": {
+        "retail_clothing": 0
+      },
+      "critical_domains": []
+    }
+  ]
+}

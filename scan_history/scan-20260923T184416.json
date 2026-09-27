@@ -1,0 +1,678 @@
+{
+  "scan_id": "scan-20260923T184416",
+  "timestamp": "2026-09-23T18:44:16.307225",
+  "stats": {
+    "total_missions": 8,
+    "critical_count": 0,
+    "high_count": 0,
+    "overall_risk": 31,
+    "overall_severity": "LOW"
+  },
+  "detections": [
+    {
+      "mission_id": "DS-001",
+      "mission_name": "Dead Stock Risk Assessment",
+      "domain": "retail_clothing",
+      "severity": "LOW",
+      "risk_score": 0,
+      "risk_factors": {},
+      "sql": null,
+      "data_count": 0,
+      "results": [],
+      "visualization_config": null,
+      "insight": null,
+      "recommendation": null,
+      "original_query": "Which products have a stock count of zero in all inventory locations, indicating potential dead stock?",
+      "depth": 0,
+      "parent_mission_id": null,
+      "rationale": "",
+      "timestamp": "LIVE AUDIT",
+      "logs": [
+        {
+          "ts": 1790189009.769,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [classify_intent]"
+        },
+        {
+          "ts": 1790189009.771,
+          "level": "INFO",
+          "node": "INTENT",
+          "msg": "[IntentModule] Using Custom ML Intent Classifier for query: 'Which products have a stock count of zero in all inventory locations, indicating potential dead stock?'"
+        },
+        {
+          "ts": 1790189009.78,
+          "level": "INFO",
+          "node": "model.py",
+          "msg": "[IntentClassifier] ML prediction: inventory_status (conf: 0.370) -> workflow: SELECT"
+        },
+        {
+          "ts": 1790189009.78,
+          "level": "INFO",
+          "node": "intent_service.py",
+          "msg": "[IntentService] Custom model result: retail=inventory_status, workflow=SELECT, conf=0.370, complexity=Complex, clarify=True"
+        },
+        {
+          "ts": 1790189009.884,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Intent classified: SELECT (conf: 0.37012604065336774) | Needs Clarification: True"
+        }
+      ]
+    },
+    {
+      "mission_id": "SA-001",
+      "mission_name": "Sizing Anomalies Across Suppliers",
+      "domain": "retail_clothing",
+      "severity": "LOW",
+      "risk_score": 0,
+      "risk_factors": {},
+      "sql": null,
+      "data_count": 0,
+      "results": [],
+      "visualization_config": null,
+      "insight": null,
+      "recommendation": null,
+      "original_query": "Which product styles have inconsistent sizes across different suppliers?",
+      "depth": 0,
+      "parent_mission_id": null,
+      "rationale": "",
+      "timestamp": "LIVE AUDIT",
+      "logs": [
+        {
+          "ts": 1790189009.781,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [classify_intent]"
+        },
+        {
+          "ts": 1790189009.781,
+          "level": "INFO",
+          "node": "INTENT",
+          "msg": "[IntentModule] Using Custom ML Intent Classifier for query: 'Which product styles have inconsistent sizes across different suppliers?'"
+        },
+        {
+          "ts": 1790189009.784,
+          "level": "INFO",
+          "node": "model.py",
+          "msg": "[IntentClassifier] ML prediction: inventory_status (conf: 0.192) -> workflow: SELECT"
+        },
+        {
+          "ts": 1790189009.784,
+          "level": "INFO",
+          "node": "intent_service.py",
+          "msg": "[IntentService] Custom model result: retail=inventory_status, workflow=SELECT, conf=0.192, complexity=Medium, clarify=True"
+        },
+        {
+          "ts": 1790189009.884,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Intent classified: SELECT (conf: 0.19195841653964119) | Needs Clarification: True"
+        }
+      ]
+    },
+    {
+      "mission_id": "SD-001",
+      "mission_name": "Supplier Lead Time Delays",
+      "domain": "retail_clothing",
+      "severity": "LOW",
+      "risk_score": 0,
+      "risk_factors": {},
+      "sql": null,
+      "data_count": 0,
+      "results": [],
+      "visualization_config": null,
+      "insight": null,
+      "recommendation": null,
+      "original_query": "Which suppliers consistently fail to meet their lead time commitments, resulting in stockouts?",
+      "depth": 0,
+      "parent_mission_id": null,
+      "rationale": "",
+      "timestamp": "LIVE AUDIT",
+      "logs": [
+        {
+          "ts": 1790189009.784,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [classify_intent]"
+        },
+        {
+          "ts": 1790189009.784,
+          "level": "INFO",
+          "node": "INTENT",
+          "msg": "[IntentModule] Using Custom ML Intent Classifier for query: 'Which suppliers consistently fail to meet their lead time commitments, resulting in stockouts?'"
+        },
+        {
+          "ts": 1790189009.785,
+          "level": "INFO",
+          "node": "model.py",
+          "msg": "[IntentClassifier] ML prediction: off_topic (conf: 0.250) -> workflow: OFF_TOPIC"
+        },
+        {
+          "ts": 1790189009.786,
+          "level": "INFO",
+          "node": "intent_service.py",
+          "msg": "[IntentService] Custom model result: retail=off_topic, workflow=OFF_TOPIC, conf=0.250, complexity=Medium, clarify=True"
+        },
+        {
+          "ts": 1790189009.884,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Intent classified: OFF_TOPIC (conf: 0.24957069849965383) | Needs Clarification: True"
+        }
+      ]
+    },
+    {
+      "mission_id": "RP-001",
+      "mission_name": "Reorder Point Breaches by Channel",
+      "domain": "retail_clothing",
+      "severity": "LOW",
+      "risk_score": 0,
+      "risk_factors": {},
+      "sql": null,
+      "data_count": 0,
+      "results": [],
+      "visualization_config": null,
+      "insight": null,
+      "recommendation": null,
+      "original_query": "Which sales channels have consistently breached reorder points for specific products, indicating stockouts?",
+      "depth": 0,
+      "parent_mission_id": null,
+      "rationale": "",
+      "timestamp": "LIVE AUDIT",
+      "logs": [
+        {
+          "ts": 1790189009.786,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [classify_intent]"
+        },
+        {
+          "ts": 1790189009.786,
+          "level": "INFO",
+          "node": "INTENT",
+          "msg": "[IntentModule] Using Custom ML Intent Classifier for query: 'Which sales channels have consistently breached reorder points for specific products, indicating stockouts?'"
+        },
+        {
+          "ts": 1790189009.789,
+          "level": "INFO",
+          "node": "model.py",
+          "msg": "[IntentClassifier] ML prediction: sales_analysis (conf: 0.272) -> workflow: SELECT"
+        },
+        {
+          "ts": 1790189009.789,
+          "level": "INFO",
+          "node": "intent_service.py",
+          "msg": "[IntentService] Custom model result: retail=sales_analysis, workflow=SELECT, conf=0.272, complexity=Medium, clarify=True"
+        },
+        {
+          "ts": 1790189009.933,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Intent classified: SELECT (conf: 0.27159196149517406) | Needs Clarification: True"
+        }
+      ]
+    },
+    {
+      "mission_id": "CL-001",
+      "mission_name": "Inventory Imbalances Across Locations",
+      "domain": "retail_clothing",
+      "severity": "LOW",
+      "risk_score": 0,
+      "risk_factors": {},
+      "sql": null,
+      "data_count": 0,
+      "results": [],
+      "visualization_config": null,
+      "insight": null,
+      "recommendation": null,
+      "original_query": "Which products have stock count imbalances across different inventory locations?",
+      "depth": 0,
+      "parent_mission_id": null,
+      "rationale": "",
+      "timestamp": "LIVE AUDIT",
+      "logs": [
+        {
+          "ts": 1790189009.789,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [classify_intent]"
+        },
+        {
+          "ts": 1790189009.789,
+          "level": "INFO",
+          "node": "INTENT",
+          "msg": "[IntentModule] Using Custom ML Intent Classifier for query: 'Which products have stock count imbalances across different inventory locations?'"
+        },
+        {
+          "ts": 1790189009.792,
+          "level": "INFO",
+          "node": "model.py",
+          "msg": "[IntentClassifier] ML prediction: inventory_status (conf: 0.381) -> workflow: SELECT"
+        },
+        {
+          "ts": 1790189009.792,
+          "level": "INFO",
+          "node": "intent_service.py",
+          "msg": "[IntentService] Custom model result: retail=inventory_status, workflow=SELECT, conf=0.381, complexity=Medium, clarify=True"
+        },
+        {
+          "ts": 1790189009.934,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Intent classified: SELECT (conf: 0.3813529003601476) | Needs Clarification: True"
+        }
+      ]
+    },
+    {
+      "mission_id": "SL-001",
+      "mission_name": "Supplier On-Time Delivery Performance",
+      "domain": "retail_clothing",
+      "severity": "LOW",
+      "risk_score": 0,
+      "risk_factors": {},
+      "sql": null,
+      "data_count": 0,
+      "results": [],
+      "visualization_config": null,
+      "insight": null,
+      "recommendation": null,
+      "original_query": "Which suppliers have consistently failed to deliver products on time, impacting stock levels?",
+      "depth": 0,
+      "parent_mission_id": null,
+      "rationale": "",
+      "timestamp": "LIVE AUDIT",
+      "logs": [
+        {
+          "ts": 1790189009.792,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [classify_intent]"
+        },
+        {
+          "ts": 1790189009.793,
+          "level": "INFO",
+          "node": "INTENT",
+          "msg": "[IntentModule] Using Custom ML Intent Classifier for query: 'Which suppliers have consistently failed to deliver products on time, impacting stock levels?'"
+        },
+        {
+          "ts": 1790189009.795,
+          "level": "INFO",
+          "node": "model.py",
+          "msg": "[IntentClassifier] ML prediction: inventory_status (conf: 0.318) -> workflow: SELECT"
+        },
+        {
+          "ts": 1790189009.795,
+          "level": "INFO",
+          "node": "intent_service.py",
+          "msg": "[IntentService] Custom model result: retail=inventory_status, workflow=SELECT, conf=0.318, complexity=Medium, clarify=True"
+        },
+        {
+          "ts": 1790189009.934,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Intent classified: SELECT (conf: 0.31763947178512814) | Needs Clarification: True"
+        }
+      ]
+    },
+    {
+      "mission_id": "SR-001",
+      "mission_name": "Sales Event Product Bundling",
+      "domain": "retail_clothing",
+      "severity": "MEDIUM",
+      "risk_score": 31,
+      "risk_factors": {
+        "affected_entities": {
+          "value": 10,
+          "score": 100,
+          "detail": "10 unique entities"
+        },
+        "dollar_exposure": {
+          "value": 0,
+          "score": 0,
+          "detail": "$0 exposure"
+        },
+        "velocity": {
+          "value": 10,
+          "score": 50,
+          "detail": "10 events"
+        },
+        "pep_involvement": {
+          "value": 0,
+          "score": 0,
+          "detail": "0 PEP accounts"
+        },
+        "kyc_gaps": {
+          "value": 0,
+          "score": 0,
+          "detail": "0 KYC gaps"
+        },
+        "severity_escalation": {
+          "value": "MEDIUM",
+          "score": 25,
+          "detail": "Base: MEDIUM"
+        }
+      },
+      "sql": "SELECT p.sku, p.style_name, p.category, SUM(se.units_sold) AS total_units_sold, COUNT(se.event_id) AS num_transactions, ROUND(SUM(se.units_sold) * p.retail_price, 2) AS estimated_revenue FROM sales_events se JOIN products p ON se.sku = p.sku GROUP BY p.sku, p.style_name, p.category ORDER BY total_units_sold DESC LIMIT 10;",
+      "data_count": 10,
+      "results": [
+        {
+          "sku": "CL-00007",
+          "style_name": "Oxford Shirt",
+          "category": "Shirts",
+          "total_units_sold": 25,
+          "num_transactions": 6,
+          "estimated_revenue": 624.75
+        },
+        {
+          "sku": "CL-00117",
+          "style_name": "Pleated Trousers",
+          "category": "Trousers",
+          "total_units_sold": 23,
+          "num_transactions": 6,
+          "estimated_revenue": 643.77
+        },
+        {
+          "sku": "CL-00005",
+          "style_name": "Oxford Shirt",
+          "category": "Shirts",
+          "total_units_sold": 22,
+          "num_transactions": 5,
+          "estimated_revenue": 549.78
+        },
+        {
+          "sku": "CL-00041",
+          "style_name": "Slim Fit Jeans",
+          "category": "Denim",
+          "total_units_sold": 22,
+          "num_transactions": 6,
+          "estimated_revenue": 879.78
+        },
+        {
+          "sku": "CL-00033",
+          "style_name": "Slim Fit Jeans",
+          "category": "Denim",
+          "total_units_sold": 21,
+          "num_transactions": 6,
+          "estimated_revenue": 839.79
+        },
+        {
+          "sku": "CL-00010",
+          "style_name": "Oxford Shirt",
+          "category": "Shirts",
+          "total_units_sold": 20,
+          "num_transactions": 5,
+          "estimated_revenue": 499.8
+        },
+        {
+          "sku": "CL-00022",
+          "style_name": "Classic Polo",
+          "category": "T-Shirts",
+          "total_units_sold": 19,
+          "num_transactions": 4,
+          "estimated_revenue": 341.81
+        },
+        {
+          "sku": "CL-00037",
+          "style_name": "Slim Fit Jeans",
+          "category": "Denim",
+          "total_units_sold": 19,
+          "num_transactions": 6,
+          "estimated_revenue": 759.81
+        },
+        {
+          "sku": "CL-00079",
+          "style_name": "Summer Linen Dress",
+          "category": "Dresses",
+          "total_units_sold": 19,
+          "num_transactions": 5,
+          "estimated_revenue": 664.81
+        },
+        {
+          "sku": "CL-00099",
+          "style_name": "Zip Hoodie",
+          "category": "Outerwear",
+          "total_units_sold": 19,
+          "num_transactions": 5,
+          "estimated_revenue": 569.81
+        }
+      ],
+      "visualization_config": {
+        "chart_type": "line",
+        "title": "total_units_sold by category",
+        "x_axis_key": "category",
+        "y_axis_key": "total_units_sold",
+        "label": "total_units_sold",
+        "description": "Auto-generated fallback chart"
+      },
+      "insight": "Sales analysis reveals 10 products in the results. Top performer: 'Oxford Shirt' with 25 units sold generating \u20b9625 in revenue. Total units across all products: 209. Strong performers indicate healthy demand patterns in their categories.",
+      "recommendation": "1. Ensure adequate stock for top-selling items to maintain sales momentum. 2. Analyze slow-moving products for potential markdowns or promotional campaigns. 3. Consider expanding size/color variants for the best-performing styles.",
+      "original_query": "Which products are frequently bundled together in sales events, indicating potential demand patterns?",
+      "depth": 0,
+      "parent_mission_id": null,
+      "rationale": "",
+      "timestamp": "LIVE AUDIT",
+      "logs": [
+        {
+          "ts": 1790189009.796,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [classify_intent]"
+        },
+        {
+          "ts": 1790189009.796,
+          "level": "INFO",
+          "node": "INTENT",
+          "msg": "[IntentModule] Using Custom ML Intent Classifier for query: 'Which products are frequently bundled together in sales events, indicating potential demand patterns?'"
+        },
+        {
+          "ts": 1790189009.802,
+          "level": "INFO",
+          "node": "model.py",
+          "msg": "[IntentClassifier] ML prediction: sales_analysis (conf: 0.512) -> workflow: SELECT"
+        },
+        {
+          "ts": 1790189009.803,
+          "level": "INFO",
+          "node": "intent_service.py",
+          "msg": "[IntentService] Custom model result: retail=sales_analysis, workflow=SELECT, conf=0.512, complexity=Medium, clarify=False"
+        },
+        {
+          "ts": 1790189009.934,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Intent classified: SELECT (conf: 0.5117420544160428) | Needs Clarification: False"
+        },
+        {
+          "ts": 1790189009.954,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [generate_sql]"
+        },
+        {
+          "ts": 1790189009.955,
+          "level": "INFO",
+          "node": "SQL_GEN",
+          "msg": "Generating SQL for domain: retail_clothing | Query: Which products are frequently bundled together in sales events, indicating potential demand patterns?"
+        },
+        {
+          "ts": 1790189009.962,
+          "level": "INFO",
+          "node": "model.py",
+          "msg": "[IntentClassifier] ML prediction: sales_analysis (conf: 0.512) -> workflow: SELECT"
+        },
+        {
+          "ts": 1790189009.963,
+          "level": "INFO",
+          "node": "rule_engine.py",
+          "msg": "[SQLGenerator] Intent: sales_analysis -> SQL: SELECT p.sku, p.style_name, p.category, SUM(se.units_sold) AS total_units_sold, ..."
+        },
+        {
+          "ts": 1790189009.963,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "SQL Generated: SELECT p.sku, p.style_name, p.category, SUM(se.uni..."
+        },
+        {
+          "ts": 1790189009.969,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [validate_sql]"
+        },
+        {
+          "ts": 1790189009.979,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [execute_query]"
+        },
+        {
+          "ts": 1790189009.979,
+          "level": "INFO",
+          "node": "DB_EXEC",
+          "msg": "Executing SQL: SELECT p.sku, p.style_name, p.category, SUM(se.units_sold) AS total_units_sold, COUNT(se.event_id) AS num_transactions, ROUND(SUM(se.units_sold) * p.retail_price, 2) AS estimated_revenue FROM sales_events se JOIN products p ON se.sku = p.sku GROUP BY p.sku, p.style_name, p.category ORDER BY total_units_sold DESC LIMIT 10;"
+        },
+        {
+          "ts": 1790189009.981,
+          "level": "INFO",
+          "node": "DB_EXEC",
+          "msg": "Execution complete. Returned 10 rows."
+        },
+        {
+          "ts": 1790189009.981,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Query execution successful. Rows: 10"
+        },
+        {
+          "ts": 1790189009.983,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [analyze_stockout]"
+        },
+        {
+          "ts": 1790189010.0,
+          "level": "INFO",
+          "node": "stockout_analyzer.py",
+          "msg": "Stockout analysis for retail_clothing: 18 at-risk products found"
+        },
+        {
+          "ts": 1790189010.0,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Stockout analysis complete: 18 at-risk products"
+        },
+        {
+          "ts": 1790189010.002,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [insight_recommendation]"
+        },
+        {
+          "ts": 1790189010.003,
+          "level": "INFO",
+          "node": "INSIGHT",
+          "msg": "Generating insights for 10 rows in domain: retail_clothing"
+        },
+        {
+          "ts": 1790189010.008,
+          "level": "INFO",
+          "node": "model.py",
+          "msg": "[IntentClassifier] ML prediction: sales_analysis (conf: 0.512) -> workflow: SELECT"
+        },
+        {
+          "ts": 1790189010.008,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Insights generated successfully."
+        },
+        {
+          "ts": 1790189010.009,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [recommend_visualization]"
+        },
+        {
+          "ts": 1790189010.009,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Visualization recommended: line"
+        }
+      ]
+    },
+    {
+      "mission_id": "PS-001",
+      "mission_name": "Product Seasonality and Demand Patterns",
+      "domain": "retail_clothing",
+      "severity": "LOW",
+      "risk_score": 0,
+      "risk_factors": {},
+      "sql": null,
+      "data_count": 0,
+      "results": [],
+      "visualization_config": null,
+      "insight": null,
+      "recommendation": null,
+      "original_query": "Which products have consistently varying demand patterns throughout the year, indicating seasonality?",
+      "depth": 0,
+      "parent_mission_id": null,
+      "rationale": "",
+      "timestamp": "LIVE AUDIT",
+      "logs": [
+        {
+          "ts": 1790189009.804,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [classify_intent]"
+        },
+        {
+          "ts": 1790189009.804,
+          "level": "INFO",
+          "node": "INTENT",
+          "msg": "[IntentModule] Using Custom ML Intent Classifier for query: 'Which products have consistently varying demand patterns throughout the year, indicating seasonality?'"
+        },
+        {
+          "ts": 1790189009.807,
+          "level": "INFO",
+          "node": "model.py",
+          "msg": "[IntentClassifier] ML prediction: stockout_risk (conf: 0.259) -> workflow: SELECT"
+        },
+        {
+          "ts": 1790189009.808,
+          "level": "INFO",
+          "node": "intent_service.py",
+          "msg": "[IntentService] Custom model result: retail=stockout_risk, workflow=SELECT, conf=0.259, complexity=Medium, clarify=True"
+        },
+        {
+          "ts": 1790189009.934,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Intent classified: SELECT (conf: 0.2589644826602265) | Needs Clarification: True"
+        }
+      ]
+    }
+  ],
+  "clusters": [],
+  "narrative": {
+    "executive_summary": "Our real-time threat detection system has identified a medium-severity threat vector related to sales event product bundling, indicating healthy demand patterns in specific product categories. This is the only notable threat detected across 8 executed missions and multiple domains. Immediate action is required to capitalize on this opportunity and mitigate potential risks.",
+    "threat_vectors": [
+      {
+        "name": "Sales Event Product Bundling",
+        "severity": "MEDIUM",
+        "description": "Sales analysis reveals 10 products in the results, with the top performer being 'Oxford Shirt' with 25 units sold generating \u20b9625 in revenue. This indicates strong demand patterns in their categories."
+      }
+    ],
+    "immediate_actions": [
+      "Immediately review sales event product bundling strategies to optimize revenue generation",
+      "Increase inventory levels for top-performing products to meet demand",
+      "Analyze product seasonality and demand patterns to inform future sales events"
+    ],
+    "monitoring_recommendations": [
+      "Continuously monitor sales event product bundling performance to identify areas for improvement",
+      "Track inventory levels and adjust as necessary to maintain optimal stock levels",
+      "Regularly review product seasonality and demand patterns to inform strategic business decisions"
+    ],
+    "overall_risk": 31,
+    "overall_severity": "MEDIUM",
+    "title": "Intelligence Brief - LIVE"
+  }
+}

@@ -1,0 +1,78 @@
+{
+  "_last_touched": 1787759995.7113345,
+  "history": [
+    {
+      "timestamp": "2026-08-26T15:59:55.711299",
+      "missions": [
+        {
+          "name": "Dead Stock Detection",
+          "query": "What are the SKUs with stock count below reorder point and last restocked more than 90 days ago?",
+          "domain": "retail_clothing",
+          "risk_score": 26,
+          "severity": "MEDIUM",
+          "data_count": 5
+        },
+        {
+          "name": "Sizing Anomalies by Style",
+          "query": "Which styles have inconsistent size ranges (e.g., XXL not available for all SKUs)?",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        },
+        {
+          "name": "Supplier Lead Time Analysis",
+          "query": "What is the average lead time for suppliers with on-time delivery rate below 90%?",
+          "domain": "retail_clothing",
+          "risk_score": 6,
+          "severity": "LOW",
+          "data_count": 1
+        },
+        {
+          "name": "Reorder Point Breaches by Category",
+          "query": "Which categories have the highest number of SKUs with stock count below reorder point?",
+          "domain": "retail_clothing",
+          "risk_score": 15,
+          "severity": "LOW",
+          "data_count": 1
+        },
+        {
+          "name": "Sales Channel Performance",
+          "query": "What are the sales channels with the highest and lowest units sold per channel for each style?",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        },
+        {
+          "name": "Product Pricing Variations",
+          "query": "Which SKUs have price variations above 20% across different channels?",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        },
+        {
+          "name": "Supplier Country Risk Assessment",
+          "query": "What is the average on-time delivery rate for suppliers from high-risk countries?",
+          "domain": "retail_clothing",
+          "risk_score": 15,
+          "severity": "LOW",
+          "data_count": 1
+        },
+        {
+          "name": "Inventory Turnover Analysis",
+          "query": "What is the inventory turnover rate for each product category?",
+          "domain": "retail_clothing",
+          "risk_score": 20,
+          "severity": "LOW",
+          "data_count": 6
+        }
+      ],
+      "domain_scores": {
+        "retail_clothing": 10
+      },
+      "critical_domains": []
+    }
+  ]
+}

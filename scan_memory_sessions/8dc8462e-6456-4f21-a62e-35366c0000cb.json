@@ -1,0 +1,175 @@
+{
+  "_last_touched": 1790346183.5190835,
+  "history": [
+    {
+      "timestamp": "2026-09-25T13:55:10.389918",
+      "missions": [
+        {
+          "name": "Supplier Lead Time Discrepancies",
+          "query": "Identify suppliers with a lead time discrepancy greater than 30% between actual and expected lead times.",
+          "domain": "retail_clothing",
+          "risk_score": 42,
+          "severity": "MEDIUM",
+          "data_count": 21
+        },
+        {
+          "name": "Sizing Anomalies by Category",
+          "query": "Detect products with a significant deviation in size distribution across different categories.",
+          "domain": "retail_clothing",
+          "risk_score": 15,
+          "severity": "LOW",
+          "data_count": 4
+        },
+        {
+          "name": "Dead Stock Hotspots",
+          "query": "Pinpoint locations with a high stock count of dead products.",
+          "domain": "retail_clothing",
+          "risk_score": 40,
+          "severity": "MEDIUM",
+          "data_count": 10
+        },
+        {
+          "name": "Reorder Point Breach Patterns",
+          "query": "Analyze the frequency and duration of reorder point breaches across different products and suppliers.",
+          "domain": "retail_clothing",
+          "risk_score": 18,
+          "severity": "LOW",
+          "data_count": 4
+        },
+        {
+          "name": "Supplier On-Time Rate Variance",
+          "query": "Identify suppliers with a significant variance in on-time delivery rate compared to their historical average.",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        },
+        {
+          "name": "Product Pricing Anomalies",
+          "query": "Detect products with a significant price discrepancy between different locations or channels.",
+          "domain": "retail_clothing",
+          "risk_score": 31,
+          "severity": "MEDIUM",
+          "data_count": 10
+        },
+        {
+          "name": "Inventory Turnover Analysis",
+          "query": "Analyze the inventory turnover rate for each product and supplier to identify slow-moving items.",
+          "domain": "retail_clothing",
+          "risk_score": 35,
+          "severity": "MEDIUM",
+          "data_count": 10
+        },
+        {
+          "name": "Restocking Efficiency Assessment",
+          "query": "Evaluate the restocking efficiency of each location by analyzing the time taken to restock products after a reorder point breach.",
+          "domain": "retail_clothing",
+          "risk_score": 15,
+          "severity": "LOW",
+          "data_count": 4
+        }
+      ],
+      "domain_scores": {
+        "retail_clothing": 24
+      },
+      "critical_domains": []
+    },
+    {
+      "timestamp": "2026-09-25T14:23:03.519062",
+      "missions": [
+        {
+          "name": "Dead Stock Detection",
+          "query": "What are the top 10 SKUs with a stock count below the reorder point across all locations?",
+          "domain": "retail_clothing",
+          "risk_score": 40,
+          "severity": "MEDIUM",
+          "data_count": 10
+        },
+        {
+          "name": "Sizing Anomalies",
+          "query": "For each category, what is the average size distribution and identify categories with a standard deviation greater than 2?",
+          "domain": "retail_clothing",
+          "risk_score": 32,
+          "severity": "MEDIUM",
+          "data_count": 11
+        },
+        {
+          "name": "Supplier Delay Analysis",
+          "query": "What is the average lead time discrepancy between actual and expected lead times for each supplier and identify suppliers with a discrepancy greater than 15 days?",
+          "domain": "retail_clothing",
+          "risk_score": 47,
+          "severity": "MEDIUM",
+          "data_count": 21
+        },
+        {
+          "name": "Reorder Point Breach Analysis",
+          "query": "For each product, what are the top 3 locations with the highest number of reorder point breaches in the last 30 days?",
+          "domain": "retail_clothing",
+          "risk_score": 16,
+          "severity": "LOW",
+          "data_count": 3
+        },
+        {
+          "name": "Supplier Discrepancies",
+          "query": "What are the top 5 suppliers with a significant variance in on-time delivery rate compared to their historical average?",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        },
+        {
+          "name": "Price Discrepancies",
+          "query": "For each SKU, what are the top 3 locations with the highest price discrepancy compared to the average retail price across all locations?",
+          "domain": "retail_clothing",
+          "risk_score": 16,
+          "severity": "LOW",
+          "data_count": 3
+        },
+        {
+          "name": "Inventory Turnover Rate Analysis",
+          "query": "For each product, what is the average inventory turnover rate across all locations and identify products with a turnover rate less than 2?",
+          "domain": "retail_clothing",
+          "risk_score": 39,
+          "severity": "MEDIUM",
+          "data_count": 46
+        },
+        {
+          "name": "Restocking Efficiency Analysis",
+          "query": "For each location, what is the average time taken to restock products after a reorder point breach in the last 30 days?",
+          "domain": "retail_clothing",
+          "risk_score": 39,
+          "severity": "MEDIUM",
+          "data_count": 30
+        },
+        {
+          "name": "Size Distribution by Category",
+          "query": "For each category, what is the average size distribution and identify categories with a standard deviation greater than 1.5?",
+          "domain": "retail_clothing",
+          "risk_score": 32,
+          "severity": "MEDIUM",
+          "data_count": 11
+        },
+        {
+          "name": "Supplier Country Analysis",
+          "query": "What is the average on-time delivery rate for each supplier country and identify countries with an average rate less than 90%?",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        },
+        {
+          "name": "Location Stock Count Analysis",
+          "query": "For each location, what is the total stock count of dead products and identify locations with a stock count greater than 100?",
+          "domain": "retail_clothing",
+          "risk_score": 42,
+          "severity": "MEDIUM",
+          "data_count": 46
+        }
+      ],
+      "domain_scores": {
+        "retail_clothing": 28
+      },
+      "critical_domains": []
+    }
+  ]
+}

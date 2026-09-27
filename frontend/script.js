@@ -2,8 +2,8 @@
 // Application State
 // ===========================
 const state = {
-    apiUrl: 'http://localhost:8080',
-    selectedDomain: 'general',
+    apiUrl: window.location.origin,
+    selectedDomain: 'retail_clothing',
     conversationHistory: [],
     currentResults: null,
     isLoading: false,
@@ -566,6 +566,31 @@ function showError(message) {
 // ===========================
 // Event Handlers
 // ===========================
+async function sendQuery(query) {
+    const response = await fetch(`${state.apiUrl}/api/v1/query`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            query: query,
+            domain: state.selectedDomain || 'retail_clothing',
+            conversation_id: state.conversationId,
+            conversation_history: state.conversationHistory
+        })
+    });
+
+    if (!response.ok) {
+        const errorData = await response.json().catch(() => ({}));
+        const errorMsg = typeof errorData.detail === 'string' 
+            ? errorData.detail 
+            : (errorData.detail?.[0]?.msg || errorData.message || `API error: ${response.status}`);
+        throw new Error(errorMsg);
+    }
+
+    return await response.json();
+}
+
 async function handleSendMessage() {
     const query = elements.queryInput.value.trim();
 
@@ -705,12 +730,21 @@ function handleClearChat() {
 function handleDomainChange(domain) {
     state.selectedDomain = domain;
 
-    // Update UI
+    // Update sidebar UI buttons
     elements.domainBtns.forEach(btn => {
         if (btn.dataset.domain === domain) {
             btn.classList.add('active');
         } else {
             btn.classList.remove('active');
+        }
+    });
+
+    // Update first-page domain cards
+    document.querySelectorAll('.domain-card').forEach(card => {
+        if (card.dataset.domain === domain) {
+            card.classList.add('active');
+        } else {
+            card.classList.remove('active');
         }
     });
 }
@@ -1095,7 +1129,7 @@ async function initialize() {
     await checkApiConnection();
 
     // Set initial domain
-    handleDomainChange('general');
+    handleDomainChange('retail_clothing');
 
     // Focus input
     elements.queryInput.focus();
@@ -1115,11 +1149,746 @@ if (document.readyState === 'loading') {
     initialize();
 }
 
+// ===========================
+// Tab & View Switching (Project 1 & Project 2 & Insights)
+// ===========================
+function switchToTab(tabName) {
+    const chatContainer = document.querySelector('.chat-container');
+    const sentinelDashboard = document.getElementById('sentinel-dashboard');
+    const project2Dashboard = document.getElementById('project2-dashboard');
+    const resultsPanel = document.getElementById('results-panel');
+    const insightsDashboard = document.getElementById('insights-dashboard');
+
+    const tabChat = document.getElementById('tab-chat');
+    const tabSentinel = document.getElementById('tab-sentinel');
+    const tabProject2 = document.getElementById('tab-project2');
+    const tabInsights = document.getElementById('tab-insights');
+
+    // Hide all main containers
+    if (chatContainer) chatContainer.classList.add('hidden');
+    if (sentinelDashboard) sentinelDashboard.classList.add('hidden');
+    if (project2Dashboard) project2Dashboard.classList.add('hidden');
+    if (resultsPanel) resultsPanel.classList.add('hidden');
+    if (insightsDashboard) insightsDashboard.classList.add('hidden');
+
+    // Reset active tab styles
+    [tabChat, tabSentinel, tabProject2, tabInsights].forEach(t => { if (t) t.classList.remove('active'); });
+
+    if (tabName === 'chat') {
+        if (chatContainer) chatContainer.classList.remove('hidden');
+        if (tabChat) tabChat.classList.add('active');
+    } else if (tabName === 'sentinel') {
+        if (sentinelDashboard) sentinelDashboard.classList.remove('hidden');
+        if (tabSentinel) tabSentinel.classList.add('active');
+    } else if (tabName === 'project2') {
+        if (project2Dashboard) {
+            project2Dashboard.classList.remove('hidden');
+            project2Dashboard.style.display = 'block';
+            const iframe = document.getElementById('project2-iframe');
+            if (iframe && (!iframe.src || iframe.src === '' || iframe.src === 'about:blank')) {
+                iframe.src = 'http://localhost:3000';
+            }
+            project2Dashboard.scrollIntoView({ behavior: 'smooth' });
+        }
+        if (tabProject2) tabProject2.classList.add('active');
+    } else if (tabName === 'insights') {
+        if (insightsDashboard) {
+            insightsDashboard.classList.remove('hidden');
+            insightsDashboard.style.display = 'block';
+        }
+        if (tabInsights) tabInsights.classList.add('active');
+        // Auto-fetch insights on tab switch
+        fetchAutoInsights();
+    }
+}
+window.switchToTab = switchToTab;
+
+// ===========================
+// Auto Insights Dashboard Engine
+// ===========================
+let _autoInsightsData = [];
+
+async function fetchAutoInsights() {
+    const findingsContainer = document.getElementById('insights-findings');
+    const lastUpdate = document.getElementById('last-insights-update');
+
+    if (findingsContainer) {
+        findingsContainer.innerHTML = `
+            <div style="text-align: center; padding: 2rem; color: #667;">
+                <div class="scanner-bar" style="margin-bottom: 1rem;"></div>
+                <p>Fetching latest insights...</p>
+            </div>`;
+    }
+
+    const host = window.location.hostname || 'localhost';
+    const baseUrl = `${window.location.protocol}//${host}:8080`;
+
+    try {
+        const res = await fetch(`${baseUrl}/api/v1/insights/today?domain=${state.currentDomain || 'retail_clothing'}`);
+        const data = await res.json();
+        _autoInsightsData = data.insights || [];
+
+        // Update proactive summary headline banner
+        const headlineEl = document.getElementById('proactive-headline-text');
+        if (headlineEl && data.summary_headline) {
+            headlineEl.textContent = data.summary_headline;
+        }
+
+        const badgeEl = document.getElementById('urgent-badge');
+        if (badgeEl && data.urgent_count !== undefined) {
+            badgeEl.textContent = data.urgent_count > 0 ? `${data.urgent_count} URGENT` : 'NORMAL';
+            badgeEl.style.backgroundColor = data.urgent_count > 0 ? '#e53e3e' : '#38a169';
+        }
+
+        updateRuleCounters(_autoInsightsData);
+        renderInsightCards(_autoInsightsData, findingsContainer);
+
+        if (lastUpdate) {
+            const now = new Date();
+            lastUpdate.textContent = now.toLocaleTimeString();
+        }
+
+        console.log(`📊 Auto Insights: ${_autoInsightsData.length} insights loaded (${data.summary_headline || 'no headline'})`);
+    } catch (err) {
+        console.error('Auto Insights fetch failed:', err);
+        if (findingsContainer) {
+            findingsContainer.innerHTML = `
+                <div class="insights-empty-state">
+                    <div class="empty-icon">⚠️</div>
+                    <p style="color: #ff5252;">Failed to fetch insights: ${err.message}</p>
+                    <p style="font-size: 0.8rem; margin-top: 0.5rem;">Ensure the backend is running on port 8080</p>
+                </div>`;
+        }
+    }
+}
+window.fetchAutoInsights = fetchAutoInsights;
+
+function updateRuleCounters(insights) {
+    const stockoutCount = insights.filter(i => i.type === 'stockout' || i.insight_type === 'stockout' || i.type === 'stockout_risk').length;
+    const criticalCount = insights.filter(i => (i.severity || '').toLowerCase() === 'critical' || (i.severity || '').toLowerCase() === 'high').length;
+    const salesDropCount = insights.filter(i => i.type === 'sales_drop' || i.insight_type === 'sales_drop').length;
+    const supplierCount = insights.filter(i => i.type === 'supplier_risk' || i.insight_type === 'supplier_risk').length;
+
+    const total = insights.length || 1;
+
+    const setEl = (id, val) => { const el = document.getElementById(id); if (el) el.textContent = val; };
+    setEl('stockout-count', stockoutCount);
+    setEl('stockout-percent', Math.round((stockoutCount / total) * 100) + '%');
+    setEl('critical-count', criticalCount);
+    setEl('critical-percent', Math.round((criticalCount / total) * 100) + '%');
+    setEl('sales-drop-count', salesDropCount);
+    setEl('sales-drop-percent', Math.round((salesDropCount / total) * 100) + '%');
+    setEl('supplier-count', supplierCount);
+    setEl('supplier-percent', Math.round((supplierCount / total) * 100) + '%');
+}
+
+function renderInsightCards(insights, container) {
+    if (!container) return;
+
+    if (!insights || insights.length === 0) {
+        container.innerHTML = `
+            <div class="insights-empty-state">
+                <div class="empty-icon">✅</div>
+                <p>No active insights detected today.</p>
+                <p style="font-size: 0.8rem; margin-top: 0.5rem;">All inventory and sales metrics are within normal thresholds.</p>
+            </div>`;
+        return;
+    }
+
+    let html = '';
+    insights.forEach((insight, idx) => {
+        const sev = (insight.severity || 'medium').toLowerCase();
+        const sevClass = `severity-${sev}`;
+        const sevBadgeClass = `sev-${sev}`;
+        const readClass = insight.is_read ? 'is-read' : '';
+        const insightId = insight.insight_id || insight.id;
+        const type = insight.type || insight.insight_type || '';
+        const typeIcon = type.includes('stockout') ? '🛡️' :
+                         type.includes('sales_drop') ? '📉' :
+                         type.includes('supplier') ? '⚠️' :
+                         type.includes('critical') ? '🔴' : '📊';
+
+        const showPOButton = insight.suggested_reorder_qty > 0 || (insight.recommended_action && insight.recommended_action.includes('Reorder'));
+        const pId = insight.product_id || insight.sku || '';
+        const pName = (insight.product_name || insight.title || '').replace(/'/g, "\\'");
+        const reorderQty = insight.suggested_reorder_qty || 15;
+
+        const poButtonHtml = showPOButton ? `
+            <button class="create-po-btn" id="po-btn-${insightId}" onclick="createDraftPOFromInsight('${insightId}', '${pId}', '${pName}', ${reorderQty})" style="background: linear-gradient(135deg, #00e5ff, #0072ff); color: #000; font-weight: 600; border: none; padding: 0.4rem 0.8rem; border-radius: 6px; cursor: pointer; font-size: 0.8rem; margin-left: 0.5rem; transition: all 0.2s ease;">
+                📦 Create Draft PO
+            </button>` : '';
+
+        const recActionHtml = insight.recommended_action ? `
+            <div class="finding-action-box" style="margin: 0.6rem 0 0.4rem 0; padding: 0.5rem 0.75rem; background: rgba(0, 229, 255, 0.08); border: 1px solid rgba(0, 229, 255, 0.25); border-radius: 6px; font-size: 0.85rem; color: #00e5ff; display: flex; align-items: center; gap: 0.5rem;">
+                <span style="font-size: 1rem;">🎯</span>
+                <div><strong>Recommended Action:</strong> ${insight.recommended_action}</div>
+            </div>` : '';
+
+        html += `
+            <div class="insight-finding-card ${sevClass} ${readClass}" id="insight-card-${insightId}" style="animation-delay: ${idx * 0.08}s;">
+                <div class="finding-header">
+                    <span class="finding-title">${typeIcon} ${insight.title || 'Insight'}</span>
+                    <span class="finding-severity ${sevBadgeClass}">${sev}</span>
+                </div>
+                <div class="finding-description">${insight.description || ''}</div>
+                ${recActionHtml}
+                <div class="finding-meta">
+                    <span class="finding-product">${insight.product_name ? 'Product: ' + insight.product_name : (insight.product_id ? 'SKU: ' + insight.product_id : '')}</span>
+                    <span class="finding-time">${insight.created_at || ''}</span>
+                    <div style="display: flex; gap: 0.4rem; align-items: center;">
+                        ${poButtonHtml}
+                        <button class="mark-read-btn" onclick="markInsightRead('${insightId}')">✓ Acknowledge</button>
+                    </div>
+                </div>
+            </div>`;
+    });
+
+    container.innerHTML = html;
+}
+
+async function createDraftPOFromInsight(insightId, productId, productName, quantity) {
+    const btn = document.getElementById(`po-btn-${insightId}`);
+    if (btn) {
+        btn.disabled = true;
+        btn.textContent = '⏳ Creating PO...';
+    }
+
+    const host = window.location.hostname || 'localhost';
+    const baseUrl = `${window.location.protocol}//${host}:8080`;
+
+    try {
+        const response = await fetch(`${baseUrl}/api/v1/purchase-orders/draft`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                product_id: productId || 'SKU-UNKNOWN',
+                product_name: productName || 'Requested Item',
+                quantity: parseInt(quantity) || 15,
+                notes: `Created from Auto Insight (${insightId})`
+            })
+        });
+
+        const data = await response.json();
+
+        if (response.ok && data.status === 'success') {
+            if (btn) {
+                btn.style.background = '#38a169';
+                btn.style.color = '#fff';
+                btn.textContent = `✓ Created (${data.po_number})`;
+            }
+            alert(`✅ Draft Purchase Order ${data.po_number} created successfully!\n\nProduct: ${productName}\nQuantity: ${quantity} units`);
+        } else {
+            throw new Error(data.detail || 'Failed to create Draft PO');
+        }
+    } catch (err) {
+        console.error('Create Draft PO error:', err);
+        if (btn) {
+            btn.disabled = false;
+            btn.textContent = '📦 Create Draft PO';
+        }
+        alert(`⚠️ Could not create Draft PO: ${err.message}`);
+    }
+}
+window.createDraftPOFromInsight = createDraftPOFromInsight;
+
+async function markInsightRead(insightId) {
+    const host = window.location.hostname || 'localhost';
+    const baseUrl = `${window.location.protocol}//${host}:8080`;
+
+    try {
+        await fetch(`${baseUrl}/api/v1/insights/read/${insightId}`, { method: 'PATCH' });
+        const card = document.getElementById(`insight-card-${insightId}`);
+        if (card) {
+            card.classList.add('is-read');
+        }
+        console.log(`📊 Insight ${insightId} marked as read`);
+    } catch (err) {
+        console.error(`Failed to mark insight ${insightId} as read:`, err);
+    }
+}
+window.markInsightRead = markInsightRead;
+
+async function acknowledgeAllInsights() {
+    const host = window.location.hostname || 'localhost';
+    const baseUrl = `${window.location.protocol}//${host}:8080`;
+
+    for (const insight of _autoInsightsData) {
+        const id = insight.insight_id || insight.id;
+        if (!insight.is_read) {
+            try {
+                await fetch(`${baseUrl}/api/v1/insights/read/${id}`, { method: 'PATCH' });
+            } catch (e) { /* continue */ }
+        }
+    }
+    // Refresh
+    fetchAutoInsights();
+}
+window.acknowledgeAllInsights = acknowledgeAllInsights;
+
+// Wire up Refresh and Acknowledge All buttons
+document.addEventListener('DOMContentLoaded', () => {
+    const refreshBtn = document.getElementById('refresh-insights-btn');
+    if (refreshBtn) refreshBtn.addEventListener('click', fetchAutoInsights);
+
+    const ackAllBtn = document.getElementById('acknowledge-all-btn');
+    if (ackAllBtn) ackAllBtn.addEventListener('click', acknowledgeAllInsights);
+});
+
 // Close export dropdown when clicking outside
 document.addEventListener('click', (e) => {
     const dropdown = document.getElementById('export-dropdown');
     const exportBtn = elements.exportBtn;
-    if (dropdown && !dropdown.contains(e.target) && !exportBtn.contains(e.target)) {
+    if (dropdown && !dropdown.contains(e.target) && exportBtn && !exportBtn.contains(e.target)) {
         dropdown.classList.add('hidden');
     }
+
+    const domainCard = e.target.closest('.domain-card');
+    if (domainCard && domainCard.dataset.domain) {
+        handleDomainChange(domainCard.dataset.domain);
+    }
+
+    if (e.target.closest('#project2-btn')) {
+        switchToTab('project2');
+    }
 });
+
+// ===========================
+// Project 2 (Next.js Hub) Interactive Controllers
+// ===========================
+function toggleProject2Mode() {
+    const nativeView = document.getElementById('project2-native-view');
+    const iframeView = document.getElementById('project2-iframe-view');
+    const toggleBtn = document.getElementById('p2-mode-toggle');
+
+    if (!nativeView || !iframeView) return;
+
+    if (nativeView.style.display === 'none') {
+        nativeView.style.display = 'block';
+        iframeView.style.display = 'none';
+        if (toggleBtn) toggleBtn.innerHTML = '🖥️ Switch View Mode';
+    } else {
+        nativeView.style.display = 'none';
+        iframeView.style.display = 'block';
+        const iframe = document.getElementById('project2-iframe');
+        if (iframe && (!iframe.src || iframe.src === '' || iframe.src === 'about:blank')) {
+            iframe.src = 'http://localhost:3000';
+        }
+        if (toggleBtn) toggleBtn.innerHTML = '🎛️ Switch View Mode';
+    }
+}
+window.toggleProject2Mode = toggleProject2Mode;
+
+async function fetchProject2Ontology() {
+    const skuInput = document.getElementById('p2-sku-input');
+    const inspectBtn = document.getElementById('p2-inspect-btn');
+    const pricingContent = document.getElementById('p2-pricing-content');
+    const supplyContent = document.getElementById('p2-supply-content');
+    const carbonContent = document.getElementById('p2-carbon-content');
+
+    const sku = skuInput ? skuInput.value.trim() : 'SKU-1001';
+    if (!sku) return;
+
+    if (inspectBtn) {
+        inspectBtn.disabled = true;
+        inspectBtn.innerText = '⏳ Evaluating...';
+    }
+
+    const host = window.location.hostname || 'localhost';
+    const baseUrl = `${window.location.protocol}//${host}:8080`;
+
+    try {
+        const [priceRes, supplyRes, carbonRes] = await Promise.all([
+            fetch(`${baseUrl}/api/v1/pricing/${sku}`).then(r => r.json()).catch(err => ({ error: String(err) })),
+            fetch(`${baseUrl}/api/v1/inventory/availability/${sku}`).then(r => r.json()).catch(err => ({ error: String(err) })),
+            fetch(`${baseUrl}/api/v1/carbon/${sku}`).then(r => r.json()).catch(err => ({ error: String(err) }))
+        ]);
+
+        // Render Pricing
+        if (pricingContent) {
+            if (priceRes.error) {
+                pricingContent.innerHTML = `<p style="color: #ff5252;">Error: ${priceRes.error}</p>`;
+            } else {
+                pricingContent.innerHTML = `
+                    <div style="display: flex; justify-content: space-between; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 4px; margin-bottom: 6px;">
+                        <span style="color: #aaa;">Base Price:</span> <strong>$${priceRes.base_price}</strong>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 4px; margin-bottom: 6px;">
+                        <span style="color: #aaa;">Recommended:</span> <strong style="color: #00e676;">$${priceRes.recommended_price}</strong>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 4px; margin-bottom: 6px;">
+                        <span style="color: #aaa;">Discount / Adj:</span> <strong style="color: #ffab00;">${priceRes.discount_pct}%</strong>
+                    </div>
+                    <p style="background: rgba(0,0,0,0.4); padding: 8px; border-radius: 6px; font-size: 0.75rem; color: #80cbc4; margin-top: 8px;">
+                        ${priceRes.reasoning}
+                    </p>
+                `;
+            }
+        }
+
+        // Render Supply Chain
+        if (supplyContent) {
+            if (Array.isArray(supplyRes)) {
+                let whHtml = `<div style="margin-bottom: 6px;"><strong>Active Warehouses:</strong> ${supplyRes.length}</div>`;
+                supplyRes.forEach(wh => {
+                    whHtml += `
+                        <div style="background: rgba(0,0,0,0.4); padding: 8px; border-radius: 6px; margin-bottom: 6px; display: flex; justify-content: space-between; align-items: center;">
+                            <div>
+                                <div style="font-weight: bold; color: #fff;">${wh.warehouse_name}</div>
+                                <div style="font-size: 0.75rem; color: #888;">${wh.warehouse_city}</div>
+                            </div>
+                            <div style="text-align: right;">
+                                <div style="font-weight: bold; color: #00e676;">${wh.quantity_available} units</div>
+                                <div style="font-size: 0.75rem; color: #aaa;">C&C: ${wh.click_collect_ready ? 'Ready' : 'N/A'}</div>
+                            </div>
+                        </div>
+                    `;
+                });
+                supplyContent.innerHTML = whHtml;
+            } else {
+                supplyContent.innerHTML = `<p style="color: #ff5252;">${supplyRes.error || 'No inventory records found'}</p>`;
+            }
+        }
+
+        // Render Carbon
+        if (carbonContent) {
+            if (carbonRes.error) {
+                carbonContent.innerHTML = `<p style="color: #ff5252;">Error: ${carbonRes.error}</p>`;
+            } else {
+                carbonContent.innerHTML = `
+                    <div style="display: flex; justify-content: space-between; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 4px; margin-bottom: 6px;">
+                        <span style="color: #aaa;">Total CO2e:</span> <strong style="color: #b388ff; font-size: 1.1rem;">${carbonRes.total_kg_co2e} kg</strong>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 4px; margin-bottom: 6px;">
+                        <span style="color: #aaa;">ESG Grade:</span> <strong style="background: #7c4dff; color: #fff; padding: 2px 8px; border-radius: 4px; font-size: 0.75rem;">Grade ${carbonRes.label}</strong>
+                    </div>
+                    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; text-align: center; font-size: 0.75rem; margin-top: 8px;">
+                        <div style="background: rgba(0,0,0,0.4); padding: 6px; border-radius: 4px;">
+                            <div style="color: #888;">Scope 1</div>
+                            <div><strong>${carbonRes.scope1_kg} kg</strong></div>
+                        </div>
+                        <div style="background: rgba(0,0,0,0.4); padding: 6px; border-radius: 4px;">
+                            <div style="color: #888;">Scope 2</div>
+                            <div><strong>${carbonRes.scope2_kg} kg</strong></div>
+                        </div>
+                        <div style="background: rgba(0,0,0,0.4); padding: 6px; border-radius: 4px;">
+                            <div style="color: #888;">Scope 3</div>
+                            <div><strong>${carbonRes.scope3_kg} kg</strong></div>
+                        </div>
+                    </div>
+                `;
+            }
+        }
+    } catch (e) {
+        console.error('Project 2 Ontology query failed:', e);
+    } finally {
+        if (inspectBtn) {
+            inspectBtn.disabled = false;
+            inspectBtn.innerText = '🔍 Query Enterprise Ontology';
+        }
+    }
+}
+window.fetchProject2Ontology = fetchProject2Ontology;
+
+// ==========================================
+// Live Excel Data Sync (live_data/ .xlsx)
+// ==========================================
+async function triggerLiveExcelSync() {
+    const btn = document.getElementById('btn-sync-excel');
+    const statusVal = document.getElementById('excel-status-val');
+    const lastSyncEl = document.getElementById('excel-last-sync');
+
+    try {
+        if (btn) {
+            btn.innerHTML = '<span>🔄</span> Syncing...';
+            btn.disabled = true;
+        }
+        if (statusVal) {
+            statusVal.innerHTML = '<span style="color:#00e5ff;">Scanning live_data/...</span>';
+        }
+
+        const res = await fetch(`${state.apiUrl}/api/v1/sync/now`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' }
+        });
+
+        if (!res.ok) {
+            const errData = await res.json().catch(() => ({}));
+            throw new Error(errData.detail || `Server responded with ${res.status}`);
+        }
+
+        const data = await res.json();
+
+        if (data.status === 'SUCCESS' || data.status === 'SKIPPED') {
+            const rowCount = data.rows_synced || 0;
+            const filesCount = (data.files_processed || []).length;
+            if (statusVal) {
+                statusVal.innerHTML = `<span style="color:#00e676;">Synced (${rowCount} rows)</span>`;
+            }
+            if (lastSyncEl && data.synced_at) {
+                const time = new Date(data.synced_at).toLocaleTimeString();
+                lastSyncEl.innerText = `Synced at ${time} (${filesCount} files)`;
+            }
+            console.log(`[Excel Sync] Successfully synced ${rowCount} rows:`, data);
+        } else {
+            if (statusVal) {
+                statusVal.innerHTML = `<span style="color:#ffab00;">${data.status || 'Failed'}</span>`;
+            }
+            if (data.errors && data.errors.length > 0 && lastSyncEl) {
+                lastSyncEl.innerText = data.errors[0].slice(0, 45) + '...';
+            }
+        }
+
+        // Refresh Auto Insights if available
+        if (typeof window.loadAutoInsights === 'function') {
+            window.loadAutoInsights();
+        }
+    } catch (err) {
+        console.error('Excel sync error:', err);
+        if (statusVal) {
+            statusVal.innerHTML = `<span style="color:#ff5252;">Sync Failed</span>`;
+        }
+        if (lastSyncEl) {
+            lastSyncEl.innerText = err.message ? err.message.slice(0, 40) : 'Check live_data folder';
+        }
+    } finally {
+        if (btn) {
+            btn.innerHTML = '<span>🔄</span> Sync Live Data Now';
+            btn.disabled = false;
+        }
+    }
+}
+window.triggerLiveExcelSync = triggerLiveExcelSync;
+
+// ==========================================
+// Email Alert Notifications Controller
+// ==========================================
+async function loadEmailConfig() {
+    const badge = document.getElementById('email-mode-badge');
+    const senderInput = document.getElementById('email-sender-input');
+    const receiverInput = document.getElementById('email-receiver-input');
+    const serverInput = document.getElementById('email-smtp-server');
+    const portInput = document.getElementById('email-smtp-port');
+    const feedback = document.getElementById('email-config-feedback');
+
+    try {
+        const res = await fetch(`${state.apiUrl}/api/v1/insights/email/status`);
+        if (!res.ok) return;
+        const data = await res.json();
+
+        if (senderInput && data.sender_email && data.sender_email !== 'Not configured') {
+            senderInput.value = data.sender_email;
+        }
+        if (receiverInput && data.recipients && data.recipients.length > 0) {
+            receiverInput.value = data.recipients.join(', ');
+        }
+        if (serverInput && data.smtp_server && data.smtp_server !== 'Not configured') {
+            serverInput.value = data.smtp_server;
+        }
+        if (portInput && data.smtp_port) {
+            portInput.value = data.smtp_port;
+        }
+
+        if (badge) {
+            if (data.is_configured) {
+                badge.innerText = 'ACTIVE SMTP';
+                badge.style.background = 'rgba(0, 230, 118, 0.2)';
+                badge.style.color = '#00e676';
+                badge.style.borderColor = 'rgba(0, 230, 118, 0.4)';
+            } else {
+                badge.innerText = 'LOG FALLBACK';
+                badge.style.background = 'rgba(255, 171, 0, 0.2)';
+                badge.style.color = '#ffab00';
+                badge.style.borderColor = 'rgba(255, 171, 0, 0.4)';
+            }
+        }
+    } catch (err) {
+        console.warn('Could not load email configuration:', err);
+    }
+}
+window.loadEmailConfig = loadEmailConfig;
+
+async function saveEmailConfig() {
+    const btn = document.getElementById('btn-save-email-config');
+    const senderInput = document.getElementById('email-sender-input');
+    const passInput = document.getElementById('email-password-input');
+    const receiverInput = document.getElementById('email-receiver-input');
+    const serverInput = document.getElementById('email-smtp-server');
+    const portInput = document.getElementById('email-smtp-port');
+    const feedback = document.getElementById('email-config-feedback');
+    const badge = document.getElementById('email-mode-badge');
+
+    const sender = (senderInput?.value || '').trim();
+    const pass = (passInput?.value || '').trim();
+    const receiver = (receiverInput?.value || '').trim();
+    const server = (serverInput?.value || '').trim();
+    const port = parseInt(portInput?.value || '587');
+
+    if (!sender && !receiver) {
+        if (feedback) {
+            feedback.innerHTML = '<span style="color:#ff5252;">⚠️ Please enter sender or receiver email</span>';
+        }
+        return;
+    }
+
+    try {
+        if (btn) {
+            btn.innerHTML = '<span>⏳</span> Saving...';
+            btn.disabled = true;
+        }
+
+        const res = await fetch(`${state.apiUrl}/api/v1/insights/email/config`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                sender_email: sender || null,
+                sender_password: pass || null,
+                receiver_emails: receiver || null,
+                smtp_server: server || null,
+                smtp_port: isNaN(port) ? null : port
+            })
+        });
+
+        const data = await res.json();
+        if (!res.ok) {
+            throw new Error(data.detail || 'Failed to save email settings');
+        }
+
+        if (passInput) passInput.value = ''; // clear password field for security
+
+        const currentStatus = data.current_status || {};
+        if (badge) {
+            if (currentStatus.is_configured) {
+                badge.innerText = 'ACTIVE SMTP';
+                badge.style.background = 'rgba(0, 230, 118, 0.2)';
+                badge.style.color = '#00e676';
+                badge.style.borderColor = 'rgba(0, 230, 118, 0.4)';
+            } else {
+                badge.innerText = 'LOG FALLBACK';
+                badge.style.background = 'rgba(255, 171, 0, 0.2)';
+                badge.style.color = '#ffab00';
+                badge.style.borderColor = 'rgba(255, 171, 0, 0.4)';
+            }
+        }
+
+        if (feedback) {
+            feedback.innerHTML = `<span style="color:#00e676;">✓ Settings saved! (${currentStatus.mode || 'Ready'})</span>`;
+            setTimeout(() => { feedback.innerHTML = ''; }, 4500);
+        }
+    } catch (err) {
+        console.error('Error saving email config:', err);
+        if (feedback) {
+            feedback.innerHTML = `<span style="color:#ff5252;">✗ Error: ${err.message}</span>`;
+        }
+    } finally {
+        if (btn) {
+            btn.innerHTML = '<span>💾</span> Save';
+            btn.disabled = false;
+        }
+    }
+}
+window.saveEmailConfig = saveEmailConfig;
+
+async function testEmailAlert() {
+    const btn = document.getElementById('btn-test-email-alert');
+    const senderInput = document.getElementById('email-sender-input');
+    const passInput = document.getElementById('email-password-input');
+    const receiverInput = document.getElementById('email-receiver-input');
+    const serverInput = document.getElementById('email-smtp-server');
+    const portInput = document.getElementById('email-smtp-port');
+    const feedback = document.getElementById('email-config-feedback');
+    const badge = document.getElementById('email-mode-badge');
+
+    const sender = (senderInput?.value || '').trim();
+    const pass = (passInput?.value || '').trim();
+    const receiver = (receiverInput?.value || '').trim();
+    const server = (serverInput?.value || '').trim();
+    const port = parseInt(portInput?.value || '587');
+
+    try {
+        if (btn) {
+            btn.innerHTML = '<span>⏳</span> Sending...';
+            btn.disabled = true;
+        }
+        if (feedback) {
+            feedback.innerHTML = '<span style="color:#00e5ff;">Testing email connection...</span>';
+        }
+
+        const res = await fetch(`${state.apiUrl}/api/v1/insights/email/test`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                sender_email: sender || null,
+                sender_password: pass || null,
+                receiver_emails: receiver || null,
+                smtp_server: server || null,
+                smtp_port: isNaN(port) ? null : port
+            })
+        });
+
+        const data = await res.json();
+
+        if (data.details && badge) {
+            if (data.details.is_configured) {
+                badge.innerText = 'ACTIVE SMTP';
+                badge.style.background = 'rgba(0, 230, 118, 0.2)';
+                badge.style.color = '#00e676';
+                badge.style.borderColor = 'rgba(0, 230, 118, 0.4)';
+            } else {
+                badge.innerText = 'LOG FALLBACK';
+                badge.style.background = 'rgba(255, 171, 0, 0.2)';
+                badge.style.color = '#ffab00';
+                badge.style.borderColor = 'rgba(255, 171, 0, 0.4)';
+            }
+        }
+
+        if (data.dispatched) {
+            if (feedback) {
+                feedback.innerHTML = `<span style="color:#00e676; font-weight:600;">✓ Test email sent successfully to ${receiver || 'recipient'}!</span>`;
+            }
+        } else {
+            if (feedback) {
+                const msg = data.message || 'Logged to system fallback';
+                feedback.innerHTML = `<span style="color:#ffab00; font-size:0.75rem; line-height:1.3; display:block;">⚠️ ${msg}</span>`;
+            }
+        }
+    } catch (err) {
+        console.error('Test email error:', err);
+        if (feedback) {
+            feedback.innerHTML = `<span style="color:#ff5252;">✗ Test failed: ${err.message}</span>`;
+        }
+    } finally {
+        if (btn) {
+            btn.innerHTML = '<span>✉️</span> Test Send';
+            btn.disabled = false;
+        }
+    }
+}
+window.testEmailAlert = testEmailAlert;
+
+function focusEmailSettings() {
+    const section = document.getElementById('email-notifications-section');
+    const senderInput = document.getElementById('email-sender-input');
+    if (section) {
+        section.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        section.style.boxShadow = '0 0 25px rgba(0, 229, 255, 0.5)';
+        section.style.borderColor = '#00e5ff';
+        setTimeout(() => {
+            section.style.boxShadow = '';
+            section.style.borderColor = '';
+        }, 2000);
+    }
+    if (senderInput) {
+        setTimeout(() => senderInput.focus(), 300);
+    }
+}
+window.focusEmailSettings = focusEmailSettings;
+
+// Load email configuration on page initialization
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', loadEmailConfig);
+} else {
+    loadEmailConfig();
+}
+
+
+

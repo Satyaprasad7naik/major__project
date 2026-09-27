@@ -1,0 +1,78 @@
+{
+  "_last_touched": 1787906661.4466794,
+  "history": [
+    {
+      "timestamp": "2026-08-28T08:44:21.446657",
+      "missions": [
+        {
+          "name": "Dead Stock Detection",
+          "query": "Identify products with stock count 0 across all locations, grouped by category and supplier.",
+          "domain": "retail_clothing",
+          "risk_score": 15,
+          "severity": "LOW",
+          "data_count": 1
+        },
+        {
+          "name": "Sizing Anomalies",
+          "query": "Detect products with inconsistent size mappings across different suppliers.",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        },
+        {
+          "name": "Supplier Lead Time Analysis",
+          "query": "Analyze supplier lead times to identify potential delays in restocking products.",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        },
+        {
+          "name": "Reorder Point Breaches",
+          "query": "Identify products with stock count below the reorder point across all locations.",
+          "domain": "retail_clothing",
+          "risk_score": 42,
+          "severity": "MEDIUM",
+          "data_count": 14
+        },
+        {
+          "name": "Channel-Specific Sales Trends",
+          "query": "Analyze sales events by channel to identify trends and opportunities.",
+          "domain": "retail_clothing",
+          "risk_score": 39,
+          "severity": "MEDIUM",
+          "data_count": 119
+        },
+        {
+          "name": "Supplier On-Time Rate Analysis",
+          "query": "Analyze supplier on-time rates to identify potential issues with delivery reliability.",
+          "domain": "retail_clothing",
+          "risk_score": 13,
+          "severity": "LOW",
+          "data_count": 2
+        },
+        {
+          "name": "Product Lifecycles",
+          "query": "Analyze product lifecycles to identify trends and opportunities for product retirement or rebranding.",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        },
+        {
+          "name": "Geographic Sales Distribution",
+          "query": "Analyze sales events by country to identify trends and opportunities for geographic expansion.",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        }
+      ],
+      "domain_scores": {
+        "retail_clothing": 14
+      },
+      "critical_domains": []
+    }
+  ]
+}

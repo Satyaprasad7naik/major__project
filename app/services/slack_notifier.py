@@ -27,7 +27,7 @@ async def _post_to_slack(channel: str, text: str) -> bool:
     """
     token = settings.SLACK_BOT_TOKEN
     if not token:
-        logger.warning("SLACK_BOT_TOKEN not set — skipping Slack notification")
+        logger.warning("SLACK_BOT_TOKEN not set - skipping Slack notification")
         return False
 
     headers = {

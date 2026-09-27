@@ -1,0 +1,450 @@
+{
+  "scan_id": "scan-20260923T185811",
+  "timestamp": "2026-09-23T18:58:11.138612",
+  "stats": {
+    "total_missions": 8,
+    "critical_count": 0,
+    "high_count": 0,
+    "overall_risk": 0,
+    "overall_severity": "LOW"
+  },
+  "detections": [
+    {
+      "mission_id": "DAM-001-retail_clothing",
+      "mission_name": "Dead Stock Identification",
+      "domain": "retail_clothing",
+      "severity": "LOW",
+      "risk_score": 0,
+      "risk_factors": {},
+      "sql": null,
+      "data_count": 0,
+      "results": [],
+      "visualization_config": null,
+      "insight": null,
+      "recommendation": null,
+      "original_query": "What products have been in inventory for more than 365 days without being sold?",
+      "depth": 0,
+      "parent_mission_id": null,
+      "rationale": "",
+      "timestamp": "LIVE AUDIT",
+      "logs": [
+        {
+          "ts": 1790189820.239,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [classify_intent]"
+        },
+        {
+          "ts": 1790189820.241,
+          "level": "INFO",
+          "node": "INTENT",
+          "msg": "[IntentModule] Using Custom ML Intent Classifier for query: 'What products have been in inventory for more than 365 days without being sold?'"
+        },
+        {
+          "ts": 1790189820.25,
+          "level": "INFO",
+          "node": "model.py",
+          "msg": "[IntentClassifier] ML prediction: stockout_risk (conf: 0.267) -> workflow: SELECT"
+        },
+        {
+          "ts": 1790189820.25,
+          "level": "INFO",
+          "node": "intent_service.py",
+          "msg": "[IntentService] Custom model result: retail=stockout_risk, workflow=SELECT, conf=0.267, complexity=Medium, clarify=True"
+        },
+        {
+          "ts": 1790189820.353,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Intent classified: SELECT (conf: 0.2668302465196222) | Needs Clarification: True"
+        }
+      ]
+    },
+    {
+      "mission_id": "DAM-002-retail_clothing",
+      "mission_name": "Sizing Anomalies Detection",
+      "domain": "retail_clothing",
+      "severity": "LOW",
+      "risk_score": 0,
+      "risk_factors": {},
+      "sql": null,
+      "data_count": 0,
+      "results": [],
+      "visualization_config": null,
+      "insight": null,
+      "recommendation": null,
+      "original_query": "What categories have a size distribution skew greater than 20% between the most common size and the least common size?",
+      "depth": 0,
+      "parent_mission_id": null,
+      "rationale": "",
+      "timestamp": "LIVE AUDIT",
+      "logs": [
+        {
+          "ts": 1790189820.251,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [classify_intent]"
+        },
+        {
+          "ts": 1790189820.251,
+          "level": "INFO",
+          "node": "INTENT",
+          "msg": "[IntentModule] Using Custom ML Intent Classifier for query: 'What categories have a size distribution skew greater than 20% between the most common size and the least common size?'"
+        },
+        {
+          "ts": 1790189820.253,
+          "level": "INFO",
+          "node": "model.py",
+          "msg": "[IntentClassifier] ML prediction: sales_analysis (conf: 0.164) -> workflow: SELECT"
+        },
+        {
+          "ts": 1790189820.253,
+          "level": "INFO",
+          "node": "intent_service.py",
+          "msg": "[IntentService] Custom model result: retail=sales_analysis, workflow=SELECT, conf=0.164, complexity=Complex, clarify=True"
+        },
+        {
+          "ts": 1790189820.354,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Intent classified: SELECT (conf: 0.16425389752567704) | Needs Clarification: True"
+        }
+      ]
+    },
+    {
+      "mission_id": "DAM-003-retail_clothing",
+      "mission_name": "Supplier Delay Risk Assessment",
+      "domain": "retail_clothing",
+      "severity": "LOW",
+      "risk_score": 0,
+      "risk_factors": {},
+      "sql": null,
+      "data_count": 0,
+      "results": [],
+      "visualization_config": null,
+      "insight": null,
+      "recommendation": null,
+      "original_query": "Which suppliers have a lead time greater than 30 days and an on-time rate less than 80%?",
+      "depth": 0,
+      "parent_mission_id": null,
+      "rationale": "",
+      "timestamp": "LIVE AUDIT",
+      "logs": [
+        {
+          "ts": 1790189820.253,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [classify_intent]"
+        },
+        {
+          "ts": 1790189820.253,
+          "level": "INFO",
+          "node": "INTENT",
+          "msg": "[IntentModule] Using Custom ML Intent Classifier for query: 'Which suppliers have a lead time greater than 30 days and an on-time rate less than 80%?'"
+        },
+        {
+          "ts": 1790189820.256,
+          "level": "INFO",
+          "node": "model.py",
+          "msg": "[IntentClassifier] ML prediction: off_topic (conf: 0.231) -> workflow: OFF_TOPIC"
+        },
+        {
+          "ts": 1790189820.256,
+          "level": "INFO",
+          "node": "intent_service.py",
+          "msg": "[IntentService] Custom model result: retail=off_topic, workflow=OFF_TOPIC, conf=0.231, complexity=Complex, clarify=True"
+        },
+        {
+          "ts": 1790189820.354,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Intent classified: OFF_TOPIC (conf: 0.23122019501494193) | Needs Clarification: True"
+        }
+      ]
+    },
+    {
+      "mission_id": "DAM-004-retail_clothing",
+      "mission_name": "Reorder Point Breaches Identification",
+      "domain": "retail_clothing",
+      "severity": "LOW",
+      "risk_score": 0,
+      "risk_factors": {},
+      "sql": null,
+      "data_count": 0,
+      "results": [],
+      "visualization_config": null,
+      "insight": null,
+      "recommendation": null,
+      "original_query": "What products have exceeded their reorder point for more than 30 days?",
+      "depth": 0,
+      "parent_mission_id": null,
+      "rationale": "",
+      "timestamp": "LIVE AUDIT",
+      "logs": [
+        {
+          "ts": 1790189820.256,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [classify_intent]"
+        },
+        {
+          "ts": 1790189820.257,
+          "level": "INFO",
+          "node": "INTENT",
+          "msg": "[IntentModule] Using Custom ML Intent Classifier for query: 'What products have exceeded their reorder point for more than 30 days?'"
+        },
+        {
+          "ts": 1790189820.258,
+          "level": "INFO",
+          "node": "model.py",
+          "msg": "[IntentClassifier] ML prediction: stockout_risk (conf: 0.388) -> workflow: SELECT"
+        },
+        {
+          "ts": 1790189820.259,
+          "level": "INFO",
+          "node": "intent_service.py",
+          "msg": "[IntentService] Custom model result: retail=stockout_risk, workflow=SELECT, conf=0.388, complexity=Medium, clarify=True"
+        },
+        {
+          "ts": 1790189820.354,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Intent classified: SELECT (conf: 0.38794722717261826) | Needs Clarification: True"
+        }
+      ]
+    },
+    {
+      "mission_id": "DAM-005-retail_clothing",
+      "mission_name": "Average Retail Price by Supplier",
+      "domain": "retail_clothing",
+      "severity": "LOW",
+      "risk_score": 0,
+      "risk_factors": {},
+      "sql": null,
+      "data_count": 0,
+      "results": [],
+      "visualization_config": null,
+      "insight": null,
+      "recommendation": null,
+      "original_query": "What is the average retail price of products supplied by each supplier?",
+      "depth": 0,
+      "parent_mission_id": null,
+      "rationale": "",
+      "timestamp": "LIVE AUDIT",
+      "logs": [
+        {
+          "ts": 1790189820.259,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [classify_intent]"
+        },
+        {
+          "ts": 1790189820.259,
+          "level": "INFO",
+          "node": "INTENT",
+          "msg": "[IntentModule] Using Custom ML Intent Classifier for query: 'What is the average retail price of products supplied by each supplier?'"
+        },
+        {
+          "ts": 1790189820.26,
+          "level": "INFO",
+          "node": "model.py",
+          "msg": "[IntentClassifier] ML prediction: stockout_risk (conf: 0.268) -> workflow: SELECT"
+        },
+        {
+          "ts": 1790189820.26,
+          "level": "INFO",
+          "node": "intent_service.py",
+          "msg": "[IntentService] Custom model result: retail=stockout_risk, workflow=SELECT, conf=0.268, complexity=Medium, clarify=True"
+        },
+        {
+          "ts": 1790189820.354,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Intent classified: SELECT (conf: 0.26765056836008916) | Needs Clarification: True"
+        }
+      ]
+    },
+    {
+      "mission_id": "DAM-006-retail_clothing",
+      "mission_name": "Sales Channels Analysis",
+      "domain": "retail_clothing",
+      "severity": "LOW",
+      "risk_score": 0,
+      "risk_factors": {},
+      "sql": null,
+      "data_count": 0,
+      "results": [],
+      "visualization_config": null,
+      "insight": null,
+      "recommendation": null,
+      "original_query": "What sales channels have a units sold distribution skew greater than 30% between the most popular channel and the least popular channel?",
+      "depth": 0,
+      "parent_mission_id": null,
+      "rationale": "",
+      "timestamp": "LIVE AUDIT",
+      "logs": [
+        {
+          "ts": 1790189820.26,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [classify_intent]"
+        },
+        {
+          "ts": 1790189820.26,
+          "level": "INFO",
+          "node": "INTENT",
+          "msg": "[IntentModule] Using Custom ML Intent Classifier for query: 'What sales channels have a units sold distribution skew greater than 30% between the most popular channel and the least popular channel?'"
+        },
+        {
+          "ts": 1790189820.261,
+          "level": "INFO",
+          "node": "model.py",
+          "msg": "[IntentClassifier] ML prediction: sales_analysis (conf: 0.433) -> workflow: SELECT"
+        },
+        {
+          "ts": 1790189820.262,
+          "level": "INFO",
+          "node": "intent_service.py",
+          "msg": "[IntentService] Custom model result: retail=sales_analysis, workflow=SELECT, conf=0.433, complexity=Complex, clarify=True"
+        },
+        {
+          "ts": 1790189820.384,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Intent classified: SELECT (conf: 0.43307274611471963) | Needs Clarification: True"
+        }
+      ]
+    },
+    {
+      "mission_id": "DAM-007-retail_clothing",
+      "mission_name": "Stock Count Variance Analysis",
+      "domain": "retail_clothing",
+      "severity": "LOW",
+      "risk_score": 0,
+      "risk_factors": {},
+      "sql": null,
+      "data_count": 0,
+      "results": [],
+      "visualization_config": null,
+      "insight": null,
+      "recommendation": null,
+      "original_query": "What locations have a stock count variance greater than 10% between the actual and expected stock counts?",
+      "depth": 0,
+      "parent_mission_id": null,
+      "rationale": "",
+      "timestamp": "LIVE AUDIT",
+      "logs": [
+        {
+          "ts": 1790189820.262,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [classify_intent]"
+        },
+        {
+          "ts": 1790189820.262,
+          "level": "INFO",
+          "node": "INTENT",
+          "msg": "[IntentModule] Using Custom ML Intent Classifier for query: 'What locations have a stock count variance greater than 10% between the actual and expected stock counts?'"
+        },
+        {
+          "ts": 1790189820.263,
+          "level": "INFO",
+          "node": "model.py",
+          "msg": "[IntentClassifier] ML prediction: inventory_status (conf: 0.313) -> workflow: SELECT"
+        },
+        {
+          "ts": 1790189820.263,
+          "level": "INFO",
+          "node": "intent_service.py",
+          "msg": "[IntentService] Custom model result: retail=inventory_status, workflow=SELECT, conf=0.313, complexity=Complex, clarify=True"
+        },
+        {
+          "ts": 1790189820.385,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Intent classified: SELECT (conf: 0.3131580035214684) | Needs Clarification: True"
+        }
+      ]
+    },
+    {
+      "mission_id": "DAM-008-retail_clothing",
+      "mission_name": "Supplier Country-wise Analysis",
+      "domain": "retail_clothing",
+      "severity": "LOW",
+      "risk_score": 0,
+      "risk_factors": {},
+      "sql": null,
+      "data_count": 0,
+      "results": [],
+      "visualization_config": null,
+      "insight": null,
+      "recommendation": null,
+      "original_query": "What countries have a higher on-time rate than the global average on-time rate?",
+      "depth": 0,
+      "parent_mission_id": null,
+      "rationale": "",
+      "timestamp": "LIVE AUDIT",
+      "logs": [
+        {
+          "ts": 1790189820.264,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [classify_intent]"
+        },
+        {
+          "ts": 1790189820.264,
+          "level": "INFO",
+          "node": "INTENT",
+          "msg": "[IntentModule] Using Custom ML Intent Classifier for query: 'What countries have a higher on-time rate than the global average on-time rate?'"
+        },
+        {
+          "ts": 1790189820.266,
+          "level": "INFO",
+          "node": "model.py",
+          "msg": "[IntentClassifier] ML prediction: off_topic (conf: 0.336) -> workflow: OFF_TOPIC"
+        },
+        {
+          "ts": 1790189820.266,
+          "level": "INFO",
+          "node": "intent_service.py",
+          "msg": "[IntentService] Custom model result: retail=off_topic, workflow=OFF_TOPIC, conf=0.336, complexity=Medium, clarify=True"
+        },
+        {
+          "ts": 1790189820.385,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Intent classified: OFF_TOPIC (conf: 0.3359047859434648) | Needs Clarification: True"
+        }
+      ]
+    }
+  ],
+  "clusters": [],
+  "narrative": {
+    "executive_summary": "Our real-time threat detection system has identified a low-risk threat landscape across 8 missions covering security, compliance, risk, and operations domains. Despite the low risk, it is essential to address these potential issues to prevent future escalation. Our analysis reveals a lack of data-driven insights across all mission domains, indicating a need for enhanced monitoring and analysis.",
+    "threat_vectors": [
+      {
+        "name": "Insufficient Data-Driven Insights",
+        "severity": "MEDIUM",
+        "description": "Our analysis indicates a lack of data-driven insights across all mission domains, suggesting a need for enhanced monitoring and analysis to prevent potential issues from escalating."
+      },
+      {
+        "name": "Inadequate Risk Assessment",
+        "severity": "LOW",
+        "description": "Our risk assessment missions have not detected any high-risk activities, but we recommend continued monitoring to ensure that low-risk activities do not develop into more significant threats."
+      }
+    ],
+    "immediate_actions": [
+      "Conduct a thorough review of our data collection and analysis processes to ensure that we are capturing and analyzing all relevant data.",
+      "Enhance our risk assessment missions to include more comprehensive and frequent analysis.",
+      "Implement a data-driven decision-making framework to inform strategic decisions."
+    ],
+    "monitoring_recommendations": [
+      "Continuously monitor our data collection and analysis processes for potential issues.",
+      "Regularly review and update our risk assessment missions to ensure they remain effective.",
+      "Implement real-time alerts for any changes in our threat landscape."
+    ],
+    "overall_risk": 0,
+    "overall_severity": "LOW",
+    "title": "Intelligence Brief - LIVE"
+  }
+}

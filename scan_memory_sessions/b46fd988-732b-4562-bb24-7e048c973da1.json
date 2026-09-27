@@ -1,0 +1,78 @@
+{
+  "_last_touched": 1787835172.2893767,
+  "history": [
+    {
+      "timestamp": "2026-08-27T12:52:52.289351",
+      "missions": [
+        {
+          "name": "Dead Stock Detection",
+          "query": "What are the products with stock count 0 or below reorder point, grouped by supplier and category?",
+          "domain": "retail_clothing",
+          "risk_score": 42,
+          "severity": "MEDIUM",
+          "data_count": 14
+        },
+        {
+          "name": "Sizing Anomaly Analysis",
+          "query": "What are the products with size distribution skewness greater than 1.5, sorted by style name and category?",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        },
+        {
+          "name": "Supplier Lead Time Analysis",
+          "query": "What are the suppliers with lead time days greater than 30, grouped by country and on-time rate?",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        },
+        {
+          "name": "Inventory Turnover Rate Calculation",
+          "query": "What is the inventory turnover rate for each product, grouped by category and supplier?",
+          "domain": "retail_clothing",
+          "risk_score": 39,
+          "severity": "MEDIUM",
+          "data_count": 120
+        },
+        {
+          "name": "Reorder Point Breach Detection",
+          "query": "What are the products with stock count below reorder point, grouped by location and supplier?",
+          "domain": "retail_clothing",
+          "risk_score": 42,
+          "severity": "MEDIUM",
+          "data_count": 14
+        },
+        {
+          "name": "Sales Channel Analysis",
+          "query": "What is the sales distribution by channel, grouped by product category and supplier?",
+          "domain": "retail_clothing",
+          "risk_score": 37,
+          "severity": "MEDIUM",
+          "data_count": 18
+        },
+        {
+          "name": "Supplier On-Time Rate Analysis",
+          "query": "What are the suppliers with on-time rate less than 90%, grouped by country and lead time days?",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        },
+        {
+          "name": "Product Pricing Analysis",
+          "query": "What is the average price difference between the retail price and unit cost, grouped by category and supplier?",
+          "domain": "retail_clothing",
+          "risk_score": 23,
+          "severity": "LOW",
+          "data_count": 7
+        }
+      ],
+      "domain_scores": {
+        "retail_clothing": 23
+      },
+      "critical_domains": []
+    }
+  ]
+}

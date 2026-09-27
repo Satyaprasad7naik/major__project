@@ -1,0 +1,218 @@
+{
+  "_last_touched": 1787512924.9778721,
+  "history": [
+    {
+      "timestamp": "2026-08-23T19:21:12.501827",
+      "missions": [
+        {
+          "name": "Dead Stock Detection",
+          "query": "Find all products with stock count 0 in the past 6 months, across all locations.",
+          "domain": "retail_clothing",
+          "risk_score": 15,
+          "severity": "LOW",
+          "data_count": 1
+        },
+        {
+          "name": "Sizing Anomalies",
+          "query": "Identify products with inconsistent size options across different styles, and calculate the average unit cost for each size group.",
+          "domain": "retail_clothing",
+          "risk_score": 42,
+          "severity": "MEDIUM",
+          "data_count": 120
+        },
+        {
+          "name": "Supplier Delays",
+          "query": "Detect suppliers with a lead time greater than 30 days, and calculate the on-time delivery rate for each supplier.",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        },
+        {
+          "name": "Reorder Point Breaches",
+          "query": "Find all products with stock count below the reorder point in the past quarter, and calculate the total units sold for each product in the same period.",
+          "domain": "retail_clothing",
+          "risk_score": 15,
+          "severity": "LOW",
+          "data_count": 1
+        },
+        {
+          "name": "Unit Cost Variance",
+          "query": "Identify products with a unit cost variance greater than 20% between the current and previous restocking, and calculate the total units sold for each product in the same period.",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        },
+        {
+          "name": "Price Adjustment",
+          "query": "Detect products with a retail price adjustment greater than 10% in the past 3 months, and calculate the total units sold for each product in the same period.",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        },
+        {
+          "name": "Supplier On-Time Rate",
+          "query": "Calculate the average on-time delivery rate for each supplier, and identify suppliers with a rate below 80%.",
+          "domain": "retail_clothing",
+          "risk_score": 15,
+          "severity": "LOW",
+          "data_count": 1
+        },
+        {
+          "name": "Stock Count Consistency",
+          "query": "Identify products with inconsistent stock counts across different locations, and calculate the average stock count for each product across all locations.",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        }
+      ],
+      "domain_scores": {
+        "retail_clothing": 11
+      },
+      "critical_domains": []
+    },
+    {
+      "timestamp": "2026-08-23T19:21:47.950243",
+      "missions": [
+        {
+          "name": "Security Domain Scan",
+          "query": "Show users with risk_level HIGH and account_status ACTIVE",
+          "domain": "security",
+          "risk_score": 39,
+          "severity": "MEDIUM",
+          "data_count": 58
+        }
+      ],
+      "domain_scores": {
+        "security": 39
+      },
+      "critical_domains": []
+    },
+    {
+      "timestamp": "2026-08-23T19:21:51.700886",
+      "missions": [
+        {
+          "name": "Compliance Domain Scan",
+          "query": "Show recent compliance violations or audit findings",
+          "domain": "compliance",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        }
+      ],
+      "domain_scores": {
+        "compliance": 0
+      },
+      "critical_domains": []
+    },
+    {
+      "timestamp": "2026-08-23T19:21:56.062362",
+      "missions": [
+        {
+          "name": "Dead Stock Alert",
+          "query": "Identify products with a stock count of 0 at any location, and have not been restocked in the past 12 months.",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        },
+        {
+          "name": "Sizing Anomalies",
+          "query": "Find products with a size distribution that deviates from the average size distribution by more than 20% across all styles.",
+          "domain": "retail_clothing",
+          "risk_score": 39,
+          "severity": "MEDIUM",
+          "data_count": 75
+        },
+        {
+          "name": "Supplier Delays",
+          "query": "Detect suppliers with a lead time greater than 30 days, and have a reorder point breach in the past quarter for more than 10% of their products.",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        },
+        {
+          "name": "Reorder Point Breaches",
+          "query": "Identify products with a stock count below the reorder point for more than 50% of the past quarter, and have not been restocked in the past 3 months.",
+          "domain": "retail_clothing",
+          "risk_score": 26,
+          "severity": "MEDIUM",
+          "data_count": 5
+        },
+        {
+          "name": "Channel-Specific Sales Trends",
+          "query": "Find sales events with a units sold variance greater than 20% between the current channel and the average channel sales for the same product in the past quarter.",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        },
+        {
+          "name": "Supplier Country-Specific Compliance",
+          "query": "Detect suppliers from countries with a high risk of non-compliance, and have a lead time greater than 30 days for more than 10% of their products.",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        },
+        {
+          "name": "Inventory Imbalance",
+          "query": "Identify products with a stock count imbalance (i.e., stock count at one location is more than 20% different from the average stock count for the same product across all locations) in the past quarter.",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        },
+        {
+          "name": "Retail Price Adjustments",
+          "query": "Find products with a retail price adjustment greater than 10% in the past 6 months, and have a stock count below the reorder point for more than 50% of the past quarter.",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        },
+        {
+          "name": "Supplier On-Time Delivery",
+          "query": "Detect suppliers with an on-time delivery rate below 80% in the past quarter, and have a lead time greater than 30 days for more than 10% of their products.",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        },
+        {
+          "name": "Product Categorization",
+          "query": "Find products with a category that deviates from the average category distribution by more than 20% across all styles, and have a stock count below the reorder point for more than 50% of the past quarter.",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        }
+      ],
+      "domain_scores": {
+        "retail_clothing": 6
+      },
+      "critical_domains": []
+    },
+    {
+      "timestamp": "2026-08-23T19:22:04.977858",
+      "missions": [
+        {
+          "name": "Operations Domain Scan",
+          "query": "Show system performance metrics and operational alerts",
+          "domain": "operations",
+          "risk_score": 39,
+          "severity": "MEDIUM",
+          "data_count": 6296
+        }
+      ],
+      "domain_scores": {
+        "operations": 39
+      },
+      "critical_domains": []
+    }
+  ]
+}

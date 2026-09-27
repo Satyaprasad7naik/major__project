@@ -1,0 +1,3709 @@
+{
+  "scan_id": "scan-20260902T121227",
+  "timestamp": "2026-09-02T12:12:27.663529",
+  "stats": {
+    "total_missions": 8,
+    "critical_count": 0,
+    "high_count": 0,
+    "overall_risk": 31,
+    "overall_severity": "LOW"
+  },
+  "detections": [
+    {
+      "mission_id": "DEAD-STOCK-001",
+      "mission_name": "Dead Stock Alert",
+      "domain": "retail_clothing",
+      "severity": "LOW",
+      "risk_score": 15,
+      "risk_factors": {
+        "affected_entities": {
+          "value": 1,
+          "score": 10,
+          "detail": "1 unique entities"
+        },
+        "dollar_exposure": {
+          "value": 0,
+          "score": 0,
+          "detail": "$0 exposure"
+        },
+        "velocity": {
+          "value": 1,
+          "score": 5,
+          "detail": "1 events"
+        },
+        "pep_involvement": {
+          "value": 0,
+          "score": 0,
+          "detail": "0 PEP accounts"
+        },
+        "kyc_gaps": {
+          "value": 0,
+          "score": 0,
+          "detail": "0 KYC gaps"
+        },
+        "severity_escalation": {
+          "value": "CRITICAL",
+          "score": 80,
+          "detail": "Base: CRITICAL"
+        }
+      },
+      "sql": "SELECT p.supplier_id, p.style_name, p.size, i.stock_count \nFROM products p \nJOIN inventory i ON p.sku = i.sku \nWHERE i.stock_count = 0",
+      "data_count": 1,
+      "results": [
+        {
+          "supplier_id": "SUP-006",
+          "style_name": "Wool Blend Blazer",
+          "size": "XS",
+          "stock_count": 0
+        }
+      ],
+      "visualization_config": {
+        "chart_type": "bar",
+        "title": "stock_count by supplier_id",
+        "x_axis_key": "supplier_id",
+        "y_axis_key": "stock_count",
+        "label": "stock_count",
+        "description": "Auto-generated fallback chart"
+      },
+      "insight": "Data analysis complete. Results retrieved.",
+      "recommendation": "Review the returned data for specific patterns.",
+      "original_query": "List all products with a stock count of 0 across all locations, grouped by supplier.",
+      "depth": 0,
+      "parent_mission_id": null,
+      "rationale": "",
+      "timestamp": "LIVE AUDIT",
+      "logs": [
+        {
+          "ts": 1788351075.585,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [classify_intent]"
+        },
+        {
+          "ts": 1788351075.585,
+          "level": "INFO",
+          "node": "INTENT",
+          "msg": "Classifying intent for domain: retail_clothing | Query: List all products with a stock count of 0 across all locations, grouped by supplier."
+        },
+        {
+          "ts": 1788351075.59,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM [openai] using model [meta/llama-3.2-11b-vision-instruct] generating response..."
+        },
+        {
+          "ts": 1788351082.703,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM response received from [meta/llama-3.2-11b-vision-instruct]. Snippet: **Intent Classification**\n\nBased on the provided q..."
+        },
+        {
+          "ts": 1788351082.703,
+          "level": "INFO",
+          "node": "INTENT",
+          "msg": "Classification Result: SELECT (conf: 1.0) | Needs Clarification: False"
+        },
+        {
+          "ts": 1788351082.771,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Intent classified: SELECT (conf: 1.0) | Needs Clarification: False"
+        },
+        {
+          "ts": 1788351082.773,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [generate_sql]"
+        },
+        {
+          "ts": 1788351082.774,
+          "level": "INFO",
+          "node": "SQL_GEN",
+          "msg": "Generating SQL for domain: retail_clothing | Query: List all products with a stock count of 0 across all locations, grouped by supplier."
+        },
+        {
+          "ts": 1788351082.785,
+          "level": "INFO",
+          "node": "SQL_GEN",
+          "msg": "Using custom SQL prompt for domain: retail_clothing"
+        },
+        {
+          "ts": 1788351082.785,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM [openai] using model [meta/llama-3.2-11b-vision-instruct] generating response..."
+        },
+        {
+          "ts": 1788351084.388,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM response received from [meta/llama-3.2-11b-vision-instruct]. Snippet: SELECT p.supplier_id, p.style_name, p.size, i.stoc..."
+        },
+        {
+          "ts": 1788351084.388,
+          "level": "INFO",
+          "node": "SQL_GEN",
+          "msg": "SQL Generated and cleaned: SELECT p.supplier_id, p.style_name, p.size, i.stoc..."
+        },
+        {
+          "ts": 1788351084.388,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "SQL Generated: SELECT p.supplier_id, p.style_name, p.size, i.stoc..."
+        },
+        {
+          "ts": 1788351084.395,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [validate_sql]"
+        },
+        {
+          "ts": 1788351084.4,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [execute_query]"
+        },
+        {
+          "ts": 1788351084.4,
+          "level": "INFO",
+          "node": "DB_EXEC",
+          "msg": "Executing SQL: SELECT p.supplier_id, p.style_name, p.size, i.stock_count \nFROM products p \nJOIN inventory i ON p.sku = i.sku \nWHERE i.stock_count = 0"
+        },
+        {
+          "ts": 1788351084.404,
+          "level": "INFO",
+          "node": "DB_EXEC",
+          "msg": "Execution complete. Returned 1 rows."
+        },
+        {
+          "ts": 1788351084.404,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Query execution successful. Rows: 1"
+        },
+        {
+          "ts": 1788351084.406,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [analyze_stockout]"
+        },
+        {
+          "ts": 1788351084.426,
+          "level": "INFO",
+          "node": "stockout_analyzer.py",
+          "msg": "Stockout analysis for retail_clothing: 17 at-risk products found"
+        },
+        {
+          "ts": 1788351084.427,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Stockout analysis complete: 17 at-risk products"
+        },
+        {
+          "ts": 1788351084.432,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [insight_recommendation]"
+        },
+        {
+          "ts": 1788351084.432,
+          "level": "INFO",
+          "node": "INSIGHT",
+          "msg": "Generating insights for 1 rows in domain: retail_clothing"
+        },
+        {
+          "ts": 1788351084.432,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM [openai] using model [meta/llama-3.2-11b-vision-instruct] generating response..."
+        },
+        {
+          "ts": 1788351084.436,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [recommend_visualization]"
+        },
+        {
+          "ts": 1788351084.436,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Visualization recommended: bar"
+        },
+        {
+          "ts": 1788351090.475,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM response received from [meta/llama-3.2-11b-vision-instruct]. Snippet: { \n  \"insight\": \"The data indicates a potential st..."
+        },
+        {
+          "ts": 1788351090.476,
+          "level": "ERROR",
+          "node": "INSIGHT",
+          "msg": "Insight Generation Error: Expecting ',' delimiter: line 3 column 67 (char 562)"
+        },
+        {
+          "ts": 1788351090.476,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Insights generated successfully."
+        }
+      ]
+    },
+    {
+      "mission_id": "SIZING-ANOMALY-002",
+      "mission_name": "Sizing Anomaly Detection",
+      "domain": "retail_clothing",
+      "severity": "LOW",
+      "risk_score": 0,
+      "risk_factors": {},
+      "sql": "SELECT p.sku, p.style_name, p.size, p.category \nFROM products p \nJOIN (SELECT category, size, COUNT(*) as total FROM products GROUP BY category, size) c ON p.category = c.category AND p.size = c.size \nWHERE (SELECT COUNT(*) FROM products WHERE category = p.category AND size = p.size) * 1.0 / (SELECT COUNT(*) FROM products WHERE category = p.category) < 0.2 \nORDER BY p.category, p.size",
+      "data_count": 0,
+      "results": [],
+      "visualization_config": null,
+      "insight": "No data found to analyze.",
+      "recommendation": "Try broadening your search criteria or checking if the data for this period is available.",
+      "original_query": "Find all products with a size that is not present in at least 20% of its categories, ordered by category and size.",
+      "depth": 0,
+      "parent_mission_id": null,
+      "rationale": "",
+      "timestamp": "LIVE AUDIT",
+      "logs": [
+        {
+          "ts": 1788351075.591,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [classify_intent]"
+        },
+        {
+          "ts": 1788351075.592,
+          "level": "INFO",
+          "node": "INTENT",
+          "msg": "Classifying intent for domain: retail_clothing | Query: Find all products with a size that is not present in at least 20% of its categories, ordered by category and size."
+        },
+        {
+          "ts": 1788351075.593,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM [openai] using model [meta/llama-3.2-11b-vision-instruct] generating response..."
+        },
+        {
+          "ts": 1788351100.802,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM response received from [meta/llama-3.2-11b-vision-instruct]. Snippet: **Intent Classification**\n\nBased on the provided q..."
+        },
+        {
+          "ts": 1788351100.804,
+          "level": "INFO",
+          "node": "INTENT",
+          "msg": "Classification Result: SELECT (conf: 1.0) | Needs Clarification: False"
+        },
+        {
+          "ts": 1788351100.878,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Intent classified: SELECT (conf: 1.0) | Needs Clarification: False"
+        },
+        {
+          "ts": 1788351100.88,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [generate_sql]"
+        },
+        {
+          "ts": 1788351100.88,
+          "level": "INFO",
+          "node": "SQL_GEN",
+          "msg": "Generating SQL for domain: retail_clothing | Query: Find all products with a size that is not present in at least 20% of its categories, ordered by category and size."
+        },
+        {
+          "ts": 1788351100.893,
+          "level": "INFO",
+          "node": "SQL_GEN",
+          "msg": "Using custom SQL prompt for domain: retail_clothing"
+        },
+        {
+          "ts": 1788351100.893,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM [openai] using model [meta/llama-3.2-11b-vision-instruct] generating response..."
+        },
+        {
+          "ts": 1788351104.866,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM response received from [meta/llama-3.2-11b-vision-instruct]. Snippet: SELECT p.sku, p.style_name, p.size, p.category \nFR..."
+        },
+        {
+          "ts": 1788351104.866,
+          "level": "INFO",
+          "node": "SQL_GEN",
+          "msg": "SQL Generated and cleaned: SELECT p.sku, p.style_name, p.size, p.category \nFR..."
+        },
+        {
+          "ts": 1788351104.866,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "SQL Generated: SELECT p.sku, p.style_name, p.size, p.category \nFR..."
+        },
+        {
+          "ts": 1788351104.871,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [validate_sql]"
+        },
+        {
+          "ts": 1788351104.881,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [execute_query]"
+        },
+        {
+          "ts": 1788351104.881,
+          "level": "INFO",
+          "node": "DB_EXEC",
+          "msg": "Executing SQL: SELECT p.sku, p.style_name, p.size, p.category \nFROM products p \nJOIN (SELECT category, size, COUNT(*) as total FROM products GROUP BY category, size) c ON p.category = c.category AND p.size = c.size \nWHERE (SELECT COUNT(*) FROM products WHERE category = p.category AND size = p.size) * 1.0 / (SELECT COUNT(*) FROM products WHERE category = p.category) < 0.2 \nORDER BY p.category, p.size"
+        },
+        {
+          "ts": 1788351104.888,
+          "level": "INFO",
+          "node": "DB_EXEC",
+          "msg": "Execution complete. Returned 0 rows."
+        },
+        {
+          "ts": 1788351104.888,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Query execution successful. Rows: 0"
+        },
+        {
+          "ts": 1788351104.891,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [analyze_stockout]"
+        },
+        {
+          "ts": 1788351104.921,
+          "level": "INFO",
+          "node": "stockout_analyzer.py",
+          "msg": "Stockout analysis for retail_clothing: 17 at-risk products found"
+        },
+        {
+          "ts": 1788351104.922,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Stockout analysis complete: 17 at-risk products"
+        },
+        {
+          "ts": 1788351104.929,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [insight_recommendation]"
+        },
+        {
+          "ts": 1788351104.93,
+          "level": "INFO",
+          "node": "INSIGHT",
+          "msg": "Generating insights for 0 rows in domain: retail_clothing"
+        },
+        {
+          "ts": 1788351104.93,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Insights generated successfully."
+        },
+        {
+          "ts": 1788351104.93,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [recommend_visualization]"
+        },
+        {
+          "ts": 1788351104.93,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "No results for visualization recommendation."
+        }
+      ]
+    },
+    {
+      "mission_id": "SUPPLIER-DELAY-003",
+      "mission_name": "Supplier Delay Warning",
+      "domain": "retail_clothing",
+      "severity": "LOW",
+      "risk_score": 0,
+      "risk_factors": {},
+      "sql": "SELECT supplier_name, lead_time_days FROM suppliers WHERE lead_time_days > 30 ORDER BY lead_time_days, supplier_name",
+      "data_count": 0,
+      "results": [],
+      "visualization_config": null,
+      "insight": "No data found to analyze.",
+      "recommendation": "Try broadening your search criteria or checking if the data for this period is available.",
+      "original_query": "Identify suppliers with a lead time exceeding 30 days, ordered by lead time and supplier name.",
+      "depth": 0,
+      "parent_mission_id": null,
+      "rationale": "",
+      "timestamp": "LIVE AUDIT",
+      "logs": [
+        {
+          "ts": 1788351075.595,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [classify_intent]"
+        },
+        {
+          "ts": 1788351075.596,
+          "level": "INFO",
+          "node": "INTENT",
+          "msg": "Classifying intent for domain: retail_clothing | Query: Identify suppliers with a lead time exceeding 30 days, ordered by lead time and supplier name."
+        },
+        {
+          "ts": 1788351075.597,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM [openai] using model [meta/llama-3.2-11b-vision-instruct] generating response..."
+        },
+        {
+          "ts": 1788351084.389,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM response received from [meta/llama-3.2-11b-vision-instruct]. Snippet: **Intent Classification**\n\nBased on the provided q..."
+        },
+        {
+          "ts": 1788351084.39,
+          "level": "INFO",
+          "node": "INTENT",
+          "msg": "Classification Result: SELECT (conf: 1.0) | Needs Clarification: False"
+        },
+        {
+          "ts": 1788351084.457,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Intent classified: SELECT (conf: 1.0) | Needs Clarification: False"
+        },
+        {
+          "ts": 1788351084.46,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [generate_sql]"
+        },
+        {
+          "ts": 1788351084.46,
+          "level": "INFO",
+          "node": "SQL_GEN",
+          "msg": "Generating SQL for domain: retail_clothing | Query: Identify suppliers with a lead time exceeding 30 days, ordered by lead time and supplier name."
+        },
+        {
+          "ts": 1788351084.47,
+          "level": "INFO",
+          "node": "SQL_GEN",
+          "msg": "Using custom SQL prompt for domain: retail_clothing"
+        },
+        {
+          "ts": 1788351084.471,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM [openai] using model [meta/llama-3.2-11b-vision-instruct] generating response..."
+        },
+        {
+          "ts": 1788351101.441,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM response received from [meta/llama-3.2-11b-vision-instruct]. Snippet: SELECT supplier_name, lead_time_days FROM supplier..."
+        },
+        {
+          "ts": 1788351101.441,
+          "level": "INFO",
+          "node": "SQL_GEN",
+          "msg": "SQL Generated and cleaned: SELECT supplier_name, lead_time_days FROM supplier..."
+        },
+        {
+          "ts": 1788351101.442,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "SQL Generated: SELECT supplier_name, lead_time_days FROM supplier..."
+        },
+        {
+          "ts": 1788351101.446,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [validate_sql]"
+        },
+        {
+          "ts": 1788351101.449,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [execute_query]"
+        },
+        {
+          "ts": 1788351101.449,
+          "level": "INFO",
+          "node": "DB_EXEC",
+          "msg": "Executing SQL: SELECT supplier_name, lead_time_days FROM suppliers WHERE lead_time_days > 30 ORDER BY lead_time_days, supplier_name"
+        },
+        {
+          "ts": 1788351101.451,
+          "level": "INFO",
+          "node": "DB_EXEC",
+          "msg": "Execution complete. Returned 0 rows."
+        },
+        {
+          "ts": 1788351101.451,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Query execution successful. Rows: 0"
+        },
+        {
+          "ts": 1788351101.453,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [analyze_stockout]"
+        },
+        {
+          "ts": 1788351101.454,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [insight_recommendation]"
+        },
+        {
+          "ts": 1788351101.454,
+          "level": "INFO",
+          "node": "INSIGHT",
+          "msg": "Generating insights for 0 rows in domain: retail_clothing"
+        },
+        {
+          "ts": 1788351101.454,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Insights generated successfully."
+        },
+        {
+          "ts": 1788351101.454,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [recommend_visualization]"
+        },
+        {
+          "ts": 1788351101.455,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "No results for visualization recommendation."
+        }
+      ]
+    },
+    {
+      "mission_id": "REORDER-POINT-BREACH-004",
+      "mission_name": "Reorder Point Breach Alert",
+      "domain": "retail_clothing",
+      "severity": "MEDIUM",
+      "risk_score": 42,
+      "risk_factors": {
+        "affected_entities": {
+          "value": 14,
+          "score": 100,
+          "detail": "14 unique entities"
+        },
+        "dollar_exposure": {
+          "value": 0,
+          "score": 0,
+          "detail": "$0 exposure"
+        },
+        "velocity": {
+          "value": 14,
+          "score": 70,
+          "detail": "14 events"
+        },
+        "pep_involvement": {
+          "value": 0,
+          "score": 0,
+          "detail": "0 PEP accounts"
+        },
+        "kyc_gaps": {
+          "value": 0,
+          "score": 0,
+          "detail": "0 KYC gaps"
+        },
+        "severity_escalation": {
+          "value": "CRITICAL",
+          "score": 80,
+          "detail": "Base: CRITICAL"
+        }
+      },
+      "sql": "SELECT s.supplier_name, i.location, p.sku, p.style_name, p.size, i.stock_count, i.reorder_point \nFROM products p \nJOIN inventory i ON p.sku = i.sku \nJOIN suppliers s ON p.supplier_id = s.supplier_id \nWHERE i.stock_count <= i.reorder_point",
+      "data_count": 14,
+      "results": [
+        {
+          "supplier_name": "Istanbul Weave House",
+          "location": "Store-Koramangala",
+          "sku": "CL-00018",
+          "style_name": "Classic Polo",
+          "size": "M",
+          "stock_count": 5,
+          "reorder_point": 5
+        },
+        {
+          "supplier_name": "Istanbul Weave House",
+          "location": "Warehouse-Bengaluru",
+          "sku": "CL-00029",
+          "style_name": "Classic Polo",
+          "size": "L",
+          "stock_count": 5,
+          "reorder_point": 5
+        },
+        {
+          "supplier_name": "Tirupur Knitwear Ltd.",
+          "location": "Store-Indiranagar",
+          "sku": "CL-00062",
+          "style_name": "Wool Blend Blazer",
+          "size": "S",
+          "stock_count": 4,
+          "reorder_point": 5
+        },
+        {
+          "supplier_name": "Tirupur Knitwear Ltd.",
+          "location": "Warehouse-Mumbai",
+          "sku": "CL-00065",
+          "style_name": "Wool Blend Blazer",
+          "size": "XL",
+          "stock_count": 3,
+          "reorder_point": 5
+        },
+        {
+          "supplier_name": "Tirupur Knitwear Ltd.",
+          "location": "Warehouse-Mumbai",
+          "sku": "CL-00066",
+          "style_name": "Wool Blend Blazer",
+          "size": "XS",
+          "stock_count": 5,
+          "reorder_point": 5
+        },
+        {
+          "supplier_name": "Tirupur Knitwear Ltd.",
+          "location": "Warehouse-Mumbai",
+          "sku": "CL-00067",
+          "style_name": "Wool Blend Blazer",
+          "size": "S",
+          "stock_count": 3,
+          "reorder_point": 5
+        },
+        {
+          "supplier_name": "Tirupur Knitwear Ltd.",
+          "location": "Store-Koramangala",
+          "sku": "CL-00068",
+          "style_name": "Wool Blend Blazer",
+          "size": "M",
+          "stock_count": 1,
+          "reorder_point": 5
+        },
+        {
+          "supplier_name": "Tirupur Knitwear Ltd.",
+          "location": "Warehouse-Bengaluru",
+          "sku": "CL-00069",
+          "style_name": "Wool Blend Blazer",
+          "size": "L",
+          "stock_count": 5,
+          "reorder_point": 5
+        },
+        {
+          "supplier_name": "Tirupur Knitwear Ltd.",
+          "location": "Store-Indiranagar",
+          "sku": "CL-00070",
+          "style_name": "Wool Blend Blazer",
+          "size": "XL",
+          "stock_count": 4,
+          "reorder_point": 5
+        },
+        {
+          "supplier_name": "Tirupur Knitwear Ltd.",
+          "location": "Warehouse-Bengaluru",
+          "sku": "CL-00071",
+          "style_name": "Wool Blend Blazer",
+          "size": "XS",
+          "stock_count": 0,
+          "reorder_point": 5
+        },
+        {
+          "supplier_name": "Tirupur Knitwear Ltd.",
+          "location": "Warehouse-Mumbai",
+          "sku": "CL-00072",
+          "style_name": "Wool Blend Blazer",
+          "size": "S",
+          "stock_count": 1,
+          "reorder_point": 5
+        },
+        {
+          "supplier_name": "Tirupur Knitwear Ltd.",
+          "location": "Warehouse-Mumbai",
+          "sku": "CL-00073",
+          "style_name": "Wool Blend Blazer",
+          "size": "M",
+          "stock_count": 3,
+          "reorder_point": 5
+        },
+        {
+          "supplier_name": "Tirupur Knitwear Ltd.",
+          "location": "Store-Indiranagar",
+          "sku": "CL-00074",
+          "style_name": "Wool Blend Blazer",
+          "size": "L",
+          "stock_count": 3,
+          "reorder_point": 5
+        },
+        {
+          "supplier_name": "Tirupur Knitwear Ltd.",
+          "location": "Warehouse-Mumbai",
+          "sku": "CL-00075",
+          "style_name": "Wool Blend Blazer",
+          "size": "XL",
+          "stock_count": 1,
+          "reorder_point": 5
+        }
+      ],
+      "visualization_config": {
+        "chart_type": "line",
+        "title": "stock_count by location",
+        "x_axis_key": "location",
+        "y_axis_key": "stock_count",
+        "label": "stock_count",
+        "description": "Auto-generated fallback chart"
+      },
+      "insight": "Data analysis complete. Results retrieved.",
+      "recommendation": "Review the returned data for specific patterns.",
+      "original_query": "List all products with a stock count below its reorder point, grouped by supplier and location.",
+      "depth": 0,
+      "parent_mission_id": null,
+      "rationale": "",
+      "timestamp": "LIVE AUDIT",
+      "logs": [
+        {
+          "ts": 1788351075.598,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [classify_intent]"
+        },
+        {
+          "ts": 1788351075.599,
+          "level": "INFO",
+          "node": "INTENT",
+          "msg": "Classifying intent for domain: retail_clothing | Query: List all products with a stock count below its reorder point, grouped by supplier and location."
+        },
+        {
+          "ts": 1788351075.601,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM [openai] using model [meta/llama-3.2-11b-vision-instruct] generating response..."
+        },
+        {
+          "ts": 1788351084.429,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM response received from [meta/llama-3.2-11b-vision-instruct]. Snippet: **Intent Classification**\n\nBased on the provided q..."
+        },
+        {
+          "ts": 1788351084.43,
+          "level": "INFO",
+          "node": "INTENT",
+          "msg": "Classification Result: SELECT (conf: 1.0) | Needs Clarification: False"
+        },
+        {
+          "ts": 1788351084.507,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Intent classified: SELECT (conf: 1.0) | Needs Clarification: False"
+        },
+        {
+          "ts": 1788351084.518,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [generate_sql]"
+        },
+        {
+          "ts": 1788351084.519,
+          "level": "INFO",
+          "node": "SQL_GEN",
+          "msg": "Generating SQL for domain: retail_clothing | Query: List all products with a stock count below its reorder point, grouped by supplier and location."
+        },
+        {
+          "ts": 1788351084.531,
+          "level": "INFO",
+          "node": "SQL_GEN",
+          "msg": "Using custom SQL prompt for domain: retail_clothing"
+        },
+        {
+          "ts": 1788351084.532,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM [openai] using model [meta/llama-3.2-11b-vision-instruct] generating response..."
+        },
+        {
+          "ts": 1788351092.151,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM response received from [meta/llama-3.2-11b-vision-instruct]. Snippet: SELECT s.supplier_name, i.location, p.sku, p.style..."
+        },
+        {
+          "ts": 1788351092.151,
+          "level": "INFO",
+          "node": "SQL_GEN",
+          "msg": "SQL Generated and cleaned: SELECT s.supplier_name, i.location, p.sku, p.style..."
+        },
+        {
+          "ts": 1788351092.151,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "SQL Generated: SELECT s.supplier_name, i.location, p.sku, p.style..."
+        },
+        {
+          "ts": 1788351092.154,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [validate_sql]"
+        },
+        {
+          "ts": 1788351092.16,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [execute_query]"
+        },
+        {
+          "ts": 1788351092.16,
+          "level": "INFO",
+          "node": "DB_EXEC",
+          "msg": "Executing SQL: SELECT s.supplier_name, i.location, p.sku, p.style_name, p.size, i.stock_count, i.reorder_point \nFROM products p \nJOIN inventory i ON p.sku = i.sku \nJOIN suppliers s ON p.supplier_id = s.supplier_id \nWHERE i.stock_count <= i.reorder_point"
+        },
+        {
+          "ts": 1788351092.162,
+          "level": "INFO",
+          "node": "DB_EXEC",
+          "msg": "Execution complete. Returned 14 rows."
+        },
+        {
+          "ts": 1788351092.163,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Query execution successful. Rows: 14"
+        },
+        {
+          "ts": 1788351092.165,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [analyze_stockout]"
+        },
+        {
+          "ts": 1788351092.179,
+          "level": "INFO",
+          "node": "stockout_analyzer.py",
+          "msg": "Stockout analysis for retail_clothing: 17 at-risk products found"
+        },
+        {
+          "ts": 1788351092.18,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Stockout analysis complete: 17 at-risk products"
+        },
+        {
+          "ts": 1788351092.183,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [insight_recommendation]"
+        },
+        {
+          "ts": 1788351092.183,
+          "level": "INFO",
+          "node": "INSIGHT",
+          "msg": "Generating insights for 14 rows in domain: retail_clothing"
+        },
+        {
+          "ts": 1788351092.183,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM [openai] using model [meta/llama-3.2-11b-vision-instruct] generating response..."
+        },
+        {
+          "ts": 1788351092.185,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [recommend_visualization]"
+        },
+        {
+          "ts": 1788351092.185,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Visualization recommended: line"
+        },
+        {
+          "ts": 1788351101.389,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM response received from [meta/llama-3.2-11b-vision-instruct]. Snippet: { \n  \"insight\": \"The data indicates a high risk of..."
+        },
+        {
+          "ts": 1788351101.39,
+          "level": "ERROR",
+          "node": "INSIGHT",
+          "msg": "Insight Generation Error: Expecting ',' delimiter: line 3 column 73 (char 716)"
+        },
+        {
+          "ts": 1788351101.39,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Insights generated successfully."
+        }
+      ]
+    },
+    {
+      "mission_id": "PRICING-ANOMALY-005",
+      "mission_name": "Pricing Anomaly Detection",
+      "domain": "retail_clothing",
+      "severity": "LOW",
+      "risk_score": 0,
+      "risk_factors": {},
+      "sql": "SELECT p.sku, p.style_name, p.retail_price \nFROM products p \nJOIN sales_events se ON p.sku = se.sku \nWHERE p.retail_price * 1.1 > (SELECT AVG(units_sold * se.retail_price) / SUM(units_sold) FROM sales_events se2 WHERE se2.sku = se.sku)",
+      "data_count": 0,
+      "results": [],
+      "visualization_config": null,
+      "insight": "No data found to analyze.",
+      "recommendation": "Try broadening your search criteria or checking if the data for this period is available.",
+      "original_query": "Find all products with a retail price that is more than 10% higher than its average retail price across all channels, ordered by product name and retail price.",
+      "depth": 0,
+      "parent_mission_id": null,
+      "rationale": "",
+      "timestamp": "LIVE AUDIT",
+      "logs": [
+        {
+          "ts": 1788351075.603,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [classify_intent]"
+        },
+        {
+          "ts": 1788351075.603,
+          "level": "INFO",
+          "node": "INTENT",
+          "msg": "Classifying intent for domain: retail_clothing | Query: Find all products with a retail price that is more than 10% higher than its average retail price across all channels, ordered by product name and retail price."
+        },
+        {
+          "ts": 1788351075.605,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM [openai] using model [meta/llama-3.2-11b-vision-instruct] generating response..."
+        },
+        {
+          "ts": 1788351100.954,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM response received from [meta/llama-3.2-11b-vision-instruct]. Snippet: To classify the user's intent, I will analyze the ..."
+        },
+        {
+          "ts": 1788351100.955,
+          "level": "INFO",
+          "node": "INTENT",
+          "msg": "Classification Result: SELECT (conf: 0.9) | Needs Clarification: False"
+        },
+        {
+          "ts": 1788351101.026,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Intent classified: SELECT (conf: 0.9) | Needs Clarification: False"
+        },
+        {
+          "ts": 1788351101.028,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [generate_sql]"
+        },
+        {
+          "ts": 1788351101.028,
+          "level": "INFO",
+          "node": "SQL_GEN",
+          "msg": "Generating SQL for domain: retail_clothing | Query: Find all products with a retail price that is more than 10% higher than its average retail price across all channels, ordered by product name and retail price."
+        },
+        {
+          "ts": 1788351101.039,
+          "level": "INFO",
+          "node": "SQL_GEN",
+          "msg": "Using custom SQL prompt for domain: retail_clothing"
+        },
+        {
+          "ts": 1788351101.04,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM [openai] using model [meta/llama-3.2-11b-vision-instruct] generating response..."
+        },
+        {
+          "ts": 1788351104.363,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM response received from [meta/llama-3.2-11b-vision-instruct]. Snippet: SELECT p.sku, p.style_name, p.retail_price \nFROM p..."
+        },
+        {
+          "ts": 1788351104.363,
+          "level": "INFO",
+          "node": "SQL_GEN",
+          "msg": "SQL Generated and cleaned: SELECT p.sku, p.style_name, p.retail_price \nFROM p..."
+        },
+        {
+          "ts": 1788351104.363,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "SQL Generated: SELECT p.sku, p.style_name, p.retail_price \nFROM p..."
+        },
+        {
+          "ts": 1788351104.364,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [validate_sql]"
+        },
+        {
+          "ts": 1788351104.371,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [execute_query]"
+        },
+        {
+          "ts": 1788351104.371,
+          "level": "INFO",
+          "node": "DB_EXEC",
+          "msg": "Executing SQL: SELECT p.sku, p.style_name, p.retail_price \nFROM products p \nJOIN sales_events se ON p.sku = se.sku \nWHERE p.retail_price * 1.1 > (SELECT AVG(units_sold * se.retail_price) / SUM(units_sold) FROM sales_events se2 WHERE se2.sku = se.sku)"
+        },
+        {
+          "ts": 1788351104.372,
+          "level": "ERROR",
+          "node": "DB_EXEC",
+          "msg": "DATABASE EXECUTION ERROR: (sqlite3.OperationalError) no such column: se.retail_price\n[SQL: SELECT p.sku, p.style_name, p.retail_price \nFROM products p \nJOIN sales_events se ON p.sku = se.sku \nWHERE p.retail_price * 1.1 > (SELECT AVG(units_sold * se.retail_price) / SUM(units_sold) FROM sales_events se2 WHERE se2.sku = se.sku)]\n(Background on this error at: https://sqlalche.me/e/20/e3q8) | Query: SELECT p.sku, p.style_name, p.retail_price \nFROM products p \nJOIN sales_events se ON p.sku = se.sku \nWHERE p.retail_price * 1.1 > (SELECT AVG(units_sold * se.retail_price) / SUM(units_sold) FROM sales_events se2 WHERE se2.sku = se.sku)"
+        },
+        {
+          "ts": 1788351104.372,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Query execution successful. Rows: 0"
+        },
+        {
+          "ts": 1788351104.374,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [analyze_stockout]"
+        },
+        {
+          "ts": 1788351104.392,
+          "level": "INFO",
+          "node": "stockout_analyzer.py",
+          "msg": "Stockout analysis for retail_clothing: 17 at-risk products found"
+        },
+        {
+          "ts": 1788351104.393,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Stockout analysis complete: 17 at-risk products"
+        },
+        {
+          "ts": 1788351104.395,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [insight_recommendation]"
+        },
+        {
+          "ts": 1788351104.396,
+          "level": "INFO",
+          "node": "INSIGHT",
+          "msg": "Generating insights for 0 rows in domain: retail_clothing"
+        },
+        {
+          "ts": 1788351104.396,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Insights generated successfully."
+        },
+        {
+          "ts": 1788351104.397,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [recommend_visualization]"
+        },
+        {
+          "ts": 1788351104.397,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "No results for visualization recommendation."
+        }
+      ]
+    },
+    {
+      "mission_id": "SALES-TRENDS-006",
+      "mission_name": "Sales Trends Analysis",
+      "domain": "retail_clothing",
+      "severity": "MEDIUM",
+      "risk_score": 39,
+      "risk_factors": {
+        "affected_entities": {
+          "value": 199,
+          "score": 100,
+          "detail": "199 unique entities"
+        },
+        "dollar_exposure": {
+          "value": 0,
+          "score": 0,
+          "detail": "$0 exposure"
+        },
+        "velocity": {
+          "value": 199,
+          "score": 100,
+          "detail": "199 events"
+        },
+        "pep_involvement": {
+          "value": 0,
+          "score": 0,
+          "detail": "0 PEP accounts"
+        },
+        "kyc_gaps": {
+          "value": 0,
+          "score": 0,
+          "detail": "0 KYC gaps"
+        },
+        "severity_escalation": {
+          "value": "MEDIUM",
+          "score": 25,
+          "detail": "Base: MEDIUM"
+        }
+      },
+      "sql": "SELECT sku, channel, SUM(units_sold) AS total_sales FROM sales_events GROUP BY sku, channel ORDER BY total_sales DESC",
+      "data_count": 199,
+      "results": [
+        {
+          "sku": "CL-00010",
+          "channel": "Online",
+          "total_sales": 17
+        },
+        {
+          "sku": "CL-00085",
+          "channel": "In-Store",
+          "total_sales": 16
+        },
+        {
+          "sku": "CL-00005",
+          "channel": "Marketplace",
+          "total_sales": 14
+        },
+        {
+          "sku": "CL-00022",
+          "channel": "Online",
+          "total_sales": 14
+        },
+        {
+          "sku": "CL-00033",
+          "channel": "Online",
+          "total_sales": 14
+        },
+        {
+          "sku": "CL-00041",
+          "channel": "Marketplace",
+          "total_sales": 14
+        },
+        {
+          "sku": "CL-00104",
+          "channel": "Online",
+          "total_sales": 14
+        },
+        {
+          "sku": "CL-00083",
+          "channel": "In-Store",
+          "total_sales": 13
+        },
+        {
+          "sku": "CL-00099",
+          "channel": "Marketplace",
+          "total_sales": 12
+        },
+        {
+          "sku": "CL-00007",
+          "channel": "Online",
+          "total_sales": 11
+        },
+        {
+          "sku": "CL-00047",
+          "channel": "In-Store",
+          "total_sales": 11
+        },
+        {
+          "sku": "CL-00048",
+          "channel": "Marketplace",
+          "total_sales": 11
+        },
+        {
+          "sku": "CL-00095",
+          "channel": "Online",
+          "total_sales": 11
+        },
+        {
+          "sku": "CL-00007",
+          "channel": "Marketplace",
+          "total_sales": 10
+        },
+        {
+          "sku": "CL-00029",
+          "channel": "Online",
+          "total_sales": 10
+        },
+        {
+          "sku": "CL-00042",
+          "channel": "Online",
+          "total_sales": 10
+        },
+        {
+          "sku": "CL-00043",
+          "channel": "Online",
+          "total_sales": 10
+        },
+        {
+          "sku": "CL-00078",
+          "channel": "Marketplace",
+          "total_sales": 10
+        },
+        {
+          "sku": "CL-00089",
+          "channel": "In-Store",
+          "total_sales": 10
+        },
+        {
+          "sku": "CL-00091",
+          "channel": "Online",
+          "total_sales": 10
+        },
+        {
+          "sku": "CL-00094",
+          "channel": "Marketplace",
+          "total_sales": 10
+        },
+        {
+          "sku": "CL-00097",
+          "channel": "Marketplace",
+          "total_sales": 10
+        },
+        {
+          "sku": "CL-00117",
+          "channel": "Marketplace",
+          "total_sales": 10
+        },
+        {
+          "sku": "CL-00120",
+          "channel": "Marketplace",
+          "total_sales": 10
+        },
+        {
+          "sku": "CL-00031",
+          "channel": "Marketplace",
+          "total_sales": 9
+        },
+        {
+          "sku": "CL-00079",
+          "channel": "In-Store",
+          "total_sales": 9
+        },
+        {
+          "sku": "CL-00100",
+          "channel": "In-Store",
+          "total_sales": 9
+        },
+        {
+          "sku": "CL-00117",
+          "channel": "Online",
+          "total_sales": 9
+        },
+        {
+          "sku": "CL-00004",
+          "channel": "Online",
+          "total_sales": 8
+        },
+        {
+          "sku": "CL-00041",
+          "channel": "Online",
+          "total_sales": 8
+        },
+        {
+          "sku": "CL-00049",
+          "channel": "In-Store",
+          "total_sales": 8
+        },
+        {
+          "sku": "CL-00093",
+          "channel": "Marketplace",
+          "total_sales": 8
+        },
+        {
+          "sku": "CL-00094",
+          "channel": "Online",
+          "total_sales": 8
+        },
+        {
+          "sku": "CL-00096",
+          "channel": "In-Store",
+          "total_sales": 8
+        },
+        {
+          "sku": "CL-00118",
+          "channel": "Online",
+          "total_sales": 8
+        },
+        {
+          "sku": "CL-00024",
+          "channel": "In-Store",
+          "total_sales": 7
+        },
+        {
+          "sku": "CL-00026",
+          "channel": "In-Store",
+          "total_sales": 7
+        },
+        {
+          "sku": "CL-00037",
+          "channel": "In-Store",
+          "total_sales": 7
+        },
+        {
+          "sku": "CL-00037",
+          "channel": "Marketplace",
+          "total_sales": 7
+        },
+        {
+          "sku": "CL-00056",
+          "channel": "Marketplace",
+          "total_sales": 7
+        },
+        {
+          "sku": "CL-00077",
+          "channel": "In-Store",
+          "total_sales": 7
+        },
+        {
+          "sku": "CL-00082",
+          "channel": "Online",
+          "total_sales": 7
+        },
+        {
+          "sku": "CL-00084",
+          "channel": "Marketplace",
+          "total_sales": 7
+        },
+        {
+          "sku": "CL-00101",
+          "channel": "In-Store",
+          "total_sales": 7
+        },
+        {
+          "sku": "CL-00110",
+          "channel": "In-Store",
+          "total_sales": 7
+        },
+        {
+          "sku": "CL-00115",
+          "channel": "In-Store",
+          "total_sales": 7
+        },
+        {
+          "sku": "CL-00004",
+          "channel": "In-Store",
+          "total_sales": 6
+        },
+        {
+          "sku": "CL-00006",
+          "channel": "In-Store",
+          "total_sales": 6
+        },
+        {
+          "sku": "CL-00009",
+          "channel": "Marketplace",
+          "total_sales": 6
+        },
+        {
+          "sku": "CL-00009",
+          "channel": "Online",
+          "total_sales": 6
+        },
+        {
+          "sku": "CL-00013",
+          "channel": "Online",
+          "total_sales": 6
+        },
+        {
+          "sku": "CL-00023",
+          "channel": "In-Store",
+          "total_sales": 6
+        },
+        {
+          "sku": "CL-00024",
+          "channel": "Online",
+          "total_sales": 6
+        },
+        {
+          "sku": "CL-00029",
+          "channel": "Marketplace",
+          "total_sales": 6
+        },
+        {
+          "sku": "CL-00040",
+          "channel": "Marketplace",
+          "total_sales": 6
+        },
+        {
+          "sku": "CL-00049",
+          "channel": "Online",
+          "total_sales": 6
+        },
+        {
+          "sku": "CL-00055",
+          "channel": "Online",
+          "total_sales": 6
+        },
+        {
+          "sku": "CL-00059",
+          "channel": "Marketplace",
+          "total_sales": 6
+        },
+        {
+          "sku": "CL-00060",
+          "channel": "In-Store",
+          "total_sales": 6
+        },
+        {
+          "sku": "CL-00076",
+          "channel": "In-Store",
+          "total_sales": 6
+        },
+        {
+          "sku": "CL-00076",
+          "channel": "Marketplace",
+          "total_sales": 6
+        },
+        {
+          "sku": "CL-00081",
+          "channel": "In-Store",
+          "total_sales": 6
+        },
+        {
+          "sku": "CL-00084",
+          "channel": "In-Store",
+          "total_sales": 6
+        },
+        {
+          "sku": "CL-00093",
+          "channel": "In-Store",
+          "total_sales": 6
+        },
+        {
+          "sku": "CL-00101",
+          "channel": "Online",
+          "total_sales": 6
+        },
+        {
+          "sku": "CL-00110",
+          "channel": "Marketplace",
+          "total_sales": 6
+        },
+        {
+          "sku": "CL-00114",
+          "channel": "Online",
+          "total_sales": 6
+        },
+        {
+          "sku": "CL-00006",
+          "channel": "Online",
+          "total_sales": 5
+        },
+        {
+          "sku": "CL-00013",
+          "channel": "In-Store",
+          "total_sales": 5
+        },
+        {
+          "sku": "CL-00013",
+          "channel": "Marketplace",
+          "total_sales": 5
+        },
+        {
+          "sku": "CL-00019",
+          "channel": "Marketplace",
+          "total_sales": 5
+        },
+        {
+          "sku": "CL-00019",
+          "channel": "Online",
+          "total_sales": 5
+        },
+        {
+          "sku": "CL-00021",
+          "channel": "Online",
+          "total_sales": 5
+        },
+        {
+          "sku": "CL-00022",
+          "channel": "In-Store",
+          "total_sales": 5
+        },
+        {
+          "sku": "CL-00031",
+          "channel": "Online",
+          "total_sales": 5
+        },
+        {
+          "sku": "CL-00037",
+          "channel": "Online",
+          "total_sales": 5
+        },
+        {
+          "sku": "CL-00040",
+          "channel": "Online",
+          "total_sales": 5
+        },
+        {
+          "sku": "CL-00053",
+          "channel": "Online",
+          "total_sales": 5
+        },
+        {
+          "sku": "CL-00054",
+          "channel": "Marketplace",
+          "total_sales": 5
+        },
+        {
+          "sku": "CL-00056",
+          "channel": "Online",
+          "total_sales": 5
+        },
+        {
+          "sku": "CL-00058",
+          "channel": "Online",
+          "total_sales": 5
+        },
+        {
+          "sku": "CL-00078",
+          "channel": "Online",
+          "total_sales": 5
+        },
+        {
+          "sku": "CL-00079",
+          "channel": "Marketplace",
+          "total_sales": 5
+        },
+        {
+          "sku": "CL-00079",
+          "channel": "Online",
+          "total_sales": 5
+        },
+        {
+          "sku": "CL-00080",
+          "channel": "In-Store",
+          "total_sales": 5
+        },
+        {
+          "sku": "CL-00091",
+          "channel": "Marketplace",
+          "total_sales": 5
+        },
+        {
+          "sku": "CL-00092",
+          "channel": "Online",
+          "total_sales": 5
+        },
+        {
+          "sku": "CL-00099",
+          "channel": "Online",
+          "total_sales": 5
+        },
+        {
+          "sku": "CL-00101",
+          "channel": "Marketplace",
+          "total_sales": 5
+        },
+        {
+          "sku": "CL-00103",
+          "channel": "In-Store",
+          "total_sales": 5
+        },
+        {
+          "sku": "CL-00106",
+          "channel": "Online",
+          "total_sales": 5
+        },
+        {
+          "sku": "CL-00107",
+          "channel": "In-Store",
+          "total_sales": 5
+        },
+        {
+          "sku": "CL-00113",
+          "channel": "Online",
+          "total_sales": 5
+        },
+        {
+          "sku": "CL-00116",
+          "channel": "In-Store",
+          "total_sales": 5
+        },
+        {
+          "sku": "CL-00120",
+          "channel": "Online",
+          "total_sales": 5
+        },
+        {
+          "sku": "CL-00002",
+          "channel": "Online",
+          "total_sales": 4
+        },
+        {
+          "sku": "CL-00003",
+          "channel": "Marketplace",
+          "total_sales": 4
+        },
+        {
+          "sku": "CL-00005",
+          "channel": "In-Store",
+          "total_sales": 4
+        },
+        {
+          "sku": "CL-00005",
+          "channel": "Online",
+          "total_sales": 4
+        },
+        {
+          "sku": "CL-00007",
+          "channel": "In-Store",
+          "total_sales": 4
+        },
+        {
+          "sku": "CL-00016",
+          "channel": "In-Store",
+          "total_sales": 4
+        },
+        {
+          "sku": "CL-00016",
+          "channel": "Marketplace",
+          "total_sales": 4
+        },
+        {
+          "sku": "CL-00017",
+          "channel": "Online",
+          "total_sales": 4
+        },
+        {
+          "sku": "CL-00018",
+          "channel": "In-Store",
+          "total_sales": 4
+        },
+        {
+          "sku": "CL-00026",
+          "channel": "Marketplace",
+          "total_sales": 4
+        },
+        {
+          "sku": "CL-00026",
+          "channel": "Online",
+          "total_sales": 4
+        },
+        {
+          "sku": "CL-00033",
+          "channel": "In-Store",
+          "total_sales": 4
+        },
+        {
+          "sku": "CL-00034",
+          "channel": "Marketplace",
+          "total_sales": 4
+        },
+        {
+          "sku": "CL-00035",
+          "channel": "In-Store",
+          "total_sales": 4
+        },
+        {
+          "sku": "CL-00035",
+          "channel": "Marketplace",
+          "total_sales": 4
+        },
+        {
+          "sku": "CL-00038",
+          "channel": "In-Store",
+          "total_sales": 4
+        },
+        {
+          "sku": "CL-00043",
+          "channel": "In-Store",
+          "total_sales": 4
+        },
+        {
+          "sku": "CL-00046",
+          "channel": "Marketplace",
+          "total_sales": 4
+        },
+        {
+          "sku": "CL-00046",
+          "channel": "Online",
+          "total_sales": 4
+        },
+        {
+          "sku": "CL-00048",
+          "channel": "Online",
+          "total_sales": 4
+        },
+        {
+          "sku": "CL-00049",
+          "channel": "Marketplace",
+          "total_sales": 4
+        },
+        {
+          "sku": "CL-00052",
+          "channel": "Online",
+          "total_sales": 4
+        },
+        {
+          "sku": "CL-00057",
+          "channel": "In-Store",
+          "total_sales": 4
+        },
+        {
+          "sku": "CL-00059",
+          "channel": "Online",
+          "total_sales": 4
+        },
+        {
+          "sku": "CL-00060",
+          "channel": "Marketplace",
+          "total_sales": 4
+        },
+        {
+          "sku": "CL-00077",
+          "channel": "Online",
+          "total_sales": 4
+        },
+        {
+          "sku": "CL-00083",
+          "channel": "Marketplace",
+          "total_sales": 4
+        },
+        {
+          "sku": "CL-00089",
+          "channel": "Marketplace",
+          "total_sales": 4
+        },
+        {
+          "sku": "CL-00097",
+          "channel": "Online",
+          "total_sales": 4
+        },
+        {
+          "sku": "CL-00110",
+          "channel": "Online",
+          "total_sales": 4
+        },
+        {
+          "sku": "CL-00111",
+          "channel": "In-Store",
+          "total_sales": 4
+        },
+        {
+          "sku": "CL-00112",
+          "channel": "In-Store",
+          "total_sales": 4
+        },
+        {
+          "sku": "CL-00112",
+          "channel": "Marketplace",
+          "total_sales": 4
+        },
+        {
+          "sku": "CL-00112",
+          "channel": "Online",
+          "total_sales": 4
+        },
+        {
+          "sku": "CL-00115",
+          "channel": "Online",
+          "total_sales": 4
+        },
+        {
+          "sku": "CL-00117",
+          "channel": "In-Store",
+          "total_sales": 4
+        },
+        {
+          "sku": "CL-00119",
+          "channel": "In-Store",
+          "total_sales": 4
+        },
+        {
+          "sku": "CL-00010",
+          "channel": "Marketplace",
+          "total_sales": 3
+        },
+        {
+          "sku": "CL-00024",
+          "channel": "Marketplace",
+          "total_sales": 3
+        },
+        {
+          "sku": "CL-00025",
+          "channel": "Marketplace",
+          "total_sales": 3
+        },
+        {
+          "sku": "CL-00028",
+          "channel": "Marketplace",
+          "total_sales": 3
+        },
+        {
+          "sku": "CL-00033",
+          "channel": "Marketplace",
+          "total_sales": 3
+        },
+        {
+          "sku": "CL-00035",
+          "channel": "Online",
+          "total_sales": 3
+        },
+        {
+          "sku": "CL-00042",
+          "channel": "Marketplace",
+          "total_sales": 3
+        },
+        {
+          "sku": "CL-00043",
+          "channel": "Marketplace",
+          "total_sales": 3
+        },
+        {
+          "sku": "CL-00044",
+          "channel": "In-Store",
+          "total_sales": 3
+        },
+        {
+          "sku": "CL-00050",
+          "channel": "In-Store",
+          "total_sales": 3
+        },
+        {
+          "sku": "CL-00055",
+          "channel": "Marketplace",
+          "total_sales": 3
+        },
+        {
+          "sku": "CL-00059",
+          "channel": "In-Store",
+          "total_sales": 3
+        },
+        {
+          "sku": "CL-00076",
+          "channel": "Online",
+          "total_sales": 3
+        },
+        {
+          "sku": "CL-00078",
+          "channel": "In-Store",
+          "total_sales": 3
+        },
+        {
+          "sku": "CL-00082",
+          "channel": "Marketplace",
+          "total_sales": 3
+        },
+        {
+          "sku": "CL-00086",
+          "channel": "In-Store",
+          "total_sales": 3
+        },
+        {
+          "sku": "CL-00087",
+          "channel": "In-Store",
+          "total_sales": 3
+        },
+        {
+          "sku": "CL-00095",
+          "channel": "In-Store",
+          "total_sales": 3
+        },
+        {
+          "sku": "CL-00095",
+          "channel": "Marketplace",
+          "total_sales": 3
+        },
+        {
+          "sku": "CL-00100",
+          "channel": "Marketplace",
+          "total_sales": 3
+        },
+        {
+          "sku": "CL-00100",
+          "channel": "Online",
+          "total_sales": 3
+        },
+        {
+          "sku": "CL-00102",
+          "channel": "Marketplace",
+          "total_sales": 3
+        },
+        {
+          "sku": "CL-00106",
+          "channel": "In-Store",
+          "total_sales": 3
+        },
+        {
+          "sku": "CL-00111",
+          "channel": "Marketplace",
+          "total_sales": 3
+        },
+        {
+          "sku": "CL-00113",
+          "channel": "In-Store",
+          "total_sales": 3
+        },
+        {
+          "sku": "CL-00119",
+          "channel": "Online",
+          "total_sales": 3
+        },
+        {
+          "sku": "CL-00002",
+          "channel": "In-Store",
+          "total_sales": 2
+        },
+        {
+          "sku": "CL-00003",
+          "channel": "In-Store",
+          "total_sales": 2
+        },
+        {
+          "sku": "CL-00011",
+          "channel": "In-Store",
+          "total_sales": 2
+        },
+        {
+          "sku": "CL-00011",
+          "channel": "Online",
+          "total_sales": 2
+        },
+        {
+          "sku": "CL-00014",
+          "channel": "Online",
+          "total_sales": 2
+        },
+        {
+          "sku": "CL-00016",
+          "channel": "Online",
+          "total_sales": 2
+        },
+        {
+          "sku": "CL-00017",
+          "channel": "In-Store",
+          "total_sales": 2
+        },
+        {
+          "sku": "CL-00025",
+          "channel": "Online",
+          "total_sales": 2
+        },
+        {
+          "sku": "CL-00038",
+          "channel": "Online",
+          "total_sales": 2
+        },
+        {
+          "sku": "CL-00040",
+          "channel": "In-Store",
+          "total_sales": 2
+        },
+        {
+          "sku": "CL-00042",
+          "channel": "In-Store",
+          "total_sales": 2
+        },
+        {
+          "sku": "CL-00044",
+          "channel": "Marketplace",
+          "total_sales": 2
+        },
+        {
+          "sku": "CL-00044",
+          "channel": "Online",
+          "total_sales": 2
+        },
+        {
+          "sku": "CL-00047",
+          "channel": "Marketplace",
+          "total_sales": 2
+        },
+        {
+          "sku": "CL-00047",
+          "channel": "Online",
+          "total_sales": 2
+        },
+        {
+          "sku": "CL-00054",
+          "channel": "In-Store",
+          "total_sales": 2
+        },
+        {
+          "sku": "CL-00054",
+          "channel": "Online",
+          "total_sales": 2
+        },
+        {
+          "sku": "CL-00086",
+          "channel": "Marketplace",
+          "total_sales": 2
+        },
+        {
+          "sku": "CL-00096",
+          "channel": "Marketplace",
+          "total_sales": 2
+        },
+        {
+          "sku": "CL-00098",
+          "channel": "In-Store",
+          "total_sales": 2
+        },
+        {
+          "sku": "CL-00099",
+          "channel": "In-Store",
+          "total_sales": 2
+        },
+        {
+          "sku": "CL-00104",
+          "channel": "Marketplace",
+          "total_sales": 2
+        },
+        {
+          "sku": "CL-00109",
+          "channel": "In-Store",
+          "total_sales": 2
+        },
+        {
+          "sku": "CL-00003",
+          "channel": "Online",
+          "total_sales": 1
+        },
+        {
+          "sku": "CL-00008",
+          "channel": "In-Store",
+          "total_sales": 1
+        },
+        {
+          "sku": "CL-00008",
+          "channel": "Marketplace",
+          "total_sales": 1
+        },
+        {
+          "sku": "CL-00009",
+          "channel": "In-Store",
+          "total_sales": 1
+        },
+        {
+          "sku": "CL-00018",
+          "channel": "Online",
+          "total_sales": 1
+        },
+        {
+          "sku": "CL-00019",
+          "channel": "In-Store",
+          "total_sales": 1
+        },
+        {
+          "sku": "CL-00031",
+          "channel": "In-Store",
+          "total_sales": 1
+        },
+        {
+          "sku": "CL-00034",
+          "channel": "In-Store",
+          "total_sales": 1
+        },
+        {
+          "sku": "CL-00060",
+          "channel": "Online",
+          "total_sales": 1
+        },
+        {
+          "sku": "CL-00084",
+          "channel": "Online",
+          "total_sales": 1
+        },
+        {
+          "sku": "CL-00092",
+          "channel": "In-Store",
+          "total_sales": 1
+        },
+        {
+          "sku": "CL-00093",
+          "channel": "Online",
+          "total_sales": 1
+        },
+        {
+          "sku": "CL-00098",
+          "channel": "Marketplace",
+          "total_sales": 1
+        },
+        {
+          "sku": "CL-00102",
+          "channel": "In-Store",
+          "total_sales": 1
+        },
+        {
+          "sku": "CL-00111",
+          "channel": "Online",
+          "total_sales": 1
+        },
+        {
+          "sku": "CL-00114",
+          "channel": "In-Store",
+          "total_sales": 1
+        },
+        {
+          "sku": "CL-00115",
+          "channel": "Marketplace",
+          "total_sales": 1
+        },
+        {
+          "sku": "CL-00119",
+          "channel": "Marketplace",
+          "total_sales": 1
+        }
+      ],
+      "visualization_config": {
+        "chart_type": "bar",
+        "title": "total_sales by sku",
+        "x_axis_key": "sku",
+        "y_axis_key": "total_sales",
+        "label": "total_sales",
+        "description": "Auto-generated fallback chart"
+      },
+      "insight": "Data analysis complete. Results retrieved.",
+      "recommendation": "Review the returned data for specific patterns.",
+      "original_query": "Analyze sales trends across all products, channels, and time periods to identify top-selling products and channels, ordered by sales volume.",
+      "depth": 0,
+      "parent_mission_id": null,
+      "rationale": "",
+      "timestamp": "LIVE AUDIT",
+      "logs": [
+        {
+          "ts": 1788351075.606,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [classify_intent]"
+        },
+        {
+          "ts": 1788351075.607,
+          "level": "INFO",
+          "node": "INTENT",
+          "msg": "Classifying intent for domain: retail_clothing | Query: Analyze sales trends across all products, channels, and time periods to identify top-selling products and channels, ordered by sales volume."
+        },
+        {
+          "ts": 1788351075.609,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM [openai] using model [meta/llama-3.2-11b-vision-instruct] generating response..."
+        },
+        {
+          "ts": 1788351082.26,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM response received from [meta/llama-3.2-11b-vision-instruct]. Snippet: **Intent Classification**\n\nBased on the user query..."
+        },
+        {
+          "ts": 1788351082.262,
+          "level": "INFO",
+          "node": "INTENT",
+          "msg": "Classification Result: SELECT (conf: 0.9) | Needs Clarification: False"
+        },
+        {
+          "ts": 1788351082.329,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Intent classified: SELECT (conf: 0.9) | Needs Clarification: False"
+        },
+        {
+          "ts": 1788351082.333,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [generate_sql]"
+        },
+        {
+          "ts": 1788351082.333,
+          "level": "INFO",
+          "node": "SQL_GEN",
+          "msg": "Generating SQL for domain: retail_clothing | Query: Analyze sales trends across all products, channels, and time periods to identify top-selling products and channels, ordered by sales volume."
+        },
+        {
+          "ts": 1788351082.346,
+          "level": "INFO",
+          "node": "SQL_GEN",
+          "msg": "Using custom SQL prompt for domain: retail_clothing"
+        },
+        {
+          "ts": 1788351082.346,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM [openai] using model [meta/llama-3.2-11b-vision-instruct] generating response..."
+        },
+        {
+          "ts": 1788351083.464,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM response received from [meta/llama-3.2-11b-vision-instruct]. Snippet: SELECT sku, channel, SUM(units_sold) AS total_sale..."
+        },
+        {
+          "ts": 1788351083.464,
+          "level": "INFO",
+          "node": "SQL_GEN",
+          "msg": "SQL Generated and cleaned: SELECT sku, channel, SUM(units_sold) AS total_sale..."
+        },
+        {
+          "ts": 1788351083.464,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "SQL Generated: SELECT sku, channel, SUM(units_sold) AS total_sale..."
+        },
+        {
+          "ts": 1788351083.466,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [validate_sql]"
+        },
+        {
+          "ts": 1788351083.473,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [execute_query]"
+        },
+        {
+          "ts": 1788351083.474,
+          "level": "INFO",
+          "node": "DB_EXEC",
+          "msg": "Executing SQL: SELECT sku, channel, SUM(units_sold) AS total_sales FROM sales_events GROUP BY sku, channel ORDER BY total_sales DESC"
+        },
+        {
+          "ts": 1788351083.479,
+          "level": "INFO",
+          "node": "DB_EXEC",
+          "msg": "Execution complete. Returned 199 rows."
+        },
+        {
+          "ts": 1788351083.479,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Query execution successful. Rows: 199"
+        },
+        {
+          "ts": 1788351083.481,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [analyze_stockout]"
+        },
+        {
+          "ts": 1788351083.503,
+          "level": "INFO",
+          "node": "stockout_analyzer.py",
+          "msg": "Stockout analysis for retail_clothing: 17 at-risk products found"
+        },
+        {
+          "ts": 1788351083.503,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Stockout analysis complete: 17 at-risk products"
+        },
+        {
+          "ts": 1788351083.506,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [insight_recommendation]"
+        },
+        {
+          "ts": 1788351083.507,
+          "level": "INFO",
+          "node": "INSIGHT",
+          "msg": "Generating insights for 199 rows in domain: retail_clothing"
+        },
+        {
+          "ts": 1788351083.507,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM [openai] using model [meta/llama-3.2-11b-vision-instruct] generating response..."
+        },
+        {
+          "ts": 1788351083.509,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [recommend_visualization]"
+        },
+        {
+          "ts": 1788351083.509,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Visualization recommended: bar"
+        },
+        {
+          "ts": 1788351094.62,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM response received from [meta/llama-3.2-11b-vision-instruct]. Snippet: { \n  \"insight\": \"The data indicates that online ch..."
+        },
+        {
+          "ts": 1788351094.62,
+          "level": "ERROR",
+          "node": "INSIGHT",
+          "msg": "Insight Generation Error: Expecting ',' delimiter: line 3 column 84 (char 630)"
+        },
+        {
+          "ts": 1788351094.621,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Insights generated successfully."
+        }
+      ]
+    },
+    {
+      "mission_id": "SUPPLIER-ON-TIME-007",
+      "mission_name": "Supplier On-Time Rate Analysis",
+      "domain": "retail_clothing",
+      "severity": "LOW",
+      "risk_score": 20,
+      "risk_factors": {
+        "affected_entities": {
+          "value": 6,
+          "score": 60,
+          "detail": "6 unique entities"
+        },
+        "dollar_exposure": {
+          "value": 0,
+          "score": 0,
+          "detail": "$0 exposure"
+        },
+        "velocity": {
+          "value": 6,
+          "score": 30,
+          "detail": "6 events"
+        },
+        "pep_involvement": {
+          "value": 0,
+          "score": 0,
+          "detail": "0 PEP accounts"
+        },
+        "kyc_gaps": {
+          "value": 0,
+          "score": 0,
+          "detail": "0 KYC gaps"
+        },
+        "severity_escalation": {
+          "value": "MEDIUM",
+          "score": 25,
+          "detail": "Base: MEDIUM"
+        }
+      },
+      "sql": "SELECT supplier_name, on_time_rate FROM suppliers",
+      "data_count": 6,
+      "results": [
+        {
+          "supplier_name": "Bangalore Textile Mills",
+          "on_time_rate": 0.94
+        },
+        {
+          "supplier_name": "Guangzhou Apparel Co.",
+          "on_time_rate": 0.81
+        },
+        {
+          "supplier_name": "Istanbul Weave House",
+          "on_time_rate": 0.88
+        },
+        {
+          "supplier_name": "Dhaka Garment Works",
+          "on_time_rate": 0.72
+        },
+        {
+          "supplier_name": "Ho Chi Minh Stitch Co.",
+          "on_time_rate": 0.9
+        },
+        {
+          "supplier_name": "Tirupur Knitwear Ltd.",
+          "on_time_rate": 0.96
+        }
+      ],
+      "visualization_config": {
+        "chart_type": "line",
+        "title": "on_time_rate by on_time_rate",
+        "x_axis_key": "on_time_rate",
+        "y_axis_key": "on_time_rate",
+        "label": "on_time_rate",
+        "description": "Auto-generated fallback chart"
+      },
+      "insight": "The on-time delivery rate across our retail clothing suppliers varies significantly, with top performers (Bangalore Textile Mills and Tirupur Knitwear Ltd.) achieving on-time rates of 94% and 96%, respectively, while bottom performers (Dhaka Garment Works and Guangzhou Apparel Co.) struggle with on-time rates of 72% and 81%, respectively. This disparity poses operational risk, as delayed shipments can impact our ability to meet customer demand and maintain brand reputation. Furthermore, the average on-time rate of 87% indicates room for improvement in our supply chain management.",
+      "recommendation": "To mitigate operational risk and improve supply chain efficiency, I recommend that the executive: 1. Conduct a thorough review of our supplier contracts to identify opportunities to renegotiate terms and penalties for late deliveries, and 2. Implement a predictive analytics solution to monitor supplier performance in real-time, enabling proactive intervention and optimization of our supply chain operations.",
+      "original_query": "Evaluate the on-time rate of all suppliers, grouped by supplier name and on-time rate.",
+      "depth": 0,
+      "parent_mission_id": null,
+      "rationale": "",
+      "timestamp": "LIVE AUDIT",
+      "logs": [
+        {
+          "ts": 1788351075.611,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [classify_intent]"
+        },
+        {
+          "ts": 1788351075.611,
+          "level": "INFO",
+          "node": "INTENT",
+          "msg": "Classifying intent for domain: retail_clothing | Query: Evaluate the on-time rate of all suppliers, grouped by supplier name and on-time rate."
+        },
+        {
+          "ts": 1788351075.612,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM [openai] using model [meta/llama-3.2-11b-vision-instruct] generating response..."
+        },
+        {
+          "ts": 1788351089.008,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM response received from [meta/llama-3.2-11b-vision-instruct]. Snippet: Based on the provided query \"Evaluate the on-time ..."
+        },
+        {
+          "ts": 1788351089.008,
+          "level": "INFO",
+          "node": "INTENT",
+          "msg": "Classification Result: SELECT (conf: 0.9) | Needs Clarification: False"
+        },
+        {
+          "ts": 1788351089.081,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Intent classified: SELECT (conf: 0.9) | Needs Clarification: False"
+        },
+        {
+          "ts": 1788351089.085,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [generate_sql]"
+        },
+        {
+          "ts": 1788351089.086,
+          "level": "INFO",
+          "node": "SQL_GEN",
+          "msg": "Generating SQL for domain: retail_clothing | Query: Evaluate the on-time rate of all suppliers, grouped by supplier name and on-time rate."
+        },
+        {
+          "ts": 1788351089.096,
+          "level": "INFO",
+          "node": "SQL_GEN",
+          "msg": "Using custom SQL prompt for domain: retail_clothing"
+        },
+        {
+          "ts": 1788351089.097,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM [openai] using model [meta/llama-3.2-11b-vision-instruct] generating response..."
+        },
+        {
+          "ts": 1788351090.024,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM response received from [meta/llama-3.2-11b-vision-instruct]. Snippet: SELECT supplier_name, on_time_rate FROM suppliers..."
+        },
+        {
+          "ts": 1788351090.024,
+          "level": "INFO",
+          "node": "SQL_GEN",
+          "msg": "SQL Generated and cleaned: SELECT supplier_name, on_time_rate FROM suppliers..."
+        },
+        {
+          "ts": 1788351090.025,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "SQL Generated: SELECT supplier_name, on_time_rate FROM suppliers..."
+        },
+        {
+          "ts": 1788351090.026,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [validate_sql]"
+        },
+        {
+          "ts": 1788351090.029,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [execute_query]"
+        },
+        {
+          "ts": 1788351090.029,
+          "level": "INFO",
+          "node": "DB_EXEC",
+          "msg": "Executing SQL: SELECT supplier_name, on_time_rate FROM suppliers"
+        },
+        {
+          "ts": 1788351090.03,
+          "level": "INFO",
+          "node": "DB_EXEC",
+          "msg": "Execution complete. Returned 6 rows."
+        },
+        {
+          "ts": 1788351090.031,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Query execution successful. Rows: 6"
+        },
+        {
+          "ts": 1788351090.032,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [analyze_stockout]"
+        },
+        {
+          "ts": 1788351090.033,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [insight_recommendation]"
+        },
+        {
+          "ts": 1788351090.033,
+          "level": "INFO",
+          "node": "INSIGHT",
+          "msg": "Generating insights for 6 rows in domain: retail_clothing"
+        },
+        {
+          "ts": 1788351090.033,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM [openai] using model [meta/llama-3.2-11b-vision-instruct] generating response..."
+        },
+        {
+          "ts": 1788351090.035,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [recommend_visualization]"
+        },
+        {
+          "ts": 1788351090.036,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Visualization recommended: line"
+        },
+        {
+          "ts": 1788351115.891,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM response received from [meta/llama-3.2-11b-vision-instruct]. Snippet: { \n  \"insight\": \"The on-time delivery rate across ..."
+        },
+        {
+          "ts": 1788351115.892,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Insights generated successfully."
+        }
+      ]
+    },
+    {
+      "mission_id": "INVENTORY-VARIANCE-008",
+      "mission_name": "Inventory Variance Analysis",
+      "domain": "retail_clothing",
+      "severity": "MEDIUM",
+      "risk_score": 39,
+      "risk_factors": {
+        "affected_entities": {
+          "value": 120,
+          "score": 100,
+          "detail": "120 unique entities"
+        },
+        "dollar_exposure": {
+          "value": 0,
+          "score": 0,
+          "detail": "$0 exposure"
+        },
+        "velocity": {
+          "value": 120,
+          "score": 100,
+          "detail": "120 events"
+        },
+        "pep_involvement": {
+          "value": 0,
+          "score": 0,
+          "detail": "0 PEP accounts"
+        },
+        "kyc_gaps": {
+          "value": 0,
+          "score": 0,
+          "detail": "0 KYC gaps"
+        },
+        "severity_escalation": {
+          "value": "MEDIUM",
+          "score": 25,
+          "detail": "Base: MEDIUM"
+        }
+      },
+      "sql": "SELECT p.style_name, p.sku, i.stock_count, i.reorder_point, \n       (SELECT AVG(i2.stock_count) \n        FROM inventory i2 \n        WHERE i2.sku = i.sku) - i.stock_count AS variance \nFROM products p \nJOIN inventory i ON p.sku = i.sku",
+      "data_count": 120,
+      "results": [
+        {
+          "style_name": "Oxford Shirt",
+          "sku": "CL-00001",
+          "stock_count": 25,
+          "reorder_point": 5,
+          "variance": 0.0
+        },
+        {
+          "style_name": "Oxford Shirt",
+          "sku": "CL-00002",
+          "stock_count": 42,
+          "reorder_point": 6,
+          "variance": 0.0
+        },
+        {
+          "style_name": "Oxford Shirt",
+          "sku": "CL-00003",
+          "stock_count": 217,
+          "reorder_point": 32,
+          "variance": 0.0
+        },
+        {
+          "style_name": "Oxford Shirt",
+          "sku": "CL-00004",
+          "stock_count": 37,
+          "reorder_point": 5,
+          "variance": 0.0
+        },
+        {
+          "style_name": "Oxford Shirt",
+          "sku": "CL-00005",
+          "stock_count": 9,
+          "reorder_point": 5,
+          "variance": 0.0
+        },
+        {
+          "style_name": "Oxford Shirt",
+          "sku": "CL-00006",
+          "stock_count": 30,
+          "reorder_point": 5,
+          "variance": 0.0
+        },
+        {
+          "style_name": "Oxford Shirt",
+          "sku": "CL-00007",
+          "stock_count": 20,
+          "reorder_point": 5,
+          "variance": 0.0
+        },
+        {
+          "style_name": "Oxford Shirt",
+          "sku": "CL-00008",
+          "stock_count": 216,
+          "reorder_point": 32,
+          "variance": 0.0
+        },
+        {
+          "style_name": "Oxford Shirt",
+          "sku": "CL-00009",
+          "stock_count": 18,
+          "reorder_point": 5,
+          "variance": 0.0
+        },
+        {
+          "style_name": "Oxford Shirt",
+          "sku": "CL-00010",
+          "stock_count": 21,
+          "reorder_point": 5,
+          "variance": 0.0
+        },
+        {
+          "style_name": "Oxford Shirt",
+          "sku": "CL-00011",
+          "stock_count": 47,
+          "reorder_point": 7,
+          "variance": 0.0
+        },
+        {
+          "style_name": "Oxford Shirt",
+          "sku": "CL-00012",
+          "stock_count": 25,
+          "reorder_point": 5,
+          "variance": 0.0
+        },
+        {
+          "style_name": "Oxford Shirt",
+          "sku": "CL-00013",
+          "stock_count": 162,
+          "reorder_point": 24,
+          "variance": 0.0
+        },
+        {
+          "style_name": "Oxford Shirt",
+          "sku": "CL-00014",
+          "stock_count": 18,
+          "reorder_point": 5,
+          "variance": 0.0
+        },
+        {
+          "style_name": "Oxford Shirt",
+          "sku": "CL-00015",
+          "stock_count": 27,
+          "reorder_point": 5,
+          "variance": 0.0
+        },
+        {
+          "style_name": "Classic Polo",
+          "sku": "CL-00016",
+          "stock_count": 28,
+          "reorder_point": 5,
+          "variance": 0.0
+        },
+        {
+          "style_name": "Classic Polo",
+          "sku": "CL-00017",
+          "stock_count": 33,
+          "reorder_point": 5,
+          "variance": 0.0
+        },
+        {
+          "style_name": "Classic Polo",
+          "sku": "CL-00018",
+          "stock_count": 5,
+          "reorder_point": 5,
+          "variance": 0.0
+        },
+        {
+          "style_name": "Classic Polo",
+          "sku": "CL-00019",
+          "stock_count": 13,
+          "reorder_point": 5,
+          "variance": 0.0
+        },
+        {
+          "style_name": "Classic Polo",
+          "sku": "CL-00020",
+          "stock_count": 11,
+          "reorder_point": 5,
+          "variance": 0.0
+        },
+        {
+          "style_name": "Classic Polo",
+          "sku": "CL-00021",
+          "stock_count": 23,
+          "reorder_point": 5,
+          "variance": 0.0
+        },
+        {
+          "style_name": "Classic Polo",
+          "sku": "CL-00022",
+          "stock_count": 18,
+          "reorder_point": 5,
+          "variance": 0.0
+        },
+        {
+          "style_name": "Classic Polo",
+          "sku": "CL-00023",
+          "stock_count": 36,
+          "reorder_point": 5,
+          "variance": 0.0
+        },
+        {
+          "style_name": "Classic Polo",
+          "sku": "CL-00024",
+          "stock_count": 10,
+          "reorder_point": 5,
+          "variance": 0.0
+        },
+        {
+          "style_name": "Classic Polo",
+          "sku": "CL-00025",
+          "stock_count": 7,
+          "reorder_point": 5,
+          "variance": 0.0
+        },
+        {
+          "style_name": "Classic Polo",
+          "sku": "CL-00026",
+          "stock_count": 54,
+          "reorder_point": 8,
+          "variance": 0.0
+        },
+        {
+          "style_name": "Classic Polo",
+          "sku": "CL-00027",
+          "stock_count": 15,
+          "reorder_point": 5,
+          "variance": 0.0
+        },
+        {
+          "style_name": "Classic Polo",
+          "sku": "CL-00028",
+          "stock_count": 50,
+          "reorder_point": 7,
+          "variance": 0.0
+        },
+        {
+          "style_name": "Classic Polo",
+          "sku": "CL-00029",
+          "stock_count": 5,
+          "reorder_point": 5,
+          "variance": 0.0
+        },
+        {
+          "style_name": "Classic Polo",
+          "sku": "CL-00030",
+          "stock_count": 49,
+          "reorder_point": 7,
+          "variance": 0.0
+        },
+        {
+          "style_name": "Slim Fit Jeans",
+          "sku": "CL-00031",
+          "stock_count": 7,
+          "reorder_point": 5,
+          "variance": 0.0
+        },
+        {
+          "style_name": "Slim Fit Jeans",
+          "sku": "CL-00032",
+          "stock_count": 40,
+          "reorder_point": 6,
+          "variance": 0.0
+        },
+        {
+          "style_name": "Slim Fit Jeans",
+          "sku": "CL-00033",
+          "stock_count": 13,
+          "reorder_point": 5,
+          "variance": 0.0
+        },
+        {
+          "style_name": "Slim Fit Jeans",
+          "sku": "CL-00034",
+          "stock_count": 28,
+          "reorder_point": 5,
+          "variance": 0.0
+        },
+        {
+          "style_name": "Slim Fit Jeans",
+          "sku": "CL-00035",
+          "stock_count": 18,
+          "reorder_point": 5,
+          "variance": 0.0
+        },
+        {
+          "style_name": "Slim Fit Jeans",
+          "sku": "CL-00036",
+          "stock_count": 27,
+          "reorder_point": 5,
+          "variance": 0.0
+        },
+        {
+          "style_name": "Slim Fit Jeans",
+          "sku": "CL-00037",
+          "stock_count": 20,
+          "reorder_point": 5,
+          "variance": 0.0
+        },
+        {
+          "style_name": "Slim Fit Jeans",
+          "sku": "CL-00038",
+          "stock_count": 31,
+          "reorder_point": 5,
+          "variance": 0.0
+        },
+        {
+          "style_name": "Slim Fit Jeans",
+          "sku": "CL-00039",
+          "stock_count": 52,
+          "reorder_point": 7,
+          "variance": 0.0
+        },
+        {
+          "style_name": "Slim Fit Jeans",
+          "sku": "CL-00040",
+          "stock_count": 56,
+          "reorder_point": 8,
+          "variance": 0.0
+        },
+        {
+          "style_name": "Slim Fit Jeans",
+          "sku": "CL-00041",
+          "stock_count": 15,
+          "reorder_point": 5,
+          "variance": 0.0
+        },
+        {
+          "style_name": "Slim Fit Jeans",
+          "sku": "CL-00042",
+          "stock_count": 60,
+          "reorder_point": 9,
+          "variance": 0.0
+        },
+        {
+          "style_name": "Slim Fit Jeans",
+          "sku": "CL-00043",
+          "stock_count": 19,
+          "reorder_point": 5,
+          "variance": 0.0
+        },
+        {
+          "style_name": "Slim Fit Jeans",
+          "sku": "CL-00044",
+          "stock_count": 27,
+          "reorder_point": 5,
+          "variance": 0.0
+        },
+        {
+          "style_name": "Slim Fit Jeans",
+          "sku": "CL-00045",
+          "stock_count": 19,
+          "reorder_point": 5,
+          "variance": 0.0
+        },
+        {
+          "style_name": "Crew Neck Tee",
+          "sku": "CL-00046",
+          "stock_count": 30,
+          "reorder_point": 5,
+          "variance": 0.0
+        },
+        {
+          "style_name": "Crew Neck Tee",
+          "sku": "CL-00047",
+          "stock_count": 60,
+          "reorder_point": 9,
+          "variance": 0.0
+        },
+        {
+          "style_name": "Crew Neck Tee",
+          "sku": "CL-00048",
+          "stock_count": 27,
+          "reorder_point": 5,
+          "variance": 0.0
+        },
+        {
+          "style_name": "Crew Neck Tee",
+          "sku": "CL-00049",
+          "stock_count": 26,
+          "reorder_point": 5,
+          "variance": 0.0
+        },
+        {
+          "style_name": "Crew Neck Tee",
+          "sku": "CL-00050",
+          "stock_count": 21,
+          "reorder_point": 5,
+          "variance": 0.0
+        },
+        {
+          "style_name": "Crew Neck Tee",
+          "sku": "CL-00051",
+          "stock_count": 21,
+          "reorder_point": 5,
+          "variance": 0.0
+        },
+        {
+          "style_name": "Crew Neck Tee",
+          "sku": "CL-00052",
+          "stock_count": 43,
+          "reorder_point": 6,
+          "variance": 0.0
+        },
+        {
+          "style_name": "Crew Neck Tee",
+          "sku": "CL-00053",
+          "stock_count": 51,
+          "reorder_point": 7,
+          "variance": 0.0
+        },
+        {
+          "style_name": "Crew Neck Tee",
+          "sku": "CL-00054",
+          "stock_count": 43,
+          "reorder_point": 6,
+          "variance": 0.0
+        },
+        {
+          "style_name": "Crew Neck Tee",
+          "sku": "CL-00055",
+          "stock_count": 41,
+          "reorder_point": 6,
+          "variance": 0.0
+        },
+        {
+          "style_name": "Crew Neck Tee",
+          "sku": "CL-00056",
+          "stock_count": 7,
+          "reorder_point": 5,
+          "variance": 0.0
+        },
+        {
+          "style_name": "Crew Neck Tee",
+          "sku": "CL-00057",
+          "stock_count": 38,
+          "reorder_point": 5,
+          "variance": 0.0
+        },
+        {
+          "style_name": "Crew Neck Tee",
+          "sku": "CL-00058",
+          "stock_count": 32,
+          "reorder_point": 5,
+          "variance": 0.0
+        },
+        {
+          "style_name": "Crew Neck Tee",
+          "sku": "CL-00059",
+          "stock_count": 44,
+          "reorder_point": 6,
+          "variance": 0.0
+        },
+        {
+          "style_name": "Crew Neck Tee",
+          "sku": "CL-00060",
+          "stock_count": 51,
+          "reorder_point": 7,
+          "variance": 0.0
+        },
+        {
+          "style_name": "Wool Blend Blazer",
+          "sku": "CL-00061",
+          "stock_count": 6,
+          "reorder_point": 5,
+          "variance": 0.0
+        },
+        {
+          "style_name": "Wool Blend Blazer",
+          "sku": "CL-00062",
+          "stock_count": 4,
+          "reorder_point": 5,
+          "variance": 0.0
+        },
+        {
+          "style_name": "Wool Blend Blazer",
+          "sku": "CL-00063",
+          "stock_count": 6,
+          "reorder_point": 5,
+          "variance": 0.0
+        },
+        {
+          "style_name": "Wool Blend Blazer",
+          "sku": "CL-00064",
+          "stock_count": 6,
+          "reorder_point": 5,
+          "variance": 0.0
+        },
+        {
+          "style_name": "Wool Blend Blazer",
+          "sku": "CL-00065",
+          "stock_count": 3,
+          "reorder_point": 5,
+          "variance": 0.0
+        },
+        {
+          "style_name": "Wool Blend Blazer",
+          "sku": "CL-00066",
+          "stock_count": 5,
+          "reorder_point": 5,
+          "variance": 0.0
+        },
+        {
+          "style_name": "Wool Blend Blazer",
+          "sku": "CL-00067",
+          "stock_count": 3,
+          "reorder_point": 5,
+          "variance": 0.0
+        },
+        {
+          "style_name": "Wool Blend Blazer",
+          "sku": "CL-00068",
+          "stock_count": 1,
+          "reorder_point": 5,
+          "variance": 0.0
+        },
+        {
+          "style_name": "Wool Blend Blazer",
+          "sku": "CL-00069",
+          "stock_count": 5,
+          "reorder_point": 5,
+          "variance": 0.0
+        },
+        {
+          "style_name": "Wool Blend Blazer",
+          "sku": "CL-00070",
+          "stock_count": 4,
+          "reorder_point": 5,
+          "variance": 0.0
+        },
+        {
+          "style_name": "Wool Blend Blazer",
+          "sku": "CL-00071",
+          "stock_count": 0,
+          "reorder_point": 5,
+          "variance": 0.0
+        },
+        {
+          "style_name": "Wool Blend Blazer",
+          "sku": "CL-00072",
+          "stock_count": 1,
+          "reorder_point": 5,
+          "variance": 0.0
+        },
+        {
+          "style_name": "Wool Blend Blazer",
+          "sku": "CL-00073",
+          "stock_count": 3,
+          "reorder_point": 5,
+          "variance": 0.0
+        },
+        {
+          "style_name": "Wool Blend Blazer",
+          "sku": "CL-00074",
+          "stock_count": 3,
+          "reorder_point": 5,
+          "variance": 0.0
+        },
+        {
+          "style_name": "Wool Blend Blazer",
+          "sku": "CL-00075",
+          "stock_count": 1,
+          "reorder_point": 5,
+          "variance": 0.0
+        },
+        {
+          "style_name": "Summer Linen Dress",
+          "sku": "CL-00076",
+          "stock_count": 16,
+          "reorder_point": 5,
+          "variance": 0.0
+        },
+        {
+          "style_name": "Summer Linen Dress",
+          "sku": "CL-00077",
+          "stock_count": 40,
+          "reorder_point": 6,
+          "variance": 0.0
+        },
+        {
+          "style_name": "Summer Linen Dress",
+          "sku": "CL-00078",
+          "stock_count": 34,
+          "reorder_point": 5,
+          "variance": 0.0
+        },
+        {
+          "style_name": "Summer Linen Dress",
+          "sku": "CL-00079",
+          "stock_count": 47,
+          "reorder_point": 7,
+          "variance": 0.0
+        },
+        {
+          "style_name": "Summer Linen Dress",
+          "sku": "CL-00080",
+          "stock_count": 44,
+          "reorder_point": 6,
+          "variance": 0.0
+        },
+        {
+          "style_name": "Summer Linen Dress",
+          "sku": "CL-00081",
+          "stock_count": 33,
+          "reorder_point": 5,
+          "variance": 0.0
+        },
+        {
+          "style_name": "Summer Linen Dress",
+          "sku": "CL-00082",
+          "stock_count": 33,
+          "reorder_point": 5,
+          "variance": 0.0
+        },
+        {
+          "style_name": "Summer Linen Dress",
+          "sku": "CL-00083",
+          "stock_count": 58,
+          "reorder_point": 8,
+          "variance": 0.0
+        },
+        {
+          "style_name": "Summer Linen Dress",
+          "sku": "CL-00084",
+          "stock_count": 36,
+          "reorder_point": 5,
+          "variance": 0.0
+        },
+        {
+          "style_name": "Summer Linen Dress",
+          "sku": "CL-00085",
+          "stock_count": 33,
+          "reorder_point": 5,
+          "variance": 0.0
+        },
+        {
+          "style_name": "Summer Linen Dress",
+          "sku": "CL-00086",
+          "stock_count": 20,
+          "reorder_point": 5,
+          "variance": 0.0
+        },
+        {
+          "style_name": "Summer Linen Dress",
+          "sku": "CL-00087",
+          "stock_count": 25,
+          "reorder_point": 5,
+          "variance": 0.0
+        },
+        {
+          "style_name": "Summer Linen Dress",
+          "sku": "CL-00088",
+          "stock_count": 14,
+          "reorder_point": 5,
+          "variance": 0.0
+        },
+        {
+          "style_name": "Summer Linen Dress",
+          "sku": "CL-00089",
+          "stock_count": 49,
+          "reorder_point": 7,
+          "variance": 0.0
+        },
+        {
+          "style_name": "Summer Linen Dress",
+          "sku": "CL-00090",
+          "stock_count": 9,
+          "reorder_point": 5,
+          "variance": 0.0
+        },
+        {
+          "style_name": "Zip Hoodie",
+          "sku": "CL-00091",
+          "stock_count": 26,
+          "reorder_point": 5,
+          "variance": 0.0
+        },
+        {
+          "style_name": "Zip Hoodie",
+          "sku": "CL-00092",
+          "stock_count": 8,
+          "reorder_point": 5,
+          "variance": 0.0
+        },
+        {
+          "style_name": "Zip Hoodie",
+          "sku": "CL-00093",
+          "stock_count": 29,
+          "reorder_point": 5,
+          "variance": 0.0
+        },
+        {
+          "style_name": "Zip Hoodie",
+          "sku": "CL-00094",
+          "stock_count": 29,
+          "reorder_point": 5,
+          "variance": 0.0
+        },
+        {
+          "style_name": "Zip Hoodie",
+          "sku": "CL-00095",
+          "stock_count": 27,
+          "reorder_point": 5,
+          "variance": 0.0
+        },
+        {
+          "style_name": "Zip Hoodie",
+          "sku": "CL-00096",
+          "stock_count": 59,
+          "reorder_point": 8,
+          "variance": 0.0
+        },
+        {
+          "style_name": "Zip Hoodie",
+          "sku": "CL-00097",
+          "stock_count": 52,
+          "reorder_point": 7,
+          "variance": 0.0
+        },
+        {
+          "style_name": "Zip Hoodie",
+          "sku": "CL-00098",
+          "stock_count": 19,
+          "reorder_point": 5,
+          "variance": 0.0
+        },
+        {
+          "style_name": "Zip Hoodie",
+          "sku": "CL-00099",
+          "stock_count": 36,
+          "reorder_point": 5,
+          "variance": 0.0
+        },
+        {
+          "style_name": "Zip Hoodie",
+          "sku": "CL-00100",
+          "stock_count": 26,
+          "reorder_point": 5,
+          "variance": 0.0
+        },
+        {
+          "style_name": "Zip Hoodie",
+          "sku": "CL-00101",
+          "stock_count": 58,
+          "reorder_point": 8,
+          "variance": 0.0
+        },
+        {
+          "style_name": "Zip Hoodie",
+          "sku": "CL-00102",
+          "stock_count": 44,
+          "reorder_point": 6,
+          "variance": 0.0
+        },
+        {
+          "style_name": "Zip Hoodie",
+          "sku": "CL-00103",
+          "stock_count": 42,
+          "reorder_point": 6,
+          "variance": 0.0
+        },
+        {
+          "style_name": "Zip Hoodie",
+          "sku": "CL-00104",
+          "stock_count": 46,
+          "reorder_point": 6,
+          "variance": 0.0
+        },
+        {
+          "style_name": "Zip Hoodie",
+          "sku": "CL-00105",
+          "stock_count": 60,
+          "reorder_point": 9,
+          "variance": 0.0
+        },
+        {
+          "style_name": "Pleated Trousers",
+          "sku": "CL-00106",
+          "stock_count": 8,
+          "reorder_point": 5,
+          "variance": 0.0
+        },
+        {
+          "style_name": "Pleated Trousers",
+          "sku": "CL-00107",
+          "stock_count": 25,
+          "reorder_point": 5,
+          "variance": 0.0
+        },
+        {
+          "style_name": "Pleated Trousers",
+          "sku": "CL-00108",
+          "stock_count": 25,
+          "reorder_point": 5,
+          "variance": 0.0
+        },
+        {
+          "style_name": "Pleated Trousers",
+          "sku": "CL-00109",
+          "stock_count": 22,
+          "reorder_point": 5,
+          "variance": 0.0
+        },
+        {
+          "style_name": "Pleated Trousers",
+          "sku": "CL-00110",
+          "stock_count": 58,
+          "reorder_point": 8,
+          "variance": 0.0
+        },
+        {
+          "style_name": "Pleated Trousers",
+          "sku": "CL-00111",
+          "stock_count": 6,
+          "reorder_point": 5,
+          "variance": 0.0
+        },
+        {
+          "style_name": "Pleated Trousers",
+          "sku": "CL-00112",
+          "stock_count": 19,
+          "reorder_point": 5,
+          "variance": 0.0
+        },
+        {
+          "style_name": "Pleated Trousers",
+          "sku": "CL-00113",
+          "stock_count": 53,
+          "reorder_point": 7,
+          "variance": 0.0
+        },
+        {
+          "style_name": "Pleated Trousers",
+          "sku": "CL-00114",
+          "stock_count": 17,
+          "reorder_point": 5,
+          "variance": 0.0
+        },
+        {
+          "style_name": "Pleated Trousers",
+          "sku": "CL-00115",
+          "stock_count": 20,
+          "reorder_point": 5,
+          "variance": 0.0
+        },
+        {
+          "style_name": "Pleated Trousers",
+          "sku": "CL-00116",
+          "stock_count": 47,
+          "reorder_point": 7,
+          "variance": 0.0
+        },
+        {
+          "style_name": "Pleated Trousers",
+          "sku": "CL-00117",
+          "stock_count": 18,
+          "reorder_point": 5,
+          "variance": 0.0
+        },
+        {
+          "style_name": "Pleated Trousers",
+          "sku": "CL-00118",
+          "stock_count": 54,
+          "reorder_point": 8,
+          "variance": 0.0
+        },
+        {
+          "style_name": "Pleated Trousers",
+          "sku": "CL-00119",
+          "stock_count": 43,
+          "reorder_point": 6,
+          "variance": 0.0
+        },
+        {
+          "style_name": "Pleated Trousers",
+          "sku": "CL-00120",
+          "stock_count": 24,
+          "reorder_point": 5,
+          "variance": 0.0
+        }
+      ],
+      "visualization_config": {
+        "chart_type": "bar",
+        "title": "stock_count by style_name",
+        "x_axis_key": "style_name",
+        "y_axis_key": "stock_count",
+        "label": "stock_count",
+        "description": "Auto-generated fallback chart"
+      },
+      "insight": "Data analysis complete. Results retrieved.",
+      "recommendation": "Review the returned data for specific patterns.",
+      "original_query": "Calculate the variance of stock counts across all locations and suppliers for each product, ordered by product name and variance.",
+      "depth": 0,
+      "parent_mission_id": null,
+      "rationale": "",
+      "timestamp": "LIVE AUDIT",
+      "logs": [
+        {
+          "ts": 1788351075.614,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [classify_intent]"
+        },
+        {
+          "ts": 1788351075.614,
+          "level": "INFO",
+          "node": "INTENT",
+          "msg": "Classifying intent for domain: retail_clothing | Query: Calculate the variance of stock counts across all locations and suppliers for each product, ordered by product name and variance."
+        },
+        {
+          "ts": 1788351075.616,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM [openai] using model [meta/llama-3.2-11b-vision-instruct] generating response..."
+        },
+        {
+          "ts": 1788351102.637,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM response received from [meta/llama-3.2-11b-vision-instruct]. Snippet: Based on the provided query \"Calculate the varianc..."
+        },
+        {
+          "ts": 1788351102.638,
+          "level": "INFO",
+          "node": "INTENT",
+          "msg": "Classification Result: SELECT (conf: 0.9) | Needs Clarification: False"
+        },
+        {
+          "ts": 1788351102.697,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Intent classified: SELECT (conf: 0.9) | Needs Clarification: False"
+        },
+        {
+          "ts": 1788351102.699,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [generate_sql]"
+        },
+        {
+          "ts": 1788351102.699,
+          "level": "INFO",
+          "node": "SQL_GEN",
+          "msg": "Generating SQL for domain: retail_clothing | Query: Calculate the variance of stock counts across all locations and suppliers for each product, ordered by product name and variance."
+        },
+        {
+          "ts": 1788351102.709,
+          "level": "INFO",
+          "node": "SQL_GEN",
+          "msg": "Using custom SQL prompt for domain: retail_clothing"
+        },
+        {
+          "ts": 1788351102.709,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM [openai] using model [meta/llama-3.2-11b-vision-instruct] generating response..."
+        },
+        {
+          "ts": 1788351109.406,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM response received from [meta/llama-3.2-11b-vision-instruct]. Snippet: SELECT p.style_name, p.sku, i.stock_count, i.reord..."
+        },
+        {
+          "ts": 1788351109.406,
+          "level": "INFO",
+          "node": "SQL_GEN",
+          "msg": "SQL Generated and cleaned: SELECT p.style_name, p.sku, i.stock_count, i.reord..."
+        },
+        {
+          "ts": 1788351109.407,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "SQL Generated: SELECT p.style_name, p.sku, i.stock_count, i.reord..."
+        },
+        {
+          "ts": 1788351109.411,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [validate_sql]"
+        },
+        {
+          "ts": 1788351109.417,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [execute_query]"
+        },
+        {
+          "ts": 1788351109.418,
+          "level": "INFO",
+          "node": "DB_EXEC",
+          "msg": "Executing SQL: SELECT p.style_name, p.sku, i.stock_count, i.reorder_point, \n       (SELECT AVG(i2.stock_count) \n        FROM inventory i2 \n        WHERE i2.sku = i.sku) - i.stock_count AS variance \nFROM products p \nJOIN inventory i ON p.sku = i.sku"
+        },
+        {
+          "ts": 1788351109.42,
+          "level": "INFO",
+          "node": "DB_EXEC",
+          "msg": "Execution complete. Returned 120 rows."
+        },
+        {
+          "ts": 1788351109.42,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Query execution successful. Rows: 120"
+        },
+        {
+          "ts": 1788351109.421,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [analyze_stockout]"
+        },
+        {
+          "ts": 1788351109.442,
+          "level": "INFO",
+          "node": "stockout_analyzer.py",
+          "msg": "Stockout analysis for retail_clothing: 17 at-risk products found"
+        },
+        {
+          "ts": 1788351109.443,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Stockout analysis complete: 17 at-risk products"
+        },
+        {
+          "ts": 1788351109.447,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [insight_recommendation]"
+        },
+        {
+          "ts": 1788351109.448,
+          "level": "INFO",
+          "node": "INSIGHT",
+          "msg": "Generating insights for 120 rows in domain: retail_clothing"
+        },
+        {
+          "ts": 1788351109.449,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM [openai] using model [meta/llama-3.2-11b-vision-instruct] generating response..."
+        },
+        {
+          "ts": 1788351109.452,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Node: [recommend_visualization]"
+        },
+        {
+          "ts": 1788351109.454,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Visualization recommended: bar"
+        },
+        {
+          "ts": 1788351116.126,
+          "level": "INFO",
+          "node": "llm.py",
+          "msg": "LLM response received from [meta/llama-3.2-11b-vision-instruct]. Snippet: { \n  \"insight\": \"The data indicates that the stock..."
+        },
+        {
+          "ts": 1788351116.126,
+          "level": "ERROR",
+          "node": "INSIGHT",
+          "msg": "Insight Generation Error: Expecting ',' delimiter: line 3 column 78 (char 708)"
+        },
+        {
+          "ts": 1788351116.126,
+          "level": "INFO",
+          "node": "ORCHESTRATOR",
+          "msg": "Insights generated successfully."
+        }
+      ]
+    }
+  ],
+  "clusters": [],
+  "narrative": {
+    "executive_summary": "Our real-time threat detection platform has identified several critical threat vectors impacting our retail clothing operations, including a Reorder Point Breach Alert and Sales Trends Analysis, both with medium severity and risk scores of 42 and 39, respectively. These threats pose significant risks to our inventory management and sales performance. Immediate action is required to mitigate these risks and prevent potential losses.",
+    "threat_vectors": [
+      {
+        "name": "Reorder Point Breach Alert",
+        "severity": "MEDIUM",
+        "description": "Our inventory levels have breached reorder points, indicating a potential stockout risk. Immediate action is required to re-order stock and prevent stockouts."
+      },
+      {
+        "name": "Sales Trends Analysis",
+        "severity": "MEDIUM",
+        "description": "Our sales trends analysis indicates a decline in sales, with a risk score of 39. This requires immediate attention to adjust pricing and promotions strategies to prevent further decline."
+      },
+      {
+        "name": "Supplier On-Time Rate Analysis",
+        "severity": "LOW",
+        "description": "Our supplier on-time delivery rates vary significantly, with some suppliers struggling to meet delivery deadlines. This requires monitoring and potential adjustments to supplier contracts."
+      }
+    ],
+    "immediate_actions": [
+      "Re-order stock to prevent stockouts within the next 48 hours",
+      "Review and adjust pricing and promotions strategies to prevent further sales decline within the next 72 hours",
+      "Schedule a meeting with suppliers to discuss delivery issues and potential contract adjustments within the next week"
+    ],
+    "monitoring_recommendations": [
+      "Continuously monitor inventory levels and sales trends to identify potential risks and opportunities",
+      "Regularly review supplier performance and adjust contracts as necessary to ensure on-time delivery",
+      "Conduct regular reviews of pricing and promotions strategies to ensure alignment with market trends and customer preferences"
+    ],
+    "overall_risk": 31,
+    "overall_severity": "MEDIUM",
+    "title": "Intelligence Brief - LIVE"
+  }
+}

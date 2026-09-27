@@ -1,0 +1,323 @@
+{
+  "_last_touched": 1786523822.6556945,
+  "history": [
+    {
+      "timestamp": "2026-08-12T08:32:40.002854",
+      "missions": [
+        {
+          "name": "Dead Stock Alert",
+          "query": "Find all products with stock count below reorder point in the past 3 months.",
+          "domain": "retail_clothing",
+          "risk_score": 37,
+          "severity": "MEDIUM",
+          "data_count": 9
+        },
+        {
+          "name": "Sizing Anomaly Detection",
+          "query": "Identify products with inconsistent size naming conventions across different styles.",
+          "domain": "retail_clothing",
+          "risk_score": 42,
+          "severity": "MEDIUM",
+          "data_count": 11520
+        },
+        {
+          "name": "Supplier Delay Analysis",
+          "query": "Analyze lead times for suppliers and identify those with consistently delayed shipments.",
+          "domain": "retail_clothing",
+          "risk_score": 9,
+          "severity": "LOW",
+          "data_count": 2
+        },
+        {
+          "name": "Reorder Point Breach Investigation",
+          "query": "Find all instances where reorder points were breached in the past quarter, along with the products affected.",
+          "domain": "retail_clothing",
+          "risk_score": 21,
+          "severity": "LOW",
+          "data_count": 5
+        },
+        {
+          "name": "Product Rotation Analysis",
+          "query": "Identify products with low stock turnover rates, indicating potential overstocking or slow-moving inventory.",
+          "domain": "retail_clothing",
+          "risk_score": 39,
+          "severity": "MEDIUM",
+          "data_count": 90
+        },
+        {
+          "name": "Supplier Performance Evaluation",
+          "query": "Compare on-time delivery rates for different suppliers to identify top performers and areas for improvement.",
+          "domain": "retail_clothing",
+          "risk_score": 15,
+          "severity": "LOW",
+          "data_count": 4
+        },
+        {
+          "name": "Channel-Specific Sales Analysis",
+          "query": "Analyze sales data by channel (e.g., online, offline) to identify trends and potential opportunities for growth.",
+          "domain": "retail_clothing",
+          "risk_score": 39,
+          "severity": "MEDIUM",
+          "data_count": 119
+        },
+        {
+          "name": "Product Variants Identification",
+          "query": "Find all products with multiple variants (e.g., different colors, sizes) and identify potential opportunities for bundling or cross-selling.",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        }
+      ],
+      "domain_scores": {
+        "retail_clothing": 25
+      },
+      "critical_domains": []
+    },
+    {
+      "timestamp": "2026-08-12T08:36:34.524762",
+      "missions": [
+        {
+          "name": "Dead Stock Identification",
+          "query": "Find all products with stock count below reorder point for 6 months or more, along with the supplier and last restocked date",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        },
+        {
+          "name": "Sizing Anomalies Detection",
+          "query": "Identify products with inconsistent size naming conventions across different styles, and suggest standardized naming conventions",
+          "domain": "retail_clothing",
+          "risk_score": 42,
+          "severity": "MEDIUM",
+          "data_count": 2160
+        },
+        {
+          "name": "Supplier Lead Time Analysis",
+          "query": "Analyze lead times for suppliers and identify those with consistently delayed shipments, along with the average lead time and on-time delivery rate",
+          "domain": "retail_clothing",
+          "risk_score": 9,
+          "severity": "LOW",
+          "data_count": 2
+        },
+        {
+          "name": "Reorder Point Breach Forecasting",
+          "query": "Predict products that are likely to breach reorder points in the next quarter, based on historical sales data and supplier lead times",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        },
+        {
+          "name": "Product Variants Opportunity Analysis",
+          "query": "Identify products with multiple variants (e.g., different colors, sizes) and suggest potential opportunities for bundling or cross-selling",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        },
+        {
+          "name": "Supplier Performance Benchmarking",
+          "query": "Compare on-time delivery rates for different suppliers to identify top performers and areas for improvement, and suggest strategies for improvement",
+          "domain": "retail_clothing",
+          "risk_score": 15,
+          "severity": "LOW",
+          "data_count": 4
+        },
+        {
+          "name": "Sales Channel Trend Analysis",
+          "query": "Analyze sales data by channel (e.g., online, offline) to identify trends and potential opportunities for growth, and suggest strategies for improvement",
+          "domain": "retail_clothing",
+          "risk_score": 12,
+          "severity": "LOW",
+          "data_count": 3
+        },
+        {
+          "name": "Inventory Turnover Rate Analysis",
+          "query": "Calculate inventory turnover rates for products and identify those with low turnover rates, indicating potential overstocking or slow-moving inventory",
+          "domain": "retail_clothing",
+          "risk_score": 39,
+          "severity": "MEDIUM",
+          "data_count": 90
+        },
+        {
+          "name": "Supplier Country of Origin Analysis",
+          "query": "Analyze the country of origin for suppliers and identify potential risks or opportunities related to global trade agreements or tariffs",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        },
+        {
+          "name": "Product Life Cycle Analysis",
+          "query": "Identify products that are nearing the end of their life cycle and suggest strategies for replacement or discontinuation",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        },
+        {
+          "name": "Inventory Forecasting Model Evaluation",
+          "query": "Evaluate the accuracy of the current inventory forecasting model and suggest improvements or alternative models to reduce stockouts and overstocking",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        }
+      ],
+      "domain_scores": {
+        "retail_clothing": 11
+      },
+      "critical_domains": []
+    },
+    {
+      "timestamp": "2026-08-12T08:36:37.637485",
+      "missions": [
+        {
+          "name": "Security Domain Scan",
+          "query": "Show users with risk_level HIGH and account_status ACTIVE",
+          "domain": "security",
+          "risk_score": 49,
+          "severity": "MEDIUM",
+          "data_count": 58
+        }
+      ],
+      "domain_scores": {
+        "security": 49
+      },
+      "critical_domains": []
+    },
+    {
+      "timestamp": "2026-08-12T08:36:44.512005",
+      "missions": [
+        {
+          "name": "Operations Domain Scan",
+          "query": "Show system performance metrics and operational alerts",
+          "domain": "operations",
+          "risk_score": 6,
+          "severity": "LOW",
+          "data_count": 1
+        }
+      ],
+      "domain_scores": {
+        "operations": 6
+      },
+      "critical_domains": []
+    },
+    {
+      "timestamp": "2026-08-12T08:36:59.453492",
+      "missions": [
+        {
+          "name": "Compliance Domain Scan",
+          "query": "Show recent compliance violations or audit findings",
+          "domain": "compliance",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        }
+      ],
+      "domain_scores": {
+        "compliance": 0
+      },
+      "critical_domains": []
+    },
+    {
+      "timestamp": "2026-08-12T08:37:02.655667",
+      "missions": [
+        {
+          "name": "Identify Products with Dead Stock",
+          "query": "Find all products with stock count below reorder point for more than 6 months and retail price above $100.",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        },
+        {
+          "name": "Analyze Sizing Conventions",
+          "query": "Identify products with inconsistent size naming conventions across different styles and categorize them by category.",
+          "domain": "retail_clothing",
+          "risk_score": 39,
+          "severity": "MEDIUM",
+          "data_count": 2160
+        },
+        {
+          "name": "Identify Suppliers with Delays",
+          "query": "Find all suppliers with lead times above 30 days and on-time delivery rates below 80%.",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        },
+        {
+          "name": "Analyze Reorder Point Breaches",
+          "query": "Find all instances where reorder points were breached in the past quarter, including products affected, and categorize them by category.",
+          "domain": "retail_clothing",
+          "risk_score": 37,
+          "severity": "MEDIUM",
+          "data_count": 9
+        },
+        {
+          "name": "Identify Low-Stock Turnover Products",
+          "query": "Find all products with stock turnover rates below 2.5 times per year and categorize them by category.",
+          "domain": "retail_clothing",
+          "risk_score": 39,
+          "severity": "MEDIUM",
+          "data_count": 27
+        },
+        {
+          "name": "Compare Supplier Performance",
+          "query": "Compare on-time delivery rates for different suppliers and identify top performers and areas for improvement.",
+          "domain": "retail_clothing",
+          "risk_score": 18,
+          "severity": "LOW",
+          "data_count": 4
+        },
+        {
+          "name": "Analyze Sales Channel Trends",
+          "query": "Analyze sales data by channel (e.g., online, offline) to identify trends and potential opportunities for growth.",
+          "domain": "retail_clothing",
+          "risk_score": 12,
+          "severity": "LOW",
+          "data_count": 3
+        },
+        {
+          "name": "Identify Bundling Opportunities",
+          "query": "Find all products with multiple variants (e.g., different colors, sizes) and identify potential opportunities for bundling or cross-selling.",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        },
+        {
+          "name": "Assess Supplier Location Risk",
+          "query": "Find all suppliers with locations in countries with high risk of supply chain disruption and categorize them by risk level.",
+          "domain": "retail_clothing",
+          "risk_score": 15,
+          "severity": "LOW",
+          "data_count": 1
+        },
+        {
+          "name": "Analyze Product Obsolescence",
+          "query": "Identify products with low sales volume and high retail price and categorize them by category.",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        },
+        {
+          "name": "Detect Inventory Shrinkage",
+          "query": "Find all instances of inventory shrinkage (i.e., missing stock) and categorize them by category and supplier.",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        }
+      ],
+      "domain_scores": {
+        "retail_clothing": 15
+      },
+      "critical_domains": []
+    }
+  ]
+}

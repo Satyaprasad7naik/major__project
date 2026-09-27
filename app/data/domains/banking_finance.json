@@ -1,0 +1,26 @@
+{
+  "domain": "banking_finance",
+  "description": "Configuration for Banking, Finance, Transactions, Account Profiles, and Financial Risk Analytics",
+  "schema_context": "ACTUAL TABLES:\n- users (user_id, email, full_name, country, phone, date_of_birth, kyc_status, kyc_verified_at, kyc_expiry_date, risk_level, risk_score, is_pep, account_status, created_at, updated_at)\n- transactions (txn_id, user_id, txn_type, instrument, amount, currency, amount_usd, status, flag_reason, payment_method, external_ref, ip_address, created_at, processed_at)\n- dashboards (dashboard_id, name, owner_id, widgets, layout, is_deployed, deploy_url, refresh_interval, created_at, deployed_at)",
+  "prompts": {
+    "intent": "You are an AI assistant for Banking & Finance.\nYour task is to classify the user's intent.\n\nACTUAL TABLES & COLUMNS:\n- users (user_id, email, full_name, country, phone, date_of_birth, kyc_status, risk_level, risk_score, is_pep, account_status)\n- transactions (txn_id, user_id, txn_type, instrument, amount, currency, amount_usd, status, flag_reason, payment_method, created_at)\n\nIf the user asks for transactions, wire transfers, user account details, account balances, high risk users, or payment volumes, classify it as SELECT and set needs_clarification to false.\n\nOutput JSON only.",
+    "sql": "You are a strict SQLite expert for Banking & Finance.\nACTUAL TABLES:\n- users (user_id, email, full_name, country, phone, date_of_birth, kyc_status, kyc_verified_at, kyc_expiry_date, risk_level, risk_score, is_pep, account_status, created_at, updated_at)\n- transactions (txn_id, user_id, txn_type, instrument, amount, currency, amount_usd, status, flag_reason, payment_method, external_ref, ip_address, created_at, processed_at)\n\nRULES:\n1. ONLY use tables: users, transactions, dashboards.\n2. JOIN users and transactions on user_id.\n3. Email is in users.email (also full_name and country are in users).\n4. Use UPPER() and LIKE with % for string comparisons.\n5. DATE FILTERING: SQLite only. Use date('now', '-30 days') or datetime() modifiers."
+  },
+  "few_shots": [
+    {
+      "question": "What is the total transaction amount by currency in the last 30 days?",
+      "sql": "SELECT currency, COUNT(*) AS txn_count, SUM(amount) AS total_amount, SUM(amount_usd) AS total_usd FROM transactions WHERE created_at >= date('now', '-30 days') GROUP BY currency ORDER BY total_usd DESC;",
+      "explanation": "Calculates volume and count of financial transactions grouped by currency."
+    },
+    {
+      "question": "Show top 5 users with highest risk score and their transaction totals",
+      "sql": "SELECT u.user_id, u.full_name, u.email, u.risk_score, u.risk_level, COUNT(t.txn_id) AS txn_count, SUM(t.amount_usd) AS total_spent_usd FROM users u LEFT JOIN transactions t ON u.user_id = t.user_id GROUP BY u.user_id ORDER BY u.risk_score DESC LIMIT 5;",
+      "explanation": "Retrieves high risk banking profiles along with transaction metrics."
+    },
+    {
+      "question": "Show all users with pending KYC status",
+      "sql": "SELECT user_id, full_name, email, country, risk_level, account_status FROM users WHERE UPPER(kyc_status) = 'PENDING';",
+      "explanation": "Lists bank account holders with unverified or pending KYC compliance."
+    }
+  ]
+}

@@ -1,0 +1,78 @@
+{
+  "_last_touched": 1788346449.6954856,
+  "history": [
+    {
+      "timestamp": "2026-09-02T10:54:09.695461",
+      "missions": [
+        {
+          "name": "Dead Stock Identification",
+          "query": "Find all products with stock count zero across all locations, grouped by supplier and category, and ordered by total value of dead stock",
+          "domain": "retail_clothing",
+          "risk_score": 15,
+          "severity": "LOW",
+          "data_count": 1
+        },
+        {
+          "name": "Sizing Anomaly Detection",
+          "query": "Identify products with inconsistent size distributions across different locations, considering the reorder point and last restocked date",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        },
+        {
+          "name": "Supplier Delay Analysis",
+          "query": "Analyze the lead time of each supplier and calculate the average delay days for products that were not delivered on time, grouped by category and supplier",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        },
+        {
+          "name": "Supplier On-Time Rate Variance",
+          "query": "Calculate the on-time rate variance for each supplier over the past quarter, considering the lead time and actual delivery dates",
+          "domain": "retail_clothing",
+          "risk_score": 39,
+          "severity": "MEDIUM",
+          "data_count": 120
+        },
+        {
+          "name": "Reorder Point Breach Analysis",
+          "query": "Identify products with reorder points breached, grouped by supplier and category, and ordered by the total value of breached stock",
+          "domain": "retail_clothing",
+          "risk_score": 18,
+          "severity": "LOW",
+          "data_count": 2
+        },
+        {
+          "name": "Sales Event Channel Analysis",
+          "query": "Analyze the sales events by channel and calculate the average units sold per channel, grouped by product category and supplier",
+          "domain": "retail_clothing",
+          "risk_score": 20,
+          "severity": "LOW",
+          "data_count": 6
+        },
+        {
+          "name": "Channel-Specific Sales Event Analysis",
+          "query": "Identify the top-selling channels for each product category and supplier, considering the units sold and sale date",
+          "domain": "retail_clothing",
+          "risk_score": 0,
+          "severity": "LOW",
+          "data_count": 0
+        },
+        {
+          "name": "Inventory Turnover Analysis",
+          "query": "Calculate the inventory turnover ratio for each product category and supplier, considering the stock count, reorder point, and last restocked date",
+          "domain": "retail_clothing",
+          "risk_score": 23,
+          "severity": "LOW",
+          "data_count": 7
+        }
+      ],
+      "domain_scores": {
+        "retail_clothing": 14
+      },
+      "critical_domains": []
+    }
+  ]
+}
