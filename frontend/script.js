@@ -878,7 +878,7 @@ async function runSentinelScan() {
         const data = await response.json();
 
         state.sentinelScans++;
-        state.sentinelDetections = data.detections;
+        state.sentinelDetections = data.detections || [];
 
         renderSentinelDetections(data.detections);
         updateSentinelStats(data.detections);
@@ -892,9 +892,9 @@ async function runSentinelScan() {
 function renderSentinelDetections(detections) {
     // Group detections for 3 columns
     const columns = {
-        security: detections.filter(d => d.domain === 'security' || d.domain === 'risk'),
-        compliance: detections.filter(d => d.domain === 'compliance'),
-        operations: detections.filter(d => d.domain === 'operations')
+        security: (detections || []).filter(d => d.domain === 'security' || d.domain === 'risk'),
+        compliance: (detections || []).filter(d => d.domain === 'compliance'),
+        operations: (detections || []).filter(d => d.domain === 'operations')
     };
 
     Object.keys(columns).forEach(colKey => {
@@ -984,10 +984,11 @@ function createMiniChart(canvas, data, config) {
 }
 
 function updateSentinelStats(detections) {
+    const safeDetections = detections || [];
     elements.scanCount.textContent = state.sentinelScans;
-    elements.detectionCount.textContent = detections.length;
+    elements.detectionCount.textContent = safeDetections.length;
 
-    const criticalCount = detections.filter(d => d.severity === 'CRITICAL').length;
+    const criticalCount = safeDetections.filter(d => d.severity === 'CRITICAL').length;
     elements.criticalAlertCount.textContent = criticalCount;
 }
 
@@ -1021,7 +1022,7 @@ async function runDomainScan(domain) {
 
         // Merge into global detections for stats
         state.sentinelDetections = [
-            ...state.sentinelDetections.filter(d => {
+            ...(state.sentinelDetections || []).filter(d => {
                 const dSection = d.domain === 'risk' ? 'security' : d.domain;
                 return dSection !== sectionId;
             }),
